@@ -1,0 +1,178 @@
+<!DOCTYPE html><html lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&amp;display=swap" rel="stylesheet">
+<style>
+    @layer base {
+      html, body {
+        width: 100vw;
+        margin: 0;
+        padding: 0;
+        background-color: #f8f9fc;
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      }
+      body {
+        overscroll-behavior: none;
+      }
+      .pb-safe {
+        padding-bottom: env(safe-area-inset-bottom, 16px);
+      }
+      .pt-safe {
+        padding-top: env(safe-area-inset-top, 0px);
+      }
+    }
+    ::-webkit-scrollbar {
+      display: none;
+    }
+  </style>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "surface": "#f8f9fc",
+            "surface-card": "#ffffff",
+            "primary": "#000000",
+            "secondary": "#64748b",
+            "tertiary": "#94a3b8",
+            "pill-bg": "#f1f5f9",
+            "pill-text": "#334155"
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-[#f8f9fc] text-slate-900 flex flex-col min-h-screen antialiased selection:bg-black selection:text-white">
+<!-- Clean Top Header -->
+<header class="fixed top-0 w-full z-40 bg-[#f8f9fc]/90 backdrop-blur-md pt-safe border-b border-transparent">
+<div class="h-14 px-5 flex items-center justify-between relative">
+<button aria-label="Go back" class="w-10 h-10 -ml-2 rounded-full flex items-center justify-center text-slate-900 active:scale-95 transition-transform" type="button">
+<span class="material-symbols-outlined text-[24px]">chevron_left</span>
+</button>
+<h1 class="absolute left-1/2 -translate-x-1/2 font-semibold text-base tracking-tight text-slate-900">
+        Risk &amp; Early Warning
+      </h1>
+<div class="w-10"></div>
+</div>
+</header>
+<!-- Main Content Scroll Area -->
+<main class="flex-1 w-full px-5 pt-20 pb-36 flex flex-col gap-6 max-w-md mx-auto">
+<!-- Top Status Hero Card -->
+<section class="bg-white rounded-3xl px-6 py-7 shadow-[0_4px_24px_rgba(0,0,0,0.03)] border border-slate-100/80 flex flex-col items-start">
+  <div class="w-13 h-13 w-[52px] h-[52px] rounded-2xl bg-slate-50 flex items-center justify-center text-slate-900 mb-6 border border-slate-100 shadow-sm">
+    <span class="material-symbols-outlined text-[28px]">shield</span>
+  </div>
+  <div class="space-y-1.5">
+    <h2 class="text-3xl font-bold tracking-tight text-slate-950">All Clear</h2>
+    <p class="text-base text-slate-500 font-normal">No immediate risks detected</p>
+  </div>
+</section>
+<!-- Segmented Filter Tabs -->
+<div class="w-full bg-slate-100 p-1 rounded-full flex items-center gap-1 shadow-sm" id="category-tabs" role="tablist">
+  <button aria-selected="true" class="tab-btn flex-1 py-2.5 px-4 rounded-full text-xs font-semibold text-center transition-all bg-black text-white shadow-sm" data-tab="environment" role="tab" type="button">
+    Environment
+  </button>
+  <button aria-selected="false" class="tab-btn flex-1 py-2.5 px-4 rounded-full text-xs font-semibold text-center transition-all text-slate-600 hover:text-black hover:bg-white/50" data-tab="health" role="tab" type="button">
+    Health
+  </button>
+  <button aria-selected="false" class="tab-btn flex-1 py-2.5 px-4 rounded-full text-xs font-semibold text-center transition-all text-slate-600 hover:text-black hover:bg-white/50" data-tab="lifestyle" role="tab" type="button">
+    Lifestyle
+  </button>
+</div>
+<!-- Risk Cards Stack -->
+<div class="flex flex-col gap-4">
+  <!-- Risk Card 1: Heat Wave Risk -->
+  <article class="bg-white rounded-3xl p-6 shadow-[0_4px_24px_rgba(0,0,0,0.03)] border border-slate-100/80 flex flex-col gap-3.5">
+    <div class="flex items-center justify-between">
+      <h3 class="text-lg font-semibold text-slate-950 tracking-tight">Heat Wave Risk</h3>
+      <span class="px-3 py-1 rounded-full bg-slate-100 text-xs font-medium text-slate-700">Low</span>
+    </div>
+    <p class="text-sm text-slate-500 font-normal">Temperature is normal</p>
+    <div class="w-full bg-slate-100 rounded-full h-1.5 overflow-hidden mt-1">
+      <div class="bg-black h-full rounded-full" style="width: 25%"></div>
+    </div>
+  </article>
+  <!-- Risk Card 2: Air Pollution -->
+  <article class="bg-white rounded-3xl p-6 shadow-[0_4px_24px_rgba(0,0,0,0.03)] border border-slate-100/80 flex flex-col gap-3.5">
+    <div class="flex items-center justify-between">
+      <h3 class="text-lg font-semibold text-slate-950 tracking-tight">Air Pollution</h3>
+      <span class="px-3 py-1 rounded-full bg-slate-100 text-xs font-medium text-slate-700">Moderate</span>
+    </div>
+    <p class="text-sm text-slate-500 font-normal">Air quality is acceptable</p>
+    <div class="w-full bg-slate-100 rounded-full h-1.5 overflow-hidden mt-1">
+      <div class="bg-black h-full rounded-full" style="width: 45%"></div>
+    </div>
+  </article>
+  <!-- Risk Card 3: Dehydration Risk -->
+  <article class="bg-white rounded-3xl p-6 shadow-[0_4px_24px_rgba(0,0,0,0.03)] border border-slate-100/80 flex flex-col gap-3.5">
+    <div class="flex items-center justify-between">
+      <h3 class="text-lg font-semibold text-slate-950 tracking-tight">Dehydration Risk</h3>
+      <span class="px-3 py-1 rounded-full bg-slate-100 text-xs font-medium text-slate-700">Low</span>
+    </div>
+    <p class="text-sm text-slate-500 font-normal">Hydration level is good</p>
+    <div class="w-full bg-slate-100 rounded-full h-1.5 overflow-hidden mt-1">
+      <div class="bg-black h-full rounded-full" style="width: 20%"></div>
+    </div>
+  </article>
+</div>
+<!-- Preparedness Card -->
+<section class="bg-white rounded-3xl p-6 shadow-[0_4px_24px_rgba(0,0,0,0.03)] border border-slate-100/80 flex flex-col gap-2.5">
+  <h3 class="text-lg font-semibold text-slate-950 tracking-tight">Stay Prepared</h3>
+  <p class="text-sm text-slate-500 font-normal leading-relaxed">
+    App continuously monitors environmental and personal conditions to keep you safe.
+  </p>
+</section>
+</main>
+<!-- Bottom Navigation Bar (Home, Calendar, Central elevated +, SOS, Profile) -->
+<nav class="fixed bottom-0 w-full z-50 pb-safe bg-white/95 backdrop-blur-xl border-t border-slate-100 shadow-[0_-4px_20px_rgba(0,0,0,0.03)]">
+  <div class="flex items-center justify-around h-16 px-4 max-w-md mx-auto relative">
+    <!-- Home -->
+    <a class="flex flex-col items-center justify-center w-12 h-12 text-slate-400 hover:text-black transition-colors active:scale-95" href="#">
+      <span class="material-symbols-outlined text-[24px]">home</span>
+      <span class="text-[10px] font-medium mt-0.5">Home</span>
+    </a>
+    <!-- Calendar -->
+    <a class="flex flex-col items-center justify-center w-12 h-12 text-slate-400 hover:text-black transition-colors active:scale-95" href="#">
+      <span class="material-symbols-outlined text-[24px]">calendar_today</span>
+      <span class="text-[10px] font-medium mt-0.5">Calendar</span>
+    </a>
+    <!-- Central Elevated Black + Button -->
+    <div class="relative flex items-center justify-center -top-4">
+      <button aria-label="Add entry" class="w-13 h-13 w-[52px] h-[52px] rounded-full bg-black text-white flex items-center justify-center shadow-lg active:scale-95 transition-transform" type="button">
+        <span class="material-symbols-outlined text-[28px]">add</span>
+      </button>
+    </div>
+    <!-- SOS -->
+    <a class="flex flex-col items-center justify-center w-12 h-12 text-slate-400 hover:text-black transition-colors active:scale-95" href="#">
+      <span class="material-symbols-outlined text-[24px]">emergency</span>
+      <span class="text-[10px] font-medium mt-0.5">SOS</span>
+    </a>
+    <!-- Profile -->
+    <a class="flex flex-col items-center justify-center w-12 h-12 text-slate-400 hover:text-black transition-colors active:scale-95" href="#">
+      <span class="material-symbols-outlined text-[24px]">person</span>
+      <span class="text-[10px] font-medium mt-0.5">Profile</span>
+    </a>
+  </div>
+</nav>
+<script>
+    (function() {
+      const tabs = document.querySelectorAll('#category-tabs .tab-btn');
+      tabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+          tabs.forEach(t => {
+            t.setAttribute('aria-selected', 'false');
+            t.className = 'tab-btn flex-1 py-2.5 px-4 rounded-full text-xs font-semibold text-center transition-all text-slate-600 hover:text-black';
+          });
+          tab.setAttribute('aria-selected', 'true');
+          tab.className = 'tab-btn flex-1 py-2.5 px-4 rounded-full text-xs font-semibold text-center transition-all bg-black text-white shadow-sm';
+        });
+      });
+    })();
+  </script>
+
+
+</body></html>

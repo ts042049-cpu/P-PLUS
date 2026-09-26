@@ -1,0 +1,259 @@
+<!DOCTYPE html><html lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&amp;display=swap" rel="stylesheet">
+<style>
+    @layer base {
+      html, body {
+        width: 100vw;
+        margin: 0;
+        padding: 0;
+        background-color: #f8f9ff;
+      }
+      body {
+        overscroll-behavior: none;
+      }
+      .pb-safe {
+        padding-bottom: env(safe-area-inset-bottom, 16px);
+      }
+      .pt-safe {
+        padding-top: env(safe-area-inset-top, 0px);
+      }
+    }
+    ::-webkit-scrollbar {
+      display: none;
+    }
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "primary": "#000000",
+            "on-primary": "#ffffff",
+            "background": "#f8f9ff",
+            "surface": "#f8f9ff",
+            "surface-container-lowest": "#ffffff",
+            "surface-container-low": "#f3f5fc",
+            "surface-container": "#e8edfa",
+            "surface-container-high": "#dfe5f5",
+            "on-surface": "#121c2a",
+            "secondary": "#647087",
+            "on-surface-variant": "#50596b",
+            "outline": "#e2e6f0",
+            "error": "#d92d20"
+          },
+          fontFamily: {
+            sans: ["Inter", "sans-serif"]
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-surface font-sans text-on-surface flex flex-col min-h-screen">
+<!-- Header -->
+<header class="sticky top-0 w-full z-40 bg-surface/90 backdrop-blur-md pt-safe">
+<div class="h-14 px-4 flex items-center justify-between relative">
+<button aria-label="Go back" class="w-10 h-10 -ml-2 flex items-center justify-center text-on-surface active:scale-95 transition-transform z-10" onclick="history.back()">
+<span class="material-symbols-outlined text-[24px]">chevron_left</span>
+</button>
+<h1 class="text-[17px] font-semibold text-on-surface text-center absolute inset-0 flex items-center justify-center pointer-events-none">
+        Emergency SOS
+      </h1>
+<div class="w-10"></div>
+</div>
+</header>
+<!-- Main Content -->
+<main class="flex-1 flex flex-col px-5 pt-2 pb-28 w-full max-w-md mx-auto">
+<!-- Concentric SOS Trigger (Main Visual Focus) -->
+<div class="flex flex-col items-center justify-center py-6 select-none"><div class="relative w-80 h-80 flex items-center justify-center"><div class="absolute w-80 h-80 rounded-full bg-[#edf1fb]/50 transition-all duration-500"></div><div class="absolute w-68 h-68 rounded-full bg-[#e5ecfa]/65 shadow-[0_6px_28px_rgba(200,210,230,0.35)] transition-all duration-500" id="sos-ring-outer" style="width: 17rem; height: 17rem;"></div><div class="absolute w-56 h-56 rounded-full bg-[#dbe4f8]/80 transition-all duration-500" id="sos-ring-mid" style="width: 14rem; height: 14rem;"></div><button aria-label="Press and hold to send SOS" class="relative z-10 w-44 h-44 rounded-full bg-primary flex flex-col items-center justify-center shadow-[0_16px_36px_rgba(0,0,0,0.28)] active:scale-95 transition-all duration-300 touch-none focus:outline-none cursor-pointer" id="sos-button"><div class="absolute inset-2 rounded-full border border-white/10 pointer-events-none"></div><svg class="absolute inset-0 w-full h-full -rotate-90 pointer-events-none" viewBox="0 0 176 176"><circle class="text-white/10" cx="88" cy="88" fill="none" r="82" stroke="currentColor" stroke-width="3"></circle><circle class="text-red-500 transition-all duration-75 ease-linear" cx="88" cy="88" fill="none" id="sos-progress-circle" r="82" stroke="currentColor" stroke-dasharray="515" stroke-dashoffset="515" stroke-linecap="round" stroke-width="4"></circle></svg><span class="text-[34px] text-on-primary tracking-wider font-bold leading-none select-none">SOS</span><span class="text-[11px] text-white/60 tracking-widest uppercase mt-1.5 font-medium select-none">HOLD 3S</span></button></div><div class="text-center mt-6"><h2 class="text-[20px] text-on-surface font-bold tracking-tight transition-colors" id="sos-status-label">Press and hold to send SOS</h2><p class="text-[14px] text-secondary mt-1 font-normal tracking-wide">Offline BLE/Mesh Transmission</p></div></div>
+<!-- Emergency Contacts Section -->
+<div class="flex flex-col mt-4">
+<!-- Section Header -->
+<div class="flex items-center justify-between pb-3 px-1">
+<h3 class="text-[15px] font-semibold text-on-surface">
+          Emergency Contacts
+        </h3>
+<button class="text-[14px] font-medium text-secondary hover:text-on-surface transition-colors active:scale-95">
+          Edit
+        </button>
+</div>
+<!-- Contact Rows -->
+<div class="flex flex-col gap-2.5">
+<!-- Contact 1: Primary Contact -->
+<div class="bg-surface-container-lowest px-4 py-3.5 rounded-2xl border border-outline/50 shadow-[0_1px_3px_rgba(0,0,0,0.02)] flex items-center justify-between">
+<div class="flex items-center gap-3.5 min-w-0">
+<div class="w-11 h-11 rounded-full bg-surface-container-low flex items-center justify-center shrink-0 text-on-surface font-semibold text-[14px]">
+              PC
+            </div>
+<div class="min-w-0">
+<p class="text-[15px] text-on-surface font-semibold truncate leading-tight">Primary Contact</p>
+<p class="text-[13px] text-secondary truncate mt-0.5 leading-tight">Dr. Robert Kelly</p>
+</div>
+</div>
+<a aria-label="Call Primary Contact" class="w-10 h-10 rounded-full bg-surface-container-low flex items-center justify-center text-on-surface hover:bg-surface-container active:scale-95 transition-transform shrink-0" href="tel:5550192834">
+<span class="material-symbols-outlined text-[19px]">call</span>
+</a>
+</div>
+<!-- Contact 2: Family Member -->
+<div class="bg-surface-container-lowest px-4 py-3.5 rounded-2xl border border-outline/50 shadow-[0_1px_3px_rgba(0,0,0,0.02)] flex items-center justify-between">
+<div class="flex items-center gap-3.5 min-w-0">
+<div class="w-11 h-11 rounded-full bg-surface-container-low flex items-center justify-center shrink-0 text-on-surface font-semibold text-[14px]">
+              FM
+            </div>
+<div class="min-w-0">
+<p class="text-[15px] text-on-surface font-semibold truncate leading-tight">Family Member</p>
+<p class="text-[13px] text-secondary truncate mt-0.5 leading-tight">Emma Sterling</p>
+</div>
+</div>
+<a aria-label="Call Family Member" class="w-10 h-10 rounded-full bg-surface-container-low flex items-center justify-center text-on-surface hover:bg-surface-container active:scale-95 transition-transform shrink-0" href="tel:5550192835">
+<span class="material-symbols-outlined text-[19px]">call</span>
+</a>
+</div>
+<!-- Contact 3: Local Help -->
+<div class="bg-surface-container-lowest px-4 py-3.5 rounded-2xl border border-outline/50 shadow-[0_1px_3px_rgba(0,0,0,0.02)] flex items-center justify-between">
+<div class="flex items-center gap-3.5 min-w-0">
+<div class="w-11 h-11 rounded-full bg-[#feeeec] text-error flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">emergency</span>
+</div>
+<div class="min-w-0">
+<p class="text-[15px] text-on-surface font-semibold truncate leading-tight">Local Help</p>
+<p class="text-[13px] text-secondary truncate mt-0.5 leading-tight">112 (Emergency)</p>
+</div>
+</div>
+<a aria-label="Call Local Help" class="w-10 h-10 rounded-full bg-surface-container-low flex items-center justify-center text-on-surface hover:bg-surface-container active:scale-95 transition-transform shrink-0" href="tel:112">
+<span class="material-symbols-outlined text-[19px]">call</span>
+</a>
+</div>
+</div>
+</div>
+<!-- Bottom Action Button -->
+<div class="mt-6 mb-2">
+<button class="w-full h-12 rounded-full bg-white border border-outline/70 text-on-surface text-[15px] font-semibold flex items-center justify-center shadow-sm hover:bg-gray-50 active:scale-[0.98] transition-all" id="test-alert-button">
+        Send Test Alert
+      </button>
+</div>
+</main>
+<!-- Bottom Navigation Shell (Home, Calendar, +, SOS, Profile) -->
+<nav class="fixed bottom-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-lg border-t border-slate-200/80 pb-safe">
+<div class="max-w-md mx-auto h-16 px-6 flex items-center justify-between">
+<!-- Home -->
+<a class="flex flex-col items-center justify-center w-12 text-secondary hover:text-on-surface transition-colors" href="#">
+<span class="material-symbols-outlined text-[24px]">home</span>
+<span class="text-[10px] font-medium mt-0.5">Home</span>
+</a>
+<!-- Calendar -->
+<a class="flex flex-col items-center justify-center w-12 text-secondary hover:text-on-surface transition-colors" href="#">
+<span class="material-symbols-outlined text-[24px]">calendar_today</span>
+<span class="text-[10px] font-medium mt-0.5">Calendar</span>
+</a>
+<!-- Quick Add (+) -->
+<div class="flex items-center justify-center -mt-4">
+<button class="w-12 h-12 rounded-full bg-primary text-on-primary flex items-center justify-center shadow-lg active:scale-95 transition-transform">
+<span class="material-symbols-outlined text-[26px]">add</span>
+</button>
+</div>
+<!-- SOS (Active) -->
+<a class="flex flex-col items-center justify-center w-12 text-primary font-semibold" href="#">
+<span class="material-symbols-outlined text-[24px]" style="font-variation-settings: 'FILL' 1;">sos</span>
+<span class="text-[10px] mt-0.5">SOS</span>
+</a>
+<!-- Profile -->
+<a class="flex flex-col items-center justify-center w-12 text-secondary hover:text-on-surface transition-colors" href="#">
+<span class="material-symbols-outlined text-[24px]">person</span>
+<span class="text-[10px] font-medium mt-0.5">Profile</span>
+</a>
+</div>
+</nav>
+<script>
+    (function() {
+      const sosBtn = document.getElementById('sos-button');
+      const circle = document.getElementById('sos-progress-circle');
+      const statusLabel = document.getElementById('sos-status-label');
+      const testBtn = document.getElementById('test-alert-button');
+      const outerRing = document.getElementById('sos-ring-outer');
+
+      let pressTimer = null;
+      let startTime = 0;
+      const requiredDuration = 3000;
+      const totalCircumference = 421; // 2 * pi * 67
+
+      function startPress(e) {
+        e.preventDefault();
+        startTime = performance.now();
+        statusLabel.textContent = 'Hold steady... Broadcasting in 3s';
+        statusLabel.classList.add('text-red-600');
+        if (outerRing) outerRing.classList.add('scale-105', 'bg-red-100/60');
+
+        function step(currentTime) {
+          const elapsed = currentTime - startTime;
+          const progress = Math.min(elapsed / requiredDuration, 1);
+          const offset = totalCircumference * (1 - progress);
+          circle.style.strokeDashoffset = offset;
+
+          if (progress < 1) {
+            pressTimer = requestAnimationFrame(step);
+          } else {
+            if (navigator.vibrate) navigator.vibrate([100, 50, 100, 50, 400]);
+            statusLabel.textContent = 'SOS SENT! Dispatchers Notified';
+            circle.style.strokeDashoffset = 0;
+            if (outerRing) {
+              outerRing.classList.remove('scale-105');
+              outerRing.classList.add('scale-110', 'bg-red-200/50');
+            }
+            setTimeout(() => {
+              resetPress();
+            }, 3500);
+          }
+        }
+        pressTimer = requestAnimationFrame(step);
+      }
+
+      function cancelPress() {
+        if (pressTimer) {
+          cancelAnimationFrame(pressTimer);
+          pressTimer = null;
+        }
+        resetPress();
+      }
+
+      function resetPress() {
+        circle.style.strokeDashoffset = totalCircumference;
+        statusLabel.textContent = 'Press and hold to send SOS';
+        statusLabel.classList.remove('text-red-600');
+        if (outerRing) {
+          outerRing.classList.remove('scale-105', 'scale-110', 'bg-red-100/60', 'bg-red-200/50');
+        }
+      }
+
+      sosBtn.addEventListener('pointerdown', startPress);
+      window.addEventListener('pointerup', cancelPress);
+      sosBtn.addEventListener('pointercancel', cancelPress);
+
+      // Test Alert
+      if (testBtn) {
+        testBtn.addEventListener('click', function() {
+          const originalText = testBtn.innerHTML;
+          testBtn.disabled = true;
+          testBtn.innerHTML = '<span class="material-symbols-outlined text-[18px] mr-2 animate-spin">sync</span> Sending Test Alert...';
+          setTimeout(() => {
+            testBtn.innerHTML = '<span class="material-symbols-outlined text-[18px] mr-2 text-emerald-600">check_circle</span> Test Ping Confirmed';
+            setTimeout(() => {
+              testBtn.innerHTML = originalText;
+              testBtn.disabled = false;
+            }, 2000);
+          }, 1200);
+        });
+      }
+    })();
+  </script>
+
+
+<script>(function() { const sosBtn = document.getElementById('sos-button'); const circle = document.getElementById('sos-progress-circle'); const statusLabel = document.getElementById('sos-status-label'); const outerRing = document.getElementById('sos-ring-outer'); if (!sosBtn || !circle) return; let pressTimer = null; let startTime = 0; const requiredDuration = 3000; const totalCircumference = 515; function startPress(e) { e.preventDefault(); startTime = performance.now(); if (statusLabel) { statusLabel.textContent = 'Hold steady... Broadcasting in 3s'; statusLabel.classList.add('text-red-600'); } if (outerRing) outerRing.classList.add('scale-105', 'bg-red-100/60'); function step(currentTime) { const elapsed = currentTime - startTime; const progress = Math.min(elapsed / requiredDuration, 1); circle.style.strokeDashoffset = totalCircumference * (1 - progress); if (progress < 1) { pressTimer = requestAnimationFrame(step); } else { if (navigator.vibrate) navigator.vibrate([100, 50, 100, 50, 400]); if (statusLabel) statusLabel.textContent = 'SOS SENT! Dispatchers Notified'; circle.style.strokeDashoffset = 0; if (outerRing) { outerRing.classList.remove('scale-105'); outerRing.classList.add('scale-110', 'bg-red-200/50'); } setTimeout(resetPress, 3500); } } pressTimer = requestAnimationFrame(step); } function cancelPress() { if (pressTimer) { cancelAnimationFrame(pressTimer); pressTimer = null; } resetPress(); } function resetPress() { circle.style.strokeDashoffset = totalCircumference; if (statusLabel) { statusLabel.textContent = 'Press and hold to send SOS'; statusLabel.classList.remove('text-red-600'); } if (outerRing) outerRing.classList.remove('scale-105', 'scale-110', 'bg-red-100/60', 'bg-red-200/50'); } sosBtn.addEventListener('pointerdown', startPress); window.addEventListener('pointerup', cancelPress); sosBtn.addEventListener('pointercancel', cancelPress); })();</script></body></html>

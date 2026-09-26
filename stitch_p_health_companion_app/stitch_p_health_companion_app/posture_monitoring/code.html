@@ -1,0 +1,311 @@
+<!DOCTYPE html><html lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport">
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "surface-tint": "#5e5e5e",
+            "surface-variant": "#d9e3f7",
+            "on-tertiary-container": "#009854",
+            "secondary": "#545f72",
+            "tertiary-fixed": "#82faab",
+            "on-error": "#ffffff",
+            "on-tertiary-fixed-variant": "#00522b",
+            "on-background": "#121c2a",
+            "on-primary-fixed-variant": "#474747",
+            "surface-container-highest": "#d9e3f7",
+            "on-primary-container": "#848484",
+            "on-error-container": "#93000a",
+            "inverse-surface": "#273140",
+            "on-secondary-fixed-variant": "#3c4759",
+            "primary": "#000000",
+            "secondary-fixed-dim": "#bcc7dd",
+            "surface": "#f8f9ff",
+            "primary-fixed-dim": "#c6c6c6",
+            "on-primary": "#ffffff",
+            "tertiary-fixed-dim": "#64dd91",
+            "error": "#ba1a1a",
+            "surface-bright": "#f8f9ff",
+            "surface-container": "#e6eeff",
+            "primary-container": "#1b1b1b",
+            "tertiary": "#000000",
+            "outline-variant": "#cfc4c5",
+            "inverse-on-surface": "#ebf1ff",
+            "on-secondary": "#ffffff",
+            "secondary-fixed": "#d8e3f9",
+            "on-tertiary": "#ffffff",
+            "surface-dim": "#d0daee",
+            "primary-fixed": "#e2e2e2",
+            "surface-container-high": "#dfe9fc",
+            "surface-container-low": "#eff3ff",
+            "on-surface-variant": "#4c4546",
+            "surface-container-lowest": "#ffffff",
+            "outline": "#7e7576",
+            "on-surface": "#121c2a",
+            "error-container": "#ffdad6",
+            "tertiary-container": "#00210e",
+            "on-secondary-container": "#586376",
+            "background": "#f8f9ff",
+            "on-secondary-fixed": "#111c2c",
+            "inverse-primary": "#c6c6c6",
+            "on-tertiary-fixed": "#00210e",
+            "on-primary-fixed": "#1b1b1b",
+            "secondary-container": "#d5e0f7"
+          },
+          borderRadius: {
+            "DEFAULT": "1rem",
+            "lg": "2rem",
+            "xl": "3rem",
+            "full": "9999px"
+          },
+          spacing: {
+            "space-md": "1rem",
+            "space-sm": "0.5rem",
+            "margin": "1.25rem",
+            "space-xs": "0.25rem",
+            "gutter": "1rem",
+            "margin-desktop": "2.5rem",
+            "space-lg": "1.5rem",
+            "gutter-tablet": "1.25rem",
+            "space-xl": "2.25rem"
+          },
+          fontFamily: {
+            "headline-lg-mobile": ["Inter"],
+            "headline-md": ["Inter"],
+            "body-md": ["Inter"],
+            "display-hero": ["Inter"],
+            "headline-lg": ["Inter"],
+            "body-lg": ["Inter"],
+            "label-md": ["Inter"],
+            "label-telemetry": ["Inter"],
+            "title-sm": ["Inter"]
+          },
+          fontSize: {
+            "headline-lg-mobile": ["26px", { lineHeight: "34px", letterSpacing: "-0.02em", fontWeight: "600" }],
+            "headline-md": ["22px", { lineHeight: "28px", letterSpacing: "-0.02em", fontWeight: "600" }],
+            "body-md": ["14px", { lineHeight: "20px", letterSpacing: "-0.005em", fontWeight: "400" }],
+            "display-hero": ["44px", { lineHeight: "52px", letterSpacing: "-0.03em", fontWeight: "600" }],
+            "headline-lg": ["32px", { lineHeight: "40px", letterSpacing: "-0.025em", fontWeight: "600" }],
+            "body-lg": ["16px", { lineHeight: "24px", letterSpacing: "-0.01em", fontWeight: "400" }],
+            "label-md": ["12px", { lineHeight: "16px", letterSpacing: "0.02em", fontWeight: "500" }],
+            "label-telemetry": ["11px", { lineHeight: "14px", letterSpacing: "0.06em", fontWeight: "600" }],
+            "title-sm": ["17px", { lineHeight: "24px", letterSpacing: "-0.015em", fontWeight: "600" }]
+          }
+        }
+      }
+    };
+  </script>
+<style>
+    @layer base {
+      html, body {
+        width: 100vw;
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        overscroll-behavior: none;
+      }
+      .pb-safe {
+        padding-bottom: env(safe-area-inset-bottom, 0px);
+      }
+      .pt-safe {
+        padding-top: env(safe-area-inset-top, 0px);
+      }
+    }
+    ::-webkit-scrollbar {
+      display: none;
+    }
+  </style>
+</head>
+<body class="bg-surface font-body-md text-body-md text-on-surface antialiased flex flex-col min-h-screen">
+<!-- Header -->
+<header class="fixed top-0 inset-x-0 z-50 bg-surface/85 backdrop-blur-xl border-b border-surface-container/40 pt-safe">
+<div class="h-14 px-margin flex items-center justify-between">
+<button aria-label="Go back" class="w-10 h-10 -ml-2 flex items-center justify-center text-on-surface hover:text-primary transition-colors" onclick="history.back()">
+<span class="material-symbols-outlined text-[22px]">arrow_back_ios_new</span>
+</button>
+<h1 class="font-title-sm text-title-sm text-on-surface tracking-tight text-center truncate">Posture Monitoring</h1>
+<button aria-label="More options" class="w-10 h-10 -mr-2 flex items-center justify-center text-on-surface hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[24px]">more_horiz</span>
+</button>
+</div>
+</header>
+<main class="flex flex-col relative w-full px-margin pt-20 pb-safe bg-surface flex-grow max-w-md mx-auto">
+<div class="flex flex-col w-full pb-8">
+<!-- Posture Status Card -->
+<div class="w-full bg-surface-container-lowest rounded-2xl p-5 shadow-[0_2px_12px_rgba(0,0,0,0.03)] flex flex-col gap-3 mb-5">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center text-on-surface">
+<span class="material-symbols-outlined text-[22px]" style="font-variation-settings: 'FILL' 1;">shield</span>
+</div>
+<h2 class="font-headline-md text-headline-md text-on-surface">Posture Status</h2>
+</div>
+<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-tertiary-fixed/30 text-on-tertiary-fixed-variant font-label-md text-label-md font-medium">
+<span class="w-1.5 h-1.5 rounded-full bg-on-tertiary-container"></span>
+            Good Posture
+          </span>
+</div>
+<p class="font-body-md text-body-md text-secondary leading-relaxed">Keep your spine aligned!</p>
+</div>
+<!-- Central Posture Showcase -->
+<div class="w-full bg-surface-container-lowest rounded-2xl p-4 shadow-[0_2px_12px_rgba(0,0,0,0.03)] mb-5 flex flex-col gap-4">
+<!-- Visual Container: Clean image presentation without mock tablet bezels -->
+<div class="w-full rounded-xl overflow-hidden bg-surface-container-lowest flex items-center justify-center">
+<img alt="Sitting posture comparison showing upright ergonomic alignment versus slouching forward bend" class="w-full h-auto object-contain select-none" src="https://lh3.googleusercontent.com/aida/AEtjO1U7Yfy8Ryh5Awug23jMhev2quBOKAzvFxXaIqvjbzm0R9jZzWlaSAcCfFlUBGx-jQfnbDx-kaCOMLqpq2Y6qgBH8IFg28a6meFFJj0VCpI5LTUuCl_ELnx0nPb05tY2JGO2T9FoLdcC__gcyJg1wffFxYIKu1OE5OuvSQEJHbptbE3Upl40IjPkUiwwpYj-U5zZ4e1FU4DUAhmQFNSsqyjC8lTHQ9z1PyfO3a_iTifc0FO04oDr1D-HmiE">
+</div>
+<!-- Comparative Cards -->
+<div class="grid grid-cols-2 gap-3">
+<!-- Left: Upright -->
+<div class="bg-surface-container-low p-4 rounded-xl flex flex-col gap-1.5">
+<div class="flex items-center justify-between">
+<span class="font-title-sm text-title-sm text-on-surface">Upright</span>
+<div class="w-5 h-5 rounded-full bg-tertiary-fixed flex items-center justify-center text-on-tertiary-fixed">
+<span class="material-symbols-outlined text-[14px]" style="font-variation-settings: 'FILL' 1;">check</span>
+</div>
+</div>
+<p class="font-body-md text-[13px] text-secondary">Optimal Alignment</p>
+<div class="flex items-baseline gap-1.5 mt-1">
+<span class="font-headline-md text-headline-md text-on-surface">0°</span>
+<span class="text-[12px] font-medium text-secondary">Deflection</span>
+</div>
+</div>
+<!-- Right: Forward Bend -->
+<div class="bg-surface-container-low p-4 rounded-xl flex flex-col gap-1.5">
+<div class="flex items-center justify-between">
+<span class="font-title-sm text-title-sm text-on-surface">Forward Bend</span>
+<div class="w-5 h-5 rounded-full bg-error-container flex items-center justify-center text-error">
+<span class="material-symbols-outlined text-[14px]" style="font-variation-settings: 'FILL' 1;">priority_high</span>
+</div>
+</div>
+<p class="font-body-md text-[13px] text-secondary">15°+ Neck Strain</p>
+<div class="flex items-baseline gap-1.5 mt-1">
+<span class="font-headline-md text-headline-md text-error">+15°</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Threshold Configuration -->
+<div class="flex flex-col gap-3 mb-6">
+
+<!-- Stepper Card 1: Alert Angle -->
+<div class="bg-surface-container-lowest rounded-2xl p-4 shadow-[0_2px_12px_rgba(0,0,0,0.03)] flex items-center justify-between">
+<div class="flex items-center gap-3.5">
+<div class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center text-on-surface">
+<span class="material-symbols-outlined text-[20px]">screen_rotation_alt</span>
+</div>
+<div>
+<span class="font-title-sm text-title-sm text-on-surface block">Alert Angle</span>
+
+</div>
+</div>
+<div class="flex items-center bg-surface-container-low rounded-full p-1 gap-1">
+<button aria-label="Decrease alert angle" class="w-8 h-8 rounded-full bg-surface-container-lowest text-on-surface flex items-center justify-center shadow-sm active:scale-95 transition-transform" id="angle-minus" type="button">
+<span class="material-symbols-outlined text-[18px]">remove</span>
+</button>
+<span class="font-title-sm text-title-sm text-on-surface min-w-[34px] text-center" id="angle-display">15°</span>
+<button aria-label="Increase alert angle" class="w-8 h-8 rounded-full bg-surface-container-lowest text-on-surface flex items-center justify-center shadow-sm active:scale-95 transition-transform" id="angle-plus" type="button">
+<span class="material-symbols-outlined text-[18px]">add</span>
+</button>
+</div>
+</div>
+<!-- Stepper Card 2: Hold Time -->
+<div class="bg-surface-container-lowest rounded-2xl p-4 shadow-[0_2px_12px_rgba(0,0,0,0.03)] flex items-center justify-between">
+<div class="flex items-center gap-3.5">
+<div class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center text-on-surface">
+<span class="material-symbols-outlined text-[20px]">timer</span>
+</div>
+<div>
+<span class="font-title-sm text-title-sm text-on-surface block">Hold Time</span>
+
+</div>
+</div>
+<div class="flex items-center bg-surface-container-low rounded-full p-1 gap-1">
+<button aria-label="Decrease hold time" class="w-8 h-8 rounded-full bg-surface-container-lowest text-on-surface flex items-center justify-center shadow-sm active:scale-95 transition-transform" id="time-minus" type="button">
+<span class="material-symbols-outlined text-[18px]">remove</span>
+</button>
+<span class="font-title-sm text-title-sm text-on-surface min-w-[38px] text-center" id="time-display">10s</span>
+<button aria-label="Increase hold time" class="w-8 h-8 rounded-full bg-surface-container-lowest text-on-surface flex items-center justify-center shadow-sm active:scale-95 transition-transform" id="time-plus" type="button">
+<span class="material-symbols-outlined text-[18px]">add</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Bottom Action CTA -->
+<div class="w-full pt-1">
+<button class="w-full h-14 rounded-full bg-primary text-on-primary font-title-sm text-title-sm flex items-center justify-center gap-2 active:scale-[0.98] transition-transform shadow-md" id="save-btn" type="button">
+<span class="">Save Settings</span>
+</button>
+<p class="text-center font-label-md text-label-md text-on-tertiary-container mt-2 opacity-0 transition-opacity duration-300" id="feedback-msg">
+          Settings saved
+        </p>
+</div>
+</div>
+</main>
+<script>
+    (function() {
+      let angle = 15;
+      let time = 10;
+
+      const angleDisplay = document.getElementById('angle-display');
+      const timeDisplay = document.getElementById('time-display');
+      const angleMinus = document.getElementById('angle-minus');
+      const anglePlus = document.getElementById('angle-plus');
+      const timeMinus = document.getElementById('time-minus');
+      const timePlus = document.getElementById('time-plus');
+      const saveBtn = document.getElementById('save-btn');
+      const feedbackMsg = document.getElementById('feedback-msg');
+
+      if (angleMinus && anglePlus && angleDisplay) {
+        angleMinus.addEventListener('click', () => {
+          if (angle > 5) {
+            angle -= 1;
+            angleDisplay.textContent = angle + '°';
+          }
+        });
+        anglePlus.addEventListener('click', () => {
+          if (angle < 45) {
+            angle += 1;
+            angleDisplay.textContent = angle + '°';
+          }
+        });
+      }
+
+      if (timeMinus && timePlus && timeDisplay) {
+        timeMinus.addEventListener('click', () => {
+          if (time > 2) {
+            time -= 1;
+            timeDisplay.textContent = time + 's';
+          }
+        });
+        timePlus.addEventListener('click', () => {
+          if (time < 60) {
+            time += 1;
+            timeDisplay.textContent = time + 's';
+          }
+        });
+      }
+
+      if (saveBtn && feedbackMsg) {
+        saveBtn.addEventListener('click', () => {
+          feedbackMsg.classList.remove('opacity-0');
+          feedbackMsg.classList.add('opacity-100');
+          setTimeout(() => {
+            feedbackMsg.classList.remove('opacity-100');
+            feedbackMsg.classList.add('opacity-0');
+          }, 2000);
+        });
+      }
+    })();
+  </script>
+
+
+</body></html>
