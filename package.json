@@ -1,0 +1,20 @@
+{
+  "name": "p-plus-health-companion-prototype",
+  "version": "1.0.0",
+  "description": "P+ Pro - Personal Health Companion App Prototype for SIH",
+  "scripts": {
+    "start": "npx serve -l 3000 .",
+    "dev": "npx serve -l 3000 ."
+  },
+  "keywords": [
+    "health-companion",
+    "sih-prototype",
+    "telemetry",
+    "wearable"
+  ],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "tailwindcss": "^3.4.17"
+  }
+}
