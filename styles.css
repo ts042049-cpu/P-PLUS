@@ -1,0 +1,549 @@
+/* P+ Health Companion App - Clinical Precision Stylesheet */
+
+:root {
+  --color-primary: #000000;
+  --color-on-primary: #ffffff;
+  --color-surface: #f8f9ff;
+  --color-on-surface: #121c2a;
+  --color-secondary: #545f72;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box !important;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Global text overflow containment */
+p, span, h1, h2, h3, h4, h5, h6, label, button, a {
+  overflow-wrap: break-word;
+  word-break: normal;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #0b0e14;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  overflow: hidden; /* Prevent double scroll on outer page */
+}
+
+/* Material Symbols Icon Normalization & Perfect Alignment */
+.material-symbols-outlined {
+  font-family: 'Material Symbols Outlined' !important;
+  font-weight: normal;
+  font-style: normal;
+  font-size: 22px;
+  line-height: 1 !important;
+  letter-spacing: normal !important;
+  text-transform: none !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  vertical-align: middle !important;
+  white-space: nowrap !important;
+  word-wrap: normal !important;
+  direction: ltr !important;
+  font-feature-settings: 'liga';
+  -webkit-font-feature-settings: 'liga';
+  -webkit-font-smoothing: antialiased;
+  user-select: none;
+  flex-shrink: 0;
+}
+
+/* Custom scrollbars hidden */
+::-webkit-scrollbar {
+  display: none;
+}
+* {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+/* Presentation Canvas & Device Frame */
+.app-canvas {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #0b0e14;
+  padding: 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.device-frame {
+  width: 100%;
+  max-width: 440px;
+  height: 100vh;
+  background: #f8f9ff;
+  border-radius: 0;
+  box-shadow: 0 0 50px rgba(0, 0, 0, 0.4);
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+}
+
+@media (min-width: 520px) {
+  .app-canvas {
+    background: radial-gradient(circle at 50% 20%, #1c2538 0%, #0b0e14 100%);
+    padding: 14px;
+  }
+  .device-frame {
+    height: min(915px, calc(100vh - 28px));
+    border-radius: 36px;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    box-shadow: 0 25px 60px -10px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255, 255, 255, 0.08);
+  }
+}
+
+.dynamic-island,
+.phone-status-bar,
+.demo-controls-pill {
+  display: none !important;
+}
+
+/* Screen Views Container & Transitions */
+.screens-viewport {
+  flex: 1;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: #f8f9ff;
+}
+
+.screen-view {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  background: #f8f9ff;
+  display: none;
+  flex-direction: column;
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.screen-view.active {
+  display: flex;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Screen scrollable main area */
+.screen-scroll-area {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+  padding-left: 16px !important;
+  padding-right: 16px !important;
+  padding-top: 12px !important;
+  padding-bottom: 96px !important; /* Critical clearance: ensures bottom buttons & cards never hide behind bottom navigation */
+}
+
+/* Universal Screen Headers & Centered Titles */
+.screen-view > header {
+  height: 56px !important;
+  min-height: 56px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  padding-left: 14px !important;
+  padding-right: 14px !important;
+  position: relative !important;
+  background-color: rgba(248, 249, 255, 0.95) !important;
+  backdrop-filter: blur(16px) !important;
+  -webkit-backdrop-filter: blur(16px) !important;
+  border-bottom: 1px solid rgba(230, 238, 255, 0.7) !important;
+}
+
+/* Sub-screen header title true center alignment without overlapping action buttons */
+.screen-view:not(#screen-home):not(#screen-login) > header > h1 {
+  position: absolute !important;
+  left: 54px !important;
+  right: 64px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  text-align: center !important;
+  font-size: 16px !important;
+  font-weight: 700 !important;
+  line-height: 22px !important;
+  letter-spacing: -0.015em !important;
+  color: #121c2a !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  pointer-events: none !important;
+}
+
+/* Standardized Header Buttons */
+.screen-view > header button {
+  width: 40px !important;
+  height: 40px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  border-radius: 9999px !important;
+  z-index: 10 !important;
+  transition: transform 0.15s ease, background-color 0.15s ease !important;
+}
+
+/* Telemetry Numerals Alignment */
+.tabular-nums, [class*="dynamic-bpm-val"] {
+  font-variant-numeric: tabular-nums !important;
+  letter-spacing: -0.02em !important;
+}
+
+/* Bottom Navigation Bar: Fix Text Placement & Proportions */
+nav.h-16 {
+  height: 62px !important;
+  min-height: 62px !important;
+  background: rgba(255, 255, 255, 0.96) !important;
+  backdrop-filter: blur(16px) !important;
+  -webkit-backdrop-filter: blur(16px) !important;
+  border-top: 1px solid rgba(230, 238, 255, 0.8) !important;
+  padding: 0 6px !important;
+}
+
+nav.h-16 > div {
+  height: 100% !important;
+  display: flex !important;
+  justify-content: space-around !important;
+  align-items: center !important;
+}
+
+nav.h-16 button {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  min-width: 52px !important;
+  height: 48px !important;
+  padding: 2px 0 !important;
+}
+
+nav.h-16 button .material-symbols-outlined {
+  font-size: 22px !important;
+  line-height: 1 !important;
+}
+
+nav.h-16 button span:last-child {
+  font-size: 10px !important;
+  font-weight: 700 !important;
+  line-height: 12px !important;
+  letter-spacing: 0.05em !important;
+  text-transform: uppercase !important;
+  margin-top: 2px !important;
+}
+
+/* Live ECG Animated Wave */
+@keyframes ecgSweep {
+  0% {
+    stroke-dashoffset: 280;
+  }
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+
+.animated-ecg-path {
+  stroke-dasharray: 280;
+  animation: ecgSweep 2.2s linear infinite;
+}
+
+/* Glowing Pulsing Ring */
+@keyframes pulseRing {
+  0% {
+    transform: scale(0.95);
+    opacity: 0.8;
+  }
+  50% {
+    transform: scale(1.05);
+    opacity: 0.35;
+  }
+  100% {
+    transform: scale(0.95);
+    opacity: 0.8;
+  }
+}
+
+.pulsing-ring {
+  animation: pulseRing 2.4s ease-in-out infinite;
+}
+
+/* Floating Presentation Controls */
+.demo-controls-pill {
+  position: fixed;
+  bottom: 16px;
+  right: 16px;
+  z-index: 9999;
+  background: rgba(18, 28, 42, 0.95);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 9999px;
+  padding: 6px 14px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
+  color: #ffffff;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.demo-controls-pill button, .demo-controls-pill select {
+  background: transparent;
+  border: none;
+  color: #ffffff;
+  font-family: inherit;
+  font-size: 12px;
+  cursor: pointer;
+  outline: none;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  transition: opacity 0.2s;
+}
+
+.demo-controls-pill select {
+  background: #1c2433;
+  padding: 5px 10px;
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.demo-controls-pill select option {
+  background: #121c2a;
+  color: #ffffff;
+}
+
+.demo-controls-pill button:hover {
+  opacity: 0.85;
+}
+
+/* Notification Toast */
+.p-toast {
+  position: fixed;
+  top: 50px;
+  left: 50%;
+  transform: translateX(-50%) translateY(-20px);
+  background: #121c2a;
+  color: #ffffff;
+  padding: 10px 20px;
+  border-radius: 9999px;
+  font-size: 13px;
+  font-weight: 500;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  z-index: 10000;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.p-toast.show {
+  transform: translateX(-50%) translateY(0);
+  opacity: 1;
+}
+
+/* Booking Modal Sheet */
+.p-modal-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(18, 28, 42, 0.5);
+  backdrop-filter: blur(4px);
+  z-index: 9990;
+  opacity: 0;
+  pointer-events: none;
+  display: none;
+  transition: opacity 0.25s ease;
+}
+
+.p-modal-overlay.open {
+  display: block;
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.p-modal-sheet {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #ffffff;
+  border-radius: 32px 32px 0 0;
+  padding: 24px 20px 32px;
+  box-shadow: 0 -10px 35px rgba(0, 0, 0, 0.15);
+  transform: translateY(100%);
+  transition: transform 0.3s cubic-bezier(0.32, 0.72, 0, 1);
+  z-index: 9995;
+}
+
+.p-modal-overlay.open .p-modal-sheet {
+  transform: translateY(0);
+}
+
+/* Avatar Preset Buttons */
+.avatar-preset-btn.active div {
+  outline: 2px solid #000000;
+  outline-offset: 2px;
+}
+
+/* Login Portal Switcher & Inputs */
+.portal-pill-btn {
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.portal-pill-btn.active {
+  background-color: #000000 !important;
+  color: #ffffff !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+}
+
+.input-auth-field {
+  transition: border-color 0.2s, box-shadow 0.2s, background-color 0.2s;
+}
+.input-auth-field:focus {
+  background-color: #ffffff !important;
+  border-color: #000000 !important;
+  box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.06);
+}
+.input-auth-field.input-error {
+  border-color: #ba1a1a !important;
+  background-color: #fff8f7 !important;
+}
+
+/* User Profile Dropdown */
+.profile-dropdown-menu {
+  position: absolute;
+  top: 54px;
+  right: 16px;
+  width: 230px;
+  background: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 20px;
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.15);
+  z-index: 999;
+  display: none;
+  flex-direction: column;
+  padding: 8px;
+  animation: fadeInDown 0.2s ease forwards;
+}
+.profile-dropdown-menu.show {
+  display: flex;
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Auth Spinner */
+.auth-spinner {
+  display: inline-block;
+  width: 15px;
+  height: 15px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  border-top-color: #ffffff;
+  animation: spin 0.7s linear infinite;
+}
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* BLE Telemetry & Terminal Styles */
+.ble-terminal-box {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  font-size: 11px;
+  line-height: 1.4;
+  background-color: #0b0e14;
+  color: #10b981;
+  border-radius: 12px;
+  padding: 10px 12px;
+  max-height: 140px;
+  overflow-y: auto;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.ble-pulse-dot {
+  position: relative;
+  display: inline-flex;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: #10b981;
+}
+
+.ble-pulse-dot::before {
+  content: '';
+  position: absolute;
+  top: -3px;
+  left: -3px;
+  right: -3px;
+  bottom: -3px;
+  border-radius: 50%;
+  background-color: rgba(16, 185, 129, 0.4);
+  animation: blePing 1.8s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+@keyframes blePing {
+  0% {
+    transform: scale(0.9);
+    opacity: 0.8;
+  }
+  75%, 100% {
+    transform: scale(2.2);
+    opacity: 0;
+  }
+}
+
+/* Radar search pulse animation for Bluetooth Section */
+.radar-pulse-ring {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  border: 2px solid rgba(37, 99, 235, 0.45);
+  animation: radarRipple 2s cubic-bezier(0, 0.2, 0.8, 1) infinite;
+}
+.radar-pulse-ring:nth-child(2) {
+  animation-delay: 0.6s;
+}
+.radar-pulse-ring:nth-child(3) {
+  animation-delay: 1.2s;
+}
+@keyframes radarRipple {
+  0% {
+    transform: scale(0.6);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(2.2);
+    opacity: 0;
+  }
+}
+
+
