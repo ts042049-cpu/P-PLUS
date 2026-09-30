@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 768 768" role="img" aria-labelledby="title">
+  <title id="title">P+ Personal Health Companion</title>
+  <defs>
+    <radialGradient id="mist"><stop stop-color="#fff"/><stop offset=".78" stop-color="#f7fbf9"/><stop offset="1" stop-color="#dce9e3"/></radialGradient>
+    <linearGradient id="leaf" x1="0" y1="1" x2="1" y2="0"><stop stop-color="#067454"/><stop offset=".52" stop-color="#20c887"/><stop offset="1" stop-color="#a2efb9"/></linearGradient>
+    <linearGradient id="ink" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#172b32"/><stop offset="1" stop-color="#06171c"/></linearGradient>
+    <filter id="shadow" x="-.2" y="-.2" width="1.4" height="1.5"><feGaussianBlur in="SourceAlpha" stdDeviation="8"/><feOffset dy="7"/><feComponentTransfer><feFuncA type="linear" slope=".17"/></feComponentTransfer><feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+  </defs>
+  <circle cx="384" cy="345" r="318" fill="url(#mist)"/>
+  <g fill="none" stroke="#71c7a1" stroke-linecap="round" opacity=".48">
+    <path d="M116 249a281 281 0 0 1 398-147M605 174a281 281 0 0 1 52 88M187 531a281 281 0 0 1-70-111M553 543a281 281 0 0 0 100-142" stroke-width="7"/>
+  </g>
+  <g fill="none" stroke="url(#leaf)" stroke-linecap="round" stroke-linejoin="round" stroke-width="6">
+    <path d="M70 365h86l12-52 14 83 12-51 12 20h37M537 365h30l13-13 11 15 14-65 13 102 13-54 12 15h75"/>
+  </g>
+  <g filter="url(#shadow)">
+    <path fill="url(#ink)" d="M266 166c73-2 150-3 205 6 51 8 83 42 83 88 0 59-42 94-94 110l-69 20c-21 6-31 19-31 39v93c0 13-10 23-23 23h-55V365c0-31 17-52 49-62l72-23c28-9 43-21 43-38 0-22-18-32-51-37-37-6-92-4-142-5-20 0-30-8-30-18 0-9 13-15 43-16z"/>
+    <path fill="url(#leaf)" d="M253 507c-5-62-10-111-7-155 3-39 17-70 48-96 22-19 57-34 106-48-30 29-54 54-76 82-22 28-32 54-32 83 0 45-12 81-39 111z"/>
+    <path fill="url(#leaf)" d="M264 344c-20-24-35-46-43-70-9-28-7-53 4-77 2 35 15 60 35 78 17 16 25 31 24 45-1 10-8 19-20 24z"/>
+    <circle cx="306" cy="245" r="28" fill="url(#leaf)"/>
+    <path fill="url(#leaf)" d="M475 112c42 7 63 26 69 54 4 16 2 31-5 47-6-24-20-37-37-51-15-12-25-28-27-50zM535 220c7-30 24-45 51-47-8 22-22 39-51 47z"/>
+    <path fill="url(#leaf)" d="M483 407h42a15 15 0 0 1 15 15v39h39a15 15 0 0 1 15 15v34a15 15 0 0 1-15 15h-39v39a15 15 0 0 1-15 15h-42a15 15 0 0 1-15-15v-39h-39a15 15 0 0 1-15-15v-34a15 15 0 0 1 15-15h39v-39a15 15 0 0 1 15-15z"/>
+  </g>
+  <path d="M197 558h374" stroke="#a9c4b9" stroke-width="3" opacity=".55"/>
+  <text x="321" y="637" fill="#18252b" font-family="Arial,sans-serif" font-size="74" font-weight="800" text-anchor="middle">P</text>
+  <path fill="url(#leaf)" d="M411 586h18v17h17v18h-17v18h-18v-18h-17v-18h17z"/>
+  <text x="384" y="674" fill="#43545b" font-family="Arial,sans-serif" font-size="25" letter-spacing="2.2" text-anchor="middle">Personal Health Companion</text>
+  <path d="M344 700h80" stroke="#34c991" stroke-linecap="round" stroke-width="4"/>
+</svg>
