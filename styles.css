@@ -1,3 +1,4 @@
+/* P+ Health Companion App - Clinical Precision Stylesheet */
 
 :root {
   --color-primary: #000000;
@@ -12,6 +13,7 @@
   -webkit-tap-highlight-color: transparent;
 }
 
+/* Global text overflow containment */
 p, span, h1, h2, h3, h4, h5, h6, label, button, a {
   overflow-wrap: break-word;
   word-break: normal;
@@ -32,7 +34,7 @@ html, body {
   overflow: hidden; /* Prevent double scroll on outer page */
 }
 
-
+/* Material Symbols Icon Normalization & Perfect Alignment */
 .material-symbols-outlined {
   font-family: 'Material Symbols Outlined' !important;
   font-weight: normal;
@@ -130,14 +132,26 @@ html, body {
   flex-direction: column;
   overflow: hidden;
   opacity: 0;
-  transform: translateY(6px);
-  transition: opacity 0.2s ease, transform 0.2s ease;
+  transform: translateY(8px);
+  transition: opacity 0.22s cubic-bezier(0.16, 1, 0.3, 1), transform 0.22s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .screen-view.active {
-  display: flex;
-  opacity: 1;
-  transform: translateY(0);
+  display: flex !important;
+  opacity: 1 !important;
+  transform: translateY(0) scale(1) !important;
+  animation: screenSpringIn 0.26s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes screenSpringIn {
+  0% {
+    opacity: 0;
+    transform: translateY(8px) scale(0.992);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
 }
 
 /* Screen scrollable main area */
@@ -197,6 +211,14 @@ html, body {
   border-radius: 9999px !important;
   z-index: 10 !important;
   transition: transform 0.15s ease, background-color 0.15s ease !important;
+}
+
+.screen-view > header button.header-action-pill {
+  width: auto !important;
+  min-width: 68px !important;
+  height: 32px !important;
+  padding: 0 10px !important;
+  border-radius: 9999px !important;
 }
 
 /* Telemetry Numerals Alignment */
@@ -543,5 +565,103 @@ nav.h-16 button span:last-child {
     opacity: 0;
   }
 }
+
+/* ========================================== */
+/* HEALTH GRAPHS & REPORT FILE STYLES */
+/* ========================================== */
+.graph-metric-pill {
+  background: #f1f5f9;
+  color: #64748b;
+  border: 1px solid #e2e8f0;
+}
+.graph-metric-pill.active {
+  background: #000000 !important;
+  color: #ffffff !important;
+  border-color: #000000 !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.14) !important;
+}
+
+.graph-card-interactive {
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+.graph-card-interactive:hover {
+  border-color: rgba(0, 0, 0, 0.12);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.04);
+}
+
+.graph-scrubber-hud {
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  pointer-events: none;
+  transition: opacity 0.15s ease, transform 0.15s ease;
+}
+
+/* Clinical Report Modal Styles */
+#clinical-report-modal {
+  transition: opacity 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+#clinical-report-modal.active {
+  opacity: 1 !important;
+  pointer-events: auto !important;
+}
+
+.report-sheet-container {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  animation: sheetSpringUp 0.32s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes sheetSpringUp {
+  0% {
+    opacity: 0;
+    transform: translateY(24px) scale(0.98);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Printable Medical Report Layout */
+@media print {
+  body {
+    background: #ffffff !important;
+    overflow: visible !important;
+  }
+  .app-canvas, .device-frame, .screens-viewport {
+    width: 100% !important;
+    max-width: 100% !important;
+    height: auto !important;
+    overflow: visible !important;
+    background: #ffffff !important;
+    box-shadow: none !important;
+    border: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+  .screen-view, #screens-viewport > section {
+    display: none !important;
+  }
+  #clinical-report-modal {
+    position: static !important;
+    display: block !important;
+    opacity: 1 !important;
+    pointer-events: auto !important;
+    background: #ffffff !important;
+    padding: 0 !important;
+  }
+  #clinical-report-modal .report-sheet-container {
+    max-height: none !important;
+    box-shadow: none !important;
+    border: none !important;
+    border-radius: 0 !important;
+    padding: 0 !important;
+    animation: none !important;
+  }
+  .no-print {
+    display: none !important;
+  }
+}
+
 
 

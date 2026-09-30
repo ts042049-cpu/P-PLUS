@@ -422,6 +422,69 @@
                 </div>
               </section>
 
+              <!-- Interactive Health Graphs & Trends Quick Access Card -->
+              <section class="w-full">
+                <div class="group w-full bg-gradient-to-br from-slate-900 via-gray-900 to-black text-white rounded-2xl p-4 shadow-[0_4px_20px_rgba(0,0,0,0.08)] flex flex-col gap-3 cursor-pointer active:scale-99 transition-all border border-black/10 box-border overflow-hidden" onclick="navigateTo('screen-graphs')">
+                  <div class="flex items-start justify-between">
+                    <div class="flex items-center gap-2.5">
+                      <div class="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center text-cyan-300 shrink-0">
+                        <span class="material-symbols-outlined text-[22px]">ssid_chart</span>
+                      </div>
+                      <div>
+                        <div class="flex items-center gap-1.5">
+                          <h3 class="font-bold text-sm text-white">Health Graphs &amp; Analytics</h3>
+                          <span class="px-1.5 py-0.5 rounded-full bg-cyan-400/20 text-cyan-300 text-[9px] font-bold tracking-wider uppercase">Interactive</span>
+                        </div>
+                        <p class="text-xs text-gray-300 mt-0.5">24H • 7D • 30D Multi-Metric Curves</p>
+                      </div>
+                    </div>
+                    <span class="material-symbols-outlined text-gray-400 group-hover:text-white transition-colors text-[20px]">chevron_right</span>
+                  </div>
+
+                  <!-- Dynamic Mini Sparkline Preview -->
+                  <div class="w-full h-10 pt-1">
+                    <svg class="w-full h-full" fill="none" preserveAspectRatio="none" viewBox="0 0 240 38">
+                      <path d="M0,28 C30,30 50,15 80,18 C110,22 130,8 160,12 C190,16 210,5 240,10" stroke="#38bdf8" stroke-width="2.2" stroke-linecap="round"/>
+                      <path d="M0,28 C30,30 50,15 80,18 C110,22 130,8 160,12 C190,16 210,5 240,10 L240,38 L0,38 Z" fill="rgba(56, 189, 248, 0.15)"/>
+                      <circle cx="240" cy="10" r="3" fill="#38bdf8" class="animate-ping"/>
+                      <circle cx="240" cy="10" r="3" fill="#38bdf8"/>
+                    </svg>
+                  </div>
+
+                  <div class="flex items-center justify-between pt-1 border-t border-white/10 text-[11px] text-gray-300">
+                    <span class="flex items-center gap-1">
+                      <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+                      <span>HR, SpO₂, Posture, Temp Graphs</span>
+                    </span>
+                    <span class="text-cyan-300 font-semibold flex items-center gap-0.5">
+                      <span>Open Graphs</span>
+                      <span class="material-symbols-outlined text-[13px]">arrow_forward</span>
+                    </span>
+                  </div>
+                </div>
+              </section>
+
+              <!-- Clinical Health Report File Generator Quick Access Card -->
+              <section class="w-full">
+                <div class="w-full bg-surface-container-lowest rounded-2xl p-3.5 shadow-[0_4px_20px_rgba(0,0,0,0.03)] flex items-center justify-between cursor-pointer active:scale-99 transition-transform border border-surface-container/50 box-border hover:border-surface-container" onclick="openClinicalReportModal()">
+                  <div class="flex items-center gap-3 min-w-0">
+                    <div class="w-10 h-10 rounded-xl bg-blue-50 text-blue-700 flex items-center justify-center shrink-0 border border-blue-100">
+                      <span class="material-symbols-outlined text-[22px]">clinical_notes</span>
+                    </div>
+                    <div class="min-w-0">
+                      <div class="flex items-center gap-1.5">
+                        <h3 class="font-title-sm text-sm text-on-surface font-bold truncate">Clinical Health Report File</h3>
+                        <span class="px-1.5 py-0.2 rounded bg-emerald-100 text-emerald-800 text-[9px] font-bold shrink-0">HTML/PDF</span>
+                      </div>
+                      <p class="font-body-md text-secondary text-xs truncate mt-0.5">Generate &amp; download doctor-ready report</p>
+                    </div>
+                  </div>
+                  <button type="button" class="w-8 h-8 rounded-full bg-surface-container-low hover:bg-surface-container flex items-center justify-center text-primary shrink-0 ml-2" onclick="event.stopPropagation(); openClinicalReportModal()" title="Generate Report File">
+                    <span class="material-symbols-outlined text-[18px]">download</span>
+                  </button>
+                </div>
+              </section>
+
               <!-- Risk Warning Quick Tile (Click -> Risk & Early Warning) -->
               <section class="w-full">
                 <div class="bg-surface-container-lowest rounded-2xl p-3.5 shadow-[0_4px_20px_rgba(0,0,0,0.03)] flex items-center justify-between cursor-pointer active:scale-99 transition-transform border border-surface-container/50 box-border w-full" onclick="navigateTo('screen-risk')">
@@ -599,6 +662,13 @@
                   </div>
 
                 </div>
+
+                <!-- Link to Health Graphs Screen -->
+                <button type="button" onclick="navigateTo('screen-graphs')" class="w-full mt-2.5 py-2.5 px-3 rounded-2xl bg-black text-white text-xs font-semibold flex items-center justify-center gap-2 active:scale-98 transition-all cursor-pointer shadow-xs">
+                  <span class="material-symbols-outlined text-[16px] text-cyan-300">ssid_chart</span>
+                  <span>View Interactive Health Graphs &amp; Trends</span>
+                  <span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+                </button>
               </section>
 
               <!-- Wireless Status Footer Card -->
@@ -773,6 +843,12 @@
               <!-- Save Button -->
               <button class="w-full h-12 rounded-full bg-primary text-on-primary font-title-sm text-sm flex items-center justify-center gap-2 active:scale-[0.98] transition-transform shadow-md font-semibold cursor-pointer" type="button" onclick="savePostureSettings()">
                 <span>Save Settings</span>
+              </button>
+
+              <!-- Link to Posture Graphs & Analytics -->
+              <button class="w-full h-11 rounded-full bg-surface-container-low hover:bg-surface-container text-on-surface font-title-sm text-xs flex items-center justify-center gap-2 active:scale-[0.98] transition-transform font-semibold cursor-pointer border border-surface-container mt-1" type="button" onclick="navigateTo('screen-graphs'); filterGraphMetric('posture');">
+                <span class="material-symbols-outlined text-[16px] text-purple-600">query_stats</span>
+                <span>View 7-Day Posture Curves &amp; Consistency</span>
               </button>
 
             </div>
@@ -1636,9 +1712,9 @@
 
               <!-- Actions: Export & Logout -->
               <div class="flex flex-col gap-2 pt-1 pb-2">
-                <button class="w-full h-11 rounded-full bg-surface-container-low hover:bg-surface-container text-on-surface text-xs font-semibold flex items-center justify-center gap-2 transition-colors cursor-pointer border border-surface-container" onclick="exportHealthReport()" type="button">
-                  <span class="material-symbols-outlined text-[16px]">download</span>
-                  <span>Export Clinical Health Summary (PDF)</span>
+                <button class="w-full h-11 rounded-full bg-surface-container-low hover:bg-surface-container text-on-surface text-xs font-semibold flex items-center justify-center gap-2 transition-colors cursor-pointer border border-surface-container" onclick="openClinicalReportModal()" type="button">
+                  <span class="material-symbols-outlined text-[16px]">description</span>
+                  <span>Open &amp; Download Clinical Health Report File</span>
                 </button>
                 <button class="w-full h-11 rounded-full bg-red-50 hover:bg-red-100 text-error text-xs font-semibold flex items-center justify-center gap-2 transition-colors cursor-pointer border border-red-200" onclick="handleLogout()" type="button">
                   <span class="material-symbols-outlined text-[16px]">logout</span>
@@ -1925,7 +2001,602 @@
           </nav>
         </section>
 
+        <!-- ========================================== -->
+        <!-- SCREEN: HEALTH GRAPHS & ANALYTICS (REVISED TELEMETRY) -->
+        <!-- ========================================== -->
+        <section id="screen-graphs" class="screen-view">
+          <!-- Header -->
+          <header class="h-14 px-4 flex items-center justify-between border-b border-surface-container/40 bg-surface/95 backdrop-blur-xl shrink-0 z-20 relative">
+            <button aria-label="Go Back" class="w-8 h-8 rounded-full flex items-center justify-center text-on-surface hover:bg-surface-container-high transition-colors cursor-pointer" onclick="goBack()">
+              <span class="material-symbols-outlined text-[20px]">arrow_back</span>
+            </button>
+            <h1 class="font-title-sm text-base text-on-surface font-bold tracking-tight">Health Graphs &amp; Analytics</h1>
+            <button aria-label="Export Clinical Report" class="header-action-pill flex items-center justify-center gap-1 bg-black hover:bg-gray-800 text-white text-xs font-semibold active:scale-95 transition-all cursor-pointer shadow-xs" onclick="openClinicalReportModal()" title="View and Download Clinical Report File">
+              <span class="material-symbols-outlined text-[15px]">description</span>
+              <span class="font-label-telemetry text-[10px] tracking-tight">Report</span>
+            </button>
+          </header>
+
+          <!-- Main Scrollable Analytics Area -->
+          <div class="screen-scroll-area px-4 pt-3 pb-24">
+            <div class="flex flex-col w-full gap-3.5 pb-8 max-w-full">
+
+              <!-- Top Timeframe Filter Segmented Control -->
+              <div class="flex items-center p-1 bg-surface-container-low rounded-2xl border border-surface-container/70 shadow-xs">
+                <button id="graph-tf-24h" type="button" class="flex-1 py-1.5 rounded-xl text-xs font-bold transition-all text-white bg-black shadow-xs cursor-pointer" onclick="switchGraphTimeframe('24h')">24 Hours</button>
+                <button id="graph-tf-7d" type="button" class="flex-1 py-1.5 rounded-xl text-xs font-bold transition-all text-secondary hover:text-on-surface cursor-pointer" onclick="switchGraphTimeframe('7d')">7 Days</button>
+                <button id="graph-tf-30d" type="button" class="flex-1 py-1.5 rounded-xl text-xs font-bold transition-all text-secondary hover:text-on-surface cursor-pointer" onclick="switchGraphTimeframe('30d')">30 Days</button>
+              </div>
+
+              <!-- Metric Filter Chips Row -->
+              <div class="flex items-center gap-1.5 overflow-x-auto pb-1 no-scrollbar select-none">
+                <button type="button" class="graph-metric-pill active px-3 py-1 rounded-full text-[11px] font-bold whitespace-nowrap cursor-pointer transition-all" onclick="filterGraphMetric('all', this)">All Metrics</button>
+                <button type="button" class="graph-metric-pill px-3 py-1 rounded-full text-[11px] font-bold whitespace-nowrap cursor-pointer transition-all" onclick="filterGraphMetric('heart', this)">Heart Rate</button>
+                <button type="button" class="graph-metric-pill px-3 py-1 rounded-full text-[11px] font-bold whitespace-nowrap cursor-pointer transition-all" onclick="filterGraphMetric('spo2', this)">SpO₂ Oxygen</button>
+                <button type="button" class="graph-metric-pill px-3 py-1 rounded-full text-[11px] font-bold whitespace-nowrap cursor-pointer transition-all" onclick="filterGraphMetric('posture', this)">Spine Posture</button>
+                <button type="button" class="graph-metric-pill px-3 py-1 rounded-full text-[11px] font-bold whitespace-nowrap cursor-pointer transition-all" onclick="filterGraphMetric('temp', this)">Body Temp</button>
+              </div>
+
+              <!-- GRAPH FORM 1: HEART RATE CONTINUOUS TELEMETRY -->
+              <div id="graph-card-heart" class="graph-card-interactive bg-surface-container-lowest rounded-2xl p-4 shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-surface-container/60 flex flex-col gap-3">
+                <div class="flex items-start justify-between">
+                  <div class="flex items-center gap-2.5">
+                    <div class="w-9 h-9 rounded-xl bg-red-50 text-red-600 flex items-center justify-center shrink-0 border border-red-100">
+                      <span class="material-symbols-outlined text-[20px] animate-pulse">favorite</span>
+                    </div>
+                    <div>
+                      <div class="flex items-center gap-1.5">
+                        <span class="font-label-telemetry text-[10px] uppercase font-bold tracking-wider text-secondary">HEART RATE CURVE</span>
+                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+                        <span class="text-[9px] font-bold text-emerald-700 bg-emerald-50 px-1.5 py-0.2 rounded">Optimal Rhythm</span>
+                      </div>
+                      <div class="flex items-baseline gap-1 mt-0.5">
+                        <span id="graph-hr-current" class="text-xl font-bold text-on-surface tabular-nums dynamic-bpm-val">72</span>
+                        <span class="text-xs font-semibold text-secondary">BPM (Resting Baseline 62)</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="text-right">
+                    <span id="graph-hr-tf-label" class="text-[10px] font-bold text-secondary uppercase tracking-wider block">24H TIMEFRAME</span>
+                    <span class="text-xs font-semibold text-emerald-600">Stable Sinus</span>
+                  </div>
+                </div>
+
+                <!-- Interactive SVG Curve for Heart Rate -->
+                <div class="relative w-full h-40 bg-slate-950 rounded-xl p-2.5 overflow-hidden flex flex-col justify-between" onmousemove="handleGraphScrub(event, 'hr')" onmouseleave="hideGraphScrub('hr')">
+                  <!-- Shaded Graph Canvas -->
+                  <svg id="svg-graph-hr" class="w-full h-28 overflow-visible" fill="none" preserveAspectRatio="none" viewBox="0 0 340 100">
+                    <defs>
+                      <linearGradient id="hrGrad" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="0%" stop-color="#ef4444" stop-opacity="0.5"/>
+                        <stop offset="100%" stop-color="#ef4444" stop-opacity="0.0"/>
+                      </linearGradient>
+                    </defs>
+                    <!-- Grid guidelines -->
+                    <line x1="0" y1="20" x2="340" y2="20" stroke="#334155" stroke-dasharray="3 3" stroke-width="0.8"/>
+                    <line x1="0" y1="50" x2="340" y2="50" stroke="#334155" stroke-dasharray="3 3" stroke-width="0.8"/>
+                    <line x1="0" y1="80" x2="340" y2="80" stroke="#334155" stroke-dasharray="3 3" stroke-width="0.8"/>
+                    <!-- Area under curve -->
+                    <path id="path-hr-area" d="M0,65 C30,68 60,74 90,70 C120,66 140,48 170,42 C200,38 230,52 260,46 C290,40 310,25 340,32 L340,100 L0,100 Z" fill="url(#hrGrad)"/>
+                    <!-- Line path -->
+                    <path id="path-hr-line" d="M0,65 C30,68 60,74 90,70 C120,66 140,48 170,42 C200,38 230,52 260,46 C290,40 310,25 340,32" stroke="#ef4444" stroke-width="2.5" stroke-linecap="round"/>
+                    <!-- Peak point -->
+                    <circle id="dot-hr-peak" cx="310" cy="25" r="4.5" fill="#f87171" stroke="#ffffff" stroke-width="1.5"/>
+                    <text id="text-hr-peak" x="305" y="16" fill="#f87171" font-size="9" font-weight="700" text-anchor="middle">Peak 94</text>
+                    <!-- Resting nadir point -->
+                    <circle id="dot-hr-nadir" cx="60" cy="74" r="3.5" fill="#94a3b8" stroke="#ffffff" stroke-width="1"/>
+                    <text id="text-hr-nadir" x="60" y="88" fill="#cbd5e1" font-size="8" font-weight="600" text-anchor="middle">Min 58</text>
+                  </svg>
+
+                  <!-- Time axis ticks -->
+                  <div id="graph-hr-axis" class="flex justify-between items-center text-[9px] font-mono text-gray-400 pt-1 border-t border-slate-800">
+                    <span>00:00</span>
+                    <span>06:00</span>
+                    <span>12:00</span>
+                    <span>18:00</span>
+                    <span>23:59</span>
+                  </div>
+
+                  <!-- Hover Scrubber HUD Tooltip -->
+                  <div id="scrub-hud-hr" class="hidden absolute top-2 right-2 bg-black/85 text-white text-[10px] font-semibold px-2 py-0.8 rounded-md border border-white/20 pointer-events-none">
+                    <span id="scrub-val-hr">72 BPM</span> • <span id="scrub-time-hr" class="text-gray-300">14:00</span>
+                  </div>
+                </div>
+
+                <!-- 4 KPI Badges for Heart Rate -->
+                <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; width: 100%;" class="pt-1 text-center">
+                  <div class="bg-surface-container-low rounded-xl p-2 border border-surface-container/50">
+                    <span class="text-[9px] uppercase font-bold text-secondary block">MIN</span>
+                    <span id="kpi-hr-min" class="text-sm font-bold text-on-surface">58</span>
+                    <span class="text-[9px] text-secondary">BPM</span>
+                  </div>
+                  <div class="bg-surface-container-low rounded-xl p-2 border border-surface-container/50">
+                    <span class="text-[9px] uppercase font-bold text-secondary block">AVG</span>
+                    <span id="kpi-hr-avg" class="text-sm font-bold text-on-surface">72</span>
+                    <span class="text-[9px] text-secondary">BPM</span>
+                  </div>
+                  <div class="bg-surface-container-low rounded-xl p-2 border border-surface-container/50">
+                    <span class="text-[9px] uppercase font-bold text-secondary block">PEAK</span>
+                    <span id="kpi-hr-max" class="text-sm font-bold text-red-600">94</span>
+                    <span class="text-[9px] text-secondary">BPM</span>
+                  </div>
+                  <div class="bg-surface-container-low rounded-xl p-2 border border-surface-container/50">
+                    <span class="text-[9px] uppercase font-bold text-secondary block">HRV</span>
+                    <span class="text-sm font-bold text-emerald-600">48</span>
+                    <span class="text-[9px] text-secondary">ms</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- GRAPH FORM 2: SPO2 BLOOD OXYGEN SATURATION BAND -->
+              <div id="graph-card-spo2" class="graph-card-interactive bg-surface-container-lowest rounded-2xl p-4 shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-surface-container/60 flex flex-col gap-3">
+                <div class="flex items-start justify-between">
+                  <div class="flex items-center gap-2.5">
+                    <div class="w-9 h-9 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center shrink-0 border border-blue-100">
+                      <span class="material-symbols-outlined text-[20px]">air</span>
+                    </div>
+                    <div>
+                      <div class="flex items-center gap-1.5">
+                        <span class="font-label-telemetry text-[10px] uppercase font-bold tracking-wider text-secondary">SPO₂ SATURATION BAND</span>
+                        <span class="text-[9px] font-bold text-blue-700 bg-blue-50 px-1.5 py-0.2 rounded">Optimal 95-100%</span>
+                      </div>
+                      <div class="flex items-baseline gap-1 mt-0.5">
+                        <span id="graph-spo2-current" class="text-xl font-bold text-on-surface tabular-nums dynamic-spo2-val">98</span>
+                        <span class="text-xs font-semibold text-secondary">% (Mean 98.4%)</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="text-right">
+                    <span class="text-[10px] font-bold text-secondary uppercase tracking-wider block">HYPOXIC DROPS</span>
+                    <span class="text-xs font-bold text-emerald-600">0 Events</span>
+                  </div>
+                </div>
+
+                <!-- Interactive SVG Area for SpO2 -->
+                <div class="relative w-full h-36 bg-slate-950 rounded-xl p-2.5 overflow-hidden flex flex-col justify-between" onmousemove="handleGraphScrub(event, 'spo2')" onmouseleave="hideGraphScrub('spo2')">
+                  <svg id="svg-graph-spo2" class="w-full h-24 overflow-visible" fill="none" preserveAspectRatio="none" viewBox="0 0 340 100">
+                    <defs>
+                      <linearGradient id="spo2Grad" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="0%" stop-color="#38bdf8" stop-opacity="0.5"/>
+                        <stop offset="100%" stop-color="#38bdf8" stop-opacity="0.0"/>
+                      </linearGradient>
+                    </defs>
+                    <!-- Shaded normal medical band 95-100% -->
+                    <rect x="0" y="10" width="340" height="70" fill="rgba(56, 189, 248, 0.08)"/>
+                    <line x1="0" y1="10" x2="340" y2="10" stroke="#0284c7" stroke-dasharray="2 2" stroke-width="0.8"/>
+                    <line x1="0" y1="80" x2="340" y2="80" stroke="#0284c7" stroke-dasharray="2 2" stroke-width="0.8"/>
+                    <text x="5" y="20" fill="#38bdf8" font-size="8" font-weight="600">100%</text>
+                    <text x="5" y="78" fill="#38bdf8" font-size="8" font-weight="600">95% (Threshold)</text>
+                    <!-- Oxygen Saturation Line -->
+                    <path id="path-spo2-area" d="M0,32 C40,30 70,42 100,40 C140,38 180,26 220,30 C260,34 300,28 340,30 L340,100 L0,100 Z" fill="url(#spo2Grad)"/>
+                    <path id="path-spo2-line" d="M0,32 C40,30 70,42 100,40 C140,38 180,26 220,30 C260,34 300,28 340,30" stroke="#38bdf8" stroke-width="2.2" stroke-linecap="round"/>
+                    <circle cx="220" cy="30" r="3.5" fill="#38bdf8" stroke="#ffffff" stroke-width="1"/>
+                  </svg>
+
+                  <div id="graph-spo2-axis" class="flex justify-between items-center text-[9px] font-mono text-gray-400 pt-1 border-t border-slate-800">
+                    <span>00:00</span>
+                    <span>06:00</span>
+                    <span>12:00</span>
+                    <span>18:00</span>
+                    <span>23:59</span>
+                  </div>
+
+                  <div id="scrub-hud-spo2" class="hidden absolute top-2 right-2 bg-black/85 text-white text-[10px] font-semibold px-2 py-0.8 rounded-md border border-white/20 pointer-events-none">
+                    <span id="scrub-val-spo2">98% SpO₂</span> • <span id="scrub-time-spo2" class="text-gray-300">16:30</span>
+                  </div>
+                </div>
+
+                <!-- 3 Summary Metrics -->
+                <div class="grid grid-cols-3 gap-2 pt-1 text-center">
+                  <div class="bg-surface-container-low rounded-xl p-2 border border-surface-container/50">
+                    <span class="text-[9px] uppercase font-bold text-secondary block">MIN SATURATION</span>
+                    <span class="text-sm font-bold text-on-surface">96.5%</span>
+                  </div>
+                  <div class="bg-surface-container-low rounded-xl p-2 border border-surface-container/50">
+                    <span class="text-[9px] uppercase font-bold text-secondary block">24H MEAN</span>
+                    <span class="text-sm font-bold text-blue-600">98.4%</span>
+                  </div>
+                  <div class="bg-surface-container-low rounded-xl p-2 border border-surface-container/50">
+                    <span class="text-[9px] uppercase font-bold text-secondary block">STATUS</span>
+                    <span class="text-sm font-bold text-emerald-600">Optimal</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- GRAPH FORM 3: SPINE DEFLECTION ANGLE & ALIGNMENT BREAKDOWN -->
+              <div id="graph-card-posture" class="graph-card-interactive bg-surface-container-lowest rounded-2xl p-4 shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-surface-container/60 flex flex-col gap-3">
+                <div class="flex items-start justify-between">
+                  <div class="flex items-center gap-2.5">
+                    <div class="w-9 h-9 rounded-xl bg-purple-50 text-purple-700 flex items-center justify-center shrink-0 border border-purple-100">
+                      <span class="material-symbols-outlined text-[20px]">accessibility_new</span>
+                    </div>
+                    <div>
+                      <div class="flex items-center gap-1.5">
+                        <span class="font-label-telemetry text-[10px] uppercase font-bold tracking-wider text-secondary">SPINE BIOMECHANICS</span>
+                        <span class="text-[9px] font-bold text-purple-700 bg-purple-50 px-1.5 py-0.2 rounded">Ergonomic Form</span>
+                      </div>
+                      <div class="flex items-baseline gap-1 mt-0.5">
+                        <span id="graph-posture-angle" class="text-xl font-bold text-on-surface tabular-nums dynamic-posture-angle">0°</span>
+                        <span class="text-xs font-semibold text-secondary">Deflection • Score: <strong class="text-primary dynamic-posture-score">94%</strong></span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="text-right">
+                    <span class="text-[10px] font-bold text-secondary uppercase tracking-wider block">GOOD FORM</span>
+                    <span class="text-xs font-bold text-primary">5h 42m Today</span>
+                  </div>
+                </div>
+
+                <!-- 24H Deflection Angle Curve -->
+                <div class="relative w-full h-36 bg-slate-950 rounded-xl p-2.5 overflow-hidden flex flex-col justify-between" onmousemove="handleGraphScrub(event, 'posture')" onmouseleave="hideGraphScrub('posture')">
+                  <svg id="svg-graph-posture" class="w-full h-24 overflow-visible" fill="none" preserveAspectRatio="none" viewBox="0 0 340 100">
+                    <defs>
+                      <linearGradient id="postureGrad" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="0%" stop-color="#a855f7" stop-opacity="0.4"/>
+                        <stop offset="100%" stop-color="#a855f7" stop-opacity="0.0"/>
+                      </linearGradient>
+                    </defs>
+                    <!-- Slouch Threshold Line (> 15 deg) -->
+                    <line x1="0" y1="35" x2="340" y2="35" stroke="#ef4444" stroke-dasharray="3 3" stroke-width="1"/>
+                    <text x="5" y="30" fill="#f87171" font-size="8" font-weight="600">15° Slouch Trigger Line</text>
+                    <!-- Angle curve -->
+                    <path id="path-posture-area" d="M0,85 C40,82 70,88 100,75 C130,62 160,30 190,78 C220,82 250,85 280,80 C310,75 330,85 340,88 L340,100 L0,100 Z" fill="url(#postureGrad)"/>
+                    <path id="path-posture-line" d="M0,85 C40,82 70,88 100,75 C130,62 160,30 190,78 C220,82 250,85 280,80 C310,75 330,85 340,88" stroke="#a855f7" stroke-width="2.2" stroke-linecap="round"/>
+                    <!-- Slouch Alert Event Marker -->
+                    <circle cx="160" cy="30" r="4.5" fill="#ef4444" stroke="#ffffff" stroke-width="1.5"/>
+                    <text x="160" y="20" fill="#f87171" font-size="8" font-weight="700" text-anchor="middle">Slouch 16°</text>
+                  </svg>
+
+                  <div id="graph-posture-axis" class="flex justify-between items-center text-[9px] font-mono text-gray-400 pt-1 border-t border-slate-800">
+                    <span>00:00</span>
+                    <span>06:00</span>
+                    <span>12:00</span>
+                    <span>18:00</span>
+                    <span>23:59</span>
+                  </div>
+
+                  <div id="scrub-hud-posture" class="hidden absolute top-2 right-2 bg-black/85 text-white text-[10px] font-semibold px-2 py-0.8 rounded-md border border-white/20 pointer-events-none">
+                    <span id="scrub-val-posture">0° Upright</span> • <span id="scrub-time-posture" class="text-gray-300">11:00</span>
+                  </div>
+                </div>
+
+                <!-- Posture Alignment Distribution Breakdown Bar -->
+                <div>
+                  <div class="flex justify-between text-[11px] font-semibold mb-1">
+                    <span>Posture Alignment Breakdown</span>
+                    <span class="text-primary font-bold">84% Upright</span>
+                  </div>
+                  <div class="w-full h-3 rounded-full overflow-hidden flex bg-surface-container-high">
+                    <div style="width: 84%;" class="bg-black h-full" title="84% Upright Neutral"></div>
+                    <div style="width: 11%;" class="bg-amber-400 h-full" title="11% Mild Forward Lean"></div>
+                    <div style="width: 5%;" class="bg-red-500 h-full" title="5% Slouch Corrected"></div>
+                  </div>
+                  <div class="flex justify-between text-[9px] text-secondary mt-1">
+                    <span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-black"></span> Upright 84%</span>
+                    <span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-amber-400"></span> Mild Lean 11%</span>
+                    <span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-red-500"></span> Slouch 5%</span>
+                  </div>
+                </div>
+
+                <!-- 7-Day Good Posture Compliance Bar Graph -->
+                <div class="pt-2 border-t border-surface-container/60">
+                  <div class="flex items-center justify-between text-[11px] font-semibold text-secondary mb-2">
+                    <span>7-Day Posture Consistency (Hours Upright)</span>
+                    <span class="text-primary font-bold">Avg 5.6h/day</span>
+                  </div>
+                  <div class="grid grid-cols-7 gap-1.5 items-end h-16 pt-1">
+                    <div class="flex flex-col items-center gap-1 h-full justify-end">
+                      <div class="w-full bg-primary/20 rounded-t-md hover:bg-primary transition-colors cursor-pointer" style="height: 75%;" title="Mon: 5.2 hrs"></div>
+                      <span class="text-[9px] font-mono text-secondary">M</span>
+                    </div>
+                    <div class="flex flex-col items-center gap-1 h-full justify-end">
+                      <div class="w-full bg-primary/20 rounded-t-md hover:bg-primary transition-colors cursor-pointer" style="height: 85%;" title="Tue: 5.8 hrs"></div>
+                      <span class="text-[9px] font-mono text-secondary">T</span>
+                    </div>
+                    <div class="flex flex-col items-center gap-1 h-full justify-end">
+                      <div class="w-full bg-primary/20 rounded-t-md hover:bg-primary transition-colors cursor-pointer" style="height: 92%;" title="Wed: 6.1 hrs"></div>
+                      <span class="text-[9px] font-mono text-secondary">W</span>
+                    </div>
+                    <div class="flex flex-col items-center gap-1 h-full justify-end">
+                      <div class="w-full bg-primary/20 rounded-t-md hover:bg-primary transition-colors cursor-pointer" style="height: 78%;" title="Thu: 5.5 hrs"></div>
+                      <span class="text-[9px] font-mono text-secondary">T</span>
+                    </div>
+                    <div class="flex flex-col items-center gap-1 h-full justify-end">
+                      <div class="w-full bg-primary/20 rounded-t-md hover:bg-primary transition-colors cursor-pointer" style="height: 84%;" title="Fri: 5.9 hrs"></div>
+                      <span class="text-[9px] font-mono text-secondary">F</span>
+                    </div>
+                    <div class="flex flex-col items-center gap-1 h-full justify-end">
+                      <div class="w-full bg-primary/20 rounded-t-md hover:bg-primary transition-colors cursor-pointer" style="height: 65%;" title="Sat: 4.8 hrs"></div>
+                      <span class="text-[9px] font-mono text-secondary">S</span>
+                    </div>
+                    <div class="flex flex-col items-center gap-1 h-full justify-end">
+                      <div class="w-full bg-primary rounded-t-md cursor-pointer" style="height: 82%;" title="Sun (Today): 5.7 hrs"></div>
+                      <span class="text-[9px] font-mono font-bold text-primary">S</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- GRAPH FORM 4: BODY TEMPERATURE CIRCADIAN DRIFT -->
+              <div id="graph-card-temp" class="graph-card-interactive bg-surface-container-lowest rounded-2xl p-4 shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-surface-container/60 flex flex-col gap-3">
+                <div class="flex items-start justify-between">
+                  <div class="flex items-center gap-2.5">
+                    <div class="w-9 h-9 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center shrink-0 border border-amber-100">
+                      <span class="material-symbols-outlined text-[20px]">device_thermostat</span>
+                    </div>
+                    <div>
+                      <div class="flex items-center gap-1.5">
+                        <span class="font-label-telemetry text-[10px] uppercase font-bold tracking-wider text-secondary">CIRCADIAN TEMPERATURE</span>
+                        <span class="text-[9px] font-bold text-amber-700 bg-amber-50 px-1.5 py-0.2 rounded">Afebrile 36.1 - 37.2°C</span>
+                      </div>
+                      <div class="flex items-baseline gap-1 mt-0.5">
+                        <span id="graph-temp-current" class="text-xl font-bold text-on-surface tabular-nums dynamic-temp-val">36.6</span>
+                        <span class="text-xs font-semibold text-secondary">°C (Circadian Shift: +0.4°C)</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="text-right">
+                    <span class="text-[10px] font-bold text-secondary uppercase tracking-wider block">FEVER RISK</span>
+                    <span class="text-xs font-bold text-emerald-600">None (Normal)</span>
+                  </div>
+                </div>
+
+                <!-- Temperature SVG Plot -->
+                <div class="relative w-full h-32 bg-slate-950 rounded-xl p-2.5 overflow-hidden flex flex-col justify-between" onmousemove="handleGraphScrub(event, 'temp')" onmouseleave="hideGraphScrub('temp')">
+                  <svg id="svg-graph-temp" class="w-full h-20 overflow-visible" fill="none" preserveAspectRatio="none" viewBox="0 0 340 100">
+                    <defs>
+                      <linearGradient id="tempGrad" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="0%" stop-color="#f59e0b" stop-opacity="0.4"/>
+                        <stop offset="100%" stop-color="#f59e0b" stop-opacity="0.0"/>
+                      </linearGradient>
+                    </defs>
+                    <line x1="0" y1="20" x2="340" y2="20" stroke="#f59e0b" stroke-dasharray="2 2" stroke-width="0.7"/>
+                    <line x1="0" y1="80" x2="340" y2="80" stroke="#f59e0b" stroke-dasharray="2 2" stroke-width="0.7"/>
+                    <path id="path-temp-area" d="M0,70 C40,78 90,82 140,65 C190,50 240,35 290,45 C320,52 335,48 340,46 L340,100 L0,100 Z" fill="url(#tempGrad)"/>
+                    <path id="path-temp-line" d="M0,70 C40,78 90,82 140,65 C190,50 240,35 290,45 C320,52 335,48 340,46" stroke="#f59e0b" stroke-width="2.2" stroke-linecap="round"/>
+                    <circle cx="290" cy="45" r="3.5" fill="#f59e0b" stroke="#ffffff" stroke-width="1"/>
+                  </svg>
+                  <div id="graph-temp-axis" class="flex justify-between items-center text-[9px] font-mono text-gray-400 pt-1 border-t border-slate-800">
+                    <span>00:00 (36.3°C)</span>
+                    <span>12:00 (36.6°C)</span>
+                    <span>23:59 (36.5°C)</span>
+                  </div>
+                  <div id="scrub-hud-temp" class="hidden absolute top-2 right-2 bg-black/85 text-white text-[10px] font-semibold px-2 py-0.8 rounded-md border border-white/20 pointer-events-none">
+                    <span id="scrub-val-temp">36.6°C</span> • <span id="scrub-time-temp" class="text-gray-300">12:00</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Dedicated Clinical Report File Action Section -->
+              <div style="background: linear-gradient(135deg, #1e3a8a 0%, #0f172a 100%); color: #ffffff;" class="rounded-2xl p-4 shadow-md flex flex-col gap-3">
+                <div class="flex items-center gap-3">
+                  <div class="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center text-cyan-300 shrink-0">
+                    <span class="material-symbols-outlined text-[24px]">description</span>
+                  </div>
+                  <div>
+                    <h3 class="font-bold text-sm text-white">Full Clinical Health Report File</h3>
+                    <p class="text-xs text-blue-200 mt-0.5">Read all revised data &amp; export official medical dossier</p>
+                  </div>
+                </div>
+
+                <div class="grid grid-cols-2 gap-2 pt-1">
+                  <button type="button" class="bg-white hover:bg-gray-100 text-black font-bold text-xs py-2.5 px-3 rounded-xl flex items-center justify-center gap-1.5 active:scale-98 transition-all cursor-pointer shadow-xs" onclick="openClinicalReportModal()">
+                    <span class="material-symbols-outlined text-[16px]">visibility</span>
+                    <span>Preview Report</span>
+                  </button>
+                  <button type="button" class="bg-cyan-400 hover:bg-cyan-300 text-slate-950 font-bold text-xs py-2.5 px-3 rounded-xl flex items-center justify-center gap-1.5 active:scale-98 transition-all cursor-pointer shadow-xs" onclick="exportHealthReport()">
+                    <span class="material-symbols-outlined text-[16px]">download</span>
+                    <span>Download File</span>
+                  </button>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- Bottom Navigation Bar for Screen Graphs -->
+          <nav class="h-16 px-space-xs bg-surface-container-lowest/95 backdrop-blur-xl border-t border-surface-container/60 shrink-0 z-30">
+            <div class="flex justify-around items-center h-full relative">
+              <button class="flex flex-col items-center justify-center min-w-[56px] h-12 text-secondary hover:text-on-surface cursor-pointer" onclick="navigateTo('screen-home')">
+                <span class="material-symbols-outlined text-[22px]">home</span>
+                <span class="font-label-telemetry text-[10px] uppercase tracking-wider">HOME</span>
+              </button>
+              <button class="flex flex-col items-center justify-center min-w-[56px] h-12 text-secondary hover:text-on-surface cursor-pointer" onclick="navigateTo('screen-doctors')">
+                <span class="material-symbols-outlined text-[22px]">medical_services</span>
+                <span class="font-label-telemetry text-[10px] uppercase tracking-wider">CARE</span>
+              </button>
+              <div class="relative -top-4 flex items-center justify-center">
+                <button aria-label="Connect Bluetooth Device" class="main-plus-ble-btn w-12 h-12 rounded-full bg-primary text-on-primary shadow-lg flex items-center justify-center transition-transform active:scale-95 cursor-pointer relative" onclick="handlePlusButtonClick()" title="Connect Bluetooth Device (ESP32-S3)">
+                  <span class="material-symbols-outlined text-[24px] nav-center-icon">add</span>
+                  <span class="nav-center-ble-badge absolute -bottom-0.5 -right-0.5 w-4 h-4 rounded-full bg-blue-600 text-white flex items-center justify-center border-2 border-white shadow-xs">
+                    <span class="material-symbols-outlined text-[10px]">bluetooth</span>
+                  </span>
+                </button>
+              </div>
+              <button class="flex flex-col items-center justify-center min-w-[56px] h-12 text-secondary hover:text-on-surface cursor-pointer" onclick="navigateTo('screen-posture')">
+                <span class="material-symbols-outlined text-[22px]">accessibility_new</span>
+                <span class="font-label-telemetry text-[10px] uppercase tracking-wider">POSTURE</span>
+              </button>
+              <button class="flex flex-col items-center justify-center min-w-[56px] h-12 text-secondary hover:text-on-surface cursor-pointer" onclick="navigateTo('screen-profile')">
+                <span class="material-symbols-outlined text-[22px]">person</span>
+                <span class="font-label-telemetry text-[10px] uppercase tracking-wider">ME</span>
+              </button>
+            </div>
+          </nav>
+        </section>
+
       </div><!-- end #screens-viewport -->
+
+      <!-- ========================================== -->
+      <!-- CLINICAL HEALTH REPORT FILE MODAL -->
+      <!-- ========================================== -->
+      <div id="clinical-report-modal" class="fixed inset-0 bg-black/70 backdrop-blur-md z-50 flex items-center justify-center p-3 opacity-0 pointer-events-none transition-opacity duration-200">
+        <div class="report-sheet-container bg-white rounded-3xl w-full max-w-[420px] max-h-[92vh] flex flex-col shadow-2xl overflow-hidden border border-black/10">
+          
+          <!-- Modal Header -->
+          <div class="px-4 py-3 border-b border-gray-100 flex items-center justify-between bg-surface-container-lowest shrink-0">
+            <div class="flex items-center gap-2.5">
+              <div class="w-8 h-8 rounded-full bg-blue-50 text-blue-700 flex items-center justify-center shrink-0">
+                <span class="material-symbols-outlined text-[18px]">verified</span>
+              </div>
+              <div>
+                <h3 class="font-bold text-sm text-gray-900 leading-tight">Clinical Health Report File</h3>
+                <p class="text-[11px] text-gray-500">Read &amp; Export Validated Medical Dossier</p>
+              </div>
+            </div>
+            <button type="button" class="w-7 h-7 rounded-full bg-gray-100 hover:bg-gray-200 flex items-center justify-center text-gray-500 hover:text-black cursor-pointer transition-colors" onclick="closeClinicalReportModal()" aria-label="Close Clinical Report">
+              <span class="material-symbols-outlined text-[16px]">close</span>
+            </button>
+          </div>
+
+          <!-- Modal Scrollable Report Content -->
+          <div id="clinical-report-modal-scroll" class="p-4 space-y-4 overflow-y-auto flex-1 text-gray-800 text-xs">
+            
+            <!-- Report Document Header Card -->
+            <div style="background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); color: #ffffff;" class="p-4 rounded-2xl flex flex-col gap-2.5 shadow-sm">
+              <div class="flex items-center justify-between">
+                <span class="text-[10px] font-mono text-cyan-300 uppercase tracking-widest font-bold">P+ DIGITAL CLINICAL REPORT</span>
+                <span class="px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 text-[9px] font-bold uppercase tracking-wider">OFFICIAL</span>
+              </div>
+              <div>
+                <h4 class="font-extrabold text-base text-white tracking-tight" id="rep-doc-title">Comprehensive Health &amp; Telemetry Dossier</h4>
+                <p class="text-[10px] text-gray-300 mt-0.5">Facility: Metro Heart Institute &amp; P+ Research Network</p>
+              </div>
+              <div class="flex items-center justify-between text-[10px] text-gray-300 pt-1.5 border-t border-white/10 font-mono">
+                <span>DOC ID: <strong id="rep-doc-id" class="text-white">PPLUS-REP-2026-8821</strong></span>
+                <span>DATE: <strong id="rep-doc-date" class="text-white">2026-09-30</strong></span>
+              </div>
+            </div>
+
+            <!-- Section 1: Patient Demographics & Baseline -->
+            <div class="bg-gray-50 rounded-2xl p-3 border border-gray-200/70 space-y-2">
+              <div class="flex items-center justify-between">
+                <span class="font-bold text-gray-900 uppercase text-[10px] tracking-wider">1. Patient Profile</span>
+                <span id="rep-patient-role-badge" class="px-2 py-0.5 rounded bg-blue-100 text-blue-800 text-[9px] font-bold">AUTHENTICATED</span>
+              </div>
+              <div class="grid grid-cols-2 gap-2 text-[11px]">
+                <div><span class="text-gray-500">Name:</span> <strong id="rep-pat-name" class="text-gray-900">Alex Turner</strong></div>
+                <div><span class="text-gray-500">Patient ID:</span> <strong id="rep-pat-id" class="font-mono text-gray-900">P-8821</strong></div>
+                <div><span class="text-gray-500">Age / Sex:</span> <strong id="rep-pat-age-sex" class="text-gray-900">28 Yrs • Male</strong></div>
+                <div><span class="text-gray-500">Blood Group:</span> <strong id="rep-pat-blood" class="text-gray-900">O+</strong></div>
+                <div><span class="text-gray-500">Height / Weight:</span> <strong id="rep-pat-hw" class="text-gray-900">178 cm • 71 kg</strong></div>
+                <div><span class="text-gray-500">BMI:</span> <strong id="rep-pat-bmi" class="text-emerald-700">22.4 (Normal)</strong></div>
+              </div>
+              <div class="pt-1 border-t border-gray-200/60 text-[10px] text-gray-600">
+                <div><span>Known Allergies:</span> <strong id="rep-pat-allergies" class="text-gray-800">Penicillin, Dust</strong></div>
+                <div><span>Chronic Conditions:</span> <strong id="rep-pat-conditions" class="text-gray-800">Mild Hypertension</strong></div>
+              </div>
+            </div>
+
+            <!-- Section 2: Physiological Vitals & Telemetry Summary -->
+            <div class="space-y-1.5">
+              <span class="font-bold text-gray-900 uppercase text-[10px] tracking-wider">2. Revised Vitals Telemetry</span>
+              <table class="w-full text-left border-collapse text-[11px] bg-white rounded-xl overflow-hidden border border-gray-200 shadow-xs">
+                <thead class="bg-gray-100 text-gray-600 text-[10px] uppercase font-bold">
+                  <tr>
+                    <th class="p-2">Metric</th>
+                    <th class="p-2">Reading</th>
+                    <th class="p-2">Reference</th>
+                    <th class="p-2">Status</th>
+                  </tr>
+                </thead>
+                <tbody class="divide-y divide-gray-100">
+                  <tr>
+                    <td class="p-2 font-medium">Heart Rate</td>
+                    <td class="p-2 font-bold"><span class="dynamic-bpm-val">72</span> BPM</td>
+                    <td class="p-2 text-gray-500">60-100</td>
+                    <td class="p-2 text-emerald-600 font-bold">Normal</td>
+                  </tr>
+                  <tr>
+                    <td class="p-2 font-medium">SpO₂ Oxygen</td>
+                    <td class="p-2 font-bold"><span class="dynamic-spo2-val">98</span>%</td>
+                    <td class="p-2 text-gray-500">95-100%</td>
+                    <td class="p-2 text-emerald-600 font-bold">Optimal</td>
+                  </tr>
+                  <tr>
+                    <td class="p-2 font-medium">Body Temp</td>
+                    <td class="p-2 font-bold"><span class="dynamic-temp-val">36.6</span>°C</td>
+                    <td class="p-2 text-gray-500">36.1-37.2</td>
+                    <td class="p-2 text-emerald-600 font-bold">Normal</td>
+                  </tr>
+                  <tr>
+                    <td class="p-2 font-medium">Posture Angle</td>
+                    <td class="p-2 font-bold"><span class="dynamic-posture-angle">0°</span></td>
+                    <td class="p-2 text-gray-500">&lt; 15°</td>
+                    <td class="p-2 text-emerald-600 font-bold">Upright</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <!-- Section 3: Telemetry Visual Curve Summary Preview -->
+            <div class="bg-slate-900 text-white rounded-2xl p-3 space-y-1.5">
+              <div class="flex items-center justify-between text-[10px]">
+                <span class="font-mono text-cyan-300 font-bold uppercase tracking-wide">3. Continuous 24H Curve Plot</span>
+                <span class="text-gray-400">Peak 94 BPM • Min 58 BPM</span>
+              </div>
+              <svg class="w-full h-14" fill="none" preserveAspectRatio="none" viewBox="0 0 300 50">
+                <path d="M0,35 C30,38 60,42 90,40 C120,38 140,25 170,22 C200,20 230,30 260,26 C280,22 290,14 300,16" stroke="#38bdf8" stroke-width="2" stroke-linecap="round"/>
+                <path d="M0,35 C30,38 60,42 90,40 C120,38 140,25 170,22 C200,20 230,30 260,26 C280,22 290,14 300,16 L300,50 L0,50 Z" fill="rgba(56, 189, 248, 0.15)"/>
+                <circle cx="290" cy="14" r="3" fill="#38bdf8"/>
+              </svg>
+            </div>
+
+            <!-- Section 4: Posture & Biomechanics Assessment -->
+            <div class="bg-gray-50 rounded-2xl p-3 border border-gray-200/70 space-y-1.5">
+              <span class="font-bold text-gray-900 uppercase text-[10px] tracking-wider">4. Posture Compliance</span>
+              <p class="text-[11px] text-gray-700 leading-snug">
+                Patient maintains <strong>84% upright ergonomic posture</strong> across daily telemetry logs. Total upright adherence: <strong>5h 42m today</strong>. Slouch alert frequency is minimal (2 corrected events). Hardware threshold active at 15°.
+              </p>
+            </div>
+
+            <!-- Section 5: Doctor Clinical Endorsement & Seal -->
+            <div class="p-3 rounded-2xl bg-blue-50/60 border border-blue-100 flex items-center justify-between">
+              <div>
+                <span class="text-[9px] uppercase tracking-wider font-bold text-blue-900 block">Attending Cardiologist</span>
+                <h5 class="font-bold text-xs text-gray-900" id="rep-doc-name">Dr. Neha Sharma, MD, FACC</h5>
+                <p class="text-[10px] text-gray-600" id="rep-doc-inst">Metro Heart Institute &amp; Research Centre</p>
+                <p class="text-[9px] font-mono text-gray-500 mt-0.5">LIC: MED-REG-IND-88419</p>
+              </div>
+              <div class="border-2 border-black/80 rounded-xl px-2.5 py-1.5 text-center bg-white shadow-xs">
+                <span class="text-[8px] font-extrabold uppercase tracking-wider block text-gray-900">P+ DIGITAL SEAL</span>
+                <span class="text-[10px] font-bold text-emerald-600">✓ VALIDATED</span>
+                <span class="text-[7.5px] font-mono text-gray-400 block">RSA-2048</span>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Modal Action Buttons Footer -->
+          <div class="px-4 py-3 border-t border-gray-100 flex flex-col gap-2 bg-gray-50 shrink-0">
+            <div class="grid grid-cols-2 gap-2">
+              <!-- Action 1: Download Standalone HTML Report File -->
+              <button type="button" onclick="exportHealthReport()" class="w-full py-2.5 rounded-xl bg-black hover:bg-gray-800 text-white font-bold text-xs flex items-center justify-center gap-1.5 active:scale-98 transition-all cursor-pointer shadow-xs">
+                <span class="material-symbols-outlined text-[16px]">download</span>
+                <span>Download Report File</span>
+              </button>
+
+              <!-- Action 2: Print / Save to PDF -->
+              <button type="button" onclick="printHealthReport()" class="w-full py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs flex items-center justify-center gap-1.5 active:scale-98 transition-all cursor-pointer shadow-xs">
+                <span class="material-symbols-outlined text-[16px]">print</span>
+                <span>Print / Save PDF</span>
+              </button>
+            </div>
+
+            <!-- Action 3: Download Raw CSV File & Close -->
+            <div class="flex items-center gap-2">
+              <button type="button" onclick="exportCsvReport()" class="flex-1 py-2 rounded-xl bg-white hover:bg-gray-100 text-gray-700 border border-gray-200 font-semibold text-xs flex items-center justify-center gap-1 active:scale-98 transition-all cursor-pointer">
+                <span class="material-symbols-outlined text-[15px]">table_chart</span>
+                <span>Export CSV Data</span>
+              </button>
+              <button type="button" onclick="closeClinicalReportModal()" class="py-2 px-4 rounded-xl bg-gray-200 hover:bg-gray-300 text-gray-700 font-semibold text-xs active:scale-98 transition-all cursor-pointer">
+                Close
+              </button>
+            </div>
+          </div>
+
+        </div>
+      </div>
 
       <!-- Appointment Booking Bottom Sheet Modal -->
       <div id="booking-modal" class="p-modal-overlay">

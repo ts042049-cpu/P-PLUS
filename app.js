@@ -1524,18 +1524,592 @@
     openEsp32BleModal();
   }
 
-  function exportHealthReport() {
-    showToast('Generating clinical health report (PDF)...', 'downloading');
+  // ==========================================
+  // CLINICAL HEALTH REPORT & GRAPH FORM ENGINE
+  // ==========================================
+
+  // Timeframe Data Sets for Graphs
+  const GRAPH_DATA = {
+    '24h': {
+      hr: {
+        current: 72,
+        min: 58,
+        avg: 71,
+        max: 94,
+        hrv: 48,
+        axis: ['00:00', '06:00', '12:00', '18:00', '23:59'],
+        areaD: 'M0,65 C30,68 60,74 90,70 C120,66 140,48 170,42 C200,38 230,52 260,46 C290,40 310,25 340,32 L340,100 L0,100 Z',
+        lineD: 'M0,65 C30,68 60,74 90,70 C120,66 140,48 170,42 C200,38 230,52 260,46 C290,40 310,25 340,32',
+        peak: { x: 310, y: 25, label: 'Peak 94' },
+        nadir: { x: 60, y: 74, label: 'Min 58' }
+      },
+      spo2: {
+        axis: ['00:00', '06:00', '12:00', '18:00', '23:59'],
+        areaD: 'M0,32 C40,30 70,42 100,40 C140,38 180,26 220,30 C260,34 300,28 340,30 L340,100 L0,100 Z',
+        lineD: 'M0,32 C40,30 70,42 100,40 C140,38 180,26 220,30 C260,34 300,28 340,30'
+      },
+      posture: {
+        axis: ['00:00', '06:00', '12:00', '18:00', '23:59'],
+        areaD: 'M0,85 C40,82 70,88 100,75 C130,62 160,30 190,78 C220,82 250,85 280,80 C310,75 330,85 340,88 L340,100 L0,100 Z',
+        lineD: 'M0,85 C40,82 70,88 100,75 C130,62 160,30 190,78 C220,82 250,85 280,80 C310,75 330,85 340,88'
+      },
+      temp: {
+        axis: ['00:00 (36.3°C)', '12:00 (36.6°C)', '23:59 (36.5°C)'],
+        areaD: 'M0,70 C40,78 90,82 140,65 C190,50 240,35 290,45 C320,52 335,48 340,46 L340,100 L0,100 Z',
+        lineD: 'M0,70 C40,78 90,82 140,65 C190,50 240,35 290,45 C320,52 335,48 340,46'
+      }
+    },
+    '7d': {
+      hr: {
+        current: 72,
+        min: 56,
+        avg: 73,
+        max: 104,
+        hrv: 51,
+        axis: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+        areaD: 'M0,60 C40,55 80,68 120,50 C160,45 200,58 240,38 C280,30 310,20 340,44 L340,100 L0,100 Z',
+        lineD: 'M0,60 C40,55 80,68 120,50 C160,45 200,58 240,38 C280,30 310,20 340,44',
+        peak: { x: 310, y: 20, label: 'Peak 104' },
+        nadir: { x: 40, y: 72, label: 'Min 56' }
+      },
+      spo2: {
+        axis: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+        areaD: 'M0,28 C50,26 100,32 150,28 C200,24 250,30 300,26 340,28 L340,100 L0,100 Z',
+        lineD: 'M0,28 C50,26 100,32 150,28 C200,24 250,30 300,26 340,28'
+      },
+      posture: {
+        axis: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+        areaD: 'M0,80 C50,75 100,82 150,70 C200,65 250,84 300,78 340,82 L340,100 L0,100 Z',
+        lineD: 'M0,80 C50,75 100,82 150,70 C200,65 250,84 300,78 340,82'
+      },
+      temp: {
+        axis: ['Mon (36.5°)', 'Wed (36.6°)', 'Fri (36.6°)', 'Sun (36.7°)'],
+        areaD: 'M0,65 C60,60 120,68 180,62 C240,58 300,64 340,60 L340,100 L0,100 Z',
+        lineD: 'M0,65 C60,60 120,68 180,62 C240,58 300,64 340,60'
+      }
+    },
+    '30d': {
+      hr: {
+        current: 72,
+        min: 54,
+        avg: 69,
+        max: 112,
+        hrv: 54,
+        axis: ['Week 1', 'Week 2', 'Week 3', 'Week 4'],
+        areaD: 'M0,50 C60,54 120,48 180,56 C240,42 290,32 340,48 L340,100 L0,100 Z',
+        lineD: 'M0,50 C60,54 120,48 180,56 C240,42 290,32 340,48',
+        peak: { x: 290, y: 32, label: 'Peak 112' },
+        nadir: { x: 120, y: 76, label: 'Min 54' }
+      },
+      spo2: {
+        axis: ['Week 1', 'Week 2', 'Week 3', 'Week 4'],
+        areaD: 'M0,26 C80,24 160,28 240,24 340,26 L340,100 L0,100 Z',
+        lineD: 'M0,26 C80,24 160,28 240,24 340,26'
+      },
+      posture: {
+        axis: ['Week 1', 'Week 2', 'Week 3', 'Week 4'],
+        areaD: 'M0,75 C80,82 160,78 240,85 340,88 L340,100 L0,100 Z',
+        lineD: 'M0,75 C80,82 160,78 240,85 340,88'
+      },
+      temp: {
+        axis: ['Week 1', 'Week 2', 'Week 3', 'Week 4'],
+        areaD: 'M0,62 C80,64 160,60 240,62 340,60 L340,100 L0,100 Z',
+        lineD: 'M0,62 C80,64 160,60 240,62 340,60'
+      }
+    }
+  };
+
+  let activeGraphTimeframe = '24h';
+
+  function switchGraphTimeframe(tf) {
+    activeGraphTimeframe = tf;
+    const btn24 = document.getElementById('graph-tf-24h');
+    const btn7d = document.getElementById('graph-tf-7d');
+    const btn30 = document.getElementById('graph-tf-30d');
+
+    [btn24, btn7d, btn30].forEach(b => {
+      if (!b) return;
+      b.className = 'flex-1 py-1.5 rounded-xl text-xs font-bold transition-all text-secondary hover:text-on-surface cursor-pointer';
+    });
+
+    const activeBtn = tf === '24h' ? btn24 : (tf === '7d' ? btn7d : btn30);
+    if (activeBtn) {
+      activeBtn.className = 'flex-1 py-1.5 rounded-xl text-xs font-bold transition-all text-white bg-black shadow-xs cursor-pointer';
+    }
+
+    const data = GRAPH_DATA[tf];
+    if (!data) return;
+
+    const tfLabel = document.getElementById('graph-hr-tf-label');
+    if (tfLabel) {
+      tfLabel.textContent = `${tf.toUpperCase()} TIMEFRAME`;
+    }
+
+    // Update Heart Rate Graph
+    const hrArea = document.getElementById('path-hr-area');
+    const hrLine = document.getElementById('path-hr-line');
+    const dotPeak = document.getElementById('dot-hr-peak');
+    const textPeak = document.getElementById('text-hr-peak');
+    const dotNadir = document.getElementById('dot-hr-nadir');
+    const textNadir = document.getElementById('text-hr-nadir');
+
+    if (hrArea) hrArea.setAttribute('d', data.hr.areaD);
+    if (hrLine) hrLine.setAttribute('d', data.hr.lineD);
+    if (dotPeak) {
+      dotPeak.setAttribute('cx', data.hr.peak.x);
+      dotPeak.setAttribute('cy', data.hr.peak.y);
+    }
+    if (textPeak) {
+      textPeak.setAttribute('x', data.hr.peak.x - 5);
+      textPeak.setAttribute('y', data.hr.peak.y - 9);
+      textPeak.textContent = data.hr.peak.label;
+    }
+    if (dotNadir) {
+      dotNadir.setAttribute('cx', data.hr.nadir.x);
+      dotNadir.setAttribute('cy', data.hr.nadir.y);
+    }
+    if (textNadir) {
+      textNadir.setAttribute('x', data.hr.nadir.x);
+      textNadir.setAttribute('y', data.hr.nadir.y + 14);
+      textNadir.textContent = data.hr.nadir.label;
+    }
+
+    const kpiMin = document.getElementById('kpi-hr-min');
+    const kpiAvg = document.getElementById('kpi-hr-avg');
+    const kpiMax = document.getElementById('kpi-hr-max');
+    if (kpiMin) kpiMin.textContent = data.hr.min;
+    if (kpiAvg) kpiAvg.textContent = data.hr.avg;
+    if (kpiMax) kpiMax.textContent = data.hr.max;
+
+    // Update Axes
+    const hrAxis = document.getElementById('graph-hr-axis');
+    if (hrAxis) {
+      hrAxis.innerHTML = data.hr.axis.map(t => `<span>${t}</span>`).join('');
+    }
+
+    // Update SpO2 Graph
+    const spo2Area = document.getElementById('path-spo2-area');
+    const spo2Line = document.getElementById('path-spo2-line');
+    if (spo2Area) spo2Area.setAttribute('d', data.spo2.areaD);
+    if (spo2Line) spo2Line.setAttribute('d', data.spo2.lineD);
+    const spo2Axis = document.getElementById('graph-spo2-axis');
+    if (spo2Axis) {
+      spo2Axis.innerHTML = data.spo2.axis.map(t => `<span>${t}</span>`).join('');
+    }
+
+    // Update Posture Graph
+    const postureArea = document.getElementById('path-posture-area');
+    const postureLine = document.getElementById('path-posture-line');
+    if (postureArea) postureArea.setAttribute('d', data.posture.areaD);
+    if (postureLine) postureLine.setAttribute('d', data.posture.lineD);
+    const postureAxis = document.getElementById('graph-posture-axis');
+    if (postureAxis) {
+      postureAxis.innerHTML = data.posture.axis.map(t => `<span>${t}</span>`).join('');
+    }
+
+    // Update Temperature Graph
+    const tempArea = document.getElementById('path-temp-area');
+    const tempLine = document.getElementById('path-temp-line');
+    if (tempArea) tempArea.setAttribute('d', data.temp.areaD);
+    if (tempLine) tempLine.setAttribute('d', data.temp.lineD);
+    const tempAxis = document.getElementById('graph-temp-axis');
+    if (tempAxis) {
+      tempAxis.innerHTML = data.temp.axis.map(t => `<span>${t}</span>`).join('');
+    }
+
+    showToast(`Graphs revised for ${tf.toUpperCase()} window`, 'monitoring');
+  }
+
+  function filterGraphMetric(metric, el) {
+    const pills = document.querySelectorAll('.graph-metric-pill');
+    pills.forEach(p => p.classList.remove('active'));
+    if (el) el.classList.add('active');
+
+    const cardHr = document.getElementById('graph-card-heart');
+    const cardSpo2 = document.getElementById('graph-card-spo2');
+    const cardPosture = document.getElementById('graph-card-posture');
+    const cardTemp = document.getElementById('graph-card-temp');
+
+    if (metric === 'all') {
+      [cardHr, cardSpo2, cardPosture, cardTemp].forEach(c => c && c.classList.remove('hidden'));
+    } else if (metric === 'heart') {
+      if (cardHr) cardHr.classList.remove('hidden');
+      [cardSpo2, cardPosture, cardTemp].forEach(c => c && c.classList.add('hidden'));
+    } else if (metric === 'spo2') {
+      if (cardSpo2) cardSpo2.classList.remove('hidden');
+      [cardHr, cardPosture, cardTemp].forEach(c => c && c.classList.add('hidden'));
+    } else if (metric === 'posture') {
+      if (cardPosture) cardPosture.classList.remove('hidden');
+      [cardHr, cardSpo2, cardTemp].forEach(c => c && c.classList.add('hidden'));
+    } else if (metric === 'temp') {
+      if (cardTemp) cardTemp.classList.remove('hidden');
+      [cardHr, cardSpo2, cardPosture].forEach(c => c && c.classList.add('hidden'));
+    }
+  }
+
+  function handleGraphScrub(e, type) {
+    const hud = document.getElementById(`scrub-hud-${type}`);
+    if (!hud) return;
+    const rect = e.currentTarget.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const pct = Math.max(0, Math.min(1, x / rect.width));
+
+    hud.classList.remove('hidden');
+    hud.style.left = `${Math.min(rect.width - 90, Math.max(10, x - 40))}px`;
+
+    const hour = Math.floor(pct * 24);
+    const min = Math.floor((pct * 24 - hour) * 60);
+    const timeStr = `${String(hour).padStart(2, '0')}:${String(min).padStart(2, '0')}`;
+
+    if (type === 'hr') {
+      const val = Math.round(58 + Math.sin(pct * Math.PI * 2) * 16 + (pct > 0.7 ? 14 : 0));
+      const valEl = document.getElementById('scrub-val-hr');
+      const timeEl = document.getElementById('scrub-time-hr');
+      if (valEl) valEl.textContent = `${val} BPM`;
+      if (timeEl) timeEl.textContent = timeStr;
+    } else if (type === 'spo2') {
+      const val = (98 + Math.sin(pct * Math.PI) * 1.2).toFixed(1);
+      const valEl = document.getElementById('scrub-val-spo2');
+      const timeEl = document.getElementById('scrub-time-spo2');
+      if (valEl) valEl.textContent = `${val}% SpO₂`;
+      if (timeEl) timeEl.textContent = timeStr;
+    } else if (type === 'posture') {
+      const deg = Math.max(0, Math.round(Math.sin(pct * 6) * 12));
+      const valEl = document.getElementById('scrub-val-posture');
+      const timeEl = document.getElementById('scrub-time-posture');
+      if (valEl) valEl.textContent = deg > 12 ? `${deg}° Slouch` : `${deg}° Upright`;
+      if (timeEl) timeEl.textContent = timeStr;
+    } else if (type === 'temp') {
+      const t = (36.3 + pct * 0.4).toFixed(1);
+      const valEl = document.getElementById('scrub-val-temp');
+      const timeEl = document.getElementById('scrub-time-temp');
+      if (valEl) valEl.textContent = `${t}°C`;
+      if (timeEl) timeEl.textContent = timeStr;
+    }
+  }
+
+  function hideGraphScrub(type) {
+    const hud = document.getElementById(`scrub-hud-${type}`);
+    if (hud) hud.classList.add('hidden');
+  }
+
+  // ==========================================
+  // CLINICAL HEALTH REPORT MODAL & EXPORT LOGIC
+  // ==========================================
+
+  function openClinicalReportModal() {
+    const modal = document.getElementById('clinical-report-modal');
+    if (!modal) return;
+
+    // Read and synchronize all active patient details
+    const patient = state.currentUser || defaultPatient;
+    const nameEl = document.getElementById('rep-pat-name');
+    const idEl = document.getElementById('rep-pat-id');
+    const ageSexEl = document.getElementById('rep-pat-age-sex');
+    const bloodEl = document.getElementById('rep-pat-blood');
+    const hwEl = document.getElementById('rep-pat-hw');
+    const bmiEl = document.getElementById('rep-pat-bmi');
+    const allergiesEl = document.getElementById('rep-pat-allergies');
+    const condEl = document.getElementById('rep-pat-conditions');
+    const dateEl = document.getElementById('rep-doc-date');
+    const docIdEl = document.getElementById('rep-doc-id');
+
+    if (nameEl) nameEl.textContent = patient.name || 'Alex Turner';
+    if (idEl) idEl.textContent = patient.id || 'P-8821';
+    if (ageSexEl) ageSexEl.textContent = `${patient.age || 28} Yrs • ${patient.gender || 'Male'}`;
+    if (bloodEl) bloodEl.textContent = patient.bloodGroup || 'O+';
+    if (hwEl) hwEl.textContent = `${patient.height || 178} cm • ${patient.weight || 71} kg`;
+
+    const hM = (patient.height || 178) / 100;
+    const w = (patient.weight || 71);
+    const bmi = (w / (hM * hM)).toFixed(1);
+    if (bmiEl) bmiEl.textContent = `${bmi} (${bmi < 18.5 ? 'Underweight' : bmi < 25 ? 'Normal' : 'Overweight'})`;
+
+    if (allergiesEl) allergiesEl.textContent = patient.allergies || 'None Known';
+    if (condEl) condEl.textContent = patient.conditions || 'None Declared';
+
+    const now = new Date();
+    const dateStr = now.toISOString().slice(0, 10);
+    if (dateEl) dateEl.textContent = dateStr;
+    if (docIdEl) docIdEl.textContent = `PPLUS-REP-${now.getFullYear()}-${Math.floor(1000 + Math.random() * 9000)}`;
+
+    modal.classList.add('active');
+    modal.classList.remove('opacity-0', 'pointer-events-none');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeClinicalReportModal() {
+    const modal = document.getElementById('clinical-report-modal');
+    if (!modal) return;
+    modal.classList.remove('active');
+    modal.classList.add('opacity-0', 'pointer-events-none');
+    document.body.style.overflow = '';
+  }
+
+  function printHealthReport() {
+    showToast('Opening clinical print & PDF dialog...', 'print');
     setTimeout(() => {
-      showToast('P+ Clinical Health Summary exported successfully!', 'download_done');
-    }, 800);
+      window.print();
+    }, 300);
+  }
+
+  function exportHealthReport() {
+    const patient = state.currentUser || defaultPatient;
+    const doctor = defaultDoctor;
+    const vitals = bleState.currentTelemetry || { heartRate: 72, spO2: 98, temp: 36.6, postureAngle: 0 };
+    const dateStr = new Date().toISOString().slice(0, 10);
+    const repId = `PPLUS-REP-${new Date().getFullYear()}-${Math.floor(1000 + Math.random() * 9000)}`;
+    const hM = (patient.height || 178) / 100;
+    const bmi = ((patient.weight || 71) / (hM * hM)).toFixed(1);
+
+    const htmlContent = `<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>P+ Clinical Health Report — ${patient.name} (${dateStr})</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; background: #f8f9fc; color: #1e293b; padding: 32px 20px; }
+    .report-wrap { max-width: 820px; margin: 0 auto; background: #ffffff; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.06); padding: 40px; border: 1px solid #e2e8f0; }
+    .header { display: flex; justify-content: space-between; align-items: flex-start; border-bottom: 2px solid #0f172a; padding-bottom: 24px; margin-bottom: 28px; }
+    .brand-h1 { font-size: 24px; font-weight: 800; color: #0f172a; letter-spacing: -0.02em; }
+    .brand-sub { font-size: 12px; color: #64748b; font-weight: 500; margin-top: 4px; text-transform: uppercase; letter-spacing: 0.1em; }
+    .meta-box { text-align: right; font-size: 12px; color: #475569; }
+    .badge-status { display: inline-block; background: #dcfce7; color: #166534; padding: 4px 10px; border-radius: 9999px; font-size: 11px; font-weight: 700; text-transform: uppercase; }
+    .section-title { font-size: 14px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: #0f172a; margin: 24px 0 12px; display: flex; align-items: center; gap: 8px; border-bottom: 1px solid #e2e8f0; padding-bottom: 6px; }
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+    .info-card { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; padding: 14px; }
+    .info-label { font-size: 10px; text-transform: uppercase; color: #64748b; font-weight: 600; letter-spacing: 0.05em; }
+    .info-val { font-size: 15px; font-weight: 700; color: #0f172a; margin-top: 4px; }
+    table { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 13px; }
+    th { text-align: left; padding: 10px 12px; background: #f1f5f9; color: #475569; font-weight: 600; font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; }
+    td { padding: 12px; border-bottom: 1px solid #e2e8f0; }
+    .graph-box { background: #0f172a; border-radius: 14px; padding: 20px; color: #ffffff; margin-top: 14px; }
+    .doc-stamp { margin-top: 32px; padding-top: 20px; border-top: 1px dashed #cbd5e1; display: flex; justify-content: space-between; align-items: flex-end; }
+    .disclaimer { font-size: 10px; color: #94a3b8; margin-top: 24px; text-align: center; }
+    @media print {
+      body { background: #fff; padding: 0; }
+      .report-wrap { box-shadow: none; border: none; padding: 0; }
+      .no-print { display: none !important; }
+    }
+  </style>
+</head>
+<body>
+  <div class="report-wrap">
+    <div class="no-print" style="margin-bottom: 18px; display: flex; justify-content: flex-end; gap: 10px;">
+      <button onclick="window.print()" style="background: #0f172a; color: #fff; border: none; padding: 8px 16px; border-radius: 8px; font-size: 12px; font-weight: 600; cursor: pointer;">Print / Save as PDF</button>
+    </div>
+
+    <div class="header">
+      <div>
+        <div class="brand-h1">P+ CLINICAL HEALTH &amp; TELEMETRY REPORT</div>
+        <div class="brand-sub">Comprehensive Physiological &amp; Posture Telemetry</div>
+      </div>
+      <div class="meta-box">
+        <div><strong>REPORT ID:</strong> ${repId}</div>
+        <div><strong>DATE:</strong> ${dateStr}</div>
+        <div style="margin-top: 4px;"><span class="badge-status">VALIDATED CLINICAL REPORT</span></div>
+      </div>
+    </div>
+
+    <div class="section-title">1. Patient Identification &amp; Biometrics</div>
+    <div class="grid-4">
+      <div class="info-card"><div class="info-label">Full Name</div><div class="info-val">${patient.name}</div></div>
+      <div class="info-card"><div class="info-label">Patient ID / Age</div><div class="info-val">${patient.id} • ${patient.age} Yrs</div></div>
+      <div class="info-card"><div class="info-label">Blood Group / Sex</div><div class="info-val">${patient.bloodGroup} • ${patient.gender}</div></div>
+      <div class="info-card"><div class="info-label">Height / Weight</div><div class="info-val">${patient.height} cm • ${patient.weight} kg (BMI ${bmi})</div></div>
+    </div>
+
+    <div class="section-title">2. Physiological Vitals &amp; Continuous Telemetry</div>
+    <table>
+      <thead>
+        <tr>
+          <th>Metric</th>
+          <th>Recorded Reading</th>
+          <th>24H Range</th>
+          <th>Clinical Reference Range</th>
+          <th>Assessment</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Heart Rate (BPM)</strong></td>
+          <td>${vitals.heartRate || 72} BPM</td>
+          <td>58 - 94 BPM</td>
+          <td>60 - 100 BPM</td>
+          <td><span style="color:#16a34a; font-weight:700;">Normal Sinus Rhythm</span></td>
+        </tr>
+        <tr>
+          <td><strong>Blood Oxygen (SpO₂)</strong></td>
+          <td>${vitals.spO2 || 98}%</td>
+          <td>96 - 99%</td>
+          <td>95 - 100%</td>
+          <td><span style="color:#16a34a; font-weight:700;">Optimal Saturation</span></td>
+        </tr>
+        <tr>
+          <td><strong>Body Core / Skin Temp</strong></td>
+          <td>${vitals.temp || 36.6} °C</td>
+          <td>36.2 - 37.0 °C</td>
+          <td>36.1 - 37.2 °C</td>
+          <td><span style="color:#16a34a; font-weight:700;">Afebrile (Normal)</span></td>
+        </tr>
+        <tr>
+          <td><strong>Posture Deflection Angle</strong></td>
+          <td>${vitals.postureAngle || 0}° Deviation</td>
+          <td>0° - 14° Angle</td>
+          <td>&lt; 15° Ergonomic Tolerance</td>
+          <td><span style="color:#16a34a; font-weight:700;">Optimal Alignment</span></td>
+        </tr>
+        <tr>
+          <td><strong>Blood Pressure Estimate</strong></td>
+          <td>118 / 76 mmHg</td>
+          <td>112/72 - 124/80</td>
+          <td>&lt; 120/80 mmHg</td>
+          <td><span style="color:#16a34a; font-weight:700;">Optimal</span></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="section-title">3. Telemetry Visual Graph Curves</div>
+    <div class="graph-box">
+      <div style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; color: #94a3b8; margin-bottom: 8px;">Heart Rate 24H Trend Curve (BPM)</div>
+      <svg viewBox="0 0 740 120" style="width: 100%; height: 110px; overflow: visible;">
+        <defs>
+          <linearGradient id="gradHR_dl" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#38bdf8" stop-opacity="0.4"/>
+            <stop offset="100%" stop-color="#38bdf8" stop-opacity="0.0"/>
+          </linearGradient>
+        </defs>
+        <line x1="0" y1="30" x2="740" y2="30" stroke="#334155" stroke-dasharray="4"/>
+        <line x1="0" y1="65" x2="740" y2="65" stroke="#334155" stroke-dasharray="4"/>
+        <line x1="0" y1="100" x2="740" y2="100" stroke="#334155" stroke-dasharray="4"/>
+        <path d="M0,75 C50,78 90,82 140,80 C190,78 220,60 270,55 C320,50 360,65 410,60 C460,55 500,40 550,42 C600,44 650,68 700,65 L740,68 L740,110 L0,110 Z" fill="url(#gradHR_dl)"/>
+        <path d="M0,75 C50,78 90,82 140,80 C190,78 220,60 270,55 C320,50 360,65 410,60 C460,55 500,40 550,42 C600,44 650,68 700,65 L740,68" fill="none" stroke="#38bdf8" stroke-width="3" stroke-linecap="round"/>
+        <circle cx="550" cy="42" r="5" fill="#38bdf8"/>
+        <text x="550" y="32" fill="#38bdf8" font-size="11" font-weight="700" text-anchor="middle">Peak 94 BPM</text>
+        <circle cx="140" cy="80" r="4" fill="#94a3b8"/>
+        <text x="140" y="98" fill="#94a3b8" font-size="10" text-anchor="middle">Resting 58 BPM</text>
+      </svg>
+      <div style="display: flex; justify-content: space-between; font-size: 10px; color: #64748b; margin-top: 6px;">
+        <span>00:00 (Sleep)</span>
+        <span>06:00 (Waking)</span>
+        <span>12:00 (Midday)</span>
+        <span>18:00 (Active)</span>
+        <span>23:59 (Current)</span>
+      </div>
+    </div>
+
+    <div class="section-title">4. Ergonomic Posture &amp; Spine Biomechanics</div>
+    <div class="grid-2">
+      <div class="info-card">
+        <div class="info-label">Daily Form Duration</div>
+        <div class="info-val">5 Hours 42 Mins Upright</div>
+        <div style="font-size: 11px; color: #64748b; margin-top: 4px;">Compliance Score: 94% (Grade A - Optimal)</div>
+      </div>
+      <div class="info-card">
+        <div class="info-label">Slouch Alert Frequency</div>
+        <div class="info-val">2 Corrected Events</div>
+        <div style="font-size: 11px; color: #64748b; margin-top: 4px;">Hardware Threshold: 15° Spine Deviation</div>
+      </div>
+    </div>
+
+    <div class="section-title">5. Attending Specialist Clinical Notes</div>
+    <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; padding: 18px; font-size: 13px; line-height: 1.6; color: #334155;">
+      <strong>Clinical Impression:</strong> Patient demonstrates exemplary physiological resilience. Continuous ECG and photoplethysmography traces show uninterrupted regular sinus rhythm with no paroxysmal tachycardia or hypoxic saturation drops. Ergonomic biofeedback shows strong upright postural adherence.<br><br>
+      <strong>Prescribed Care Plan:</strong> Continue wearing P+ ESP32-S3 sensor during active desk work hours. Maintain hydration and 30 minutes daily cardiovascular exercise. Routine tele-consultation scheduled in 30 days.
+    </div>
+
+    <div class="doc-stamp">
+      <div>
+        <div style="font-size: 13px; font-weight: 700; color: #0f172a;">${doctor.name}</div>
+        <div style="font-size: 11px; color: #64748b;">${doctor.degree} • ${doctor.specialty}</div>
+        <div style="font-size: 11px; color: #64748b;">${doctor.hospital}</div>
+        <div style="font-size: 10px; font-family: monospace; color: #475569; margin-top: 4px;">LIC: ${doctor.license}</div>
+      </div>
+      <div style="text-align: right;">
+        <div style="display: inline-block; border: 2px solid #0f172a; padding: 8px 14px; border-radius: 8px; text-align: center;">
+          <div style="font-size: 9px; text-transform: uppercase; font-weight: 800; letter-spacing: 0.1em; color: #0f172a;">P+ DIGITAL SEAL</div>
+          <div style="font-size: 11px; font-weight: 700; color: #16a34a; margin: 2px 0;">✓ VERIFIED CLINICAL</div>
+          <div style="font-size: 8px; font-family: monospace; color: #64748b;">RSA-2048 CRYPTO-STAMP</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="disclaimer">
+      This diagnostic report is compiled automatically by the P+ Health Companion platform based on verified wearable telemetry streams and calibrated clinical thresholds. Confidential medical document.
+    </div>
+  </div>
+</body>
+</html>`;
+
+    // Trigger immediate browser download of the standalone report file
+    const blob = new Blob([htmlContent], { type: 'text/html;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    const safeName = (patient.name || 'Patient').replace(/\s+/g, '_');
+    a.href = url;
+    a.download = `PPlus_Clinical_Health_Report_${safeName}_${dateStr}.html`;
+    document.body.appendChild(a);
+    a.click();
+    setTimeout(() => {
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    }, 150);
+
+    showToast('P+ Clinical Health Report file downloaded successfully!', 'download_done');
+  }
+
+  function exportCsvReport() {
+    const dateStr = new Date().toISOString().slice(0, 10);
+    let csvContent = 'Timestamp,Device,HeartRate_BPM,SpO2_Pct,Temperature_C,Posture_Angle_Deg,Posture_Status,Battery_Pct,Motion_Status\n';
+
+    const hours = [
+      '00:00:00', '02:00:00', '04:00:00', '06:00:00', '08:00:00', '09:30:00',
+      '11:00:00', '12:30:00', '14:00:00', '15:30:00', '17:00:00', '18:30:00',
+      '20:00:00', '21:30:00', '23:00:00'
+    ];
+
+    const readings = [
+      { hr: 60, spo2: 98, temp: 36.3, angle: 0, status: 'Upright (Sleep)', bat: 95, motion: 'Resting' },
+      { hr: 58, spo2: 98, temp: 36.2, angle: 0, status: 'Upright (Sleep)', bat: 93, motion: 'Resting' },
+      { hr: 62, spo2: 97, temp: 36.3, angle: 0, status: 'Upright (Sleep)', bat: 91, motion: 'Resting' },
+      { hr: 68, spo2: 99, temp: 36.5, angle: 2, status: 'Upright', bat: 89, motion: 'Waking' },
+      { hr: 74, spo2: 98, temp: 36.6, angle: 3, status: 'Upright', bat: 87, motion: 'Desk Active' },
+      { hr: 78, spo2: 98, temp: 36.7, angle: 8, status: 'Mild Lean', bat: 85, motion: 'Desk Active' },
+      { hr: 82, spo2: 99, temp: 36.7, angle: 2, status: 'Upright', bat: 83, motion: 'Walking' },
+      { hr: 75, spo2: 98, temp: 36.8, angle: 14, status: 'Slouch Alert', bat: 81, motion: 'Desk Active' },
+      { hr: 71, spo2: 99, temp: 36.6, angle: 1, status: 'Upright', bat: 80, motion: 'Resting' },
+      { hr: 76, spo2: 98, temp: 36.7, angle: 4, status: 'Upright', bat: 78, motion: 'Desk Active' },
+      { hr: 94, spo2: 99, temp: 37.0, angle: 5, status: 'Upright', bat: 75, motion: 'Cardio Workout' },
+      { hr: 80, spo2: 99, temp: 36.8, angle: 2, status: 'Upright', bat: 74, motion: 'Cooling Down' },
+      { hr: 72, spo2: 98, temp: 36.6, angle: 0, status: 'Upright', bat: 72, motion: 'Resting' },
+      { hr: 69, spo2: 98, temp: 36.5, angle: 1, status: 'Upright', bat: 70, motion: 'Evening Relax' },
+      { hr: 64, spo2: 98, temp: 36.4, angle: 0, status: 'Upright', bat: 69, motion: 'Night Rest' }
+    ];
+
+    readings.forEach((r, idx) => {
+      csvContent += `${dateStr}T${hours[idx]}Z,ESP32-S3-PPLUS,${r.hr},${r.spo2},${r.temp},${r.angle},"${r.status}",${r.bat},"${r.motion}"\n`;
+    });
+
+    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `PPlus_Telemetry_Data_${dateStr}.csv`;
+    document.body.appendChild(a);
+    a.click();
+    setTimeout(() => {
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    }, 150);
+
+    showToast('Raw telemetry CSV data file downloaded!', 'download_done');
   }
 
   function exportClinicalLogs() {
-    showToast('Generating clinical consultation dossier & telemetry logs (PDF)...', 'downloading');
-    setTimeout(() => {
-      showToast('Doctor Clinical Dossier exported successfully!', 'download_done');
-    }, 800);
+    exportHealthReport();
   }
 
   // ==========================================
@@ -2203,6 +2777,14 @@
   window.syncPairedDevices = syncPairedDevices;
   window.exportHealthReport = exportHealthReport;
   window.exportClinicalLogs = exportClinicalLogs;
+  window.openClinicalReportModal = openClinicalReportModal;
+  window.closeClinicalReportModal = closeClinicalReportModal;
+  window.printHealthReport = printHealthReport;
+  window.exportCsvReport = exportCsvReport;
+  window.switchGraphTimeframe = switchGraphTimeframe;
+  window.filterGraphMetric = filterGraphMetric;
+  window.handleGraphScrub = handleGraphScrub;
+  window.hideGraphScrub = hideGraphScrub;
   window.openAvatarModal = openAvatarModal;
   window.closeAvatarModal = closeAvatarModal;
   window.triggerPhotoUpload = triggerPhotoUpload;

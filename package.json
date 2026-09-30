@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "description": "P+ Pro - Personal Health Companion App Prototype for SIH",
   "scripts": {
-    "start": "npx serve -l 3000 .",
-    "dev": "npx serve -l 3000 ."
+    "start": "node server.js",
+    "dev": "node server.js"
   },
   "keywords": [
     "health-companion",
