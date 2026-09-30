@@ -126,21 +126,7 @@ P+ uses a clean, modern health-focused interface with:
 - Dark/modern visual styling
 - Mobile-first experience
 
-### 📱 Screenshots
 
-<p align="center">
-  <img src="./phone_screen.png" width="220"/>
-  <img src="./phone_screen2.png" width="220"/>
-  <img src="./phone_screen3.png" width="220"/>
-</p>
-
-<p align="center">
-  <img src="./screen_pplus_pro.png" width="220"/>
-  <img src="./screen_pplus_pro_live.png" width="220"/>
-  <img src="./screen_premium_loaded.png" width="220"/>
-</p>
-
----
 
 # 🛠️ Technology Stack
 
