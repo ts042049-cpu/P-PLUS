@@ -2706,6 +2706,7 @@
 
   // Setup Everything on DOM Ready
   window.addEventListener('DOMContentLoaded', async () => {
+    initTheme();
     updateClock();
     setInterval(updateClock, 10000);
     initGlobalNavigation();
@@ -2806,6 +2807,46 @@
   window.toggleEsp32CodeSnippet = toggleEsp32CodeSnippet;
   window.copyEsp32ArduinoCode = copyEsp32ArduinoCode;
   window.bleState = bleState;
+
+  // ==========================================
+  // ROYAL EMERALD & GOLD THEME CONTROLLER
+  // ==========================================
+  function initTheme() {
+    try {
+      const savedTheme = localStorage.getItem('pplus_theme') || 'theme-emerald-gold';
+      applyTheme(savedTheme, false);
+    } catch (_) {
+      applyTheme('theme-emerald-gold', false);
+    }
+  }
+
+  function applyTheme(themeName, showToastNotification = true) {
+    const isGold = themeName === 'theme-emerald-gold';
+    if (isGold) {
+      document.body.classList.add('theme-emerald-gold');
+      try { localStorage.setItem('pplus_theme', 'theme-emerald-gold'); } catch (_) {}
+      document.querySelectorAll('.theme-pill-label').forEach(el => el.textContent = 'GOLD');
+      if (showToastNotification) {
+        showToast('Royal Emerald & Champagne Gold Theme ✨', 'palette');
+      }
+    } else {
+      document.body.classList.remove('theme-emerald-gold');
+      try { localStorage.setItem('pplus_theme', 'theme-classic'); } catch (_) {}
+      document.querySelectorAll('.theme-pill-label').forEach(el => el.textContent = 'CLASSIC');
+      if (showToastNotification) {
+        showToast('Classic Medical Slate Theme Activated', 'palette');
+      }
+    }
+  }
+
+  function toggleAppTheme() {
+    const isEmeraldGold = document.body.classList.contains('theme-emerald-gold');
+    applyTheme(isEmeraldGold ? 'theme-classic' : 'theme-emerald-gold', true);
+  }
+
+  window.toggleAppTheme = toggleAppTheme;
+  window.applyTheme = applyTheme;
+  window.initTheme = initTheme;
 })();
 
 
