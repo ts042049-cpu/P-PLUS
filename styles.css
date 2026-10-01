@@ -847,12 +847,160 @@ body.theme-stealth-onyx {
   --theme-pill-border: rgba(255, 255, 255, 0.35);
 }
 
+/* 6. IMPERIAL AMETHYST & RADIANT LILAC */
+body.theme-amethyst-purple {
+  --theme-canvas-bg: radial-gradient(circle at 50% 18%, #280c44 0%, #130424 50%, #05010a 100%);
+  --theme-frame-border: 1.5px solid rgba(192, 132, 252, 0.45);
+  --theme-frame-glow: 0 30px 75px -10px rgba(0, 0, 0, 0.9), 0 0 40px rgba(192, 132, 252, 0.22);
+  --theme-bg: #0e0517;
+  --theme-header-bg: rgba(16, 6, 28, 0.95);
+  --theme-card-bg: linear-gradient(150deg, rgba(38, 14, 66, 0.85) 0%, rgba(16, 6, 28, 0.95) 100%);
+  --theme-card-border: 1px solid rgba(192, 132, 252, 0.24);
+  --theme-card-highlight: rgba(216, 180, 254, 0.16);
+  --theme-card-low-bg: rgba(26, 9, 44, 0.88);
+  --theme-text: #faf5ff;
+  --theme-text-muted: #b89ec9;
+  --theme-accent: #c084fc;
+  --theme-accent-numeral: #e9d5ff;
+  --theme-numeral-glow: 0 0 14px rgba(192, 132, 252, 0.55);
+  --theme-ecg-stroke: #c084fc;
+  --theme-ecg-glow: drop-shadow(0 0 5px rgba(192, 132, 252, 0.85));
+  --theme-btn-bg: linear-gradient(135deg, #e9d5ff 0%, #c084fc 50%, #9333ea 100%);
+  --theme-btn-text: #0e0419;
+  --theme-btn-border: 1px solid rgba(233, 213, 255, 0.6);
+  --theme-btn-shadow: 0 4px 18px rgba(192, 132, 252, 0.35);
+  --theme-nav-bg: rgba(14, 5, 24, 0.96);
+  --theme-nav-border: 1px solid rgba(192, 132, 252, 0.24);
+  --theme-nav-inactive: #7e5c94;
+  --theme-nav-glow: 0 0 12px rgba(192, 132, 252, 0.6);
+  --theme-bar-gradient: linear-gradient(90deg, #c084fc 0%, #e9d5ff 100%);
+  --theme-border: rgba(192, 132, 252, 0.22);
+  --theme-input-bg: rgba(18, 7, 32, 0.88);
+  --theme-input-border: 1px solid rgba(192, 132, 252, 0.28);
+  --theme-modal-bg: linear-gradient(165deg, #2a0b4c 0%, #0e0517 100%);
+  --theme-pill-bg: linear-gradient(135deg, rgba(192, 132, 252, 0.2) 0%, rgba(42, 11, 76, 0.7) 100%);
+  --theme-pill-color: #e9d5ff;
+  --theme-pill-border: rgba(192, 132, 252, 0.45);
+}
+
+/* 7. SOLAR AMBER & OBSIDIAN TOPAZ */
+body.theme-solar-amber {
+  --theme-canvas-bg: radial-gradient(circle at 50% 18%, #362208 0%, #1a1003 50%, #070401 100%);
+  --theme-frame-border: 1.5px solid rgba(245, 158, 11, 0.45);
+  --theme-frame-glow: 0 30px 75px -10px rgba(0, 0, 0, 0.9), 0 0 40px rgba(245, 158, 11, 0.2);
+  --theme-bg: #0e0b04;
+  --theme-header-bg: rgba(18, 13, 5, 0.95);
+  --theme-card-bg: linear-gradient(150deg, rgba(46, 32, 10, 0.85) 0%, rgba(18, 13, 5, 0.95) 100%);
+  --theme-card-border: 1px solid rgba(245, 158, 11, 0.24);
+  --theme-card-highlight: rgba(251, 191, 36, 0.16);
+  --theme-card-low-bg: rgba(32, 22, 7, 0.88);
+  --theme-text: #fffbeb;
+  --theme-text-muted: #bfa886;
+  --theme-accent: #fbbf24;
+  --theme-accent-numeral: #fde68a;
+  --theme-numeral-glow: 0 0 14px rgba(245, 158, 11, 0.5);
+  --theme-ecg-stroke: #f59e0b;
+  --theme-ecg-glow: drop-shadow(0 0 5px rgba(245, 158, 11, 0.85));
+  --theme-btn-bg: linear-gradient(135deg, #fef3c7 0%, #f59e0b 50%, #d97706 100%);
+  --theme-btn-text: #170d01;
+  --theme-btn-border: 1px solid rgba(254, 243, 199, 0.6);
+  --theme-btn-shadow: 0 4px 18px rgba(245, 158, 11, 0.35);
+  --theme-nav-bg: rgba(14, 10, 3, 0.96);
+  --theme-nav-border: 1px solid rgba(245, 158, 11, 0.24);
+  --theme-nav-inactive: #8c7352;
+  --theme-nav-glow: 0 0 12px rgba(245, 158, 11, 0.6);
+  --theme-bar-gradient: linear-gradient(90deg, #f59e0b 0%, #fef3c7 100%);
+  --theme-border: rgba(245, 158, 11, 0.22);
+  --theme-input-bg: rgba(22, 16, 6, 0.88);
+  --theme-input-border: 1px solid rgba(245, 158, 11, 0.28);
+  --theme-modal-bg: linear-gradient(165deg, #38240a 0%, #0e0b04 100%);
+  --theme-pill-bg: linear-gradient(135deg, rgba(245, 158, 11, 0.2) 0%, rgba(56, 36, 10, 0.7) 100%);
+  --theme-pill-color: #fde68a;
+  --theme-pill-border: rgba(245, 158, 11, 0.45);
+}
+
+/* 8. NORDIC AURORA & GLACIAL MINT */
+body.theme-nordic-mint {
+  --theme-canvas-bg: radial-gradient(circle at 50% 18%, #092e27 0%, #041714 50%, #010807 100%);
+  --theme-frame-border: 1.5px solid rgba(16, 185, 129, 0.45);
+  --theme-frame-glow: 0 30px 75px -10px rgba(0, 0, 0, 0.9), 0 0 40px rgba(16, 185, 129, 0.2);
+  --theme-bg: #031412;
+  --theme-header-bg: rgba(4, 22, 19, 0.95);
+  --theme-card-bg: linear-gradient(150deg, rgba(8, 44, 38, 0.85) 0%, rgba(4, 22, 19, 0.95) 100%);
+  --theme-card-border: 1px solid rgba(16, 185, 129, 0.24);
+  --theme-card-highlight: rgba(52, 211, 153, 0.16);
+  --theme-card-low-bg: rgba(6, 32, 28, 0.88);
+  --theme-text: #ecfdf5;
+  --theme-text-muted: #82b5a5;
+  --theme-accent: #10b981;
+  --theme-accent-numeral: #34d399;
+  --theme-numeral-glow: 0 0 14px rgba(16, 185, 129, 0.5);
+  --theme-ecg-stroke: #10b981;
+  --theme-ecg-glow: drop-shadow(0 0 5px rgba(16, 185, 129, 0.85));
+  --theme-btn-bg: linear-gradient(135deg, #a7f3d0 0%, #10b981 50%, #059669 100%);
+  --theme-btn-text: #01140e;
+  --theme-btn-border: 1px solid rgba(167, 243, 208, 0.6);
+  --theme-btn-shadow: 0 4px 18px rgba(16, 185, 129, 0.35);
+  --theme-nav-bg: rgba(3, 18, 16, 0.96);
+  --theme-nav-border: 1px solid rgba(16, 185, 129, 0.24);
+  --theme-nav-inactive: #578a7c;
+  --theme-nav-glow: 0 0 12px rgba(16, 185, 129, 0.6);
+  --theme-bar-gradient: linear-gradient(90deg, #10b981 0%, #a7f3d0 100%);
+  --theme-border: rgba(16, 185, 129, 0.22);
+  --theme-input-bg: rgba(5, 26, 23, 0.88);
+  --theme-input-border: 1px solid rgba(16, 185, 129, 0.28);
+  --theme-modal-bg: linear-gradient(165deg, #093830 0%, #031412 100%);
+  --theme-pill-bg: linear-gradient(135deg, rgba(16, 185, 129, 0.2) 0%, rgba(9, 46, 39, 0.7) 100%);
+  --theme-pill-color: #34d399;
+  --theme-pill-border: rgba(16, 185, 129, 0.45);
+}
+
+/* 9. CHAMPAGNE PEARL & ALABASTER GOLD (LUXURY LIGHT) */
+body.theme-pearl-gold {
+  --theme-canvas-bg: radial-gradient(circle at 50% 18%, #faf6ef 0%, #ebe4d5 60%, #ded3c0 100%);
+  --theme-frame-border: 1.5px solid rgba(184, 134, 11, 0.35);
+  --theme-frame-glow: 0 25px 60px -10px rgba(110, 85, 30, 0.25), 0 0 25px rgba(212, 175, 55, 0.18);
+  --theme-bg: #fcfbfa;
+  --theme-header-bg: rgba(252, 251, 250, 0.95);
+  --theme-card-bg: linear-gradient(150deg, #ffffff 0%, #fbf9f5 100%);
+  --theme-card-border: 1px solid rgba(184, 134, 11, 0.22);
+  --theme-card-highlight: rgba(255, 255, 255, 0.9);
+  --theme-card-low-bg: #f5f0e6;
+  --theme-text: #1c1917;
+  --theme-text-muted: #78716c;
+  --theme-accent: #b8860b;
+  --theme-accent-numeral: #854d0e;
+  --theme-numeral-glow: none;
+  --theme-ecg-stroke: #b8860b;
+  --theme-ecg-glow: drop-shadow(0 0 3px rgba(184, 134, 11, 0.4));
+  --theme-btn-bg: linear-gradient(135deg, #fef3c7 0%, #d4af37 50%, #92400e 100%);
+  --theme-btn-text: #ffffff;
+  --theme-btn-border: 1px solid rgba(212, 175, 55, 0.5);
+  --theme-btn-shadow: 0 4px 18px rgba(184, 134, 11, 0.28);
+  --theme-nav-bg: rgba(252, 251, 250, 0.97);
+  --theme-nav-border: 1px solid rgba(184, 134, 11, 0.2);
+  --theme-nav-inactive: #8c827a;
+  --theme-nav-glow: 0 0 8px rgba(184, 134, 11, 0.3);
+  --theme-bar-gradient: linear-gradient(90deg, #d4af37 0%, #b8860b 100%);
+  --theme-border: rgba(184, 134, 11, 0.18);
+  --theme-input-bg: #ffffff;
+  --theme-input-border: 1px solid rgba(184, 134, 11, 0.28);
+  --theme-modal-bg: linear-gradient(165deg, #ffffff 0%, #fbf9f5 100%);
+  --theme-pill-bg: linear-gradient(135deg, rgba(212, 175, 55, 0.16) 0%, rgba(245, 240, 230, 0.85) 100%);
+  --theme-pill-color: #854d0e;
+  --theme-pill-border: rgba(184, 134, 11, 0.35);
+}
+
 /* ========================================================================== */
-/* UNIVERSAL DARK THEME ENGINE APPLICATION                                    */
+/* UNIVERSAL THEME ENGINE APPLICATION                                         */
 /* ========================================================================== */
 
-body[class*="theme-"]:not(.theme-classic) {
+body[class*="theme-"]:not(.theme-classic):not(.theme-pearl-gold) {
   background-color: #03060a !important;
+}
+
+body.theme-pearl-gold {
+  background-color: #ebe4d5 !important;
 }
 
 body[class*="theme-"]:not(.theme-classic) .app-canvas {
