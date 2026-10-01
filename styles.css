@@ -981,6 +981,34 @@ body.theme-emerald-gold #profile-patient-view > div:first-child {
   box-shadow: 0 0 12px rgba(212, 175, 55, 0.35);
 }
 
+/* Header Pills in Emerald & Gold Theme */
+body.theme-emerald-gold #ble-status-pill {
+  background: rgba(10, 36, 48, 0.85) !important;
+  color: #93c5fd !important;
+  border: 1px solid rgba(147, 197, 253, 0.35) !important;
+}
+body.theme-emerald-gold #ble-status-pill:hover {
+  background: rgba(14, 48, 64, 0.95) !important;
+  border-color: rgba(147, 197, 253, 0.65) !important;
+}
+body.theme-emerald-gold #ble-status-pill span#ble-header-icon {
+  color: #60a5fa !important;
+}
 
+body.theme-emerald-gold button[aria-label="Emergency SOS"] {
+  background: rgba(50, 14, 18, 0.85) !important;
+  color: #fca5a5 !important;
+  border: 1px solid rgba(248, 113, 113, 0.35) !important;
+}
+body.theme-emerald-gold button[aria-label="Emergency SOS"]:hover {
+  background: rgba(68, 18, 24, 0.95) !important;
+  border-color: rgba(248, 113, 113, 0.65) !important;
+}
 
+body.theme-emerald-gold button[aria-label="Notifications"] {
+  color: #c9ded3 !important;
+}
+body.theme-emerald-gold button[aria-label="Notifications"]:hover {
+  color: #f5d77f !important;
+}
 

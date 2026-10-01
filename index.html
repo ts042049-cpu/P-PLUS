@@ -40,14 +40,15 @@
               <span>BUILT FOR A HEALTHIER INDIA</span>
             </div>
 
+            <!-- Theme Toggle Pill in Top Right Corner -->
+            <button id="login-theme-toggle-btn" type="button" aria-label="Toggle Theme" class="theme-pill-btn absolute top-3 right-4 z-30 flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-bold transition-all active:scale-95 cursor-pointer shadow-xs" onclick="toggleAppTheme()" title="Switch Theme (Emerald & Gold / Classic)">
+              <span class="material-symbols-outlined text-[14px] text-amber-400">palette</span>
+              <span class="theme-pill-label text-[10px]">GOLD</span>
+            </button>
+
             <!-- 1. TOP BRANDING -->
-            <header class="w-full flex items-center justify-between text-center mt-1 shrink-0 z-10 relative px-1">
-              <div class="w-12"></div>
-              <img alt="P+ Personal Health Companion" class="w-40 h-40 object-contain mx-auto" src="assets/images/pplus-logo.svg">
-              <button id="login-theme-toggle-btn" type="button" aria-label="Toggle Theme" class="theme-pill-btn flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-bold transition-all active:scale-95 cursor-pointer shadow-xs" onclick="toggleAppTheme()" title="Switch Theme (Emerald & Gold / Classic)">
-                <span class="material-symbols-outlined text-[14px] text-amber-400">palette</span>
-                <span class="theme-pill-label text-[10px]">GOLD</span>
-              </button>
+            <header class="w-full flex flex-col items-center text-center mt-1 shrink-0 z-10">
+              <img alt="P+ Personal Health Companion" class="w-40 h-40 object-contain" src="assets/images/pplus-logo.svg">
             </header>
 
             <!-- 2. MAIN HEALTH VISUAL (3D ANATOMICAL HEART + FLOATING LABELS) -->
