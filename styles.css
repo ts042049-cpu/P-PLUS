@@ -93,7 +93,35 @@ html, body {
   margin: 0 auto;
 }
 
-@media (min-width: 520px) {
+@media (max-width: 520px) {
+  html, body {
+    width: 100% !important;
+    height: 100% !important;
+    overflow: hidden !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+  .app-canvas {
+    width: 100% !important;
+    height: 100% !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    background: transparent !important;
+  }
+  .device-frame,
+  body[class*="theme-"]:not(.theme-classic) .device-frame {
+    width: 100% !important;
+    max-width: 100% !important;
+    height: 100% !important;
+    max-height: 100% !important;
+    border-radius: 0 !important;
+    border: none !important;
+    box-shadow: none !important;
+    margin: 0 !important;
+  }
+}
+
+@media (min-width: 521px) {
   .app-canvas {
     background: radial-gradient(circle at 50% 20%, #1c2538 0%, #0b0e14 100%);
     padding: 14px;
@@ -201,10 +229,10 @@ html, body {
   pointer-events: none !important;
 }
 
-/* Standardized Header Buttons */
-.screen-view > header button {
-  width: 40px !important;
-  height: 40px !important;
+/* Standardized Header Buttons (circular for icon-only buttons like Back and Notifications) */
+.screen-view > header button:not(.header-telemetry-pill):not(#ble-status-pill):not(#home-theme-toggle-btn):not([aria-label="Emergency SOS"]):not(.header-action-pill):not(.theme-pill-btn) {
+  width: 36px !important;
+  height: 36px !important;
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
@@ -213,12 +241,46 @@ html, body {
   transition: transform 0.15s ease, background-color 0.15s ease !important;
 }
 
+/* Header Action & Telemetry Pills (ESP32, Theme Colour, SOS) - Encloses both icon and text completely inside their colored shape */
+.screen-view > header button.header-telemetry-pill,
+.screen-view > header button#ble-status-pill,
+.screen-view > header button#home-theme-toggle-btn,
+.screen-view > header button[aria-label="Emergency SOS"],
+.screen-view > header button.theme-pill-btn,
 .screen-view > header button.header-action-pill {
   width: auto !important;
-  min-width: 68px !important;
-  height: 32px !important;
-  padding: 0 10px !important;
+  min-width: unset !important;
+  max-width: none !important;
+  height: 25px !important;
+  min-height: 25px !important;
+  padding: 0 7.5px !important;
   border-radius: 9999px !important;
+  display: inline-flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 3px !important;
+  white-space: nowrap !important;
+  box-sizing: border-box !important;
+  overflow: hidden !important;
+  text-overflow: clip !important;
+  z-index: 10 !important;
+  flex-shrink: 0 !important;
+  transition: transform 0.15s ease, background-color 0.15s ease !important;
+}
+
+.screen-view > header button.header-telemetry-pill:hover,
+.screen-view > header button#ble-status-pill:hover,
+.screen-view > header button#home-theme-toggle-btn:hover,
+.screen-view > header button[aria-label="Emergency SOS"]:hover {
+  transform: scale(1.03);
+}
+
+.screen-view > header button.header-telemetry-pill:active,
+.screen-view > header button#ble-status-pill:active,
+.screen-view > header button#home-theme-toggle-btn:active,
+.screen-view > header button[aria-label="Emergency SOS"]:active {
+  transform: scale(0.96);
 }
 
 /* Telemetry Numerals Alignment */
@@ -1063,7 +1125,8 @@ body[class*="theme-"]:not(.theme-classic) select:focus {
 body[class*="theme-"]:not(.theme-classic) .p-modal-sheet,
 body[class*="theme-"]:not(.theme-classic) .profile-dropdown-menu,
 body[class*="theme-"]:not(.theme-classic) .report-sheet-container,
-body[class*="theme-"]:not(.theme-classic) .theme-modal-container {
+body[class*="theme-"]:not(.theme-classic) .theme-modal-container,
+body[class*="theme-"]:not(.theme-classic) .notifications-modal-container {
   background: var(--theme-modal-bg) !important;
   border: 1px solid var(--theme-border) !important;
   color: var(--theme-text) !important;
@@ -1102,17 +1165,64 @@ body[class*="theme-"]:not(.theme-classic) #profile-patient-view > div:first-chil
   box-shadow: 0 12px 35px rgba(0, 0, 0, 0.5) !important;
 }
 
-/* Header Pills */
+/* Header Telemetry Pills (ESP32, Theme Colour, SOS) - Individual Color Theme Rules */
 body[class*="theme-"]:not(.theme-classic) #ble-status-pill {
-  background: var(--theme-card-low-bg) !important;
-  color: var(--theme-accent) !important;
-  border: 1px solid var(--theme-border) !important;
+  background: rgba(14, 42, 77, 0.9) !important;
+  color: #93c5fd !important;
+  border: 1px solid rgba(59, 130, 246, 0.6) !important;
+  box-shadow: 0 1px 6px rgba(37, 99, 235, 0.25) !important;
 }
+body[class*="theme-"]:not(.theme-classic) #ble-status-pill #ble-header-icon {
+  color: #60a5fa !important;
+  font-size: 13px !important;
+  line-height: 1 !important;
+}
+body[class*="theme-"]:not(.theme-classic) #ble-status-pill #ble-header-label {
+  color: #bfdbfe !important;
+  font-size: 9px !important;
+  font-weight: 700 !important;
+  line-height: 1 !important;
+}
+
+body[class*="theme-"]:not(.theme-classic) #home-theme-toggle-btn,
+body[class*="theme-"]:not(.theme-classic) .theme-pill-btn {
+  background: var(--theme-pill-bg, linear-gradient(135deg, rgba(212, 175, 55, 0.22) 0%, rgba(13, 56, 41, 0.85) 100%)) !important;
+  border: 1px solid var(--theme-pill-border, rgba(212, 175, 55, 0.55)) !important;
+  color: var(--theme-pill-color, #fde68a) !important;
+  box-shadow: 0 1px 6px rgba(212, 175, 55, 0.25) !important;
+}
+body[class*="theme-"]:not(.theme-classic) #home-theme-toggle-btn .material-symbols-outlined,
+body[class*="theme-"]:not(.theme-classic) .theme-pill-btn .material-symbols-outlined {
+  color: #fbbf24 !important;
+  font-size: 13px !important;
+  line-height: 1 !important;
+}
+body[class*="theme-"]:not(.theme-classic) #home-theme-toggle-btn .theme-pill-label,
+body[class*="theme-"]:not(.theme-classic) .theme-pill-btn .theme-pill-label {
+  color: var(--theme-pill-color, #fde68a) !important;
+  font-size: 9px !important;
+  font-weight: 700 !important;
+  line-height: 1 !important;
+}
+
 body[class*="theme-"]:not(.theme-classic) button[aria-label="Emergency SOS"] {
-  background: rgba(50, 14, 18, 0.85) !important;
+  background: rgba(75, 14, 20, 0.9) !important;
   color: #fca5a5 !important;
-  border: 1px solid rgba(248, 113, 113, 0.35) !important;
+  border: 1px solid rgba(239, 68, 68, 0.6) !important;
+  box-shadow: 0 1px 6px rgba(239, 68, 68, 0.3) !important;
 }
+body[class*="theme-"]:not(.theme-classic) button[aria-label="Emergency SOS"] .material-symbols-outlined {
+  color: #f87171 !important;
+  font-size: 13px !important;
+  line-height: 1 !important;
+}
+body[class*="theme-"]:not(.theme-classic) button[aria-label="Emergency SOS"] span:not(.material-symbols-outlined) {
+  color: #fecaca !important;
+  font-size: 9px !important;
+  font-weight: 800 !important;
+  line-height: 1 !important;
+}
+
 body[class*="theme-"]:not(.theme-classic) button[aria-label="Notifications"] {
   color: var(--theme-text-muted) !important;
 }
@@ -1120,14 +1230,14 @@ body[class*="theme-"]:not(.theme-classic) button[aria-label="Notifications"]:hov
   color: var(--theme-accent) !important;
 }
 
-/* Theme Pill */
+/* Theme Pill (Universal Fallback) */
 .theme-pill-btn {
   background: var(--theme-pill-bg, linear-gradient(135deg, rgba(212, 175, 55, 0.18) 0%, rgba(13, 56, 41, 0.7) 100%)) !important;
   border: 1px solid var(--theme-pill-border, rgba(212, 175, 55, 0.4)) !important;
   color: var(--theme-pill-color, #f5d77f) !important;
 }
 .theme-pill-btn:hover {
-  opacity: 0.9;
+  opacity: 0.92;
   transform: scale(1.02);
 }
 

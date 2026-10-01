@@ -2944,10 +2944,44 @@
     openThemeSelectorModal();
   }
 
+  function openNotificationsModal() {
+    const modal = document.getElementById('notifications-modal');
+    if (!modal) return;
+    modal.classList.remove('opacity-0', 'pointer-events-none');
+    modal.classList.add('opacity-100', 'pointer-events-auto');
+  }
+
+  function closeNotificationsModal() {
+    const modal = document.getElementById('notifications-modal');
+    if (!modal) return;
+    modal.classList.remove('opacity-100', 'pointer-events-auto');
+    modal.classList.add('opacity-0', 'pointer-events-none');
+  }
+
+  function markAllNotificationsAsRead() {
+    document.querySelectorAll('.notif-card.unread').forEach(card => {
+      card.classList.remove('unread', 'bg-amber-500/5', 'bg-emerald-500/5', 'bg-blue-500/5');
+      card.classList.add('bg-black/[0.02]', 'dark:bg-white/[0.02]');
+      const dot = card.querySelector('span.w-2.h-2.rounded-full');
+      if (dot) dot.remove();
+    });
+    const unreadDot = document.getElementById('notif-unread-dot');
+    if (unreadDot) unreadDot.style.display = 'none';
+    const badgePill = document.getElementById('notif-badge-pill');
+    if (badgePill) {
+      badgePill.textContent = 'ALL CAUGHT UP';
+      badgePill.className = 'px-1.5 py-0.5 rounded-full bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 text-[9px] font-bold leading-none';
+    }
+    showToast('All notifications marked as read', 'done_all');
+  }
+
   window.toggleAppTheme = toggleAppTheme;
   window.selectAppTheme = selectAppTheme;
   window.openThemeSelectorModal = openThemeSelectorModal;
   window.closeThemeSelectorModal = closeThemeSelectorModal;
+  window.openNotificationsModal = openNotificationsModal;
+  window.closeNotificationsModal = closeNotificationsModal;
+  window.markAllNotificationsAsRead = markAllNotificationsAsRead;
   window.initTheme = initTheme;
 })();
 

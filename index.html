@@ -212,22 +212,23 @@
             </div>
             <div class="flex items-center gap-1.5 relative">
               <!-- Top Navbar Bluetooth ESP32-S3 Pill -->
-              <button id="ble-status-pill" type="button" onclick="openEsp32BleModal()" class="flex items-center gap-1 bg-blue-50 hover:bg-blue-100 text-blue-700 border border-blue-200/90 px-2 py-1 rounded-full text-xs font-bold transition-all active:scale-95 cursor-pointer shadow-xs" title="Connect ESP32-S3 via Bluetooth">
-                <span id="ble-header-icon" class="material-symbols-outlined text-[15px] text-blue-600">bluetooth</span>
-                <span id="ble-header-label" class="font-label-telemetry text-[10px] tracking-tight">ESP32</span>
+              <button id="ble-status-pill" type="button" onclick="openEsp32BleModal()" class="header-telemetry-pill flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-bold transition-all active:scale-95 cursor-pointer shadow-xs" title="Connect ESP32-S3 via Bluetooth">
+                <span id="ble-header-icon" class="material-symbols-outlined text-[12px] text-blue-600">bluetooth</span>
+                <span id="ble-header-label" class="font-label-telemetry text-[9px] tracking-tight">ESP32</span>
               </button>
               <!-- Top Navbar Theme Switcher Pill -->
-              <button id="home-theme-toggle-btn" type="button" onclick="openThemeSelectorModal()" class="theme-pill-btn flex items-center gap-1 px-2 py-1 rounded-full text-xs font-bold transition-all active:scale-95 cursor-pointer shadow-xs" title="Choose Theme & Color Modes">
-                <span class="material-symbols-outlined text-[14px] text-amber-400">palette</span>
-                <span class="theme-pill-label font-label-telemetry text-[10px] tracking-tight">GOLD</span>
+              <button id="home-theme-toggle-btn" type="button" onclick="openThemeSelectorModal()" class="header-telemetry-pill theme-pill-btn flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-bold transition-all active:scale-95 cursor-pointer shadow-xs" title="Choose Theme & Color Modes">
+                <span class="material-symbols-outlined text-[12px] text-amber-400">palette</span>
+                <span class="theme-pill-label font-label-telemetry text-[9px] tracking-tight">colour</span>
               </button>
               <!-- Top Navbar Emergency SOS Button (Beside Notifications) -->
-              <button aria-label="Emergency SOS" class="flex items-center gap-1.5 bg-red-50 hover:bg-red-100 text-error border border-red-200/90 px-2.5 py-1 rounded-full text-xs font-bold transition-all active:scale-95 cursor-pointer shadow-xs" onclick="navigateTo('screen-sos')" title="Emergency SOS">
-                <span class="material-symbols-outlined text-[15px] text-error animate-pulse" style="font-variation-settings: 'FILL' 1;">emergency</span>
-                <span class="font-label-telemetry text-[10px] tracking-wider text-error font-extrabold">SOS</span>
+              <button aria-label="Emergency SOS" class="header-telemetry-pill flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-bold transition-all active:scale-95 cursor-pointer shadow-xs" onclick="navigateTo('screen-sos')" title="Emergency SOS">
+                <span class="material-symbols-outlined text-[12px] text-error animate-pulse" style="font-variation-settings: 'FILL' 1;">emergency</span>
+                <span class="font-label-telemetry text-[9px] tracking-wider text-error font-bold">SOS</span>
               </button>
-              <button aria-label="Notifications" class="w-8 h-8 flex items-center justify-center text-on-surface hover:text-primary transition-colors cursor-pointer" onclick="showToast('Daily ECG calibrated • 7-day streak', 'notifications_active')" title="Notifications">
+              <button id="btn-navbar-notifications" aria-label="Notifications" class="w-8 h-8 relative flex items-center justify-center text-on-surface hover:text-primary transition-colors cursor-pointer active:scale-95" onclick="openNotificationsModal()" title="Notifications & Alerts">
                 <span class="material-symbols-outlined text-[20px]">notifications</span>
+                <span id="notif-unread-dot" class="absolute top-1 right-1 w-2 h-2 rounded-full bg-red-500 ring-2 ring-white dark:ring-black"></span>
               </button>
               <div id="home-avatar-btn" class="w-8 h-8 rounded-full overflow-hidden bg-surface-container-high ring-2 ring-primary/30 cursor-pointer active:scale-95 transition-transform" onclick="navigateTo('screen-profile')" title="Open Health & Clinical Profile">
                 <img id="home-avatar-img" class="w-full h-full object-cover" alt="User Profile" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC7oLNhZft-_5NFE_r1jeWbiYhe5D9ugz7wfXM_HqTUzvz4H9IwmLxhE94qekm-wUFfC9UOsjKGm3G3-HnS29iK_1RsLqnSDTP7diXu1tcinjvlSyuIhzPd7eRoDLVjP58-VfabynwpbfyB1EkpTwDHzOBji70n_CDiW9b1RTWsc1XuygDGX2w3n31EUdG5yBq7M6YCy3aPgQGtJqPy2aJDBbswLqVB9QmuzeBBBXa7jrur4hltT8SOOw">
@@ -3254,6 +3255,9 @@ void loop() {
             </button>
           </div>
 
+        </div>
+      </div>
+
       <!-- Theme Selection Modal Sheet -->
       <div id="theme-selector-modal" class="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 flex items-end sm:items-center justify-center p-0 sm:p-4 transition-opacity duration-200 opacity-0 pointer-events-none">
         <div class="theme-modal-container bg-white dark:bg-[#0c1a14] rounded-t-3xl sm:rounded-3xl w-full max-w-[420px] max-h-[90vh] flex flex-col shadow-2xl overflow-hidden border border-black/10 animate-sheetSpringUp">
@@ -3385,6 +3389,127 @@ void loop() {
           <div class="p-3 border-t border-black/5 dark:border-white/10 flex items-center justify-between bg-black/[0.02]">
             <span class="text-[10px] text-gray-400 font-medium">Click any theme to apply live</span>
             <button type="button" onclick="closeThemeSelectorModal()" class="px-4 py-1.5 rounded-full bg-black dark:bg-white text-white dark:text-black font-semibold text-xs active:scale-95 transition-all cursor-pointer">
+              Done
+            </button>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Notifications Center Modal Sheet -->
+      <div id="notifications-modal" class="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 flex items-end sm:items-center justify-center p-0 sm:p-4 transition-opacity duration-200 opacity-0 pointer-events-none">
+        <div class="notifications-modal-container bg-white dark:bg-[#0c1a14] rounded-t-3xl sm:rounded-3xl w-full max-w-[420px] max-h-[85vh] flex flex-col shadow-2xl overflow-hidden border border-black/10 animate-sheetSpringUp">
+          
+          <!-- Modal Header -->
+          <div class="px-5 py-3.5 border-b border-black/5 dark:border-white/10 flex items-center justify-between">
+            <div class="flex items-center gap-2.5">
+              <div class="w-8 h-8 rounded-full bg-blue-500/15 text-blue-500 flex items-center justify-center shrink-0">
+                <span class="material-symbols-outlined text-[20px]">notifications_active</span>
+              </div>
+              <div>
+                <div class="flex items-center gap-2">
+                  <h3 class="font-bold text-sm text-gray-900 dark:text-white leading-tight">Notifications &amp; Alerts</h3>
+                  <span id="notif-badge-pill" class="px-1.5 py-0.5 rounded-full bg-red-500 text-white text-[9px] font-extrabold leading-none">3 NEW</span>
+                </div>
+                <p class="text-[11px] text-gray-500 dark:text-gray-400">Live health telemetry &amp; doctor updates</p>
+              </div>
+            </div>
+            <div class="flex items-center gap-1.5">
+              <button type="button" onclick="markAllNotificationsAsRead()" class="text-[11px] text-primary dark:text-amber-400 font-semibold hover:underline px-2 py-1 cursor-pointer" title="Mark all as read">
+                Read all
+              </button>
+              <button type="button" class="w-7 h-7 rounded-full bg-black/5 dark:bg-white/10 hover:bg-black/10 flex items-center justify-center text-gray-500 dark:text-gray-300 hover:text-black cursor-pointer transition-colors" onclick="closeNotificationsModal()" aria-label="Close Notifications">
+                <span class="material-symbols-outlined text-[16px]">close</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Notification Items List -->
+          <div class="p-3.5 overflow-y-auto space-y-2.5 max-h-[60vh] select-none" id="notifications-list-container">
+            
+            <!-- Item 1: Posture Alert (Unread) -->
+            <div class="notif-card unread p-3 rounded-2xl border border-amber-500/20 bg-amber-500/5 flex items-start gap-3 transition-all hover:bg-amber-500/10 cursor-pointer" onclick="navigateTo('screen-posture'); closeNotificationsModal();">
+              <div class="w-8 h-8 rounded-full bg-amber-500/20 text-amber-500 flex items-center justify-center shrink-0 mt-0.5">
+                <span class="material-symbols-outlined text-[18px]">airline_seat_recline_extra</span>
+              </div>
+              <div class="flex-1 min-w-0">
+                <div class="flex items-center justify-between gap-1">
+                  <h4 class="text-xs font-bold text-gray-900 dark:text-white truncate">Posture Deflection Alert</h4>
+                  <span class="text-[10px] text-amber-500 font-medium whitespace-nowrap">2m ago</span>
+                </div>
+                <p class="text-[11px] text-gray-600 dark:text-gray-300 mt-0.5 leading-snug">Spine bent 16° for &gt;10s. Tap to view 3D ergonomic posture view.</p>
+                <div class="mt-1.5 flex items-center gap-2">
+                  <span class="inline-flex items-center gap-1 px-1.5 py-0.5 rounded text-[9px] font-semibold bg-amber-500/10 text-amber-600 dark:text-amber-400">
+                    <span class="w-1.5 h-1.5 rounded-full bg-amber-500"></span> Sensor IMU
+                  </span>
+                  <span class="text-[10px] text-primary dark:text-amber-400 font-bold">Fix Posture →</span>
+                </div>
+              </div>
+              <span class="w-2 h-2 rounded-full bg-amber-500 shrink-0 mt-2"></span>
+            </div>
+
+            <!-- Item 2: Vitals Normal (Unread) -->
+            <div class="notif-card unread p-3 rounded-2xl border border-emerald-500/20 bg-emerald-500/5 flex items-start gap-3 transition-all hover:bg-emerald-500/10 cursor-pointer" onclick="navigateTo('screen-graphs'); closeNotificationsModal();">
+              <div class="w-8 h-8 rounded-full bg-emerald-500/20 text-emerald-500 flex items-center justify-center shrink-0 mt-0.5">
+                <span class="material-symbols-outlined text-[18px]">favorite</span>
+              </div>
+              <div class="flex-1 min-w-0">
+                <div class="flex items-center justify-between gap-1">
+                  <h4 class="text-xs font-bold text-gray-900 dark:text-white truncate">Vitals Stream Synchronized</h4>
+                  <span class="text-[10px] text-emerald-500 font-medium whitespace-nowrap">15m ago</span>
+                </div>
+                <p class="text-[11px] text-gray-600 dark:text-gray-300 mt-0.5 leading-snug">Heart rate at 72 BPM and SpO₂ at 98%. 7-day optimal vitals streak active.</p>
+                <div class="mt-1.5 flex items-center gap-2">
+                  <span class="inline-flex items-center gap-1 px-1.5 py-0.5 rounded text-[9px] font-semibold bg-emerald-500/10 text-emerald-600 dark:text-emerald-400">
+                    <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> Live Telemetry
+                  </span>
+                  <span class="text-[10px] text-primary dark:text-emerald-400 font-bold">View Graphs →</span>
+                </div>
+              </div>
+              <span class="w-2 h-2 rounded-full bg-emerald-500 shrink-0 mt-2"></span>
+            </div>
+
+            <!-- Item 3: Doctor Message (Unread) -->
+            <div class="notif-card unread p-3 rounded-2xl border border-blue-500/20 bg-blue-500/5 flex items-start gap-3 transition-all hover:bg-blue-500/10 cursor-pointer" onclick="navigateTo('screen-doctors'); closeNotificationsModal();">
+              <div class="w-8 h-8 rounded-full bg-blue-500/20 text-blue-500 flex items-center justify-center shrink-0 mt-0.5">
+                <span class="material-symbols-outlined text-[18px]">medical_services</span>
+              </div>
+              <div class="flex-1 min-w-0">
+                <div class="flex items-center justify-between gap-1">
+                  <h4 class="text-xs font-bold text-gray-900 dark:text-white truncate">Dr. Neha Sharma Note</h4>
+                  <span class="text-[10px] text-blue-500 font-medium whitespace-nowrap">1h ago</span>
+                </div>
+                <p class="text-[11px] text-gray-600 dark:text-gray-300 mt-0.5 leading-snug">&ldquo;Great progress on thoracic alignment. Continue ergonomic hold-times.&rdquo;</p>
+                <div class="mt-1.5 flex items-center gap-2">
+                  <span class="inline-flex items-center gap-1 px-1.5 py-0.5 rounded text-[9px] font-semibold bg-blue-500/10 text-blue-600 dark:text-blue-400">
+                    Consultation
+                  </span>
+                  <span class="text-[10px] text-primary dark:text-blue-400 font-bold">Care Team →</span>
+                </div>
+              </div>
+              <span class="w-2 h-2 rounded-full bg-blue-500 shrink-0 mt-2"></span>
+            </div>
+
+            <!-- Item 4: BLE ESP32 Connected (Read) -->
+            <div class="notif-card p-3 rounded-2xl border border-black/5 dark:border-white/5 bg-black/[0.02] dark:bg-white/[0.02] flex items-start gap-3 transition-all hover:bg-black/[0.04] cursor-pointer" onclick="openEsp32BleModal(); closeNotificationsModal();">
+              <div class="w-8 h-8 rounded-full bg-gray-500/10 text-gray-500 flex items-center justify-center shrink-0 mt-0.5">
+                <span class="material-symbols-outlined text-[18px]">bluetooth_connected</span>
+              </div>
+              <div class="flex-1 min-w-0">
+                <div class="flex items-center justify-between gap-1">
+                  <h4 class="text-xs font-semibold text-gray-800 dark:text-gray-200 truncate">ESP32-S3 Node Online</h4>
+                  <span class="text-[10px] text-gray-400 whitespace-nowrap">3h ago</span>
+                </div>
+                <p class="text-[11px] text-gray-500 dark:text-gray-400 mt-0.5 leading-snug">Peripheral paired via BLE mesh. Telemetry sample rate 10Hz.</p>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Modal Footer -->
+          <div class="p-3 border-t border-black/5 dark:border-white/10 flex items-center justify-between bg-black/[0.02]">
+            <span class="text-[10px] text-gray-400 font-medium">Auto-synced with ESP32 &amp; Care triage</span>
+            <button type="button" onclick="closeNotificationsModal()" class="px-4 py-1.5 rounded-full bg-black dark:bg-white text-white dark:text-black font-semibold text-xs active:scale-95 transition-all cursor-pointer">
               Done
             </button>
           </div>
