@@ -663,5 +663,324 @@ nav.h-16 button span:last-child {
   }
 }
 
+/* ========================================================================== */
+/* ROYAL EMERALD & CHAMPAGNE GOLD LUXURY THEME (PREMIUM & COOL EDITION)      */
+/* ========================================================================== */
+
+body.theme-emerald-gold {
+  --color-primary: #d4af37;
+  --color-on-primary: #04140e;
+  --color-surface: #061812;
+  --color-on-surface: #f4f8f5;
+  --color-secondary: #8dafa0;
+  background-color: #030d09 !important;
+}
+
+body.theme-emerald-gold .app-canvas {
+  background: radial-gradient(circle at 50% 18%, #0d3829 0%, #061c14 52%, #020b08 100%) !important;
+}
+
+@media (min-width: 520px) {
+  body.theme-emerald-gold .app-canvas {
+    background: radial-gradient(circle at 50% 18%, #0f402f 0%, #072218 45%, #020b08 100%) !important;
+  }
+}
+
+body.theme-emerald-gold .device-frame {
+  background: #061812 !important;
+  border: 1.5px solid rgba(212, 175, 55, 0.45) !important;
+  box-shadow: 0 30px 75px -10px rgba(0, 0, 0, 0.9), 0 0 40px rgba(212, 175, 55, 0.16), inset 0 0 0 1px rgba(245, 215, 127, 0.25) !important;
+}
+
+body.theme-emerald-gold .screens-viewport,
+body.theme-emerald-gold .screen-view {
+  background: #061812 !important;
+}
+
+body.theme-emerald-gold #screen-risk,
+body.theme-emerald-gold #screen-sos,
+body.theme-emerald-gold #screen-doctors,
+body.theme-emerald-gold #screen-find,
+body.theme-emerald-gold #screen-profile,
+body.theme-emerald-gold #screen-graphs {
+  background: #061812 !important;
+}
+
+/* Universal Screen Headers */
+body.theme-emerald-gold .screen-view > header {
+  background-color: rgba(5, 22, 16, 0.94) !important;
+  backdrop-filter: blur(20px) !important;
+  -webkit-backdrop-filter: blur(20px) !important;
+  border-bottom: 1px solid rgba(212, 175, 55, 0.22) !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3) !important;
+}
+
+body.theme-emerald-gold .screen-view:not(#screen-home):not(#screen-login) > header > h1 {
+  color: #f7eed7 !important;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+body.theme-emerald-gold header .text-on-surface,
+body.theme-emerald-gold header h1,
+body.theme-emerald-gold header span.text-title-sm {
+  color: #f7eed7 !important;
+}
+
+body.theme-emerald-gold header button {
+  color: #c9ded3 !important;
+}
+body.theme-emerald-gold header button:hover {
+  color: #f5d77f !important;
+}
+
+/* Cards & Containers (Frosted Dark Emerald Glass with Gold Trim) */
+body.theme-emerald-gold .bg-surface-container-lowest,
+body.theme-emerald-gold .bg-white,
+body.theme-emerald-gold .bg-white\/95,
+body.theme-emerald-gold .bg-white\/90,
+body.theme-emerald-gold .bg-\[\#f8f9fc\],
+body.theme-emerald-gold .bg-slate-50,
+body.theme-emerald-gold section.bg-white,
+body.theme-emerald-gold .graph-card-interactive {
+  background: linear-gradient(150deg, rgba(13, 44, 33, 0.85) 0%, rgba(6, 24, 18, 0.95) 100%) !important;
+  border: 1px solid rgba(212, 175, 55, 0.22) !important;
+  color: #f5f8f6 !important;
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.38), inset 0 1px 0 rgba(245, 215, 127, 0.12) !important;
+}
+
+body.theme-emerald-gold .bg-surface-container-low,
+body.theme-emerald-gold .bg-\[\#F5F5F7\],
+body.theme-emerald-gold .bg-gray-50,
+body.theme-emerald-gold .bg-\[\#F8F9FA\] {
+  background: rgba(10, 36, 27, 0.88) !important;
+  border: 1px solid rgba(212, 175, 55, 0.18) !important;
+  color: #e5ede8 !important;
+}
+
+body.theme-emerald-gold .bg-surface-container,
+body.theme-emerald-gold .bg-surface-container-high {
+  background: rgba(16, 52, 38, 0.92) !important;
+  border-color: rgba(212, 175, 55, 0.25) !important;
+}
+
+/* Typography & Text Contrast */
+body.theme-emerald-gold .text-on-surface,
+body.theme-emerald-gold .text-black,
+body.theme-emerald-gold .text-slate-900,
+body.theme-emerald-gold .text-gray-900,
+body.theme-emerald-gold .text-gray-800,
+body.theme-emerald-gold h1,
+body.theme-emerald-gold h2,
+body.theme-emerald-gold h3,
+body.theme-emerald-gold h4,
+body.theme-emerald-gold h5 {
+  color: #f4f8f5 !important;
+}
+
+body.theme-emerald-gold .text-secondary,
+body.theme-emerald-gold .text-gray-400,
+body.theme-emerald-gold .text-gray-500,
+body.theme-emerald-gold .text-gray-600,
+body.theme-emerald-gold .text-slate-500,
+body.theme-emerald-gold .text-slate-600 {
+  color: #8dafa0 !important;
+}
+
+body.theme-emerald-gold .text-primary {
+  color: #f5d77f !important;
+}
+
+/* Gold Vitals, Numbers & Telemetry */
+body.theme-emerald-gold .dynamic-bpm-val,
+body.theme-emerald-gold .dynamic-spo2-val,
+body.theme-emerald-gold .dynamic-temp-val,
+body.theme-emerald-gold .dynamic-posture-score,
+body.theme-emerald-gold .dynamic-posture-angle,
+body.theme-emerald-gold .tabular-nums,
+body.theme-emerald-gold span.text-2xl.font-bold.text-on-surface {
+  color: #f5d77f !important;
+  text-shadow: 0 0 14px rgba(245, 215, 127, 0.45);
+}
+
+body.theme-emerald-gold .animated-ecg-path {
+  stroke: #f5d77f !important;
+  filter: drop-shadow(0 0 5px rgba(212, 175, 55, 0.85));
+}
+
+body.theme-emerald-gold svg path[stroke="#000000"],
+body.theme-emerald-gold svg path[stroke="#121c2a"] {
+  stroke: #f5d77f !important;
+}
+body.theme-emerald-gold svg path[stroke="#545f72"] {
+  stroke: #7ea392 !important;
+}
+body.theme-emerald-gold svg circle[fill="#121c2a"] {
+  fill: #f5d77f !important;
+}
+
+/* CTA Buttons (Shimmering Champagne Gold) */
+body.theme-emerald-gold .bg-primary,
+body.theme-emerald-gold .bg-black,
+body.theme-emerald-gold button.bg-primary,
+body.theme-emerald-gold button.bg-black,
+body.theme-emerald-gold .portal-pill-btn.active,
+body.theme-emerald-gold .graph-metric-pill.active {
+  background: linear-gradient(135deg, #fce8a2 0%, #d4af37 50%, #b88612 100%) !important;
+  color: #04140e !important;
+  font-weight: 700 !important;
+  border: 1px solid rgba(255, 238, 170, 0.6) !important;
+  box-shadow: 0 4px 18px rgba(212, 175, 55, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.45) !important;
+  text-shadow: none !important;
+}
+
+body.theme-emerald-gold .bg-primary:hover,
+body.theme-emerald-gold .bg-black:hover,
+body.theme-emerald-gold button.bg-primary:hover,
+body.theme-emerald-gold button.bg-black:hover,
+body.theme-emerald-gold .portal-pill-btn.active:hover,
+body.theme-emerald-gold .graph-metric-pill.active:hover {
+  background: linear-gradient(135deg, #fff2be 0%, #e2be49 50%, #c49419 100%) !important;
+  box-shadow: 0 6px 24px rgba(212, 175, 55, 0.5) !important;
+}
+
+body.theme-emerald-gold .bg-primary *,
+body.theme-emerald-gold .bg-black *,
+body.theme-emerald-gold button.bg-primary *,
+body.theme-emerald-gold button.bg-black *,
+body.theme-emerald-gold .portal-pill-btn.active * {
+  color: #04140e !important;
+}
+
+/* Home logo badge */
+body.theme-emerald-gold .w-8.h-8.rounded-full.bg-primary {
+  background: linear-gradient(135deg, #fce8a2 0%, #d4af37 100%) !important;
+  box-shadow: 0 0 14px rgba(212, 175, 55, 0.45) !important;
+  border: 1px solid rgba(255, 238, 170, 0.6) !important;
+}
+body.theme-emerald-gold .w-8.h-8.rounded-full.bg-primary span {
+  color: #04140e !important;
+  font-weight: 900 !important;
+}
+
+/* Bottom Navigation */
+body.theme-emerald-gold nav.h-16 {
+  background: rgba(4, 18, 13, 0.96) !important;
+  backdrop-filter: blur(20px) !important;
+  -webkit-backdrop-filter: blur(20px) !important;
+  border-top: 1px solid rgba(212, 175, 55, 0.24) !important;
+  box-shadow: 0 -6px 24px rgba(0, 0, 0, 0.45) !important;
+}
+
+body.theme-emerald-gold nav.h-16 button {
+  color: #6b8d7e !important;
+  transition: all 0.2s ease !important;
+}
+
+body.theme-emerald-gold nav.h-16 button:hover {
+  color: #f5d77f !important;
+}
+
+body.theme-emerald-gold nav.h-16 button.text-primary,
+body.theme-emerald-gold nav.h-16 button.active,
+body.theme-emerald-gold nav.h-16 button[class*="text-primary"] {
+  color: #f5d77f !important;
+  text-shadow: 0 0 12px rgba(212, 175, 55, 0.55);
+}
+
+body.theme-emerald-gold nav.h-16 button .material-symbols-outlined {
+  color: inherit !important;
+}
+
+/* Inputs, Form Controls & Placeholders */
+body.theme-emerald-gold .input-auth-field,
+body.theme-emerald-gold input[type="text"],
+body.theme-emerald-gold input[type="password"],
+body.theme-emerald-gold input[type="email"],
+body.theme-emerald-gold input[type="search"],
+body.theme-emerald-gold select {
+  background-color: rgba(5, 20, 14, 0.88) !important;
+  color: #f5f8f6 !important;
+  border: 1px solid rgba(212, 175, 55, 0.26) !important;
+}
+
+body.theme-emerald-gold .input-auth-field::placeholder,
+body.theme-emerald-gold input::placeholder {
+  color: #5d7e70 !important;
+}
+
+body.theme-emerald-gold .input-auth-field:focus,
+body.theme-emerald-gold input:focus,
+body.theme-emerald-gold select:focus {
+  background-color: rgba(7, 28, 20, 0.96) !important;
+  border-color: #d4af37 !important;
+  box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.25) !important;
+}
+
+/* Modals, Sheets, Dialogs & Dropdowns */
+body.theme-emerald-gold .p-modal-sheet,
+body.theme-emerald-gold .profile-dropdown-menu,
+body.theme-emerald-gold .report-sheet-container {
+  background: linear-gradient(165deg, #0d2e22 0%, #061912 100%) !important;
+  border: 1px solid rgba(212, 175, 55, 0.32) !important;
+  color: #f5f8f6 !important;
+  box-shadow: 0 -12px 45px rgba(0, 0, 0, 0.75), 0 0 35px rgba(212, 175, 55, 0.12) !important;
+}
+
+body.theme-emerald-gold .p-modal-overlay {
+  background: rgba(2, 10, 7, 0.72) !important;
+}
+
+/* Posture Bar, Badges & Specialty Components */
+body.theme-emerald-gold .dynamic-posture-bar {
+  background: linear-gradient(90deg, #d4af37 0%, #fcedba 100%) !important;
+  box-shadow: 0 0 10px rgba(212, 175, 55, 0.45) !important;
+}
+
+body.theme-emerald-gold .border-surface-container,
+body.theme-emerald-gold .border-surface-container\/40,
+body.theme-emerald-gold .border-surface-container\/50,
+body.theme-emerald-gold .border-surface-container\/60,
+body.theme-emerald-gold .border-black\/5,
+body.theme-emerald-gold .border-black\/10,
+body.theme-emerald-gold .border-slate-100,
+body.theme-emerald-gold .border-gray-200\/60 {
+  border-color: rgba(212, 175, 55, 0.2) !important;
+}
+
+body.theme-emerald-gold .radar-pulse-ring {
+  border-color: rgba(212, 175, 55, 0.5) !important;
+}
+body.theme-emerald-gold .pulsing-ring {
+  border-color: #d4af37 !important;
+}
+
+/* Floating badges in login screen */
+body.theme-emerald-gold .absolute.bg-white\/90 {
+  background: rgba(8, 28, 20, 0.88) !important;
+  border: 1px solid rgba(212, 175, 55, 0.3) !important;
+  color: #f5d77f !important;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3) !important;
+}
+
+/* Executive VIP Health Card (Health Profile) */
+body.theme-emerald-gold #profile-patient-view > div:first-child {
+  background: linear-gradient(135deg, #0f392b 0%, #082219 45%, #144837 100%) !important;
+  border: 1.5px solid rgba(212, 175, 55, 0.45) !important;
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.5), 0 0 25px rgba(212, 175, 55, 0.15) !important;
+}
+
+/* Theme Switcher Button styling */
+.theme-pill-btn {
+  background: linear-gradient(135deg, rgba(212, 175, 55, 0.18) 0%, rgba(13, 56, 41, 0.7) 100%);
+  border: 1px solid rgba(212, 175, 55, 0.4);
+  color: #f5d77f;
+}
+.theme-pill-btn:hover {
+  background: linear-gradient(135deg, rgba(212, 175, 55, 0.28) 0%, rgba(18, 70, 52, 0.85) 100%);
+  border-color: rgba(212, 175, 55, 0.65);
+  box-shadow: 0 0 12px rgba(212, 175, 55, 0.35);
+}
+
+
 
 

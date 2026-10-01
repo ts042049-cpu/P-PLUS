@@ -16,7 +16,7 @@
   <link rel="stylesheet" href="styles.css">
 
 </head>
-<body>
+<body class="theme-emerald-gold">
 
   <!-- Presentation App Canvas -->
   <div class="app-canvas">
@@ -41,8 +41,13 @@
             </div>
 
             <!-- 1. TOP BRANDING -->
-            <header class="w-full flex flex-col items-center text-center mt-1 shrink-0 z-10">
-              <img alt="P+ Personal Health Companion" class="w-44 h-44 object-contain" src="assets/images/pplus-logo.svg">
+            <header class="w-full flex items-center justify-between text-center mt-1 shrink-0 z-10 relative px-1">
+              <div class="w-12"></div>
+              <img alt="P+ Personal Health Companion" class="w-40 h-40 object-contain mx-auto" src="assets/images/pplus-logo.svg">
+              <button id="login-theme-toggle-btn" type="button" aria-label="Toggle Theme" class="theme-pill-btn flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-bold transition-all active:scale-95 cursor-pointer shadow-xs" onclick="toggleAppTheme()" title="Switch Theme (Emerald & Gold / Classic)">
+                <span class="material-symbols-outlined text-[14px] text-amber-400">palette</span>
+                <span class="theme-pill-label text-[10px]">GOLD</span>
+              </button>
             </header>
 
             <!-- 2. MAIN HEALTH VISUAL (3D ANATOMICAL HEART + FLOATING LABELS) -->
@@ -209,6 +214,11 @@
               <button id="ble-status-pill" type="button" onclick="openEsp32BleModal()" class="flex items-center gap-1 bg-blue-50 hover:bg-blue-100 text-blue-700 border border-blue-200/90 px-2 py-1 rounded-full text-xs font-bold transition-all active:scale-95 cursor-pointer shadow-xs" title="Connect ESP32-S3 via Bluetooth">
                 <span id="ble-header-icon" class="material-symbols-outlined text-[15px] text-blue-600">bluetooth</span>
                 <span id="ble-header-label" class="font-label-telemetry text-[10px] tracking-tight">ESP32</span>
+              </button>
+              <!-- Top Navbar Theme Switcher Pill -->
+              <button id="home-theme-toggle-btn" type="button" onclick="toggleAppTheme()" class="theme-pill-btn flex items-center gap-1 px-2 py-1 rounded-full text-xs font-bold transition-all active:scale-95 cursor-pointer shadow-xs" title="Toggle Theme (Emerald & Gold / Classic)">
+                <span class="material-symbols-outlined text-[14px] text-amber-400">palette</span>
+                <span class="theme-pill-label font-label-telemetry text-[10px] tracking-tight">GOLD</span>
               </button>
               <!-- Top Navbar Emergency SOS Button (Beside Notifications) -->
               <button aria-label="Emergency SOS" class="flex items-center gap-1.5 bg-red-50 hover:bg-red-100 text-error border border-red-200/90 px-2.5 py-1 rounded-full text-xs font-bold transition-all active:scale-95 cursor-pointer shadow-xs" onclick="navigateTo('screen-sos')" title="Emergency SOS">
