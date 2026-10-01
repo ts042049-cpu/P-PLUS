@@ -2815,70 +2815,36 @@
     'theme-emerald-gold': {
       name: 'Royal Emerald & Gold',
       shortName: 'GOLD',
-      category: 'dark-luxury',
       toast: 'Royal Emerald & Champagne Gold Theme ✨',
       icon: 'workspace_premium'
     },
     'theme-oceanic-blue': {
       name: 'Oceanic Sapphire & Ice Blue',
       shortName: 'SAPPHIRE',
-      category: 'dark-luxury',
       toast: 'Oceanic Sapphire & Ice Blue Activated 🌊',
       icon: 'water_drop'
     },
     'theme-cyberpunk': {
       name: 'Midnight Cyberpunk Neon',
       shortName: 'NEON',
-      category: 'vibrant',
       toast: 'Midnight Cyberpunk Neon Activated ⚡',
       icon: 'electric_bolt'
     },
     'theme-sunset-crimson': {
       name: 'Crimson Rose Gold',
       shortName: 'ROSE',
-      category: 'dark-luxury',
       toast: 'Crimson Rose Gold & Copper Activated 🔥',
       icon: 'local_fire_department'
-    },
-    'theme-amethyst-purple': {
-      name: 'Imperial Amethyst & Lilac',
-      shortName: 'AMETHYST',
-      category: 'vibrant',
-      toast: 'Imperial Amethyst & Radiant Lilac Activated 🔮',
-      icon: 'diamond'
-    },
-    'theme-solar-amber': {
-      name: 'Solar Amber & Topaz',
-      shortName: 'AMBER',
-      category: 'dark-luxury',
-      toast: 'Solar Amber & Obsidian Topaz Activated ☀️',
-      icon: 'sunny'
-    },
-    'theme-nordic-mint': {
-      name: 'Nordic Aurora & Mint',
-      shortName: 'MINT',
-      category: 'vibrant',
-      toast: 'Nordic Aurora & Glacial Mint Activated 🌿',
-      icon: 'eco'
     },
     'theme-stealth-onyx': {
       name: 'Stealth Onyx & Silver',
       shortName: 'ONYX',
-      category: 'dark-luxury',
       toast: 'Stealth Onyx OLED Blackout Activated 🖤',
       icon: 'dark_mode'
-    },
-    'theme-pearl-gold': {
-      name: 'Champagne Pearl & Gold',
-      shortName: 'PEARL',
-      category: 'light',
-      toast: 'Champagne Pearl & Alabaster Gold Activated 🥂',
-      icon: 'stars'
     },
     'theme-classic': {
       name: 'Clinical Medical Slate',
       shortName: 'SLATE',
-      category: 'light',
       toast: 'Clinical Medical Slate Activated 🩺',
       icon: 'medical_services'
     }
@@ -2889,11 +2855,7 @@
     'theme-oceanic-blue',
     'theme-cyberpunk',
     'theme-sunset-crimson',
-    'theme-amethyst-purple',
-    'theme-solar-amber',
-    'theme-nordic-mint',
     'theme-stealth-onyx',
-    'theme-pearl-gold',
     'theme-classic'
   ];
 
@@ -2978,28 +2940,6 @@
     modal.classList.add('opacity-0', 'pointer-events-none');
   }
 
-  function filterThemeCategory(category, btnEl) {
-    // Update active button styling
-    document.querySelectorAll('.theme-filter-pill').forEach(btn => {
-      btn.classList.remove('bg-black', 'text-white', 'dark:bg-white', 'dark:text-black', 'shadow-xs');
-      btn.classList.add('bg-black/5', 'text-gray-600', 'dark:bg-white/10', 'dark:text-gray-300');
-    });
-    if (btnEl) {
-      btnEl.classList.remove('bg-black/5', 'text-gray-600', 'dark:bg-white/10', 'dark:text-gray-300');
-      btnEl.classList.add('bg-black', 'text-white', 'dark:bg-white', 'dark:text-black', 'shadow-xs');
-    }
-
-    // Filter cards
-    document.querySelectorAll('.theme-card-option').forEach(card => {
-      const cardCat = card.getAttribute('data-theme-cat');
-      if (category === 'all' || cardCat === category) {
-        card.style.display = 'flex';
-      } else {
-        card.style.display = 'none';
-      }
-    });
-  }
-
   function toggleAppTheme() {
     openThemeSelectorModal();
   }
@@ -3008,7 +2948,6 @@
   window.selectAppTheme = selectAppTheme;
   window.openThemeSelectorModal = openThemeSelectorModal;
   window.closeThemeSelectorModal = closeThemeSelectorModal;
-  window.filterThemeCategory = filterThemeCategory;
   window.initTheme = initTheme;
 })();
 
