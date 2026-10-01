@@ -664,351 +664,483 @@ nav.h-16 button span:last-child {
 }
 
 /* ========================================================================== */
-/* ROYAL EMERALD & CHAMPAGNE GOLD LUXURY THEME (PREMIUM & COOL EDITION)      */
+/* MULTI-THEME LUXURY ENGINE FOR P+ HEALTH COMPANION                          */
 /* ========================================================================== */
 
+/* 1. ROYAL EMERALD & CHAMPAGNE GOLD (DEFAULT) */
 body.theme-emerald-gold {
-  --color-primary: #d4af37;
-  --color-on-primary: #04140e;
-  --color-surface: #061812;
-  --color-on-surface: #f4f8f5;
-  --color-secondary: #8dafa0;
-  background-color: #030d09 !important;
+  --theme-canvas-bg: radial-gradient(circle at 50% 18%, #0f402f 0%, #072218 45%, #020b08 100%);
+  --theme-frame-border: 1.5px solid rgba(212, 175, 55, 0.45);
+  --theme-frame-glow: 0 30px 75px -10px rgba(0, 0, 0, 0.9), 0 0 40px rgba(212, 175, 55, 0.16);
+  --theme-bg: #061812;
+  --theme-header-bg: rgba(5, 22, 16, 0.94);
+  --theme-card-bg: linear-gradient(150deg, rgba(13, 44, 33, 0.85) 0%, rgba(6, 24, 18, 0.95) 100%);
+  --theme-card-border: 1px solid rgba(212, 175, 55, 0.22);
+  --theme-card-highlight: rgba(245, 215, 127, 0.15);
+  --theme-card-low-bg: rgba(10, 36, 27, 0.88);
+  --theme-text: #f4f8f5;
+  --theme-text-muted: #8dafa0;
+  --theme-accent: #f5d77f;
+  --theme-accent-numeral: #f5d77f;
+  --theme-numeral-glow: 0 0 14px rgba(245, 215, 127, 0.45);
+  --theme-ecg-stroke: #f5d77f;
+  --theme-ecg-glow: drop-shadow(0 0 5px rgba(212, 175, 55, 0.85));
+  --theme-btn-bg: linear-gradient(135deg, #fce8a2 0%, #d4af37 50%, #b88612 100%);
+  --theme-btn-text: #04140e;
+  --theme-btn-border: 1px solid rgba(255, 238, 170, 0.6);
+  --theme-btn-shadow: 0 4px 18px rgba(212, 175, 55, 0.35);
+  --theme-nav-bg: rgba(4, 18, 13, 0.96);
+  --theme-nav-border: 1px solid rgba(212, 175, 55, 0.24);
+  --theme-nav-inactive: #6b8d7e;
+  --theme-nav-glow: 0 0 12px rgba(212, 175, 55, 0.55);
+  --theme-bar-gradient: linear-gradient(90deg, #d4af37 0%, #fcedba 100%);
+  --theme-border: rgba(212, 175, 55, 0.22);
+  --theme-input-bg: rgba(5, 20, 14, 0.88);
+  --theme-input-border: 1px solid rgba(212, 175, 55, 0.26);
+  --theme-modal-bg: linear-gradient(165deg, #0d2e22 0%, #061912 100%);
+  --theme-pill-bg: linear-gradient(135deg, rgba(212, 175, 55, 0.18) 0%, rgba(13, 56, 41, 0.7) 100%);
+  --theme-pill-color: #f5d77f;
+  --theme-pill-border: rgba(212, 175, 55, 0.4);
 }
 
-body.theme-emerald-gold .app-canvas {
-  background: radial-gradient(circle at 50% 18%, #0d3829 0%, #061c14 52%, #020b08 100%) !important;
+/* 2. OCEANIC SAPPHIRE & ELECTRIC ICE BLUE */
+body.theme-oceanic-blue {
+  --theme-canvas-bg: radial-gradient(circle at 50% 18%, #082846 0%, #041426 50%, #01060e 100%);
+  --theme-frame-border: 1.5px solid rgba(56, 189, 248, 0.45);
+  --theme-frame-glow: 0 30px 75px -10px rgba(0, 0, 0, 0.9), 0 0 40px rgba(56, 189, 248, 0.18);
+  --theme-bg: #030f1c;
+  --theme-header-bg: rgba(4, 18, 34, 0.95);
+  --theme-card-bg: linear-gradient(150deg, rgba(10, 36, 64, 0.85) 0%, rgba(4, 18, 34, 0.95) 100%);
+  --theme-card-border: 1px solid rgba(56, 189, 248, 0.22);
+  --theme-card-highlight: rgba(125, 211, 252, 0.15);
+  --theme-card-low-bg: rgba(8, 28, 48, 0.88);
+  --theme-text: #f0f9ff;
+  --theme-text-muted: #82a8c6;
+  --theme-accent: #38bdf8;
+  --theme-accent-numeral: #38bdf8;
+  --theme-numeral-glow: 0 0 14px rgba(56, 189, 248, 0.5);
+  --theme-ecg-stroke: #38bdf8;
+  --theme-ecg-glow: drop-shadow(0 0 5px rgba(56, 189, 248, 0.85));
+  --theme-btn-bg: linear-gradient(135deg, #7dd3fc 0%, #0284c7 50%, #0369a1 100%);
+  --theme-btn-text: #020d18;
+  --theme-btn-border: 1px solid rgba(186, 230, 253, 0.6);
+  --theme-btn-shadow: 0 4px 18px rgba(2, 132, 199, 0.35);
+  --theme-nav-bg: rgba(3, 14, 28, 0.96);
+  --theme-nav-border: 1px solid rgba(56, 189, 248, 0.24);
+  --theme-nav-inactive: #6287a3;
+  --theme-nav-glow: 0 0 12px rgba(56, 189, 248, 0.6);
+  --theme-bar-gradient: linear-gradient(90deg, #38bdf8 0%, #bae6fd 100%);
+  --theme-border: rgba(56, 189, 248, 0.22);
+  --theme-input-bg: rgba(4, 18, 32, 0.88);
+  --theme-input-border: 1px solid rgba(56, 189, 248, 0.28);
+  --theme-modal-bg: linear-gradient(165deg, #092844 0%, #030f1c 100%);
+  --theme-pill-bg: linear-gradient(135deg, rgba(56, 189, 248, 0.18) 0%, rgba(8, 40, 70, 0.7) 100%);
+  --theme-pill-color: #38bdf8;
+  --theme-pill-border: rgba(56, 189, 248, 0.4);
 }
 
-@media (min-width: 520px) {
-  body.theme-emerald-gold .app-canvas {
-    background: radial-gradient(circle at 50% 18%, #0f402f 0%, #072218 45%, #020b08 100%) !important;
-  }
+/* 3. MIDNIGHT CYBERPUNK NEON */
+body.theme-cyberpunk {
+  --theme-canvas-bg: radial-gradient(circle at 50% 18%, #320b5a 0%, #150426 50%, #06010c 100%);
+  --theme-frame-border: 1.5px solid rgba(236, 72, 153, 0.5);
+  --theme-frame-glow: 0 30px 75px -10px rgba(0, 0, 0, 0.9), 0 0 40px rgba(236, 72, 153, 0.2);
+  --theme-bg: #0a0314;
+  --theme-header-bg: rgba(14, 4, 26, 0.95);
+  --theme-card-bg: linear-gradient(150deg, rgba(38, 12, 68, 0.85) 0%, rgba(14, 4, 26, 0.95) 100%);
+  --theme-card-border: 1px solid rgba(236, 72, 153, 0.26);
+  --theme-card-highlight: rgba(244, 114, 182, 0.16);
+  --theme-card-low-bg: rgba(28, 8, 48, 0.88);
+  --theme-text: #fdf4ff;
+  --theme-text-muted: #b08ab8;
+  --theme-accent: #00f5d4;
+  --theme-accent-numeral: #00f5d4;
+  --theme-numeral-glow: 0 0 14px rgba(0, 245, 212, 0.55);
+  --theme-ecg-stroke: #00f5d4;
+  --theme-ecg-glow: drop-shadow(0 0 5px rgba(0, 245, 212, 0.9));
+  --theme-btn-bg: linear-gradient(135deg, #f472b6 0%, #c084fc 50%, #06b6d4 100%);
+  --theme-btn-text: #0a0212;
+  --theme-btn-border: 1px solid rgba(244, 114, 182, 0.6);
+  --theme-btn-shadow: 0 4px 18px rgba(236, 72, 153, 0.4);
+  --theme-nav-bg: rgba(12, 3, 22, 0.96);
+  --theme-nav-border: 1px solid rgba(236, 72, 153, 0.26);
+  --theme-nav-inactive: #886290;
+  --theme-nav-glow: 0 0 12px rgba(0, 245, 212, 0.65);
+  --theme-bar-gradient: linear-gradient(90deg, #00f5d4 0%, #f472b6 100%);
+  --theme-border: rgba(236, 72, 153, 0.24);
+  --theme-input-bg: rgba(16, 4, 28, 0.88);
+  --theme-input-border: 1px solid rgba(236, 72, 153, 0.3);
+  --theme-modal-bg: linear-gradient(165deg, #2a0b4c 0%, #0a0314 100%);
+  --theme-pill-bg: linear-gradient(135deg, rgba(236, 72, 153, 0.2) 0%, rgba(46, 12, 80, 0.7) 100%);
+  --theme-pill-color: #00f5d4;
+  --theme-pill-border: rgba(236, 72, 153, 0.45);
 }
 
-body.theme-emerald-gold .device-frame {
-  background: #061812 !important;
-  border: 1.5px solid rgba(212, 175, 55, 0.45) !important;
-  box-shadow: 0 30px 75px -10px rgba(0, 0, 0, 0.9), 0 0 40px rgba(212, 175, 55, 0.16), inset 0 0 0 1px rgba(245, 215, 127, 0.25) !important;
+/* 4. CRIMSON ROSE GOLD & COPPER */
+body.theme-sunset-crimson {
+  --theme-canvas-bg: radial-gradient(circle at 50% 18%, #3c0c18 0%, #1c050c 50%, #080104 100%);
+  --theme-frame-border: 1.5px solid rgba(251, 113, 133, 0.45);
+  --theme-frame-glow: 0 30px 75px -10px rgba(0, 0, 0, 0.9), 0 0 40px rgba(251, 113, 133, 0.2);
+  --theme-bg: #0f0307;
+  --theme-header-bg: rgba(18, 5, 10, 0.95);
+  --theme-card-bg: linear-gradient(150deg, rgba(50, 14, 26, 0.85) 0%, rgba(18, 5, 10, 0.95) 100%);
+  --theme-card-border: 1px solid rgba(251, 113, 133, 0.25);
+  --theme-card-highlight: rgba(253, 164, 175, 0.15);
+  --theme-card-low-bg: rgba(36, 10, 18, 0.88);
+  --theme-text: #fff1f2;
+  --theme-text-muted: #bd8e95;
+  --theme-accent: #fda4af;
+  --theme-accent-numeral: #fda4af;
+  --theme-numeral-glow: 0 0 14px rgba(251, 113, 133, 0.5);
+  --theme-ecg-stroke: #f43f5e;
+  --theme-ecg-glow: drop-shadow(0 0 5px rgba(244, 63, 94, 0.85));
+  --theme-btn-bg: linear-gradient(135deg, #fecdd3 0%, #fb7185 50%, #e11d48 100%);
+  --theme-btn-text: #180206;
+  --theme-btn-border: 1px solid rgba(254, 205, 211, 0.6);
+  --theme-btn-shadow: 0 4px 18px rgba(225, 29, 72, 0.35);
+  --theme-nav-bg: rgba(16, 4, 8, 0.96);
+  --theme-nav-border: 1px solid rgba(251, 113, 133, 0.25);
+  --theme-nav-inactive: #9a6d74;
+  --theme-nav-glow: 0 0 12px rgba(251, 113, 133, 0.6);
+  --theme-bar-gradient: linear-gradient(90deg, #f43f5e 0%, #fecdd3 100%);
+  --theme-border: rgba(251, 113, 133, 0.22);
+  --theme-input-bg: rgba(20, 6, 10, 0.88);
+  --theme-input-border: 1px solid rgba(251, 113, 133, 0.28);
+  --theme-modal-bg: linear-gradient(165deg, #350d1a 0%, #0f0307 100%);
+  --theme-pill-bg: linear-gradient(135deg, rgba(251, 113, 133, 0.2) 0%, rgba(60, 14, 28, 0.7) 100%);
+  --theme-pill-color: #fda4af;
+  --theme-pill-border: rgba(251, 113, 133, 0.4);
 }
 
-body.theme-emerald-gold .screens-viewport,
-body.theme-emerald-gold .screen-view {
-  background: #061812 !important;
+/* 5. STEALTH ONYX & TITANIUM SILVER */
+body.theme-stealth-onyx {
+  --theme-canvas-bg: radial-gradient(circle at 50% 18%, #202024 0%, #0f0f12 50%, #000000 100%);
+  --theme-frame-border: 1.5px solid rgba(255, 255, 255, 0.35);
+  --theme-frame-glow: 0 30px 75px -10px rgba(0, 0, 0, 0.95), 0 0 30px rgba(255, 255, 255, 0.08);
+  --theme-bg: #050507;
+  --theme-header-bg: rgba(10, 10, 14, 0.95);
+  --theme-card-bg: linear-gradient(150deg, rgba(28, 28, 34, 0.85) 0%, rgba(12, 12, 15, 0.95) 100%);
+  --theme-card-border: 1px solid rgba(255, 255, 255, 0.16);
+  --theme-card-highlight: rgba(255, 255, 255, 0.12);
+  --theme-card-low-bg: rgba(20, 20, 24, 0.88);
+  --theme-text: #f8fafc;
+  --theme-text-muted: #94a3b8;
+  --theme-accent: #ffffff;
+  --theme-accent-numeral: #ffffff;
+  --theme-numeral-glow: 0 0 12px rgba(255, 255, 255, 0.4);
+  --theme-ecg-stroke: #e2e8f0;
+  --theme-ecg-glow: drop-shadow(0 0 5px rgba(255, 255, 255, 0.7));
+  --theme-btn-bg: linear-gradient(135deg, #ffffff 0%, #e2e8f0 50%, #cbd5e1 100%);
+  --theme-btn-text: #09090b;
+  --theme-btn-border: 1px solid rgba(255, 255, 255, 0.7);
+  --theme-btn-shadow: 0 4px 18px rgba(255, 255, 255, 0.2);
+  --theme-nav-bg: rgba(8, 8, 10, 0.96);
+  --theme-nav-border: 1px solid rgba(255, 255, 255, 0.18);
+  --theme-nav-inactive: #64748b;
+  --theme-nav-glow: 0 0 12px rgba(255, 255, 255, 0.5);
+  --theme-bar-gradient: linear-gradient(90deg, #ffffff 0%, #94a3b8 100%);
+  --theme-border: rgba(255, 255, 255, 0.15);
+  --theme-input-bg: rgba(14, 14, 18, 0.88);
+  --theme-input-border: 1px solid rgba(255, 255, 255, 0.2);
+  --theme-modal-bg: linear-gradient(165deg, #222228 0%, #08080a 100%);
+  --theme-pill-bg: linear-gradient(135deg, rgba(255, 255, 255, 0.15) 0%, rgba(30, 30, 36, 0.7) 100%);
+  --theme-pill-color: #ffffff;
+  --theme-pill-border: rgba(255, 255, 255, 0.35);
 }
 
-body.theme-emerald-gold #screen-risk,
-body.theme-emerald-gold #screen-sos,
-body.theme-emerald-gold #screen-doctors,
-body.theme-emerald-gold #screen-find,
-body.theme-emerald-gold #screen-profile,
-body.theme-emerald-gold #screen-graphs {
-  background: #061812 !important;
+/* ========================================================================== */
+/* UNIVERSAL DARK THEME ENGINE APPLICATION                                    */
+/* ========================================================================== */
+
+body[class*="theme-"]:not(.theme-classic) {
+  background-color: #03060a !important;
+}
+
+body[class*="theme-"]:not(.theme-classic) .app-canvas {
+  background: var(--theme-canvas-bg) !important;
+}
+
+body[class*="theme-"]:not(.theme-classic) .device-frame {
+  background: var(--theme-bg) !important;
+  border: var(--theme-frame-border) !important;
+  box-shadow: var(--theme-frame-glow) !important;
+}
+
+body[class*="theme-"]:not(.theme-classic) .screens-viewport,
+body[class*="theme-"]:not(.theme-classic) .screen-view,
+body[class*="theme-"]:not(.theme-classic) #screen-risk,
+body[class*="theme-"]:not(.theme-classic) #screen-sos,
+body[class*="theme-"]:not(.theme-classic) #screen-doctors,
+body[class*="theme-"]:not(.theme-classic) #screen-find,
+body[class*="theme-"]:not(.theme-classic) #screen-profile,
+body[class*="theme-"]:not(.theme-classic) #screen-graphs {
+  background: var(--theme-bg) !important;
 }
 
 /* Universal Screen Headers */
-body.theme-emerald-gold .screen-view > header {
-  background-color: rgba(5, 22, 16, 0.94) !important;
+body[class*="theme-"]:not(.theme-classic) .screen-view > header {
+  background-color: var(--theme-header-bg) !important;
   backdrop-filter: blur(20px) !important;
   -webkit-backdrop-filter: blur(20px) !important;
-  border-bottom: 1px solid rgba(212, 175, 55, 0.22) !important;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3) !important;
+  border-bottom: 1px solid var(--theme-border) !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35) !important;
 }
 
-body.theme-emerald-gold .screen-view:not(#screen-home):not(#screen-login) > header > h1 {
-  color: #f7eed7 !important;
+body[class*="theme-"]:not(.theme-classic) .screen-view:not(#screen-home):not(#screen-login) > header > h1,
+body[class*="theme-"]:not(.theme-classic) header .text-on-surface,
+body[class*="theme-"]:not(.theme-classic) header h1,
+body[class*="theme-"]:not(.theme-classic) header span.text-title-sm {
+  color: var(--theme-text) !important;
   text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
 }
 
-body.theme-emerald-gold header .text-on-surface,
-body.theme-emerald-gold header h1,
-body.theme-emerald-gold header span.text-title-sm {
-  color: #f7eed7 !important;
+body[class*="theme-"]:not(.theme-classic) header button {
+  color: var(--theme-text-muted) !important;
+}
+body[class*="theme-"]:not(.theme-classic) header button:hover {
+  color: var(--theme-accent) !important;
 }
 
-body.theme-emerald-gold header button {
-  color: #c9ded3 !important;
-}
-body.theme-emerald-gold header button:hover {
-  color: #f5d77f !important;
-}
-
-/* Cards & Containers (Frosted Dark Emerald Glass with Gold Trim) */
-body.theme-emerald-gold .bg-surface-container-lowest,
-body.theme-emerald-gold .bg-white,
-body.theme-emerald-gold .bg-white\/95,
-body.theme-emerald-gold .bg-white\/90,
-body.theme-emerald-gold .bg-\[\#f8f9fc\],
-body.theme-emerald-gold .bg-slate-50,
-body.theme-emerald-gold section.bg-white,
-body.theme-emerald-gold .graph-card-interactive {
-  background: linear-gradient(150deg, rgba(13, 44, 33, 0.85) 0%, rgba(6, 24, 18, 0.95) 100%) !important;
-  border: 1px solid rgba(212, 175, 55, 0.22) !important;
-  color: #f5f8f6 !important;
-  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.38), inset 0 1px 0 rgba(245, 215, 127, 0.12) !important;
+/* Cards & Containers */
+body[class*="theme-"]:not(.theme-classic) .bg-surface-container-lowest,
+body[class*="theme-"]:not(.theme-classic) .bg-white,
+body[class*="theme-"]:not(.theme-classic) .bg-white\/95,
+body[class*="theme-"]:not(.theme-classic) .bg-white\/90,
+body[class*="theme-"]:not(.theme-classic) .bg-\[\#f8f9fc\],
+body[class*="theme-"]:not(.theme-classic) .bg-slate-50,
+body[class*="theme-"]:not(.theme-classic) section.bg-white,
+body[class*="theme-"]:not(.theme-classic) .graph-card-interactive {
+  background: var(--theme-card-bg) !important;
+  border: var(--theme-card-border) !important;
+  color: var(--theme-text) !important;
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.4), inset 0 1px 0 var(--theme-card-highlight) !important;
 }
 
-body.theme-emerald-gold .bg-surface-container-low,
-body.theme-emerald-gold .bg-\[\#F5F5F7\],
-body.theme-emerald-gold .bg-gray-50,
-body.theme-emerald-gold .bg-\[\#F8F9FA\] {
-  background: rgba(10, 36, 27, 0.88) !important;
-  border: 1px solid rgba(212, 175, 55, 0.18) !important;
-  color: #e5ede8 !important;
+body[class*="theme-"]:not(.theme-classic) .bg-surface-container-low,
+body[class*="theme-"]:not(.theme-classic) .bg-\[\#F5F5F7\],
+body[class*="theme-"]:not(.theme-classic) .bg-gray-50,
+body[class*="theme-"]:not(.theme-classic) .bg-\[\#F8F9FA\] {
+  background: var(--theme-card-low-bg) !important;
+  border: 1px solid var(--theme-border) !important;
+  color: var(--theme-text) !important;
 }
 
-body.theme-emerald-gold .bg-surface-container,
-body.theme-emerald-gold .bg-surface-container-high {
-  background: rgba(16, 52, 38, 0.92) !important;
-  border-color: rgba(212, 175, 55, 0.25) !important;
+body[class*="theme-"]:not(.theme-classic) .bg-surface-container,
+body[class*="theme-"]:not(.theme-classic) .bg-surface-container-high {
+  background: var(--theme-card-low-bg) !important;
+  border-color: var(--theme-border) !important;
 }
 
-/* Typography & Text Contrast */
-body.theme-emerald-gold .text-on-surface,
-body.theme-emerald-gold .text-black,
-body.theme-emerald-gold .text-slate-900,
-body.theme-emerald-gold .text-gray-900,
-body.theme-emerald-gold .text-gray-800,
-body.theme-emerald-gold h1,
-body.theme-emerald-gold h2,
-body.theme-emerald-gold h3,
-body.theme-emerald-gold h4,
-body.theme-emerald-gold h5 {
-  color: #f4f8f5 !important;
+/* Typography & Text */
+body[class*="theme-"]:not(.theme-classic) .text-on-surface,
+body[class*="theme-"]:not(.theme-classic) .text-black,
+body[class*="theme-"]:not(.theme-classic) .text-slate-900,
+body[class*="theme-"]:not(.theme-classic) .text-gray-900,
+body[class*="theme-"]:not(.theme-classic) .text-gray-800,
+body[class*="theme-"]:not(.theme-classic) h1,
+body[class*="theme-"]:not(.theme-classic) h2,
+body[class*="theme-"]:not(.theme-classic) h3,
+body[class*="theme-"]:not(.theme-classic) h4,
+body[class*="theme-"]:not(.theme-classic) h5 {
+  color: var(--theme-text) !important;
 }
 
-body.theme-emerald-gold .text-secondary,
-body.theme-emerald-gold .text-gray-400,
-body.theme-emerald-gold .text-gray-500,
-body.theme-emerald-gold .text-gray-600,
-body.theme-emerald-gold .text-slate-500,
-body.theme-emerald-gold .text-slate-600 {
-  color: #8dafa0 !important;
+body[class*="theme-"]:not(.theme-classic) .text-secondary,
+body[class*="theme-"]:not(.theme-classic) .text-gray-400,
+body[class*="theme-"]:not(.theme-classic) .text-gray-500,
+body[class*="theme-"]:not(.theme-classic) .text-gray-600,
+body[class*="theme-"]:not(.theme-classic) .text-slate-500,
+body[class*="theme-"]:not(.theme-classic) .text-slate-600 {
+  color: var(--theme-text-muted) !important;
 }
 
-body.theme-emerald-gold .text-primary {
-  color: #f5d77f !important;
+body[class*="theme-"]:not(.theme-classic) .text-primary {
+  color: var(--theme-accent) !important;
 }
 
-/* Gold Vitals, Numbers & Telemetry */
-body.theme-emerald-gold .dynamic-bpm-val,
-body.theme-emerald-gold .dynamic-spo2-val,
-body.theme-emerald-gold .dynamic-temp-val,
-body.theme-emerald-gold .dynamic-posture-score,
-body.theme-emerald-gold .dynamic-posture-angle,
-body.theme-emerald-gold .tabular-nums,
-body.theme-emerald-gold span.text-2xl.font-bold.text-on-surface {
-  color: #f5d77f !important;
-  text-shadow: 0 0 14px rgba(245, 215, 127, 0.45);
+/* Numerals & Vitals */
+body[class*="theme-"]:not(.theme-classic) .dynamic-bpm-val,
+body[class*="theme-"]:not(.theme-classic) .dynamic-spo2-val,
+body[class*="theme-"]:not(.theme-classic) .dynamic-temp-val,
+body[class*="theme-"]:not(.theme-classic) .dynamic-posture-score,
+body[class*="theme-"]:not(.theme-classic) .dynamic-posture-angle,
+body[class*="theme-"]:not(.theme-classic) .tabular-nums,
+body[class*="theme-"]:not(.theme-classic) span.text-2xl.font-bold.text-on-surface {
+  color: var(--theme-accent-numeral) !important;
+  text-shadow: var(--theme-numeral-glow) !important;
 }
 
-body.theme-emerald-gold .animated-ecg-path {
-  stroke: #f5d77f !important;
-  filter: drop-shadow(0 0 5px rgba(212, 175, 55, 0.85));
+/* ECG and Waves */
+body[class*="theme-"]:not(.theme-classic) .animated-ecg-path {
+  stroke: var(--theme-ecg-stroke) !important;
+  filter: var(--theme-ecg-glow) !important;
 }
 
-body.theme-emerald-gold svg path[stroke="#000000"],
-body.theme-emerald-gold svg path[stroke="#121c2a"] {
-  stroke: #f5d77f !important;
+body[class*="theme-"]:not(.theme-classic) svg path[stroke="#000000"],
+body[class*="theme-"]:not(.theme-classic) svg path[stroke="#121c2a"] {
+  stroke: var(--theme-accent) !important;
 }
-body.theme-emerald-gold svg path[stroke="#545f72"] {
-  stroke: #7ea392 !important;
-}
-body.theme-emerald-gold svg circle[fill="#121c2a"] {
-  fill: #f5d77f !important;
+body[class*="theme-"]:not(.theme-classic) svg circle[fill="#121c2a"] {
+  fill: var(--theme-accent) !important;
 }
 
-/* CTA Buttons (Shimmering Champagne Gold) */
-body.theme-emerald-gold .bg-primary,
-body.theme-emerald-gold .bg-black,
-body.theme-emerald-gold button.bg-primary,
-body.theme-emerald-gold button.bg-black,
-body.theme-emerald-gold .portal-pill-btn.active,
-body.theme-emerald-gold .graph-metric-pill.active {
-  background: linear-gradient(135deg, #fce8a2 0%, #d4af37 50%, #b88612 100%) !important;
-  color: #04140e !important;
+/* Primary CTAs */
+body[class*="theme-"]:not(.theme-classic) .bg-primary,
+body[class*="theme-"]:not(.theme-classic) .bg-black,
+body[class*="theme-"]:not(.theme-classic) button.bg-primary,
+body[class*="theme-"]:not(.theme-classic) button.bg-black,
+body[class*="theme-"]:not(.theme-classic) .portal-pill-btn.active,
+body[class*="theme-"]:not(.theme-classic) .graph-metric-pill.active {
+  background: var(--theme-btn-bg) !important;
+  color: var(--theme-btn-text) !important;
   font-weight: 700 !important;
-  border: 1px solid rgba(255, 238, 170, 0.6) !important;
-  box-shadow: 0 4px 18px rgba(212, 175, 55, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.45) !important;
-  text-shadow: none !important;
+  border: var(--theme-btn-border) !important;
+  box-shadow: var(--theme-btn-shadow) !important;
 }
 
-body.theme-emerald-gold .bg-primary:hover,
-body.theme-emerald-gold .bg-black:hover,
-body.theme-emerald-gold button.bg-primary:hover,
-body.theme-emerald-gold button.bg-black:hover,
-body.theme-emerald-gold .portal-pill-btn.active:hover,
-body.theme-emerald-gold .graph-metric-pill.active:hover {
-  background: linear-gradient(135deg, #fff2be 0%, #e2be49 50%, #c49419 100%) !important;
-  box-shadow: 0 6px 24px rgba(212, 175, 55, 0.5) !important;
+body[class*="theme-"]:not(.theme-classic) .bg-primary *,
+body[class*="theme-"]:not(.theme-classic) .bg-black *,
+body[class*="theme-"]:not(.theme-classic) button.bg-primary *,
+body[class*="theme-"]:not(.theme-classic) button.bg-black *,
+body[class*="theme-"]:not(.theme-classic) .portal-pill-btn.active * {
+  color: var(--theme-btn-text) !important;
 }
 
-body.theme-emerald-gold .bg-primary *,
-body.theme-emerald-gold .bg-black *,
-body.theme-emerald-gold button.bg-primary *,
-body.theme-emerald-gold button.bg-black *,
-body.theme-emerald-gold .portal-pill-btn.active * {
-  color: #04140e !important;
+/* Logo Badge */
+body[class*="theme-"]:not(.theme-classic) .w-8.h-8.rounded-full.bg-primary {
+  background: var(--theme-btn-bg) !important;
+  box-shadow: var(--theme-btn-shadow) !important;
+  border: var(--theme-btn-border) !important;
 }
-
-/* Home logo badge */
-body.theme-emerald-gold .w-8.h-8.rounded-full.bg-primary {
-  background: linear-gradient(135deg, #fce8a2 0%, #d4af37 100%) !important;
-  box-shadow: 0 0 14px rgba(212, 175, 55, 0.45) !important;
-  border: 1px solid rgba(255, 238, 170, 0.6) !important;
-}
-body.theme-emerald-gold .w-8.h-8.rounded-full.bg-primary span {
-  color: #04140e !important;
+body[class*="theme-"]:not(.theme-classic) .w-8.h-8.rounded-full.bg-primary span {
+  color: var(--theme-btn-text) !important;
   font-weight: 900 !important;
 }
 
 /* Bottom Navigation */
-body.theme-emerald-gold nav.h-16 {
-  background: rgba(4, 18, 13, 0.96) !important;
+body[class*="theme-"]:not(.theme-classic) nav.h-16 {
+  background: var(--theme-nav-bg) !important;
   backdrop-filter: blur(20px) !important;
   -webkit-backdrop-filter: blur(20px) !important;
-  border-top: 1px solid rgba(212, 175, 55, 0.24) !important;
+  border-top: var(--theme-nav-border) !important;
   box-shadow: 0 -6px 24px rgba(0, 0, 0, 0.45) !important;
 }
 
-body.theme-emerald-gold nav.h-16 button {
-  color: #6b8d7e !important;
-  transition: all 0.2s ease !important;
+body[class*="theme-"]:not(.theme-classic) nav.h-16 button {
+  color: var(--theme-nav-inactive) !important;
 }
-
-body.theme-emerald-gold nav.h-16 button:hover {
-  color: #f5d77f !important;
+body[class*="theme-"]:not(.theme-classic) nav.h-16 button:hover {
+  color: var(--theme-accent) !important;
 }
-
-body.theme-emerald-gold nav.h-16 button.text-primary,
-body.theme-emerald-gold nav.h-16 button.active,
-body.theme-emerald-gold nav.h-16 button[class*="text-primary"] {
-  color: #f5d77f !important;
-  text-shadow: 0 0 12px rgba(212, 175, 55, 0.55);
+body[class*="theme-"]:not(.theme-classic) nav.h-16 button.text-primary,
+body[class*="theme-"]:not(.theme-classic) nav.h-16 button.active,
+body[class*="theme-"]:not(.theme-classic) nav.h-16 button[class*="text-primary"] {
+  color: var(--theme-accent) !important;
+  text-shadow: var(--theme-nav-glow) !important;
 }
-
-body.theme-emerald-gold nav.h-16 button .material-symbols-outlined {
+body[class*="theme-"]:not(.theme-classic) nav.h-16 button .material-symbols-outlined {
   color: inherit !important;
 }
 
-/* Inputs, Form Controls & Placeholders */
-body.theme-emerald-gold .input-auth-field,
-body.theme-emerald-gold input[type="text"],
-body.theme-emerald-gold input[type="password"],
-body.theme-emerald-gold input[type="email"],
-body.theme-emerald-gold input[type="search"],
-body.theme-emerald-gold select {
-  background-color: rgba(5, 20, 14, 0.88) !important;
-  color: #f5f8f6 !important;
-  border: 1px solid rgba(212, 175, 55, 0.26) !important;
+/* Inputs */
+body[class*="theme-"]:not(.theme-classic) .input-auth-field,
+body[class*="theme-"]:not(.theme-classic) input[type="text"],
+body[class*="theme-"]:not(.theme-classic) input[type="password"],
+body[class*="theme-"]:not(.theme-classic) input[type="email"],
+body[class*="theme-"]:not(.theme-classic) input[type="search"],
+body[class*="theme-"]:not(.theme-classic) select {
+  background-color: var(--theme-input-bg) !important;
+  color: var(--theme-text) !important;
+  border: var(--theme-input-border) !important;
+}
+body[class*="theme-"]:not(.theme-classic) .input-auth-field:focus,
+body[class*="theme-"]:not(.theme-classic) input:focus,
+body[class*="theme-"]:not(.theme-classic) select:focus {
+  border-color: var(--theme-accent) !important;
+  box-shadow: 0 0 0 3px var(--theme-border) !important;
 }
 
-body.theme-emerald-gold .input-auth-field::placeholder,
-body.theme-emerald-gold input::placeholder {
-  color: #5d7e70 !important;
+/* Modals & Sheets */
+body[class*="theme-"]:not(.theme-classic) .p-modal-sheet,
+body[class*="theme-"]:not(.theme-classic) .profile-dropdown-menu,
+body[class*="theme-"]:not(.theme-classic) .report-sheet-container,
+body[class*="theme-"]:not(.theme-classic) .theme-modal-container {
+  background: var(--theme-modal-bg) !important;
+  border: 1px solid var(--theme-border) !important;
+  color: var(--theme-text) !important;
+  box-shadow: 0 -12px 45px rgba(0, 0, 0, 0.75) !important;
 }
 
-body.theme-emerald-gold .input-auth-field:focus,
-body.theme-emerald-gold input:focus,
-body.theme-emerald-gold select:focus {
-  background-color: rgba(7, 28, 20, 0.96) !important;
-  border-color: #d4af37 !important;
-  box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.25) !important;
+/* Posture Bar */
+body[class*="theme-"]:not(.theme-classic) .dynamic-posture-bar {
+  background: var(--theme-bar-gradient) !important;
+  box-shadow: 0 0 10px var(--theme-accent) !important;
 }
 
-/* Modals, Sheets, Dialogs & Dropdowns */
-body.theme-emerald-gold .p-modal-sheet,
-body.theme-emerald-gold .profile-dropdown-menu,
-body.theme-emerald-gold .report-sheet-container {
-  background: linear-gradient(165deg, #0d2e22 0%, #061912 100%) !important;
-  border: 1px solid rgba(212, 175, 55, 0.32) !important;
-  color: #f5f8f6 !important;
-  box-shadow: 0 -12px 45px rgba(0, 0, 0, 0.75), 0 0 35px rgba(212, 175, 55, 0.12) !important;
+/* Borders */
+body[class*="theme-"]:not(.theme-classic) .border-surface-container,
+body[class*="theme-"]:not(.theme-classic) .border-surface-container\/40,
+body[class*="theme-"]:not(.theme-classic) .border-surface-container\/50,
+body[class*="theme-"]:not(.theme-classic) .border-surface-container\/60,
+body[class*="theme-"]:not(.theme-classic) .border-black\/5,
+body[class*="theme-"]:not(.theme-classic) .border-black\/10,
+body[class*="theme-"]:not(.theme-classic) .border-slate-100 {
+  border-color: var(--theme-border) !important;
 }
 
-body.theme-emerald-gold .p-modal-overlay {
-  background: rgba(2, 10, 7, 0.72) !important;
-}
-
-/* Posture Bar, Badges & Specialty Components */
-body.theme-emerald-gold .dynamic-posture-bar {
-  background: linear-gradient(90deg, #d4af37 0%, #fcedba 100%) !important;
-  box-shadow: 0 0 10px rgba(212, 175, 55, 0.45) !important;
-}
-
-body.theme-emerald-gold .border-surface-container,
-body.theme-emerald-gold .border-surface-container\/40,
-body.theme-emerald-gold .border-surface-container\/50,
-body.theme-emerald-gold .border-surface-container\/60,
-body.theme-emerald-gold .border-black\/5,
-body.theme-emerald-gold .border-black\/10,
-body.theme-emerald-gold .border-slate-100,
-body.theme-emerald-gold .border-gray-200\/60 {
-  border-color: rgba(212, 175, 55, 0.2) !important;
-}
-
-body.theme-emerald-gold .radar-pulse-ring {
-  border-color: rgba(212, 175, 55, 0.5) !important;
-}
-body.theme-emerald-gold .pulsing-ring {
-  border-color: #d4af37 !important;
-}
-
-/* Floating badges in login screen */
-body.theme-emerald-gold .absolute.bg-white\/90 {
-  background: rgba(8, 28, 20, 0.88) !important;
-  border: 1px solid rgba(212, 175, 55, 0.3) !important;
-  color: #f5d77f !important;
+/* Floating labels in login screen */
+body[class*="theme-"]:not(.theme-classic) .absolute.bg-white\/90 {
+  background: var(--theme-card-low-bg) !important;
+  border: 1px solid var(--theme-border) !important;
+  color: var(--theme-accent) !important;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3) !important;
 }
 
-/* Executive VIP Health Card (Health Profile) */
-body.theme-emerald-gold #profile-patient-view > div:first-child {
-  background: linear-gradient(135deg, #0f392b 0%, #082219 45%, #144837 100%) !important;
-  border: 1.5px solid rgba(212, 175, 55, 0.45) !important;
-  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.5), 0 0 25px rgba(212, 175, 55, 0.15) !important;
+/* Executive VIP Health Card */
+body[class*="theme-"]:not(.theme-classic) #profile-patient-view > div:first-child {
+  background: var(--theme-card-bg) !important;
+  border: 1.5px solid var(--theme-border) !important;
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.5) !important;
 }
 
-/* Theme Switcher Button styling */
-.theme-pill-btn {
-  background: linear-gradient(135deg, rgba(212, 175, 55, 0.18) 0%, rgba(13, 56, 41, 0.7) 100%);
-  border: 1px solid rgba(212, 175, 55, 0.4);
-  color: #f5d77f;
+/* Header Pills */
+body[class*="theme-"]:not(.theme-classic) #ble-status-pill {
+  background: var(--theme-card-low-bg) !important;
+  color: var(--theme-accent) !important;
+  border: 1px solid var(--theme-border) !important;
 }
-.theme-pill-btn:hover {
-  background: linear-gradient(135deg, rgba(212, 175, 55, 0.28) 0%, rgba(18, 70, 52, 0.85) 100%);
-  border-color: rgba(212, 175, 55, 0.65);
-  box-shadow: 0 0 12px rgba(212, 175, 55, 0.35);
-}
-
-/* Header Pills in Emerald & Gold Theme */
-body.theme-emerald-gold #ble-status-pill {
-  background: rgba(10, 36, 48, 0.85) !important;
-  color: #93c5fd !important;
-  border: 1px solid rgba(147, 197, 253, 0.35) !important;
-}
-body.theme-emerald-gold #ble-status-pill:hover {
-  background: rgba(14, 48, 64, 0.95) !important;
-  border-color: rgba(147, 197, 253, 0.65) !important;
-}
-body.theme-emerald-gold #ble-status-pill span#ble-header-icon {
-  color: #60a5fa !important;
-}
-
-body.theme-emerald-gold button[aria-label="Emergency SOS"] {
+body[class*="theme-"]:not(.theme-classic) button[aria-label="Emergency SOS"] {
   background: rgba(50, 14, 18, 0.85) !important;
   color: #fca5a5 !important;
   border: 1px solid rgba(248, 113, 113, 0.35) !important;
 }
-body.theme-emerald-gold button[aria-label="Emergency SOS"]:hover {
-  background: rgba(68, 18, 24, 0.95) !important;
-  border-color: rgba(248, 113, 113, 0.65) !important;
+body[class*="theme-"]:not(.theme-classic) button[aria-label="Notifications"] {
+  color: var(--theme-text-muted) !important;
+}
+body[class*="theme-"]:not(.theme-classic) button[aria-label="Notifications"]:hover {
+  color: var(--theme-accent) !important;
 }
 
-body.theme-emerald-gold button[aria-label="Notifications"] {
-  color: #c9ded3 !important;
+/* Theme Pill */
+.theme-pill-btn {
+  background: var(--theme-pill-bg, linear-gradient(135deg, rgba(212, 175, 55, 0.18) 0%, rgba(13, 56, 41, 0.7) 100%)) !important;
+  border: 1px solid var(--theme-pill-border, rgba(212, 175, 55, 0.4)) !important;
+  color: var(--theme-pill-color, #f5d77f) !important;
 }
-body.theme-emerald-gold button[aria-label="Notifications"]:hover {
-  color: #f5d77f !important;
+.theme-pill-btn:hover {
+  opacity: 0.9;
+  transform: scale(1.02);
+}
+
+/* Theme Selector Modal Items */
+.theme-card-option {
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: pointer;
+}
+.theme-card-option:hover {
+  transform: translateY(-2px);
+}
+.theme-card-option.active {
+  outline: 2px solid var(--theme-accent, #d4af37);
+  outline-offset: 2px;
 }
 

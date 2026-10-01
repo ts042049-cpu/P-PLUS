@@ -41,7 +41,7 @@
             </div>
 
             <!-- Theme Toggle Pill in Top Right Corner -->
-            <button id="login-theme-toggle-btn" type="button" aria-label="Toggle Theme" class="theme-pill-btn absolute top-3 right-4 z-30 flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-bold transition-all active:scale-95 cursor-pointer shadow-xs" onclick="toggleAppTheme()" title="Switch Theme (Emerald & Gold / Classic)">
+            <button id="login-theme-toggle-btn" type="button" aria-label="Choose Theme" class="theme-pill-btn absolute top-3 right-4 z-30 flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-bold transition-all active:scale-95 cursor-pointer shadow-xs" onclick="openThemeSelectorModal()" title="Choose Theme & Color Modes">
               <span class="material-symbols-outlined text-[14px] text-amber-400">palette</span>
               <span class="theme-pill-label text-[10px]">GOLD</span>
             </button>
@@ -217,7 +217,7 @@
                 <span id="ble-header-label" class="font-label-telemetry text-[10px] tracking-tight">ESP32</span>
               </button>
               <!-- Top Navbar Theme Switcher Pill -->
-              <button id="home-theme-toggle-btn" type="button" onclick="toggleAppTheme()" class="theme-pill-btn flex items-center gap-1 px-2 py-1 rounded-full text-xs font-bold transition-all active:scale-95 cursor-pointer shadow-xs" title="Toggle Theme (Emerald & Gold / Classic)">
+              <button id="home-theme-toggle-btn" type="button" onclick="openThemeSelectorModal()" class="theme-pill-btn flex items-center gap-1 px-2 py-1 rounded-full text-xs font-bold transition-all active:scale-95 cursor-pointer shadow-xs" title="Choose Theme & Color Modes">
                 <span class="material-symbols-outlined text-[14px] text-amber-400">palette</span>
                 <span class="theme-pill-label font-label-telemetry text-[10px] tracking-tight">GOLD</span>
               </button>
@@ -3251,6 +3251,141 @@ void loop() {
           <div class="px-4 py-2.5 border-t border-gray-100 flex items-center justify-end bg-gray-50">
             <button type="button" onclick="closeEsp32BleModal()" class="w-full py-2.5 rounded-full bg-black text-white font-semibold text-xs active:scale-98 transition-all cursor-pointer">
               Done &amp; Return to App
+            </button>
+          </div>
+
+      <!-- Theme Selection Modal Sheet -->
+      <div id="theme-selector-modal" class="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 flex items-end sm:items-center justify-center p-0 sm:p-4 transition-opacity duration-200 opacity-0 pointer-events-none">
+        <div class="theme-modal-container bg-white dark:bg-[#0c1a14] rounded-t-3xl sm:rounded-3xl w-full max-w-[420px] max-h-[90vh] flex flex-col shadow-2xl overflow-hidden border border-black/10 animate-sheetSpringUp">
+          
+          <!-- Modal Header -->
+          <div class="px-5 py-3.5 border-b border-black/5 dark:border-white/10 flex items-center justify-between">
+            <div class="flex items-center gap-2.5">
+              <div class="w-8 h-8 rounded-full bg-amber-500/15 text-amber-500 flex items-center justify-center shrink-0">
+                <span class="material-symbols-outlined text-[20px]">palette</span>
+              </div>
+              <div>
+                <h3 class="font-bold text-sm text-gray-900 dark:text-white leading-tight">Theme &amp; Color Modes</h3>
+                <p class="text-[11px] text-gray-500 dark:text-gray-400">Choose your personalized companion style</p>
+              </div>
+            </div>
+            <button type="button" class="w-7 h-7 rounded-full bg-black/5 dark:bg-white/10 hover:bg-black/10 flex items-center justify-center text-gray-500 dark:text-gray-300 hover:text-black cursor-pointer transition-colors" onclick="closeThemeSelectorModal()" aria-label="Close Theme Selector">
+              <span class="material-symbols-outlined text-[16px]">close</span>
+            </button>
+          </div>
+
+          <!-- Themes List -->
+          <div class="p-4 space-y-2.5 overflow-y-auto max-h-[60vh]" id="themes-list-container">
+            
+            <!-- Option 1: Royal Emerald & Champagne Gold -->
+            <div class="theme-card-option flex items-center justify-between p-3 rounded-2xl border border-black/10 dark:border-white/10 bg-black/[0.02] dark:bg-white/[0.04] cursor-pointer" onclick="selectAppTheme('theme-emerald-gold')">
+              <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-xl flex items-center justify-center shadow-sm relative overflow-hidden" style="background: linear-gradient(135deg, #061812 0%, #0d3829 100%); border: 1.5px solid #d4af37;">
+                  <span class="w-4 h-4 rounded-full" style="background: #f5d77f; box-shadow: 0 0 8px #f5d77f;"></span>
+                </div>
+                <div>
+                  <div class="flex items-center gap-1.5">
+                    <span class="font-bold text-xs text-gray-900 dark:text-white">Royal Emerald &amp; Gold</span>
+                    <span class="text-[9px] px-1.5 py-0.2 rounded-full font-bold uppercase" style="background: rgba(212, 175, 55, 0.2); color: #d4af37;">ROYAL</span>
+                  </div>
+                  <p class="text-[11px] text-gray-500 dark:text-gray-400">Deep imperial forest green with 18k champagne gold</p>
+                </div>
+              </div>
+              <span class="theme-check-icon material-symbols-outlined text-[20px] text-amber-500" data-theme-id="theme-emerald-gold">radio_button_unchecked</span>
+            </div>
+
+            <!-- Option 2: Oceanic Sapphire & Ice Blue -->
+            <div class="theme-card-option flex items-center justify-between p-3 rounded-2xl border border-black/10 dark:border-white/10 bg-black/[0.02] dark:bg-white/[0.04] cursor-pointer" onclick="selectAppTheme('theme-oceanic-blue')">
+              <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-xl flex items-center justify-center shadow-sm relative overflow-hidden" style="background: linear-gradient(135deg, #030f1c 0%, #08294a 100%); border: 1.5px solid #38bdf8;">
+                  <span class="w-4 h-4 rounded-full" style="background: #38bdf8; box-shadow: 0 0 8px #38bdf8;"></span>
+                </div>
+                <div>
+                  <div class="flex items-center gap-1.5">
+                    <span class="font-bold text-xs text-gray-900 dark:text-white">Oceanic Sapphire &amp; Ice Blue</span>
+                    <span class="text-[9px] px-1.5 py-0.2 rounded-full font-bold uppercase" style="background: rgba(56, 189, 248, 0.2); color: #38bdf8;">COOL</span>
+                  </div>
+                  <p class="text-[11px] text-gray-500 dark:text-gray-400">Deep abyssal navy with electric cyan &amp; ice telemetry</p>
+                </div>
+              </div>
+              <span class="theme-check-icon material-symbols-outlined text-[20px] text-sky-400" data-theme-id="theme-oceanic-blue">radio_button_unchecked</span>
+            </div>
+
+            <!-- Option 3: Midnight Cyberpunk Neon -->
+            <div class="theme-card-option flex items-center justify-between p-3 rounded-2xl border border-black/10 dark:border-white/10 bg-black/[0.02] dark:bg-white/[0.04] cursor-pointer" onclick="selectAppTheme('theme-cyberpunk')">
+              <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-xl flex items-center justify-center shadow-sm relative overflow-hidden" style="background: linear-gradient(135deg, #0a0314 0%, #320b5a 100%); border: 1.5px solid #ec4899;">
+                  <span class="w-4 h-4 rounded-full" style="background: #00f5d4; box-shadow: 0 0 8px #00f5d4;"></span>
+                </div>
+                <div>
+                  <div class="flex items-center gap-1.5">
+                    <span class="font-bold text-xs text-gray-900 dark:text-white">Midnight Cyberpunk Neon</span>
+                    <span class="text-[9px] px-1.5 py-0.2 rounded-full font-bold uppercase" style="background: rgba(236, 72, 153, 0.2); color: #ec4899;">NEON</span>
+                  </div>
+                  <p class="text-[11px] text-gray-500 dark:text-gray-400">Obsidian violet with electric cyan &amp; magenta pulse</p>
+                </div>
+              </div>
+              <span class="theme-check-icon material-symbols-outlined text-[20px] text-pink-500" data-theme-id="theme-cyberpunk">radio_button_unchecked</span>
+            </div>
+
+            <!-- Option 4: Crimson Rose Gold & Copper -->
+            <div class="theme-card-option flex items-center justify-between p-3 rounded-2xl border border-black/10 dark:border-white/10 bg-black/[0.02] dark:bg-white/[0.04] cursor-pointer" onclick="selectAppTheme('theme-sunset-crimson')">
+              <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-xl flex items-center justify-center shadow-sm relative overflow-hidden" style="background: linear-gradient(135deg, #0f0307 0%, #3c0c18 100%); border: 1.5px solid #fb7185;">
+                  <span class="w-4 h-4 rounded-full" style="background: #fda4af; box-shadow: 0 0 8px #fda4af;"></span>
+                </div>
+                <div>
+                  <div class="flex items-center gap-1.5">
+                    <span class="font-bold text-xs text-gray-900 dark:text-white">Crimson Rose Gold</span>
+                    <span class="text-[9px] px-1.5 py-0.2 rounded-full font-bold uppercase" style="background: rgba(251, 113, 133, 0.2); color: #fb7185;">WARM</span>
+                  </div>
+                  <p class="text-[11px] text-gray-500 dark:text-gray-400">Midnight velvet with glowing rose gold &amp; sunset copper</p>
+                </div>
+              </div>
+              <span class="theme-check-icon material-symbols-outlined text-[20px] text-rose-400" data-theme-id="theme-sunset-crimson">radio_button_unchecked</span>
+            </div>
+
+            <!-- Option 5: Stealth Onyx & Silver -->
+            <div class="theme-card-option flex items-center justify-between p-3 rounded-2xl border border-black/10 dark:border-white/10 bg-black/[0.02] dark:bg-white/[0.04] cursor-pointer" onclick="selectAppTheme('theme-stealth-onyx')">
+              <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-xl flex items-center justify-center shadow-sm relative overflow-hidden" style="background: linear-gradient(135deg, #050507 0%, #202024 100%); border: 1.5px solid #ffffff;">
+                  <span class="w-4 h-4 rounded-full" style="background: #ffffff; box-shadow: 0 0 8px #ffffff;"></span>
+                </div>
+                <div>
+                  <div class="flex items-center gap-1.5">
+                    <span class="font-bold text-xs text-gray-900 dark:text-white">Stealth Onyx &amp; Silver</span>
+                    <span class="text-[9px] px-1.5 py-0.2 rounded-full font-bold uppercase" style="background: rgba(255, 255, 255, 0.15); color: #ffffff;">OLED</span>
+                  </div>
+                  <p class="text-[11px] text-gray-500 dark:text-gray-400">Pure blackout minimalism with titanium silver precision</p>
+                </div>
+              </div>
+              <span class="theme-check-icon material-symbols-outlined text-[20px] text-gray-300" data-theme-id="theme-stealth-onyx">radio_button_unchecked</span>
+            </div>
+
+            <!-- Option 6: Clinical Medical Slate (Classic) -->
+            <div class="theme-card-option flex items-center justify-between p-3 rounded-2xl border border-black/10 dark:border-white/10 bg-black/[0.02] dark:bg-white/[0.04] cursor-pointer" onclick="selectAppTheme('theme-classic')">
+              <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-xl flex items-center justify-center shadow-sm relative overflow-hidden" style="background: linear-gradient(135deg, #f8f9ff 0%, #e2e8f0 100%); border: 1.5px solid #64748b;">
+                  <span class="w-4 h-4 rounded-full" style="background: #0f172a; box-shadow: 0 0 6px rgba(0,0,0,0.3);"></span>
+                </div>
+                <div>
+                  <div class="flex items-center gap-1.5">
+                    <span class="font-bold text-xs text-gray-900 dark:text-white">Clinical Medical Slate</span>
+                    <span class="text-[9px] px-1.5 py-0.2 rounded-full font-bold uppercase bg-gray-200 text-gray-800">LIGHT</span>
+                  </div>
+                  <p class="text-[11px] text-gray-500 dark:text-gray-400">Clean, high-clarity daylight clinical interface</p>
+                </div>
+              </div>
+              <span class="theme-check-icon material-symbols-outlined text-[20px] text-gray-400" data-theme-id="theme-classic">radio_button_unchecked</span>
+            </div>
+
+          </div>
+
+          <!-- Modal Footer -->
+          <div class="p-3 border-t border-black/5 dark:border-white/10 flex items-center justify-between bg-black/[0.02]">
+            <span class="text-[10px] text-gray-400 font-medium">Click any theme to apply live</span>
+            <button type="button" onclick="closeThemeSelectorModal()" class="px-4 py-1.5 rounded-full bg-black dark:bg-white text-white dark:text-black font-semibold text-xs active:scale-95 transition-all cursor-pointer">
+              Done
             </button>
           </div>
 

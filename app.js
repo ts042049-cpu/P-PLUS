@@ -2809,43 +2809,145 @@
   window.bleState = bleState;
 
   // ==========================================
-  // ROYAL EMERALD & GOLD THEME CONTROLLER
+  // COMPREHENSIVE MULTI-THEME CONTROLLER
   // ==========================================
+  const THEMES_METADATA = {
+    'theme-emerald-gold': {
+      name: 'Royal Emerald & Gold',
+      shortName: 'GOLD',
+      toast: 'Royal Emerald & Champagne Gold Theme ✨',
+      icon: 'workspace_premium'
+    },
+    'theme-oceanic-blue': {
+      name: 'Oceanic Sapphire & Ice Blue',
+      shortName: 'SAPPHIRE',
+      toast: 'Oceanic Sapphire & Ice Blue Activated 🌊',
+      icon: 'water_drop'
+    },
+    'theme-cyberpunk': {
+      name: 'Midnight Cyberpunk Neon',
+      shortName: 'NEON',
+      toast: 'Midnight Cyberpunk Neon Activated ⚡',
+      icon: 'electric_bolt'
+    },
+    'theme-sunset-crimson': {
+      name: 'Crimson Rose Gold',
+      shortName: 'ROSE',
+      toast: 'Crimson Rose Gold & Copper Activated 🔥',
+      icon: 'local_fire_department'
+    },
+    'theme-stealth-onyx': {
+      name: 'Stealth Onyx & Silver',
+      shortName: 'ONYX',
+      toast: 'Stealth Onyx OLED Blackout Activated 🖤',
+      icon: 'dark_mode'
+    },
+    'theme-classic': {
+      name: 'Clinical Medical Slate',
+      shortName: 'SLATE',
+      toast: 'Clinical Medical Slate Activated 🩺',
+      icon: 'medical_services'
+    }
+  };
+
+  const ALL_THEME_CLASSES = [
+    'theme-emerald-gold',
+    'theme-oceanic-blue',
+    'theme-cyberpunk',
+    'theme-sunset-crimson',
+    'theme-stealth-onyx',
+    'theme-classic'
+  ];
+
   function initTheme() {
     try {
       const savedTheme = localStorage.getItem('pplus_theme') || 'theme-emerald-gold';
-      applyTheme(savedTheme, false);
+      selectAppTheme(savedTheme, false);
     } catch (_) {
-      applyTheme('theme-emerald-gold', false);
+      selectAppTheme('theme-emerald-gold', false);
     }
   }
 
-  function applyTheme(themeName, showToastNotification = true) {
-    const isGold = themeName === 'theme-emerald-gold';
-    if (isGold) {
-      document.body.classList.add('theme-emerald-gold');
-      try { localStorage.setItem('pplus_theme', 'theme-emerald-gold'); } catch (_) {}
-      document.querySelectorAll('.theme-pill-label').forEach(el => el.textContent = 'GOLD');
-      if (showToastNotification) {
-        showToast('Royal Emerald & Champagne Gold Theme ✨', 'palette');
-      }
-    } else {
-      document.body.classList.remove('theme-emerald-gold');
-      try { localStorage.setItem('pplus_theme', 'theme-classic'); } catch (_) {}
-      document.querySelectorAll('.theme-pill-label').forEach(el => el.textContent = 'CLASSIC');
-      if (showToastNotification) {
-        showToast('Classic Medical Slate Theme Activated', 'palette');
-      }
+  function selectAppTheme(themeId, showToastNotification = true) {
+    if (!THEMES_METADATA[themeId]) {
+      themeId = 'theme-emerald-gold';
     }
+
+    // Remove all theme classes first
+    ALL_THEME_CLASSES.forEach(cls => document.body.classList.remove(cls));
+
+    // Add selected theme class if not classic
+    if (themeId !== 'theme-classic') {
+      document.body.classList.add(themeId);
+    }
+
+    try {
+      localStorage.setItem('pplus_theme', themeId);
+    } catch (_) {}
+
+    const meta = THEMES_METADATA[themeId];
+
+    // Update all pill labels
+    document.querySelectorAll('.theme-pill-label').forEach(el => {
+      el.textContent = meta.shortName;
+    });
+
+    // Update active state in theme modal
+    updateThemeModalActiveCard(themeId);
+
+    if (showToastNotification) {
+      showToast(meta.toast, 'palette');
+    }
+  }
+
+  function updateThemeModalActiveCard(activeThemeId) {
+    // Update radio/check icons
+    document.querySelectorAll('.theme-check-icon').forEach(icon => {
+      const tId = icon.getAttribute('data-theme-id');
+      if (tId === activeThemeId) {
+        icon.textContent = 'check_circle';
+        icon.classList.add('scale-110');
+      } else {
+        icon.textContent = 'radio_button_unchecked';
+        icon.classList.remove('scale-110');
+      }
+    });
+
+    // Update card borders/highlight
+    document.querySelectorAll('.theme-card-option').forEach(card => {
+      const icon = card.querySelector('.theme-check-icon');
+      if (icon && icon.getAttribute('data-theme-id') === activeThemeId) {
+        card.classList.add('active');
+      } else {
+        card.classList.remove('active');
+      }
+    });
+  }
+
+  function openThemeSelectorModal() {
+    const modal = document.getElementById('theme-selector-modal');
+    if (!modal) return;
+    const currentTheme = localStorage.getItem('pplus_theme') || 'theme-emerald-gold';
+    updateThemeModalActiveCard(currentTheme);
+    modal.classList.remove('opacity-0', 'pointer-events-none');
+    modal.classList.add('opacity-100', 'pointer-events-auto');
+  }
+
+  function closeThemeSelectorModal() {
+    const modal = document.getElementById('theme-selector-modal');
+    if (!modal) return;
+    modal.classList.remove('opacity-100', 'pointer-events-auto');
+    modal.classList.add('opacity-0', 'pointer-events-none');
   }
 
   function toggleAppTheme() {
-    const isEmeraldGold = document.body.classList.contains('theme-emerald-gold');
-    applyTheme(isEmeraldGold ? 'theme-classic' : 'theme-emerald-gold', true);
+    openThemeSelectorModal();
   }
 
   window.toggleAppTheme = toggleAppTheme;
-  window.applyTheme = applyTheme;
+  window.selectAppTheme = selectAppTheme;
+  window.openThemeSelectorModal = openThemeSelectorModal;
+  window.closeThemeSelectorModal = closeThemeSelectorModal;
   window.initTheme = initTheme;
 })();
 
