@@ -2,8 +2,8 @@
   "app": "P+ Pro — Personal Health Companion",
   "version": "2.0.0",
   "format": "PPLUS_PRO_BACKFILE_V2",
-  "savedAt": "2026-09-30T16:25:33.809Z",
-  "label": "Exported: pplus_pro_backfile_2026-09-30_215533.json",
+  "savedAt": "2026-10-01T17:04:45.063Z",
+  "label": "Auto-Sync Save",
   "stats": {
     "usersCount": 2,
     "appointmentsCount": 2,
@@ -16,7 +16,7 @@
         "id": "P-8821",
         "role": "patient",
         "name": "Alex Turner",
-        "email": "alex@example.com",
+        "email": "alex.turner@clinical.org",
         "phone": "+1 (555) 234-8890",
         "bloodGroup": "O+",
         "age": 28,
@@ -28,7 +28,7 @@
         "allergies": "Penicillin, Dust",
         "conditions": "Mild Hypertension",
         "avatar": "https://lh3.googleusercontent.com/aida-public/AB6AXuC7oLNhZft-_5NFE_r1jeWbiYhe5D9ugz7wfXM_HqTUzvz4H9IwmLxhE94qekm-wUFfC9UOsjKGm3G3-HnS29iK_1RsLqnSDTP7diXu1tcinjvlSyuIhzPd7eRoDLVjP58-VfabynwpbfyB1EkpTwDHzOBji70n_CDiW9b1RTWsc1XuygDGX2w3n31EUdG5yBq7M6YCy3aPgQGtJqPy2aJDBbswLqVB9QmuzeBBBXa7jrur4hltT8SOOw",
-        "updatedAt": "2026-09-30T16:20:00.918Z"
+        "updatedAt": "2026-10-01T17:04:17.716Z"
       },
       {
         "id": "DOC-CARD-492",
@@ -54,7 +54,7 @@
       "holdTime": 10,
       "vibrate": true,
       "mode": "Desk & Mobile",
-      "updatedAt": "2026-09-23T14:00:00.000Z"
+      "updatedAt": "2026-10-01T17:04:45.061Z"
     },
     "appointments": [
       {
