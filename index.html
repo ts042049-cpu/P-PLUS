@@ -32,7 +32,7 @@
         <!-- ========================================== -->
         <section id="screen-login" class="screen-view active">
           <div class="screen-scroll-area">
-            <div class="min-h-full w-full flex flex-col justify-between px-5 pt-3 pb-4 max-w-[400px] mx-auto relative select-none">
+            <div class="h-full w-full flex flex-col justify-between px-3 py-1.5 max-w-[390px] mx-auto relative select-none">
 
             <!-- Subtle Editorial Ambient Side Marks -->
             <div class="hidden">
@@ -41,33 +41,33 @@
             </div>
 
             <!-- Theme Toggle Pill in Top Right Corner -->
-            <button id="login-theme-toggle-btn" type="button" aria-label="Choose Theme" class="theme-pill-btn absolute top-3 right-4 z-30 flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-bold transition-all active:scale-95 cursor-pointer shadow-xs" onclick="openThemeSelectorModal()" title="Choose Theme & Color Modes">
+            <button id="login-theme-toggle-btn" type="button" aria-label="Choose Theme" class="theme-pill-btn absolute top-2 right-2 z-30 flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-bold transition-all active:scale-95 cursor-pointer shadow-xs" onclick="openThemeSelectorModal()" title="Choose Theme & Color Modes">
               <span class="material-symbols-outlined text-[14px] text-amber-400">palette</span>
               <span class="theme-pill-label text-[10px]">GOLD</span>
             </button>
 
-            <!-- 1. TOP BRANDING -->
-            <header class="w-full flex flex-col items-center text-center mt-4 mb-2 shrink-0 z-10">
-              <img alt="P+ Personal Health Companion" class="w-32 h-32 object-contain" src="assets/images/pplus-logo.svg">
+            <!-- 1. TOP BRANDING (Compact Modern App Icon) -->
+            <header class="w-full flex flex-col items-center text-center mt-1 mb-1 shrink-0 z-10">
+              <img alt="P+ Personal Health Companion" class="w-14 h-14 object-contain drop-shadow-sm transition-transform active:scale-95" src="assets/images/pplus-logo.svg">
             </header>
 
             <!-- 2. PREMIUM TRANSLUCENT LOGIN CARD -->
-            <div class="w-full bg-white/95 backdrop-blur-xl rounded-[26px] px-5 py-4 shadow-[0_10px_32px_rgba(0,0,0,0.04)] border border-black/[0.05] flex flex-col shrink-0 z-10">
+            <div class="w-full bg-white/95 backdrop-blur-xl rounded-[22px] px-4 py-3 shadow-[0_8px_24px_rgba(0,0,0,0.04)] border border-black/[0.05] flex flex-col shrink-0 z-10">
               
               <!-- Card Header -->
-              <div class="mb-3 text-left">
-                <h2 id="login-heading" class="font-bold text-lg text-black tracking-tight">Welcome Back</h2>
-                <p id="login-subheading" class="text-xs text-gray-400 mt-0.5">Sign in to continue your health journey</p>
+              <div class="mb-2 text-left">
+                <h2 id="login-heading" class="font-bold text-base text-black tracking-tight">Welcome Back</h2>
+                <p id="login-subheading" class="text-[11px] text-gray-400 mt-0.5">Sign in to continue your health journey</p>
               </div>
 
               <!-- Interactive Login Form -->
-              <form id="login-form" class="flex flex-col space-y-2.5" onsubmit="handleLoginSubmit(event)" novalidate>
+              <form id="login-form" class="flex flex-col space-y-2" onsubmit="handleLoginSubmit(event)" novalidate>
                 
                 <!-- First & Last Name Field -->
-                <div class="flex flex-col space-y-1">
+                <div class="flex flex-col space-y-0.5">
                   <div class="relative flex items-center">
-                    <span class="material-symbols-outlined absolute left-3.5 text-gray-400 text-[18px] pointer-events-none">badge</span>
-                    <input class="input-auth-field w-full bg-[#F5F5F7] text-black placeholder:text-gray-400 rounded-2xl pl-10 pr-3.5 py-2.5 text-xs font-medium outline-none border border-black/[0.04] focus:border-black/30 focus:bg-white focus:ring-2 focus:ring-black/5 transition-all"
+                    <span class="material-symbols-outlined absolute left-3 text-gray-400 text-[17px] pointer-events-none">badge</span>
+                    <input class="input-auth-field w-full bg-[#F5F5F7] text-black placeholder:text-gray-400 rounded-xl pl-9 pr-3 py-2 text-xs font-medium outline-none border border-black/[0.04] focus:border-black/30 focus:bg-white focus:ring-2 focus:ring-black/5 transition-all"
                           id="login-name"
                           placeholder="First & Last Name"
                           type="text"
@@ -77,10 +77,10 @@
                 </div>
 
                 <!-- Email or Phone Field -->
-                <div class="flex flex-col space-y-1">
+                <div class="flex flex-col space-y-0.5">
                   <div class="relative flex items-center">
-                    <span class="material-symbols-outlined absolute left-3.5 text-gray-400 text-[18px] pointer-events-none">person</span>
-                    <input class="input-auth-field w-full bg-[#F5F5F7] text-black placeholder:text-gray-400 rounded-2xl pl-10 pr-3.5 py-2.5 text-xs font-medium outline-none border border-black/[0.04] focus:border-black/30 focus:bg-white focus:ring-2 focus:ring-black/5 transition-all"
+                    <span class="material-symbols-outlined absolute left-3 text-gray-400 text-[17px] pointer-events-none">person</span>
+                    <input class="input-auth-field w-full bg-[#F5F5F7] text-black placeholder:text-gray-400 rounded-xl pl-9 pr-3 py-2 text-xs font-medium outline-none border border-black/[0.04] focus:border-black/30 focus:bg-white focus:ring-2 focus:ring-black/5 transition-all"
                            id="login-email"
                            placeholder="Email or Phone"
                            type="text"
@@ -90,24 +90,24 @@
                 </div>
 
                 <!-- Password Field -->
-                <div class="flex flex-col space-y-1">
+                <div class="flex flex-col space-y-0.5">
                   <div class="relative flex items-center">
-                    <span class="material-symbols-outlined absolute left-3.5 text-gray-400 text-[18px] pointer-events-none">lock</span>
-                    <input class="input-auth-field w-full bg-[#F5F5F7] text-black placeholder:text-gray-400 rounded-2xl pl-10 pr-10 py-2.5 text-xs font-medium outline-none border border-black/[0.04] focus:border-black/30 focus:bg-white focus:ring-2 focus:ring-black/5 transition-all"
+                    <span class="material-symbols-outlined absolute left-3 text-gray-400 text-[17px] pointer-events-none">lock</span>
+                    <input class="input-auth-field w-full bg-[#F5F5F7] text-black placeholder:text-gray-400 rounded-xl pl-9 pr-9 py-2 text-xs font-medium outline-none border border-black/[0.04] focus:border-black/30 focus:bg-white focus:ring-2 focus:ring-black/5 transition-all"
                            id="login-password"
                            placeholder="Password"
                            type="password"
                            autocomplete="current-password">
-                    <button type="button" id="toggle-login-pwd" class="absolute right-3 p-1 text-gray-400 hover:text-black transition-colors cursor-pointer" onclick="togglePasswordVisibility()" aria-label="Toggle password visibility">
-                      <span class="material-symbols-outlined text-[18px]" id="eye-icon-login">visibility</span>
+                    <button type="button" id="toggle-login-pwd" class="absolute right-2.5 p-1 text-gray-400 hover:text-black transition-colors cursor-pointer" onclick="togglePasswordVisibility()" aria-label="Toggle password visibility">
+                      <span class="material-symbols-outlined text-[17px]" id="eye-icon-login">visibility</span>
                     </button>
                   </div>
                   <p id="login-password-error" class="text-red-500 text-[10px] font-medium px-1 hidden"></p>
                 </div>
 
                 <!-- Remember Me + Forgot Password -->
-                <div class="flex items-center justify-between text-xs px-0.5">
-                  <label class="flex items-center gap-2 cursor-pointer select-none">
+                <div class="flex items-center justify-between text-[11px] px-0.5 pt-0.5">
+                  <label class="flex items-center gap-1.5 cursor-pointer select-none">
                     <input type="checkbox" id="login-remember-me" class="rounded border-gray-300 text-black focus:ring-black w-3.5 h-3.5 cursor-pointer accent-black" checked>
                     <span class="text-gray-500 font-medium text-[11px]">Remember me</span>
                   </label>
@@ -117,8 +117,8 @@
                 </div>
 
                 <!-- Sign In Large Black Pill Button -->
-                <div class="pt-0.5">
-                  <button id="btn-login-submit" class="w-full bg-black text-white font-bold text-xs py-3 px-6 rounded-full shadow-[0_4px_14px_rgba(0,0,0,0.18)] hover:bg-neutral-900 active:scale-[0.99] transition-all flex items-center justify-center gap-2 cursor-pointer tracking-wide" type="submit">
+                <div class="pt-1">
+                  <button id="btn-login-submit" class="w-full bg-black text-white font-bold text-xs py-2.5 px-6 rounded-full shadow-[0_4px_14px_rgba(0,0,0,0.18)] hover:bg-neutral-900 active:scale-[0.99] transition-all flex items-center justify-center gap-2 cursor-pointer tracking-wide" type="submit">
                     <span id="btn-login-spinner" class="auth-spinner hidden"></span>
                     <span id="btn-login-text">Sign In</span>
                     <span id="btn-login-icon" class="text-sm font-bold leading-none">→</span>
@@ -127,27 +127,27 @@
               </form>
 
               <!-- Social / Biometric Divider -->
-              <div class="flex items-center my-2.5">
+              <div class="flex items-center my-2">
                 <div class="flex-grow h-px bg-gray-200/80"></div>
-                <span class="px-3 text-[10px] text-gray-400 lowercase tracking-wider font-medium">or continue with</span>
+                <span class="px-2.5 text-[10px] text-gray-400 lowercase tracking-wider font-medium">or continue with</span>
                 <div class="flex-grow h-px bg-gray-200/80"></div>
               </div>
 
               <!-- Social Buttons: Google & Apple Logos -->
-              <div class="flex items-center justify-center gap-4 my-1">
+              <div class="flex items-center justify-center gap-3 my-0.5">
                 <!-- Google Logo Button -->
-                <button aria-label="Continue with Google" class="w-12 h-12 rounded-full bg-[#F5F5F7] hover:bg-[#EAEAEA] active:scale-95 border border-black/[0.06] flex items-center justify-center transition-all cursor-pointer shadow-xs" type="button" onclick="simulateSocialLogin('Google')" title="Google">
-                  <svg class="w-5 h-5" viewBox="0 0 24 24"><path d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.8-2.4 3.66v3.05h3.88c2.27-2.09 3.66-5.17 3.66-9.15z" fill="#4285F4"></path><path d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.05c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.1-6.72-4.94H1.24v3.15C3.26 21.36 7.34 24 12 24z" fill="#34A853"></path><path d="M5.28 14.26c-.25-.72-.38-1.49-.38-2.26s.13-1.54.38-2.26V6.59H1.24C.45 8.16 0 9.92 0 12c0 2.08.45 3.84 1.24 5.41l4.04-3.15z" fill="#FBBC05"></path><path d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.34 0 3.26 2.64 1.24 6.59l4.04 3.15c.95-2.84 3.6-4.99 6.72-4.99z" fill="#EA4335"></path></svg>
+                <button aria-label="Continue with Google" class="w-10 h-10 rounded-full bg-[#F5F5F7] hover:bg-[#EAEAEA] active:scale-95 border border-black/[0.06] flex items-center justify-center transition-all cursor-pointer shadow-xs" type="button" onclick="simulateSocialLogin('Google')" title="Google">
+                  <svg class="w-4.5 h-4.5" viewBox="0 0 24 24"><path d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.8-2.4 3.66v3.05h3.88c2.27-2.09 3.66-5.17 3.66-9.15z" fill="#4285F4"></path><path d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.05c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.1-6.72-4.94H1.24v3.15C3.26 21.36 7.34 24 12 24z" fill="#34A853"></path><path d="M5.28 14.26c-.25-.72-.38-1.49-.38-2.26s.13-1.54.38-2.26V6.59H1.24C.45 8.16 0 9.92 0 12c0 2.08.45 3.84 1.24 5.41l4.04-3.15z" fill="#FBBC05"></path><path d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.34 0 3.26 2.64 1.24 6.59l4.04 3.15c.95-2.84 3.6-4.99 6.72-4.99z" fill="#EA4335"></path></svg>
                 </button>
                 <!-- Apple Logo Button -->
-                <button aria-label="Continue with Apple ID" class="w-12 h-12 rounded-full bg-[#F5F5F7] hover:bg-[#EAEAEA] active:scale-95 border border-black/[0.06] flex items-center justify-center transition-all cursor-pointer text-black shadow-xs" type="button" onclick="simulateSocialLogin('Apple')" title="Apple ID">
-                  <svg class="w-5 h-5 fill-current" viewBox="0 0 170 170"><path d="M150.37 130.25c-2.45 5.66-5.35 10.87-8.71 15.66-4.58 6.53-8.33 11.05-11.22 13.56-4.48 4.12-9.28 6.23-14.42 6.35-3.69 0-8.14-1.05-13.32-3.18-5.19-2.12-9.97-3.17-14.34-3.17-4.58 0-9.49 1.05-14.75 3.17-5.26 2.13-9.5 3.24-12.74 3.35-4.35.13-9.16-1.9-14.42-6.08-3.7-3.04-7.58-7.71-11.65-14-4.9-7.5-8.9-16.14-12-25.92-3.1-9.78-4.65-19.14-4.65-28.09 0-13.04 3.33-24.03 10-32.97 6.67-8.94 15.06-13.48 25.17-13.62 4.35 0 9.38 1.15 15.08 3.44 5.7 2.3 9.4 3.51 11.11 3.63 1.94-.25 5.86-1.55 11.75-3.9 5.89-2.35 10.9-3.39 15.03-3.12 11.41.6 20.35 4.88 26.83 12.83-9.56 5.79-14.23 13.91-14.02 24.36.21 8.23 3.33 15.11 9.36 20.63 6.03 5.52 13.1 8.87 21.21 10.05-2.02 6.09-4.32 11.95-6.9 17.58zm-29.35-108.6c.11 2.94-.65 5.88-2.28 8.82-1.63 2.94-3.8 5.46-6.51 7.56-2.5 1.96-5.17 3.34-8.01 4.14-2.84.8-5.46 1.09-7.86.87-.11-2.72.63-5.55 2.22-8.5 1.59-2.95 3.77-5.5 6.54-7.65 2.5-1.96 5.17-3.38 8.01-4.26 2.84-.88 5.64-1.21 8.4-1z"/></svg>
+                <button aria-label="Continue with Apple ID" class="w-10 h-10 rounded-full bg-[#F5F5F7] hover:bg-[#EAEAEA] active:scale-95 border border-black/[0.06] flex items-center justify-center transition-all cursor-pointer text-black shadow-xs" type="button" onclick="simulateSocialLogin('Apple')" title="Apple ID">
+                  <svg class="w-4.5 h-4.5 fill-current" viewBox="0 0 170 170"><path d="M150.37 130.25c-2.45 5.66-5.35 10.87-8.71 15.66-4.58 6.53-8.33 11.05-11.22 13.56-4.48 4.12-9.28 6.23-14.42 6.35-3.69 0-8.14-1.05-13.32-3.18-5.19-2.12-9.97-3.17-14.34-3.17-4.58 0-9.49 1.05-14.75 3.17-5.26 2.13-9.5 3.24-12.74 3.35-4.35.13-9.16-1.9-14.42-6.08-3.7-3.04-7.58-7.71-11.65-14-4.9-7.5-8.9-16.14-12-25.92-3.1-9.78-4.65-19.14-4.65-28.09 0-13.04 3.33-24.03 10-32.97 6.67-8.94 15.06-13.48 25.17-13.62 4.35 0 9.38 1.15 15.08 3.44 5.7 2.3 9.4 3.51 11.11 3.63 1.94-.25 5.86-1.55 11.75-3.9 5.89-2.35 10.9-3.39 15.03-3.12 11.41.6 20.35 4.88 26.83 12.83-9.56 5.79-14.23 13.91-14.02 24.36.21 8.23 3.33 15.11 9.36 20.63 6.03 5.52 13.1 8.87 21.21 10.05-2.02 6.09-4.32 11.95-6.9 17.58zm-29.35-108.6c.11 2.94-.65 5.88-2.28 8.82-1.63 2.94-3.8 5.46-6.51 7.56-2.5 1.96-5.17 3.34-8.01 4.14-2.84.8-5.46 1.09-7.86.87-.11-2.72.63-5.55 2.22-8.5 1.59-2.95 3.77-5.5 6.54-7.65 2.5-1.96 5.17-3.38 8.01-4.26 2.84-.88 5.64-1.21 8.4-1z"/></svg>
                 </button>
               </div>
 
               <!-- Create Account Link -->
-              <div class="mt-2.5 pt-2 border-t border-gray-100 text-center">
-                <p class="text-xs text-gray-500">
+              <div class="mt-2 pt-1.5 border-t border-gray-100 text-center">
+                <p class="text-[11px] text-gray-500">
                   New here? 
                   <a class="text-black font-bold hover:underline cursor-pointer ml-1" onclick="openRegisterModal('patient')">Create Account</a>
                 </p>
@@ -155,16 +155,16 @@
             </div>
 
             <!-- 4. PRIVACY & SECURITY FOOTER MESSAGE -->
-            <footer class="w-full flex flex-col items-center text-center mt-2 shrink-0">
-              <div class="flex items-center gap-1.5 text-[11px] text-gray-400 font-medium">
-                <span class="material-symbols-outlined text-[13px] text-gray-400">shield</span>
+            <footer class="w-full flex flex-col items-center text-center mt-1 shrink-0">
+              <div class="flex items-center gap-1.5 text-[10px] text-gray-400 font-medium">
+                <span class="material-symbols-outlined text-[12px] text-gray-400">shield</span>
                 <span>Your data stays with you</span>
                 <span class="w-1 h-1 rounded-full bg-gray-300"></span>
                 <span>Offline • Private • Secure</span>
               </div>
 
               <!-- Bottom Home Indicator Bar -->
-              <div class="w-28 h-1 bg-black/15 rounded-full mt-2 mb-0.5"></div>
+              <div class="w-24 h-1 bg-black/15 rounded-full mt-1.5 mb-0.5"></div>
             </footer>
 
           </div>
