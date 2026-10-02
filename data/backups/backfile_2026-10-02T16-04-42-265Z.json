@@ -2,7 +2,7 @@
   "app": "P+ Pro — Personal Health Companion",
   "version": "2.0.0",
   "format": "PPLUS_PRO_BACKFILE_V2",
-  "savedAt": "2026-10-02T16:07:43.242Z",
+  "savedAt": "2026-10-02T16:04:42.265Z",
   "label": "Auto-Sync Save",
   "stats": {
     "usersCount": 2,
@@ -54,7 +54,7 @@
       "holdTime": 10,
       "vibrate": true,
       "mode": "Desk & Mobile",
-      "updatedAt": "2026-10-02T16:07:43.237Z"
+      "updatedAt": "2026-10-01T17:04:45.061Z"
     },
     "appointments": [
       {
