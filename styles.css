@@ -194,45 +194,6 @@ html, body {
   padding-bottom: 96px !important; /* Critical clearance: ensures bottom buttons & cards never hide behind bottom navigation */
 }
 
-/* Screen 1: Login & Welcome - Zero-Scroll Screen & Fixed Fit */
-#screen-login {
-  overflow: hidden !important;
-  height: 100% !important;
-  max-height: 100% !important;
-  touch-action: manipulation;
-}
-
-#screen-login .screen-scroll-area {
-  height: 100% !important;
-  max-height: 100% !important;
-  overflow: hidden !important;
-  overflow-y: hidden !important;
-  overflow-x: hidden !important;
-  overscroll-behavior: none !important;
-  -webkit-overflow-scrolling: auto !important;
-  padding-left: 14px !important;
-  padding-right: 14px !important;
-  padding-top: 8px !important;
-  padding-bottom: 8px !important; /* Overrides the global 96px padding that forced scroll effect */
-  display: flex !important;
-  flex-direction: column !important;
-  scrollbar-width: none !important;
-  -ms-overflow-style: none !important;
-}
-
-#screen-login .screen-scroll-area::-webkit-scrollbar {
-  display: none !important;
-  width: 0 !important;
-  height: 0 !important;
-}
-
-@media (max-height: 500px) {
-  #screen-login,
-  #screen-login .screen-scroll-area {
-    overflow-y: auto !important;
-  }
-}
-
 /* Universal Screen Headers & Centered Titles */
 .screen-view > header {
   height: 56px !important;
