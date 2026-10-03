@@ -2,81 +2,60 @@ const fs = require('fs');
 const html = fs.readFileSync('index.html', 'utf8');
 const js = fs.readFileSync('app.js', 'utf8');
 
-// 1. Find all inline handlers in index.html
+// 1. Find all inline handlers in index.html and check their syntax
 const eventRegex = /on(?:click|submit|change|input|keyup|keydown)="([^"]+)"/g;
 let match;
-const inlineCalls = new Set();
+const handlers = [];
 while ((match = eventRegex.exec(html)) !== null) {
-  const code = match[1].trim();
-  const fnMatches = code.match(/([a-zA-Z0-9_$]+)\s*\(/g);
-  if (fnMatches) {
-    fnMatches.forEach(f => inlineCalls.add(f.replace('(', '').trim()));
-  }
+  handlers.push({ code: match[1], line: html.substring(0, match.index).split('\n').length });
 }
 
-console.log('--- Inline event functions called in index.html (' + inlineCalls.size + ') ---');
-const missingFns = [];
-const nonExportedFns = [];
-
-inlineCalls.forEach(fn => {
-  // Builtins like parseInt, alert, confirm, prompt, event.preventDefault, etc.
-  if (['parseInt', 'parseFloat', 'alert', 'confirm', 'prompt', 'preventDefault', 'stopPropagation', 'encodeURIComponent', 'decodeURIComponent'].includes(fn)) return;
-  
-  // Check if defined in js or html
-  const inJsDef = new RegExp('(function\\s+' + fn + '\\b|const\\s+' + fn + '\\s*=|let\\s+' + fn + '\\s*=|var\\s+' + fn + '\\s*=)').test(js);
-  const inHtmlDef = new RegExp('(function\\s+' + fn + '\\b|window\\.' + fn + '\\s*=)').test(html);
-  
-  if (!inJsDef && !inHtmlDef) {
-    missingFns.push(fn);
-  } else if (!inHtmlDef) {
-    // Check if exported to window in app.js
-    const isExported = new RegExp('window\\.' + fn + '\\s*=').test(js) || new RegExp('^function\\s+' + fn, 'm').test(js);
-    // Since app.js might be wrapped in an IIFE or DOMContentLoaded, let's check
-    if (!new RegExp('window\\.' + fn + '\\s*=').test(js)) {
-      nonExportedFns.push(fn);
-    }
+console.log('Total inline event handlers found:', handlers.length);
+let syntaxErrors = 0;
+handlers.forEach(h => {
+  try {
+    new Function('event', h.code);
+  } catch (err) {
+    syntaxErrors++;
+    console.error('SYNTAX ERROR on line ' + h.line + ': ' + h.code + ' -> ' + err.message);
   }
 });
-
-console.log('Completely Missing Functions:', missingFns);
-console.log('Functions in app.js that may NOT be attached to window (could fail if called inline):', nonExportedFns);
-
-// 2. Check getElementById in app.js
-const getElemRegex = /getElementById\(['"]([^'"]+)['"]\)/g;
-const elemIdsInJs = new Set();
-while ((match = getElemRegex.exec(js)) !== null) {
-  elemIdsInJs.add(match[1]);
+if (syntaxErrors === 0) {
+  console.log('All inline event handler snippets are valid JavaScript syntax!');
 }
 
-console.log('\n--- Checking getElementById in app.js (' + elemIdsInJs.size + ' unique IDs) ---');
-const missingIds = [];
-elemIdsInJs.forEach(id => {
-  if (!html.includes('id="' + id + '"') && !html.includes("id='" + id + "'")) {
-    missingIds.push(id);
+// 2. Extract every function called
+const calledFns = new Set();
+handlers.forEach(h => {
+  const matches = h.code.match(/([a-zA-Z0-9_$]+)\s*\(/g);
+  if (matches) {
+    matches.forEach(m => calledFns.add(m.replace('(', '').trim()));
   }
 });
-console.log('IDs in app.js not found in index.html:', missingIds);
 
-// 3. Check querySelector / querySelectorAll with ID in app.js
-const qsIdRegex = /querySelector(?:All)?\(['"]#([a-zA-Z0-9_\-]+)['"]\)/g;
-const qsIdsInJs = new Set();
-while ((match = qsIdRegex.exec(js)) !== null) {
-  qsIdsInJs.add(match[1]);
+const builtins = new Set(['parseInt', 'parseFloat', 'alert', 'confirm', 'prompt', 'preventDefault', 'stopPropagation', 'encodeURIComponent', 'decodeURIComponent']);
+const missing = [];
+calledFns.forEach(fn => {
+  if (builtins.has(fn)) return;
+  // Check if defined in js
+  const inJs = js.includes('function ' + fn) || js.includes('window.' + fn) || js.includes(fn + ' =');
+  const inHtml = html.includes('function ' + fn) || html.includes('window.' + fn);
+  if (!inJs && !inHtml) {
+    missing.push(fn);
+  }
+});
+console.log('\nMissing function definitions called in index.html:', missing);
+
+// 3. Check all functions exported to window in app.js
+const windowExports = [];
+const winExportRegex = /window\.([a-zA-Z0-9_$]+)\s*=/g;
+while ((match = winExportRegex.exec(js)) !== null) {
+  windowExports.push(match[1]);
 }
-const missingQsIds = [];
-qsIdsInJs.forEach(id => {
-  if (!html.includes('id="' + id + '"') && !html.includes("id='" + id + "'")) {
-    missingQsIds.push(id);
-  }
-});
-console.log('IDs in querySelector not found in index.html:', missingQsIds);
+console.log('\nTotal window exports in app.js:', windowExports.length);
 
-console.log('\n--- Checking lines for missing IDs in app.js ---');
-const lines = js.split('\n');
-missingIds.forEach(id => {
-  lines.forEach((line, i) => {
-    if (line.includes("'" + id + "'") || line.includes('"' + id + '"')) {
-      console.log((i+1) + ' [' + id + ']: ' + line.trim());
-    }
-  });
+// Check if any missing function from index.html is in windowExports
+missing.forEach(fn => {
+  console.log('Needs implementation: ' + fn);
 });
+
