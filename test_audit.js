@@ -70,3 +70,13 @@ qsIdsInJs.forEach(id => {
   }
 });
 console.log('IDs in querySelector not found in index.html:', missingQsIds);
+
+console.log('\n--- Checking lines for missing IDs in app.js ---');
+const lines = js.split('\n');
+missingIds.forEach(id => {
+  lines.forEach((line, i) => {
+    if (line.includes("'" + id + "'") || line.includes('"' + id + '"')) {
+      console.log((i+1) + ' [' + id + ']: ' + line.trim());
+    }
+  });
+});
