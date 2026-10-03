@@ -1,29 +1,17 @@
 const fs = require('fs');
 const html = fs.readFileSync('index.html', 'utf8');
+const js = fs.readFileSync('app.js', 'utf8');
 
-// Find all buttons with onclick
-const regex = /<button\b[^>]*onclick="([^"]*)"[^>]*>/g;
+// Find all addEventListener calls in app.js
+const listenerRegex = /([a-zA-Z0-9_$.]+)\.addEventListener\(['"]([^'"]+)['"]/g;
 let m;
-const list = [];
-while ((m = regex.exec(html)) !== null) {
-  const line = html.substring(0, m.index).split('\n').length;
-  list.push({ line, onclick: m[1] });
+console.log('Event listeners in app.js:');
+while ((m = listenerRegex.exec(js)) !== null) {
+  console.log(`  ${m[1]}.addEventListener('${m[2]}')`);
 }
 
-console.log('Total button onclicks found: ' + list.length);
-// Check if any onclick calls navigateTo with a non-existent screen
-const validScreens = [
-  'screen-login', 'screen-home', 'screen-live', 'screen-posture',
-  'screen-risk', 'screen-sos', 'screen-doctors', 'screen-find',
-  'screen-profile', 'screen-graphs'
-];
-
-list.forEach(item => {
-  const navMatch = item.onclick.match(/navigateTo\(['"]([^'"]+)['"]\)/);
-  if (navMatch) {
-    const target = navMatch[1];
-    if (!validScreens.includes(target)) {
-      console.log(`INVALID navigateTo on line ${item.line}: ${item.onclick}`);
-    }
-  }
-});
+// Find all event delegations on document or window
+const docListenerRegex = /document\.addEventListener\(['"]([^'"]+)['"]/g;
+while ((m = docListenerRegex.exec(js)) !== null) {
+  console.log(`  document.addEventListener('${m[1]}')`);
+}
