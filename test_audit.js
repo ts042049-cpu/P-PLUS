@@ -2,23 +2,16 @@ const fs = require('fs');
 const html = fs.readFileSync('index.html', 'utf8');
 const js = fs.readFileSync('app.js', 'utf8');
 
-const modals = [
-  'clinical-report-modal',
-  'booking-modal',
-  'register-modal',
-  'edit-profile-modal',
-  'avatar-modal',
-  'esp32-ble-modal',
-  'theme-selector-modal',
-  'notifications-modal'
-];
+// Find all forms
+const formRegex = /<form\b([^>]*)>/g;
+let m;
+const forms = [];
+while ((m = formRegex.exec(html)) !== null) {
+  const line = html.substring(0, m.index).split('\n').length;
+  forms.push({ line, tag: m[0] });
+}
 
-modals.forEach(id => {
-  console.log(`\n=== Modal: ${id} ===`);
-  const lines = js.split('\n');
-  lines.forEach((l, i) => {
-    if (l.includes(id)) {
-      console.log(`  Line ${i+1}: ${l.trim()}`);
-    }
-  });
+console.log('Forms found (' + forms.length + '):');
+forms.forEach(f => {
+  console.log(`Line ${f.line}: ${f.tag}`);
 });
