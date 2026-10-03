@@ -194,6 +194,11 @@ html, body {
   padding-bottom: 96px !important; /* Critical clearance: ensures bottom buttons & cards never hide behind bottom navigation */
 }
 
+#screen-login .screen-scroll-area {
+  padding-bottom: 20px !important;
+  padding-top: 6px !important;
+}
+
 /* Universal Screen Headers & Centered Titles */
 .screen-view > header {
   height: 56px !important;
