@@ -1,41 +1,32 @@
 const fs = require('fs');
 const html = fs.readFileSync('index.html', 'utf8');
+const js = fs.readFileSync('app.js', 'utf8');
 
-const btnRegex = /<button\b([^>]*)>/g;
+// 1. Screens
+const screenRegex = /<section\s+id="([^"]+)"\s+class="[^"]*screen-view/g;
 let m;
-let count = 0;
-const inactiveButtons = [];
-while ((m = btnRegex.exec(html)) !== null) {
-  count++;
-  const attrs = m[1];
-  const hasOnclick = attrs.includes('onclick=');
-  const hasTypeSubmit = attrs.includes('type="submit"') || attrs.includes("type='submit'");
-  const hasId = attrs.includes('id=');
-  if (!hasOnclick && !hasTypeSubmit && !hasId) {
-    const line = html.substring(0, m.index).split('\n').length;
-    inactiveButtons.push({ line, tag: m[0] });
-  }
+const screens = [];
+while ((m = screenRegex.exec(html)) !== null) {
+  screens.push(m[1]);
+}
+console.log('Screens found in index.html (' + screens.length + '):', screens);
+
+// 2. All navigateTo calls in index.html and app.js
+const navRegex = /navigateTo\(['"]([^'"]+)['"]/g;
+const navTargets = new Set();
+while ((m = navRegex.exec(html)) !== null) {
+  navTargets.add(m[1]);
+}
+while ((m = navRegex.exec(js)) !== null) {
+  navTargets.add(m[1]);
 }
 
-console.log(`Total buttons: ${count}`);
-console.log(`Buttons without onclick, submit, or id (${inactiveButtons.length}):`);
-inactiveButtons.forEach(b => console.log(`Line ${b.line}: ${b.tag}`));
-
-// Also check anchor tags <a>
-const aRegex = /<a\b([^>]*)>/g;
-let aCount = 0;
-const inactiveLinks = [];
-while ((m = aRegex.exec(html)) !== null) {
-  aCount++;
-  const attrs = m[1];
-  const hasOnclick = attrs.includes('onclick=');
-  const hasHref = attrs.includes('href=') && !attrs.includes('href="#"') && !attrs.includes("href='#'");
-  const hasId = attrs.includes('id=');
-  if (!hasOnclick && !hasHref && !hasId) {
-    const line = html.substring(0, m.index).split('\n').length;
-    inactiveLinks.push({ line, tag: m[0] });
+console.log('\nNav targets called (' + navTargets.size + '):', Array.from(navTargets));
+const invalidScreens = [];
+navTargets.forEach(target => {
+  if (!screens.includes(target)) {
+    invalidScreens.push(target);
   }
-}
-console.log(`\nTotal links: ${aCount}`);
-console.log(`Links without valid href or onclick (${inactiveLinks.length}):`);
-inactiveLinks.forEach(l => console.log(`Line ${l.line}: ${l.tag}`));
+});
+
+console.log('Invalid navigateTo screen targets (BUG!):', invalidScreens);
