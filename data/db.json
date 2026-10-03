@@ -85,6 +85,18 @@
   ],
   "sos_events": [
     {
+      "id": "SOS-1791033830229",
+      "status": "DISPATCH_TRIGGERED",
+      "emergencyContact": "Dr. Robert Kelly (+1 555-019-2834)",
+      "patientName": "Alex Turner",
+      "location": "Lat 28.6139° N, Lon 77.2090° E",
+      "vitalSnapshot": {
+        "heartRate": 74,
+        "spO2": 98
+      },
+      "timestamp": "2026-10-03T13:23:50.229Z"
+    },
+    {
       "id": "SOS-1791033813596",
       "status": "DISPATCH_TRIGGERED",
       "emergencyContact": "Emergency Triage",

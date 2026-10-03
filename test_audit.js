@@ -1,46 +1,41 @@
 const fs = require('fs');
 const html = fs.readFileSync('index.html', 'utf8');
-const js = fs.readFileSync('app.js', 'utf8');
 
-// Find all function calls in inline event handlers
-const eventRegex = /on(?:click|submit|change|input|keyup|keydown)="([^"]+)"/g;
-let match;
-const calledFns = new Set();
-while ((match = eventRegex.exec(html)) !== null) {
-  const code = match[1];
-  const re = /([a-zA-Z0-9_$]+)\s*\(/g;
-  let m;
-  while ((m = re.exec(code)) !== null) {
-    calledFns.add(m[1]);
+const btnRegex = /<button\b([^>]*)>/g;
+let m;
+let count = 0;
+const inactiveButtons = [];
+while ((m = btnRegex.exec(html)) !== null) {
+  count++;
+  const attrs = m[1];
+  const hasOnclick = attrs.includes('onclick=');
+  const hasTypeSubmit = attrs.includes('type="submit"') || attrs.includes("type='submit'");
+  const hasId = attrs.includes('id=');
+  if (!hasOnclick && !hasTypeSubmit && !hasId) {
+    const line = html.substring(0, m.index).split('\n').length;
+    inactiveButtons.push({ line, tag: m[0] });
   }
 }
 
-const builtins = new Set(['parseInt', 'parseFloat', 'alert', 'confirm', 'prompt', 'preventDefault', 'stopPropagation', 'encodeURIComponent', 'decodeURIComponent', 'if', 'getElementById']);
+console.log(`Total buttons: ${count}`);
+console.log(`Buttons without onclick, submit, or id (${inactiveButtons.length}):`);
+inactiveButtons.forEach(b => console.log(`Line ${b.line}: ${b.tag}`));
 
-console.log('Total functions called in HTML inline handlers:', calledFns.size);
-
-const missingInAppJs = [];
-const definedInAppJs = [];
-
-calledFns.forEach(fn => {
-  if (builtins.has(fn)) return;
-  // Look for: window.fn = OR function fn( OR const fn = OR let fn =
-  const hasWin = js.includes('window.' + fn + ' =') || js.includes('window.' + fn + '=');
-  const hasFn = new RegExp('\\bfunction\\s+' + fn + '\\s*\\(').test(js);
-  const hasConst = new RegExp('\\bconst\\s+' + fn + '\\s*=').test(js);
-  const hasLet = new RegExp('\\blet\\s+' + fn + '\\s*=').test(js);
-  
-  if (hasWin || hasFn || hasConst || hasLet) {
-    // If defined inside IIFE, check if it's exported to window
-    if (!hasWin) {
-      console.warn(`WARNING: ${fn} is defined in app.js but NOT exported to window! Inline onclick will throw ReferenceError!`);
-    } else {
-      definedInAppJs.push(fn);
-    }
-  } else {
-    missingInAppJs.push(fn);
+// Also check anchor tags <a>
+const aRegex = /<a\b([^>]*)>/g;
+let aCount = 0;
+const inactiveLinks = [];
+while ((m = aRegex.exec(html)) !== null) {
+  aCount++;
+  const attrs = m[1];
+  const hasOnclick = attrs.includes('onclick=');
+  const hasHref = attrs.includes('href=') && !attrs.includes('href="#"') && !attrs.includes("href='#'");
+  const hasId = attrs.includes('id=');
+  if (!hasOnclick && !hasHref && !hasId) {
+    const line = html.substring(0, m.index).split('\n').length;
+    inactiveLinks.push({ line, tag: m[0] });
   }
-});
-
-console.log('\nDEFINED & EXPORTED TO WINDOW (' + definedInAppJs.length + '):', definedInAppJs);
-console.log('\nTRULY MISSING FUNCTIONS (' + missingInAppJs.length + '):', missingInAppJs);
+}
+console.log(`\nTotal links: ${aCount}`);
+console.log(`Links without valid href or onclick (${inactiveLinks.length}):`);
+inactiveLinks.forEach(l => console.log(`Line ${l.line}: ${l.tag}`));
