@@ -2,12 +2,12 @@
   "app": "P+ Pro — Personal Health Companion",
   "version": "2.0.0",
   "format": "PPLUS_PRO_BACKFILE_V2",
-  "savedAt": "2026-10-03T13:23:33.604Z",
+  "savedAt": "2026-10-03T13:23:33.590Z",
   "label": "Auto-Sync Save",
   "stats": {
     "usersCount": 3,
     "appointmentsCount": 3,
-    "sosEventsCount": 2,
+    "sosEventsCount": 1,
     "diagnosticsCount": 2
   },
   "data": {
@@ -97,18 +97,6 @@
     ],
     "sos_events": [
       {
-        "id": "SOS-1791033813596",
-        "status": "DISPATCH_TRIGGERED",
-        "emergencyContact": "Emergency Triage",
-        "patientName": "Alex Turner",
-        "location": "Lat 28.6139° N, Lon 77.2090° E",
-        "vitalSnapshot": {
-          "heartRate": 110,
-          "spO2": 95
-        },
-        "timestamp": "2026-10-03T13:23:33.596Z"
-      },
-      {
         "id": "SOS-1790957082247",
         "status": "DISPATCH_TRIGGERED",
         "emergencyContact": "bhaiya (9999999999)",
@@ -145,15 +133,15 @@
       }
     ],
     "vitals_stream": {
-      "heartRate": 74,
-      "spO2": 99,
+      "heartRate": 72,
+      "spO2": 98,
       "temp": 36.6,
       "postureAngle": 0,
       "motion": "Normal (Resting Phase)",
       "battery": 78,
       "connected": true,
       "device": "P+ Wearable ESP32-S3",
-      "updatedAt": "2026-10-03T13:23:33.604Z"
+      "updatedAt": "2026-09-23T14:00:00.000Z"
     }
   }
 }
