@@ -1,17 +1,21 @@
 const fs = require('fs');
 const html = fs.readFileSync('index.html', 'utf8');
-const js = fs.readFileSync('app.js', 'utf8');
 
-// Find all addEventListener calls in app.js
-const listenerRegex = /([a-zA-Z0-9_$.]+)\.addEventListener\(['"]([^'"]+)['"]/g;
+const regex = /data-navigate="([^"]+)"/g;
 let m;
-console.log('Event listeners in app.js:');
-while ((m = listenerRegex.exec(js)) !== null) {
-  console.log(`  ${m[1]}.addEventListener('${m[2]}')`);
+const targets = new Set();
+while ((m = regex.exec(html)) !== null) {
+  targets.add(m[1]);
 }
+console.log('data-navigate targets:', Array.from(targets));
+const validScreens = [
+  'back', 'screen-login', 'screen-home', 'screen-live', 'screen-posture',
+  'screen-risk', 'screen-sos', 'screen-doctors', 'screen-find',
+  'screen-profile', 'screen-graphs'
+];
 
-// Find all event delegations on document or window
-const docListenerRegex = /document\.addEventListener\(['"]([^'"]+)['"]/g;
-while ((m = docListenerRegex.exec(js)) !== null) {
-  console.log(`  document.addEventListener('${m[1]}')`);
-}
+targets.forEach(t => {
+  if (!validScreens.includes(t)) {
+    console.log(`INVALID data-navigate: ${t}`);
+  }
+});
