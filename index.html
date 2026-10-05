@@ -2761,6 +2761,24 @@
             </button>
           </div>
 
+          <!-- Quick One-Tap Google Registration Option -->
+          <div class="pt-0.5">
+            <button type="button" onclick="closeRegisterModal(); triggerGoogleSignIn();" class="w-full h-10 bg-white hover:bg-neutral-50 active:scale-[0.99] border border-gray-300 rounded-xl flex items-center justify-center gap-2 px-3 shadow-xs text-xs font-semibold text-gray-700 transition-all cursor-pointer group">
+              <svg class="w-4 h-4 shrink-0" viewBox="0 0 24 24">
+                <path d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.8-2.4 3.66v3.05h3.88c2.27-2.09 3.66-5.17 3.66-9.15z" fill="#4285F4"/>
+                <path d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.05c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.1-6.72-4.94H1.24v3.15C3.26 21.36 7.34 24 12 24z" fill="#34A853"/>
+                <path d="M5.28 14.26c-.25-.72-.38-1.49-.38-2.26s.13-1.54.38-2.26V6.59H1.24C.45 8.16 0 9.92 0 12c0 2.08.45 3.84 1.24 5.41l4.04-3.15z" fill="#FBBC05"/>
+                <path d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.34 0 3.26 2.64 1.24 6.59l4.04 3.15c.95-2.84 3.6-4.99 6.72-4.99z" fill="#EA4335"/>
+              </svg>
+              <span>Quick Sign Up with Google (1-Tap)</span>
+            </button>
+            <div class="flex items-center my-2">
+              <div class="flex-grow h-px bg-gray-200"></div>
+              <span class="px-2 text-[10px] text-gray-400 lowercase font-medium">or fill form manually</span>
+              <div class="flex-grow h-px bg-gray-200"></div>
+            </div>
+          </div>
+
           <!-- Patient Signup Form -->
           <form id="form-reg-patient" class="flex flex-col space-y-2.5 pt-1" onsubmit="handlePatientRegistration(event)">
             <div class="flex flex-col space-y-0.5">
