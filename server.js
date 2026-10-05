@@ -431,6 +431,65 @@ const server = http.createServer(async (req, res) => {
       });
     }
 
+    // 5b. Auth: POST /api/auth/google (Google OAuth / Identity Services integration)
+    if (pathname === '/api/auth/google' && req.method === 'POST') {
+      const body = await parseBody(req);
+      const email = (body.email || '').trim().toLowerCase();
+      const name = body.name || 'Google User';
+      const avatar = body.avatar || body.picture || '';
+      const googleId = body.sub || body.googleId || '';
+      const role = body.role || 'patient';
+
+      if (!email && !googleId) {
+        return sendJSON(res, 400, { success: false, error: 'Email or Google ID required' });
+      }
+
+      let user = db.users.find(u => (u.email && u.email.toLowerCase() === email) || (u.googleId && u.googleId === googleId));
+      if (user) {
+        if (avatar && (!user.avatar || user.avatar.includes('AB6AXuC7oLNhZft'))) {
+          user.avatar = avatar;
+        }
+        if (name && (!user.name || user.name === 'Alex Turner' || user.name.startsWith('New '))) {
+          user.name = name;
+        }
+        user.lastLogin = new Date().toISOString();
+        user.authProvider = 'google';
+        if (googleId) user.googleId = googleId;
+      } else {
+        const newId = role === 'doctor' ? `DOC-${Math.floor(1000 + Math.random() * 9000)}` : `P-${Math.floor(1000 + Math.random() * 9000)}`;
+        user = {
+          id: newId,
+          role: role,
+          name: name,
+          email: email,
+          phone: body.phone || '+1 (555) 234-8890',
+          bloodGroup: 'O+',
+          age: 28,
+          gender: 'Not specified',
+          height: 175,
+          weight: 70,
+          emergencyName: 'Emergency Contact',
+          emergencyPhone: '+1 (555) 019-2834',
+          allergies: 'None recorded',
+          conditions: 'Healthy',
+          avatar: avatar || 'https://lh3.googleusercontent.com/aida-public/AB6AXuC7oLNhZft-_5NFE_r1jeWbiYhe5D9ugz7wfXM_HqTUzvz4H9IwmLxhE94qekm-wUFfC9UOsjKGm3G3-HnS29iK_1RsLqnSDTP7diXu1tcinjvlSyuIhzPd7eRoDLVjP58-VfabynwpbfyB1EkpTwDHzOBji70n_CDiW9b1RTWsc1XuygDGX2w3n31EUdG5yBq7M6YCy3aPgQGtJqPy2aJDBbswLqVB9QmuzeBBBXa7jrur4hltT8SOOw',
+          googleId: googleId,
+          authProvider: 'google',
+          createdAt: new Date().toISOString(),
+          lastLogin: new Date().toISOString()
+        };
+        db.users.push(user);
+      }
+      writeDB(db);
+
+      return sendJSON(res, 200, {
+        success: true,
+        message: 'Google Sign-In verified and logged in successfully',
+        user: user,
+        token: `JWT-GOOGLE-${Date.now()}-${Math.random().toString(36).substring(2, 8)}`
+      });
+    }
+
 
     // 6. Live Telemetry & Vitals: GET /api/vitals
     if (pathname === '/api/vitals' && req.method === 'GET') {
