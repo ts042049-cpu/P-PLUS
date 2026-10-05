@@ -2,7 +2,7 @@
   "app": "P+ Pro — Personal Health Companion",
   "version": "2.0.0",
   "format": "PPLUS_PRO_BACKFILE_V2",
-  "savedAt": "2026-10-05T13:29:15.699Z",
+  "savedAt": "2026-10-05T13:29:15.638Z",
   "label": "Auto-Sync Save",
   "stats": {
     "usersCount": 3,
@@ -28,11 +28,10 @@
         "allergies": "Penicillin, Dust",
         "conditions": "Mild Hypertension",
         "avatar": "https://lh3.googleusercontent.com/aida-public/AB6AXuC7oLNhZft-_5NFE_r1jeWbiYhe5D9ugz7wfXM_HqTUzvz4H9IwmLxhE94qekm-wUFfC9UOsjKGm3G3-HnS29iK_1RsLqnSDTP7diXu1tcinjvlSyuIhzPd7eRoDLVjP58-VfabynwpbfyB1EkpTwDHzOBji70n_CDiW9b1RTWsc1XuygDGX2w3n31EUdG5yBq7M6YCy3aPgQGtJqPy2aJDBbswLqVB9QmuzeBBBXa7jrur4hltT8SOOw",
-        "updatedAt": "2026-10-05T13:29:15.696Z",
+        "updatedAt": "2026-10-05T13:17:56.384Z",
         "authProvider": "google",
         "googleId": "gis_alex_turner_gmail_com",
-        "lastLoginAt": "2026-10-05T13:29:15.629Z",
-        "googleEmail": "alex.turner@gmail.com"
+        "lastLoginAt": "2026-10-05T13:29:15.629Z"
       },
       {
         "id": "DOC-CARD-492",
