@@ -866,6 +866,209 @@
     }, 600);
   }
 
+  // ==========================================
+  // GOOGLE SIGN-IN INTEGRATION (GIS & OAUTH)
+  // ==========================================
+
+  // Decode standard Google JWT Credential Response (ID Token)
+  function decodeJwtResponse(token) {
+    try {
+      const base64Url = token.split('.')[1];
+      const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+      const jsonPayload = decodeURIComponent(
+        atob(base64)
+          .split('')
+          .map(c => '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2))
+          .join('')
+      );
+      return JSON.parse(jsonPayload);
+    } catch (e) {
+      console.warn('Could not parse Google ID token payload:', e);
+      return null;
+    }
+  }
+
+  // Get active Google Client ID (from meta tag or localStorage)
+  function getGoogleClientId() {
+    const stored = localStorage.getItem('pplus_google_client_id');
+    if (stored && stored.trim() && !stored.includes('YOUR_GOOGLE_CLIENT_ID')) {
+      return stored.trim();
+    }
+    const meta = document.querySelector('meta[name="google-signin-client_id"]');
+    const metaVal = meta ? meta.getAttribute('content') : '';
+    if (metaVal && !metaVal.includes('YOUR_GOOGLE_CLIENT_ID')) {
+      return metaVal.trim();
+    }
+    return '';
+  }
+
+  // Initialize Google Identity Services (GIS)
+  function initGoogleAuth() {
+    const clientId = getGoogleClientId();
+    if (!clientId) return;
+
+    if (window.google && window.google.accounts && window.google.accounts.id) {
+      try {
+        window.google.accounts.id.initialize({
+          client_id: clientId,
+          callback: handleGoogleCredentialResponse,
+          auto_select: false,
+          cancel_on_tap_outside: true
+        });
+
+        // Optionally render GIS button in real container if desired
+        const container = document.getElementById('g-signin-real-container');
+        if (container) {
+          window.google.accounts.id.renderButton(container, {
+            theme: 'outline',
+            size: 'large',
+            shape: 'circle',
+            type: 'icon'
+          });
+        }
+      } catch (err) {
+        console.warn('Google Identity Services initialization notice:', err);
+      }
+    }
+  }
+
+  // Handle Google Credential Response from GIS (Modern Google Identity Services)
+  function handleGoogleCredentialResponse(response) {
+    if (!response || !response.credential) {
+      showToast('Google Sign-In response incomplete.', 'warning');
+      return;
+    }
+
+    const payload = decodeJwtResponse(response.credential);
+    if (!payload) {
+      showToast('Could not verify Google account token.', 'error');
+      return;
+    }
+
+    const googleUser = {
+      name: payload.name || `${payload.given_name || 'Google'} ${payload.family_name || 'User'}`.trim(),
+      email: payload.email || 'user@gmail.com',
+      avatar: payload.picture || 'https://lh3.googleusercontent.com/aida-public/AB6AXuC7oLNhZft-_5NFE_r1jeWbiYhe5D9ugz7wfXM_HqTUzvz4H9IwmLxhE94qekm-wUFfC9UOsjKGm3G3-HnS29iK_1RsLqnSDTP7diXu1tcinjvlSyuIhzPd7eRoDLVjP58-VfabynwpbfyB1EkpTwDHzOBji70n_CDiW9b1RTWsc1XuygDGX2w3n31EUdG5yBq7M6YCy3aPgQGtJqPy2aJDBbswLqVB9QmuzeBBBXa7jrur4hltT8SOOw',
+      sub: payload.sub,
+      role: state.currentPortal || 'patient'
+    };
+
+    completeGoogleLogin(googleUser);
+  }
+
+  // Handle legacy Google Sign-In response (gapi.auth2 getBasicProfile() compatibility)
+  function onSignIn(googleUser) {
+    if (!googleUser) return;
+    try {
+      const profile = typeof googleUser.getBasicProfile === 'function' ? googleUser.getBasicProfile() : null;
+      if (profile) {
+        const userData = {
+          name: profile.getName(),
+          email: profile.getEmail(),
+          avatar: profile.getImageUrl(),
+          googleId: profile.getId(),
+          role: state.currentPortal || 'patient'
+        };
+        completeGoogleLogin(userData);
+      }
+    } catch (e) {
+      console.warn('Legacy onSignIn error:', e);
+    }
+  }
+
+  // Complete Google login and sync with server & UI
+  function completeGoogleLogin(googleUser) {
+    showToast(`Signed in with Google as ${googleUser.name}`, 'check_circle');
+
+    // Sync with backend API
+    fetch('/api/auth/google', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(googleUser)
+    })
+      .then(res => res.json())
+      .then(data => {
+        if (data.success && data.user) {
+          state.currentUser = Object.assign({}, data.user);
+        } else {
+          state.currentUser = Object.assign({}, loadStoredProfile(state.currentPortal || 'patient'), googleUser);
+        }
+        finishSessionSetup();
+      })
+      .catch(() => {
+        // Fallback offline sync
+        state.currentUser = Object.assign({}, loadStoredProfile(state.currentPortal || 'patient'), googleUser);
+        finishSessionSetup();
+      });
+
+    function finishSessionSetup() {
+      state.currentUser.authProvider = 'google';
+      saveStoredProfile(state.currentUser);
+      updateActiveUserProfile();
+      renderProfileData();
+      navigateTo('screen-home');
+    }
+  }
+
+  // Trigger Google Sign-In on button click
+  function handleGoogleSignInClick() {
+    const clientId = getGoogleClientId();
+
+    if (clientId && window.google && window.google.accounts && window.google.accounts.id) {
+      try {
+        window.google.accounts.id.initialize({
+          client_id: clientId,
+          callback: handleGoogleCredentialResponse
+        });
+        window.google.accounts.id.prompt((notification) => {
+          if (notification.isNotDisplayed() || notification.isSkippedMoment()) {
+            openGoogleConfigModal();
+          }
+        });
+        return;
+      } catch (err) {
+        console.warn('GIS prompt error:', err);
+      }
+    }
+
+    openGoogleConfigModal();
+  }
+
+  // Modal / Prompt to configure Google OAuth Client ID or use Demo Account
+  function openGoogleConfigModal() {
+    const currentId = getGoogleClientId();
+    const promptMsg = currentId
+      ? `Active Google Client ID:\n${currentId}\n\nClick OK to authenticate with Google, or enter a new Client ID:`
+      : `P+ Pro — Google Sign-In Setup\n\nTo connect live Google OAuth credentials:\n1. Paste your Web Client ID from Google Cloud Console (ends with .apps.googleusercontent.com)\n2. Or leave empty and click OK to test with the Verified Google Demo Account!\n\nEnter Google Client ID:`;
+
+    const input = prompt(promptMsg, currentId || '');
+    if (input === null) return; // User canceled
+
+    const trimmed = input.trim();
+    if (trimmed && trimmed.includes('.apps.googleusercontent.com')) {
+      localStorage.setItem('pplus_google_client_id', trimmed);
+      const meta = document.querySelector('meta[name="google-signin-client_id"]');
+      if (meta) meta.setAttribute('content', trimmed);
+      showToast('Google Client ID saved! Initializing Google Identity...', 'verified');
+      initGoogleAuth();
+      if (window.google && window.google.accounts && window.google.accounts.id) {
+        window.google.accounts.id.prompt();
+      }
+    } else {
+      // Use verified Google demo account
+      showToast('Connecting with Google Account...', 'sync');
+      setTimeout(() => {
+        completeGoogleLogin({
+          name: state.currentPortal === 'doctor' ? 'Dr. Alex Turner (Google)' : 'Alex Turner (Google)',
+          email: 'alex.turner@gmail.com',
+          avatar: 'https://lh3.googleusercontent.com/aida-public/AB6AXuC7oLNhZft-_5NFE_r1jeWbiYhe5D9ugz7wfXM_HqTUzvz4H9IwmLxhE94qekm-wUFfC9UOsjKGm3G3-HnS29iK_1RsLqnSDTP7diXu1tcinjvlSyuIhzPd7eRoDLVjP58-VfabynwpbfyB1EkpTwDHzOBji70n_CDiW9b1RTWsc1XuygDGX2w3n31EUdG5yBq7M6YCy3aPgQGtJqPy2aJDBbswLqVB9QmuzeBBBXa7jrur4hltT8SOOw',
+          sub: 'google-oauth-109283746592817264',
+          role: state.currentPortal || 'patient'
+        });
+      }, 500);
+    }
+  }
+
   // Forgot Password Prompt
   function showForgotPasswordPrompt() {
     const emailInput = document.getElementById('login-email');
@@ -907,6 +1110,19 @@
   function handleLogout() {
     toggleProfileMenu(false);
     showToast('Signed out of health companion. Vault locked.', 'lock');
+    // Disable Google auto-select on logout
+    if (window.google && window.google.accounts && window.google.accounts.id) {
+      try {
+        window.google.accounts.id.disableAutoSelect();
+      } catch (_) {}
+    }
+    // Sign out legacy gapi if active
+    if (window.gapi && window.gapi.auth2) {
+      try {
+        const auth2 = window.gapi.auth2.getAuthInstance();
+        if (auth2) auth2.signOut();
+      } catch (_) {}
+    }
     // Save current profile to guarantee user name and custom details are never lost
     saveStoredProfile(state.currentUser);
     // Pre-populate login form with active profile credentials
@@ -2746,6 +2962,9 @@
     // Start live telemetry polling
     startLiveTelemetrySync();
 
+    // Initialize Google Identity Services OAuth
+    setTimeout(initGoogleAuth, 600);
+
     // Default start screen
     navigateTo('screen-login', false);
   });
@@ -2760,6 +2979,12 @@
   window.handleLoginSubmit = handleLoginSubmit;
   window.simulateBiometricAuth = simulateBiometricAuth;
   window.simulateSocialLogin = simulateSocialLogin;
+  window.handleGoogleSignInClick = handleGoogleSignInClick;
+  window.handleGoogleCredentialResponse = handleGoogleCredentialResponse;
+  window.onSignIn = onSignIn;
+  window.decodeJwtResponse = decodeJwtResponse;
+  window.initGoogleAuth = initGoogleAuth;
+  window.openGoogleConfigModal = openGoogleConfigModal;
   window.showForgotPasswordPrompt = showForgotPasswordPrompt;
   window.toggleProfileMenu = toggleProfileMenu;
   window.handleLogout = handleLogout;

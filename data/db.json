@@ -18,9 +18,10 @@
       "avatar": "https://lh3.googleusercontent.com/aida-public/AB6AXuC7oLNhZft-_5NFE_r1jeWbiYhe5D9ugz7wfXM_HqTUzvz4H9IwmLxhE94qekm-wUFfC9UOsjKGm3G3-HnS29iK_1RsLqnSDTP7diXu1tcinjvlSyuIhzPd7eRoDLVjP58-VfabynwpbfyB1EkpTwDHzOBji70n_CDiW9b1RTWsc1XuygDGX2w3n31EUdG5yBq7M6YCy3aPgQGtJqPy2aJDBbswLqVB9QmuzeBBBXa7jrur4hltT8SOOw",
       "updatedAt": "2026-10-05T13:33:39.604Z",
       "authProvider": "google",
-      "googleId": "gis_alex_turner_gmail_com",
+      "googleId": "google-12345",
       "lastLoginAt": "2026-10-05T13:33:39.531Z",
-      "googleEmail": "alex.turner@gmail.com"
+      "googleEmail": "alex.turner@gmail.com",
+      "lastLogin": "2026-10-05T13:38:28.445Z"
     },
     {
       "id": "DOC-CARD-492",
