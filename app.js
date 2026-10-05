@@ -3006,6 +3006,9 @@
     // Start live telemetry polling
     startLiveTelemetrySync();
 
+    // Initialize Google Identity Services (GIS)
+    initGoogleIdentityServices();
+
     // Default start screen
     navigateTo('screen-login', false);
   });
@@ -3020,6 +3023,15 @@
   window.handleLoginSubmit = handleLoginSubmit;
   window.simulateBiometricAuth = simulateBiometricAuth;
   window.simulateSocialLogin = simulateSocialLogin;
+  window.triggerGoogleSignIn = triggerGoogleSignIn;
+  window.openGoogleAuthModal = openGoogleAuthModal;
+  window.closeGoogleAuthModal = closeGoogleAuthModal;
+  window.selectGoogleAccount = selectGoogleAccount;
+  window.toggleCustomGoogleAccountForm = toggleCustomGoogleAccountForm;
+  window.submitCustomGoogleAccount = submitCustomGoogleAccount;
+  window.saveGisClientId = saveGisClientId;
+  window.handleGoogleCredentialResponse = handleGoogleCredentialResponse;
+  window.initGoogleIdentityServices = initGoogleIdentityServices;
   window.showForgotPasswordPrompt = showForgotPasswordPrompt;
   window.toggleProfileMenu = toggleProfileMenu;
   window.handleLogout = handleLogout;
