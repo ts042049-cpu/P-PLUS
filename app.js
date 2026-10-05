@@ -847,248 +847,8 @@
     }, 700);
   }
 
-  // ==========================================
-  // GOOGLE IDENTITY SERVICES (GIS) INTEGRATION
-  // ==========================================
-  const GOOGLE_CLIENT_ID_KEY = 'pplus_google_client_id';
-  const DEFAULT_GOOGLE_CLIENT_ID = '723849182345-sampledeveloperid.apps.googleusercontent.com';
-
-  function getGoogleClientId() {
-    return localStorage.getItem(GOOGLE_CLIENT_ID_KEY) || DEFAULT_GOOGLE_CLIENT_ID;
-  }
-
-  function parseJwt(token) {
-    try {
-      const base64Url = token.split('.')[1];
-      if (!base64Url) return null;
-      const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
-      const jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
-        return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
-      }).join(''));
-      return JSON.parse(jsonPayload);
-    } catch (e) {
-      console.warn('JWT parse exception:', e);
-      return null;
-    }
-  }
-
-  function initGoogleIdentityServices() {
-    const inputGis = document.getElementById('input-gis-client-id');
-    const savedId = localStorage.getItem(GOOGLE_CLIENT_ID_KEY);
-    if (inputGis && savedId) {
-      inputGis.value = savedId;
-    }
-
-    const checkGis = () => {
-      if (window.google && window.google.accounts && window.google.accounts.id) {
-        try {
-          const clientId = getGoogleClientId();
-          window.google.accounts.id.initialize({
-            client_id: clientId,
-            callback: handleGoogleCredentialResponse,
-            auto_select: false,
-            cancel_on_tap_outside: true
-          });
-
-          const indicator = document.getElementById('gis-status-indicator');
-          if (indicator) {
-            indicator.textContent = 'Google GIS Active & Initialized';
-            indicator.className = 'text-[10px] text-emerald-600 font-semibold';
-          }
-
-          const renderContainer = document.getElementById('google-gis-rendered-container');
-          if (renderContainer) {
-            try {
-              window.google.accounts.id.renderButton(renderContainer, {
-                theme: 'outline',
-                size: 'large',
-                type: 'standard',
-                shape: 'pill',
-                text: 'signin_with',
-                logo_alignment: 'left',
-                width: 280
-              });
-            } catch (_) {}
-          }
-        } catch (gisInitErr) {
-          console.log('[P+ Pro GIS] GIS initialized in sandbox/preview mode:', gisInitErr.message);
-        }
-      }
-    };
-
-    if (window.google && window.google.accounts && window.google.accounts.id) {
-      checkGis();
-    } else {
-      let attempts = 0;
-      const interval = setInterval(() => {
-        attempts++;
-        if (window.google && window.google.accounts && window.google.accounts.id) {
-          clearInterval(interval);
-          checkGis();
-        } else if (attempts > 15) {
-          clearInterval(interval);
-        }
-      }, 500);
-    }
-  }
-
-  function triggerGoogleSignIn(preferredRole) {
-    if (preferredRole) {
-      state.currentPortal = preferredRole;
-    }
-    
-    // Attempt Google One Tap if GIS SDK is loaded with client ID
-    if (window.google && window.google.accounts && window.google.accounts.id) {
-      try {
-        window.google.accounts.id.prompt((notification) => {
-          if (notification.isNotDisplayed() || notification.isSkippedMoment()) {
-            openGoogleAuthModal();
-          }
-        });
-      } catch (_) {
-        openGoogleAuthModal();
-      }
-    }
-
-    openGoogleAuthModal();
-  }
-
-  function openGoogleAuthModal() {
-    const modal = document.getElementById('google-auth-modal');
-    if (modal) {
-      modal.classList.add('open');
-    }
-  }
-
-  function closeGoogleAuthModal() {
-    const modal = document.getElementById('google-auth-modal');
-    if (modal) {
-      modal.classList.remove('open');
-    }
-  }
-
-  function toggleCustomGoogleAccountForm() {
-    const form = document.getElementById('google-custom-account-form');
-    if (form) form.classList.toggle('hidden');
-  }
-
-  function saveGisClientId() {
-    const input = document.getElementById('input-gis-client-id');
-    const val = input ? input.value.trim() : '';
-    if (val) {
-      localStorage.setItem(GOOGLE_CLIENT_ID_KEY, val);
-      showToast('Google Client ID saved! Reloading GIS...', 'check_circle');
-      initGoogleIdentityServices();
-    } else {
-      localStorage.removeItem(GOOGLE_CLIENT_ID_KEY);
-      showToast('Google Client ID reset to demo mode', 'info');
-    }
-  }
-
-  function selectGoogleAccount(name, email, avatar, role = 'patient') {
-    closeGoogleAuthModal();
-    showToast(`Google Identity Services: Signing in as ${name}...`, 'lock');
-
-    apiRequest('/api/auth/google', 'POST', {
-      name: name,
-      email: email,
-      avatar: avatar,
-      role: role,
-      googleId: `gis_${email.replace(/[^a-zA-Z0-9]/g, '_')}`
-    }).then(res => {
-      const user = (res && res.user) ? res.user : {
-        name, email, avatar, role, authProvider: 'google', id: role === 'doctor' ? 'DOC-492' : 'P-8821'
-      };
-
-      state.currentPortal = role;
-      state.currentUser = Object.assign({}, loadStoredProfile(role), user);
-      state.currentUser.authProvider = 'google';
-      state.currentUser.googleEmail = email;
-      saveStoredProfile(state.currentUser);
-
-      updateActiveUserProfile();
-      renderProfileData();
-      switchLoginPortal(role);
-
-      showToast(`✓ Welcome, ${name}! Signed in via Google Identity Services`, 'verified_user');
-      navigateTo('screen-home');
-    }).catch(err => {
-      console.warn('Backend Google Auth fallback:', err);
-      const user = {
-        name, email, avatar, role, authProvider: 'google', id: role === 'doctor' ? 'DOC-492' : 'P-8821'
-      };
-      state.currentPortal = role;
-      state.currentUser = Object.assign({}, loadStoredProfile(role), user);
-      state.currentUser.authProvider = 'google';
-      state.currentUser.googleEmail = email;
-      saveStoredProfile(state.currentUser);
-
-      updateActiveUserProfile();
-      renderProfileData();
-      switchLoginPortal(role);
-
-      showToast(`✓ Welcome, ${name}! Signed in with Google`, 'check_circle');
-      navigateTo('screen-home');
-    });
-  }
-
-  function submitCustomGoogleAccount() {
-    const nameInput = document.getElementById('google-custom-name');
-    const emailInput = document.getElementById('google-custom-email');
-    const roleRadio = document.querySelector('input[name="google-custom-role"]:checked');
-
-    const name = nameInput && nameInput.value.trim() ? nameInput.value.trim() : 'Google User';
-    const email = emailInput && emailInput.value.trim() ? emailInput.value.trim() : 'user@gmail.com';
-    const role = roleRadio ? roleRadio.value : 'patient';
-
-    const avatar = role === 'doctor'
-      ? 'https://lh3.googleusercontent.com/aida-public/AB6AXuDIqde2zHWq5d75xmp5aVgxeVego2Sai2irnWTj-vmHBG_t27ybS25MvuSVXxfzw01o8CZPgCxM3Lxj5K9m-lgCCegetXS7QKxdc7ysjQ2UWbJLPqNL_ZRRGwCgooxO7n2G6Kyb75y4Ou8sl1XjAcIZxy_uZ4aCd6MYGz5vN_zChy0g_8047jL7xNjraXRqE7MxTw6xWd730310TSuyGxwnyPpDLqJwIRkbUnKJMpxb8Z9IB-tOdt63Ug'
-      : 'https://lh3.googleusercontent.com/aida-public/AB6AXuC7oLNhZft-_5NFE_r1jeWbiYhe5D9ugz7wfXM_HqTUzvz4H9IwmLxhE94qekm-wUFfC9UOsjKGm3G3-HnS29iK_1RsLqnSDTP7diXu1tcinjvlSyuIhzPd7eRoDLVjP58-VfabynwpbfyB1EkpTwDHzOBji70n_CDiW9b1RTWsc1XuygDGX2w3n31EUdG5yBq7M6YCy3aPgQGtJqPy2aJDBbswLqVB9QmuzeBBBXa7jrur4hltT8SOOw';
-
-    selectGoogleAccount(name, email, avatar, role);
-  }
-
-  function handleGoogleCredentialResponse(response) {
-    if (!response || !response.credential) return;
-    const payload = parseJwt(response.credential);
-    if (!payload) return;
-
-    const name = payload.name || 'Google User';
-    const email = payload.email || 'user@gmail.com';
-    const avatar = payload.picture || '';
-    const googleId = payload.sub || `gis_${Date.now()}`;
-    const role = state.currentPortal || 'patient';
-
-    showToast(`Google Verified: Authenticating ${name}...`, 'lock');
-
-    apiRequest('/api/auth/google', 'POST', {
-      credential: response.credential,
-      name, email, avatar, role, googleId
-    }).then(res => {
-      const user = (res && res.user) ? res.user : {
-        name, email, avatar, role, authProvider: 'google', googleId, id: 'P-8821'
-      };
-      state.currentUser = Object.assign({}, loadStoredProfile(role), user);
-      state.currentUser.authProvider = 'google';
-      state.currentUser.googleEmail = email;
-      saveStoredProfile(state.currentUser);
-
-      updateActiveUserProfile();
-      renderProfileData();
-      showToast(`✓ Google Sign-In Successful! Welcome, ${name}`, 'verified');
-      navigateTo('screen-home');
-    }).catch(() => {
-      selectGoogleAccount(name, email, avatar, role);
-    });
-  }
-
   // Social SSO
   function simulateSocialLogin(provider) {
-    if (provider === 'Google') {
-      triggerGoogleSignIn();
-      return;
-    }
-
     const nameInput = document.getElementById('login-name');
     const typedName = nameInput ? nameInput.value.trim() : '';
 
@@ -1471,16 +1231,6 @@
           ? 'Accepting real-time patient arrhythmia alerts and emergency triage dispatches.'
           : 'Standby mode: Non-urgent alerts routed to hospital duty registry.';
       }
-
-      // Sync Google Identity Services account card
-      const docGoogleEmail = document.getElementById('doc-profile-google-email');
-      const docGoogleBadge = document.getElementById('doc-profile-google-badge');
-      if (docGoogleEmail) {
-        docGoogleEmail.textContent = user.googleEmail || user.email || 'dr.neha.sharma@hospital.org';
-      }
-      if (docGoogleBadge) {
-        docGoogleBadge.textContent = (user.authProvider === 'google' || (user.email && user.email.includes('@'))) ? 'CONNECTED' : 'GIS READY';
-      }
     } else {
       if (doctorView) doctorView.classList.add('hidden');
       if (patientView) patientView.classList.remove('hidden');
@@ -1547,16 +1297,6 @@
 
       if (allergiesEl) allergiesEl.textContent = user.allergies || 'None';
       if (conditionsEl) conditionsEl.textContent = user.conditions || 'None';
-
-      // Sync Google Identity Services account card
-      const patientGoogleEmail = document.getElementById('profile-google-email');
-      const patientGoogleBadge = document.getElementById('profile-google-badge');
-      if (patientGoogleEmail) {
-        patientGoogleEmail.textContent = user.googleEmail || user.email || 'alex.turner@gmail.com';
-      }
-      if (patientGoogleBadge) {
-        patientGoogleBadge.textContent = (user.authProvider === 'google' || (user.email && user.email.includes('@'))) ? 'CONNECTED' : 'GIS READY';
-      }
 
       // Sync to SOS screen
       const sosScreenName = document.getElementById('sos-primary-contact-name');
@@ -3006,9 +2746,6 @@
     // Start live telemetry polling
     startLiveTelemetrySync();
 
-    // Initialize Google Identity Services (GIS)
-    initGoogleIdentityServices();
-
     // Default start screen
     navigateTo('screen-login', false);
   });
@@ -3023,15 +2760,6 @@
   window.handleLoginSubmit = handleLoginSubmit;
   window.simulateBiometricAuth = simulateBiometricAuth;
   window.simulateSocialLogin = simulateSocialLogin;
-  window.triggerGoogleSignIn = triggerGoogleSignIn;
-  window.openGoogleAuthModal = openGoogleAuthModal;
-  window.closeGoogleAuthModal = closeGoogleAuthModal;
-  window.selectGoogleAccount = selectGoogleAccount;
-  window.toggleCustomGoogleAccountForm = toggleCustomGoogleAccountForm;
-  window.submitCustomGoogleAccount = submitCustomGoogleAccount;
-  window.saveGisClientId = saveGisClientId;
-  window.handleGoogleCredentialResponse = handleGoogleCredentialResponse;
-  window.initGoogleIdentityServices = initGoogleIdentityServices;
   window.showForgotPasswordPrompt = showForgotPasswordPrompt;
   window.toggleProfileMenu = toggleProfileMenu;
   window.handleLogout = handleLogout;

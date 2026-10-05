@@ -14,8 +14,7 @@
   <!-- Offline Standalone Tailwind CSS Bundle -->
   <link rel="stylesheet" href="tailwind.built.css">
   <link rel="stylesheet" href="styles.css">
-  <!-- Google Identity Services (GIS) Web SDK -->
-  <script src="https://accounts.google.com/gsi/client" async defer></script>
+
 </head>
 <body class="theme-emerald-gold">
 
@@ -129,35 +128,16 @@
                 <div class="flex-grow h-px bg-gray-200/80"></div>
               </div>
 
-              <!-- Google Identity Services (GIS) Sign-In Button -->
-              <div class="flex flex-col gap-2 my-1 w-full">
-                <button id="btn-google-gis-signin" aria-label="Sign in with Google" class="w-full h-11 bg-white hover:bg-[#F8F9FA] active:bg-[#F1F3F4] active:scale-[0.99] border border-[#DADCE0] hover:border-[#4285F4] rounded-full flex items-center justify-between px-3.5 shadow-[0_1px_3px_rgba(60,64,67,0.08)] hover:shadow-[0_2px_6px_rgba(66,133,244,0.18)] transition-all cursor-pointer select-none group" type="button" onclick="triggerGoogleSignIn()">
-                  <div class="flex items-center gap-2.5">
-                    <svg class="w-[18px] h-[18px] shrink-0" viewBox="0 0 24 24">
-                      <path d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.8-2.4 3.66v3.05h3.88c2.27-2.09 3.66-5.17 3.66-9.15z" fill="#4285F4"></path>
-                      <path d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.05c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.1-6.72-4.94H1.24v3.15C3.26 21.36 7.34 24 12 24z" fill="#34A853"></path>
-                      <path d="M5.28 14.26c-.25-.72-.38-1.49-.38-2.26s.13-1.54.38-2.26V6.59H1.24C.45 8.16 0 9.92 0 12c0 2.08.45 3.84 1.24 5.41l4.04-3.15z" fill="#FBBC05"></path>
-                      <path d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.34 0 3.26 2.64 1.24 6.59l4.04 3.15c.95-2.84 3.6-4.99 6.72-4.99z" fill="#EA4335"></path>
-                    </svg>
-                    <span class="text-xs font-semibold text-[#3C4043] group-hover:text-black tracking-normal">Sign in with Google</span>
-                  </div>
-                  <span class="text-[9px] font-bold uppercase tracking-wider text-blue-700 bg-blue-50 px-2 py-0.5 rounded-full border border-blue-200">GIS 1-Tap</span>
+              <!-- Social Buttons: Google & Apple Logos -->
+              <div class="flex items-center justify-center gap-4 my-1">
+                <!-- Google Logo Button -->
+                <button aria-label="Continue with Google" class="w-12 h-12 rounded-full bg-[#F5F5F7] hover:bg-[#EAEAEA] active:scale-95 border border-black/[0.06] flex items-center justify-center transition-all cursor-pointer shadow-xs" type="button" onclick="simulateSocialLogin('Google')" title="Google">
+                  <svg class="w-5 h-5" viewBox="0 0 24 24"><path d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.8-2.4 3.66v3.05h3.88c2.27-2.09 3.66-5.17 3.66-9.15z" fill="#4285F4"></path><path d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.05c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.1-6.72-4.94H1.24v3.15C3.26 21.36 7.34 24 12 24z" fill="#34A853"></path><path d="M5.28 14.26c-.25-.72-.38-1.49-.38-2.26s.13-1.54.38-2.26V6.59H1.24C.45 8.16 0 9.92 0 12c0 2.08.45 3.84 1.24 5.41l4.04-3.15z" fill="#FBBC05"></path><path d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.34 0 3.26 2.64 1.24 6.59l4.04 3.15c.95-2.84 3.6-4.99 6.72-4.99z" fill="#EA4335"></path></svg>
                 </button>
-
-                <!-- Hidden native Google Identity Services rendered button target -->
-                <div id="google-gis-rendered-container" class="hidden"></div>
-
-                <!-- Secondary Quick Apple / Biometric Row -->
-                <div class="flex items-center justify-center gap-2 pt-0.5">
-                  <button type="button" onclick="simulateSocialLogin('Apple')" class="h-7 px-3 rounded-full bg-[#F5F5F7] hover:bg-[#EAEAEA] active:scale-95 text-black border border-black/[0.05] flex items-center gap-1.5 text-[10px] font-medium transition-all cursor-pointer" title="Apple ID">
-                    <svg class="w-3 h-3 fill-current shrink-0" viewBox="0 0 170 170"><path d="M150.37 130.25c-2.45 5.66-5.35 10.87-8.71 15.66-4.58 6.53-8.33 11.05-11.22 13.56-4.48 4.12-9.28 6.23-14.42 6.35-3.69 0-8.14-1.05-13.32-3.18-5.19-2.12-9.97-3.17-14.34-3.17-4.58 0-9.49 1.05-14.75 3.17-5.26 2.13-9.5 3.24-12.74 3.35-4.35.13-9.16-1.9-14.42-6.08-3.7-3.04-7.58-7.71-11.65-14-4.9-7.5-8.9-16.14-12-25.92-3.1-9.78-4.65-19.14-4.65-28.09 0-13.04 3.33-24.03 10-32.97 6.67-8.94 15.06-13.48 25.17-13.62 4.35 0 9.38 1.15 15.08 3.44 5.7 2.3 9.4 3.51 11.11 3.63 1.94-.25 5.86-1.55 11.75-3.9 5.89-2.35 10.9-3.39 15.03-3.12 11.41.6 20.35 4.88 26.83 12.83-9.56 5.79-14.23 13.91-14.02 24.36.21 8.23 3.33 15.11 9.36 20.63 6.03 5.52 13.1 8.87 21.21 10.05-2.02 6.09-4.32 11.95-6.9 17.58zm-29.35-108.6c.11 2.94-.65 5.88-2.28 8.82-1.63 2.94-3.8 5.46-6.51 7.56-2.5 1.96-5.17 3.34-8.01 4.14-2.84.8-5.46 1.09-7.86.87-.11-2.72.63-5.55 2.22-8.5 1.59-2.95 3.77-5.5 6.54-7.65 2.5-1.96 5.17-3.38 8.01-4.26 2.84-.88 5.64-1.21 8.4-1z"/></svg>
-                    <span>Apple ID</span>
-                  </button>
-                  <button type="button" onclick="simulateBiometricAuth()" class="h-7 px-3 rounded-full bg-[#F5F5F7] hover:bg-[#EAEAEA] active:scale-95 text-black border border-black/[0.05] flex items-center gap-1.5 text-[10px] font-medium transition-all cursor-pointer" title="Face ID / Fingerprint">
-                    <span class="material-symbols-outlined text-[13px] text-gray-700">fingerprint</span>
-                    <span>Biometric</span>
-                  </button>
-                </div>
+                <!-- Apple Logo Button -->
+                <button aria-label="Continue with Apple ID" class="w-12 h-12 rounded-full bg-[#F5F5F7] hover:bg-[#EAEAEA] active:scale-95 border border-black/[0.06] flex items-center justify-center transition-all cursor-pointer text-black shadow-xs" type="button" onclick="simulateSocialLogin('Apple')" title="Apple ID">
+                  <svg class="w-5 h-5 fill-current" viewBox="0 0 170 170"><path d="M150.37 130.25c-2.45 5.66-5.35 10.87-8.71 15.66-4.58 6.53-8.33 11.05-11.22 13.56-4.48 4.12-9.28 6.23-14.42 6.35-3.69 0-8.14-1.05-13.32-3.18-5.19-2.12-9.97-3.17-14.34-3.17-4.58 0-9.49 1.05-14.75 3.17-5.26 2.13-9.5 3.24-12.74 3.35-4.35.13-9.16-1.9-14.42-6.08-3.7-3.04-7.58-7.71-11.65-14-4.9-7.5-8.9-16.14-12-25.92-3.1-9.78-4.65-19.14-4.65-28.09 0-13.04 3.33-24.03 10-32.97 6.67-8.94 15.06-13.48 25.17-13.62 4.35 0 9.38 1.15 15.08 3.44 5.7 2.3 9.4 3.51 11.11 3.63 1.94-.25 5.86-1.55 11.75-3.9 5.89-2.35 10.9-3.39 15.03-3.12 11.41.6 20.35 4.88 26.83 12.83-9.56 5.79-14.23 13.91-14.02 24.36.21 8.23 3.33 15.11 9.36 20.63 6.03 5.52 13.1 8.87 21.21 10.05-2.02 6.09-4.32 11.95-6.9 17.58zm-29.35-108.6c.11 2.94-.65 5.88-2.28 8.82-1.63 2.94-3.8 5.46-6.51 7.56-2.5 1.96-5.17 3.34-8.01 4.14-2.84.8-5.46 1.09-7.86.87-.11-2.72.63-5.55 2.22-8.5 1.59-2.95 3.77-5.5 6.54-7.65 2.5-1.96 5.17-3.38 8.01-4.26 2.84-.88 5.64-1.21 8.4-1z"/></svg>
+                </button>
               </div>
 
               <!-- Create Account Link -->
@@ -1689,30 +1669,6 @@
                 </label>
               </div>
 
-              <!-- Connected Google Identity Services Card -->
-              <div class="w-full bg-surface-container-lowest rounded-2xl p-3.5 shadow-sm border border-surface-container/60 flex items-center justify-between">
-                <div class="flex items-center gap-3 min-w-0">
-                  <div class="w-9 h-9 rounded-xl bg-white border border-gray-200 shadow-2xs flex items-center justify-center shrink-0">
-                    <svg class="w-5 h-5" viewBox="0 0 24 24">
-                      <path d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.8-2.4 3.66v3.05h3.88c2.27-2.09 3.66-5.17 3.66-9.15z" fill="#4285F4"/>
-                      <path d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.05c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.1-6.72-4.94H1.24v3.15C3.26 21.36 7.34 24 12 24z" fill="#34A853"/>
-                      <path d="M5.28 14.26c-.25-.72-.38-1.49-.38-2.26s.13-1.54.38-2.26V6.59H1.24C.45 8.16 0 9.92 0 12c0 2.08.45 3.84 1.24 5.41l4.04-3.15z" fill="#FBBC05"/>
-                      <path d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.34 0 3.26 2.64 1.24 6.59l4.04 3.15c.95-2.84 3.6-4.99 6.72-4.99z" fill="#EA4335"/>
-                    </svg>
-                  </div>
-                  <div class="min-w-0">
-                    <div class="flex items-center gap-1.5">
-                      <span class="text-xs font-bold text-on-surface">Google Account</span>
-                      <span id="profile-google-badge" class="px-1.5 py-0.5 rounded-full text-[9px] font-bold uppercase bg-emerald-100 text-emerald-800">Connected</span>
-                    </div>
-                    <p id="profile-google-email" class="text-[11px] text-secondary truncate mt-0.5">alex.turner@gmail.com</p>
-                  </div>
-                </div>
-                <button type="button" onclick="triggerGoogleSignIn()" class="px-2.5 py-1 rounded-full bg-surface-container hover:bg-surface-container-high text-xs font-semibold text-on-surface transition-colors cursor-pointer shrink-0">
-                  Switch
-                </button>
-              </div>
-
               <!-- Actions: Export & Logout -->
               <div class="flex flex-col gap-2 pt-1 pb-2">
                 <button class="w-full h-11 rounded-full bg-surface-container-low hover:bg-surface-container text-on-surface text-xs font-semibold flex items-center justify-center gap-2 transition-colors cursor-pointer border border-surface-container" onclick="openClinicalReportModal()" type="button">
@@ -1956,30 +1912,6 @@
                   </div>
                   <input type="checkbox" checked class="rounded text-primary focus:ring-primary w-4 h-4 border-gray-300" onchange="showToast('Emergency paramedic link armed', 'emergency')">
                 </label>
-              </div>
-
-              <!-- Connected Google Identity Services Card -->
-              <div class="w-full bg-surface-container-lowest rounded-2xl p-3.5 shadow-sm border border-surface-container/60 flex items-center justify-between">
-                <div class="flex items-center gap-3 min-w-0">
-                  <div class="w-9 h-9 rounded-xl bg-white border border-gray-200 shadow-2xs flex items-center justify-center shrink-0">
-                    <svg class="w-5 h-5" viewBox="0 0 24 24">
-                      <path d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.8-2.4 3.66v3.05h3.88c2.27-2.09 3.66-5.17 3.66-9.15z" fill="#4285F4"/>
-                      <path d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.05c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.1-6.72-4.94H1.24v3.15C3.26 21.36 7.34 24 12 24z" fill="#34A853"/>
-                      <path d="M5.28 14.26c-.25-.72-.38-1.49-.38-2.26s.13-1.54.38-2.26V6.59H1.24C.45 8.16 0 9.92 0 12c0 2.08.45 3.84 1.24 5.41l4.04-3.15z" fill="#FBBC05"/>
-                      <path d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.34 0 3.26 2.64 1.24 6.59l4.04 3.15c.95-2.84 3.6-4.99 6.72-4.99z" fill="#EA4335"/>
-                    </svg>
-                  </div>
-                  <div class="min-w-0">
-                    <div class="flex items-center gap-1.5">
-                      <span class="text-xs font-bold text-on-surface">Doctor Google Account</span>
-                      <span id="doc-profile-google-badge" class="px-1.5 py-0.5 rounded-full text-[9px] font-bold uppercase bg-blue-100 text-blue-800">Connected</span>
-                    </div>
-                    <p id="doc-profile-google-email" class="text-[11px] text-secondary truncate mt-0.5">dr.neha.sharma@hospital.org</p>
-                  </div>
-                </div>
-                <button type="button" onclick="triggerGoogleSignIn()" class="px-2.5 py-1 rounded-full bg-surface-container hover:bg-surface-container-high text-xs font-semibold text-on-surface transition-colors cursor-pointer shrink-0">
-                  Switch
-                </button>
               </div>
 
               <!-- Doctor Actions: Export Consultation Logs & Sign Out -->
@@ -2670,121 +2602,6 @@
         </div>
       </div>
 
-      <!-- ========================================== -->
-      <!-- GOOGLE IDENTITY SERVICES (GIS) MODAL       -->
-      <!-- ========================================== -->
-      <div id="google-auth-modal" class="p-modal-overlay">
-        <div class="p-modal-sheet flex flex-col gap-3.5 max-h-[90vh] overflow-y-auto" style="border-radius: 28px 28px 0 0; background: #ffffff;">
-          <div class="w-12 h-1.5 bg-gray-200 rounded-full mx-auto -mt-2"></div>
-          
-          <!-- Google Header -->
-          <div class="flex items-start justify-between border-b border-gray-100 pb-3">
-            <div class="flex items-center gap-2.5">
-              <div class="w-9 h-9 rounded-full bg-white border border-gray-200 flex items-center justify-center shadow-xs">
-                <svg class="w-5 h-5" viewBox="0 0 24 24">
-                  <path d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.8-2.4 3.66v3.05h3.88c2.27-2.09 3.66-5.17 3.66-9.15z" fill="#4285F4"/>
-                  <path d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.05c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.1-6.72-4.94H1.24v3.15C3.26 21.36 7.34 24 12 24z" fill="#34A853"/>
-                  <path d="M5.28 14.26c-.25-.72-.38-1.49-.38-2.26s.13-1.54.38-2.26V6.59H1.24C.45 8.16 0 9.92 0 12c0 2.08.45 3.84 1.24 5.41l4.04-3.15z" fill="#FBBC05"/>
-                  <path d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.34 0 3.26 2.64 1.24 6.59l4.04 3.15c.95-2.84 3.6-4.99 6.72-4.99z" fill="#EA4335"/>
-                </svg>
-              </div>
-              <div>
-                <h3 class="font-bold text-base text-gray-900 leading-tight">Sign in with Google</h3>
-                <p class="text-xs text-gray-500 mt-0.5">Choose an account to continue to <strong class="text-gray-800">P+ Pro</strong></p>
-              </div>
-            </div>
-            <button aria-label="Close Google modal" class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center text-gray-500 hover:text-black cursor-pointer hover:bg-gray-200 transition-colors" onclick="closeGoogleAuthModal()" type="button">
-              <span class="material-symbols-outlined text-[18px]">close</span>
-            </button>
-          </div>
-
-          <!-- Accounts Selection List -->
-          <div class="flex flex-col gap-2">
-            <!-- Account 1: Alex Turner -->
-            <button type="button" onclick="selectGoogleAccount('Alex Turner', 'alex.turner@gmail.com', 'https://lh3.googleusercontent.com/aida-public/AB6AXuC7oLNhZft-_5NFE_r1jeWbiYhe5D9ugz7wfXM_HqTUzvz4H9IwmLxhE94qekm-wUFfC9UOsjKGm3G3-HnS29iK_1RsLqnSDTP7diXu1tcinjvlSyuIhzPd7eRoDLVjP58-VfabynwpbfyB1EkpTwDHzOBji70n_CDiW9b1RTWsc1XuygDGX2w3n31EUdG5yBq7M6YCy3aPgQGtJqPy2aJDBbswLqVB9QmuzeBBBXa7jrur4hltT8SOOw', 'patient')" class="w-full p-3 rounded-2xl border border-gray-200 hover:border-blue-400 hover:bg-blue-50/40 active:scale-[0.99] transition-all flex items-center gap-3 text-left cursor-pointer group">
-              <img class="w-10 h-10 rounded-full object-cover ring-1 ring-gray-300 group-hover:ring-blue-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC7oLNhZft-_5NFE_r1jeWbiYhe5D9ugz7wfXM_HqTUzvz4H9IwmLxhE94qekm-wUFfC9UOsjKGm3G3-HnS29iK_1RsLqnSDTP7diXu1tcinjvlSyuIhzPd7eRoDLVjP58-VfabynwpbfyB1EkpTwDHzOBji70n_CDiW9b1RTWsc1XuygDGX2w3n31EUdG5yBq7M6YCy3aPgQGtJqPy2aJDBbswLqVB9QmuzeBBBXa7jrur4hltT8SOOw" alt="Alex Turner">
-              <div class="flex-1 min-w-0">
-                <div class="flex items-center justify-between">
-                  <span class="font-bold text-xs text-gray-900 group-hover:text-blue-700">Alex Turner</span>
-                  <span class="text-[10px] font-semibold px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800">Patient</span>
-                </div>
-                <p class="text-[11px] text-gray-500 truncate">alex.turner@gmail.com</p>
-                <p class="text-[10px] text-gray-400 mt-0.5">Default Patient Profile • Blood Group O+</p>
-              </div>
-              <span class="material-symbols-outlined text-gray-400 group-hover:text-blue-600 text-[18px]">chevron_right</span>
-            </button>
-
-            <!-- Account 2: Dr. Neha Sharma -->
-            <button type="button" onclick="selectGoogleAccount('Dr. Neha Sharma', 'dr.neha.sharma@hospital.org', 'https://lh3.googleusercontent.com/aida-public/AB6AXuDIqde2zHWq5d75xmp5aVgxeVego2Sai2irnWTj-vmHBG_t27ybS25MvuSVXxfzw01o8CZPgCxM3Lxj5K9m-lgCCegetXS7QKxdc7ysjQ2UWbJLPqNL_ZRRGwCgooxO7n2G6Kyb75y4Ou8sl1XjAcIZxy_uZ4aCd6MYGz5vN_zChy0g_8047jL7xNjraXRqE7MxTw6xWd730310TSuyGxwnyPpDLqJwIRkbUnKJMpxb8Z9IB-tOdt63Ug', 'doctor')" class="w-full p-3 rounded-2xl border border-gray-200 hover:border-blue-400 hover:bg-blue-50/40 active:scale-[0.99] transition-all flex items-center gap-3 text-left cursor-pointer group">
-              <img class="w-10 h-10 rounded-full object-cover ring-1 ring-gray-300 group-hover:ring-blue-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDIqde2zHWq5d75xmp5aVgxeVego2Sai2irnWTj-vmHBG_t27ybS25MvuSVXxfzw01o8CZPgCxM3Lxj5K9m-lgCCegetXS7QKxdc7ysjQ2UWbJLPqNL_ZRRGwCgooxO7n2G6Kyb75y4Ou8sl1XjAcIZxy_uZ4aCd6MYGz5vN_zChy0g_8047jL7xNjraXRqE7MxTw6xWd730310TSuyGxwnyPpDLqJwIRkbUnKJMpxb8Z9IB-tOdt63Ug" alt="Dr. Neha Sharma">
-              <div class="flex-1 min-w-0">
-                <div class="flex items-center justify-between">
-                  <span class="font-bold text-xs text-gray-900 group-hover:text-blue-700">Dr. Neha Sharma</span>
-                  <span class="text-[10px] font-semibold px-2 py-0.5 rounded-full bg-blue-100 text-blue-800">Doctor</span>
-                </div>
-                <p class="text-[11px] text-gray-500 truncate">dr.neha.sharma@hospital.org</p>
-                <p class="text-[10px] text-gray-400 mt-0.5">Cardiologist • Metro Heart Institute</p>
-              </div>
-              <span class="material-symbols-outlined text-gray-400 group-hover:text-blue-600 text-[18px]">chevron_right</span>
-            </button>
-
-            <!-- Toggle Custom Account Form -->
-            <button type="button" onclick="toggleCustomGoogleAccountForm()" class="w-full py-2.5 px-3 rounded-2xl border border-dashed border-gray-300 hover:border-gray-400 hover:bg-gray-50 transition-all flex items-center justify-center gap-2 text-xs font-semibold text-gray-700 cursor-pointer">
-              <span class="material-symbols-outlined text-[17px] text-gray-500">person_add</span>
-              <span>Use another Google account</span>
-            </button>
-
-            <!-- Custom Google Account Form -->
-            <div id="google-custom-account-form" class="hidden p-3.5 bg-gray-50 rounded-2xl border border-gray-200 flex flex-col gap-2.5">
-              <div class="text-[11px] font-bold text-gray-700">Enter Google Account Details</div>
-              <input type="text" id="google-custom-name" placeholder="Full Name (e.g. Rahul Verma)" class="w-full bg-white text-xs px-3 py-2 rounded-xl border border-gray-300 outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500">
-              <input type="email" id="google-custom-email" placeholder="Gmail Address (e.g. rahul.verma@gmail.com)" class="w-full bg-white text-xs px-3 py-2 rounded-xl border border-gray-300 outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500">
-              <div class="flex items-center gap-2 text-xs">
-                <label class="flex items-center gap-1.5 cursor-pointer font-medium text-gray-700">
-                  <input type="radio" name="google-custom-role" value="patient" checked class="accent-black"> Patient
-                </label>
-                <label class="flex items-center gap-1.5 cursor-pointer font-medium text-gray-700 ml-3">
-                  <input type="radio" name="google-custom-role" value="doctor" class="accent-black"> Doctor
-                </label>
-              </div>
-              <button type="button" onclick="submitCustomGoogleAccount()" class="w-full py-2 rounded-xl bg-black text-white text-xs font-semibold hover:bg-neutral-800 transition-colors cursor-pointer mt-1">
-                Sign in with this Google Account
-              </button>
-            </div>
-
-            <!-- Expandable Google Client ID Configuration (GIS) -->
-            <details class="text-xs text-gray-600 bg-gray-50 rounded-xl p-2.5 border border-gray-200">
-              <summary class="font-semibold cursor-pointer select-none flex items-center justify-between text-[11px] text-gray-700">
-                <span class="flex items-center gap-1.5">
-                  <span class="material-symbols-outlined text-[15px] text-blue-600">settings</span>
-                  <span>Google Cloud GIS Client ID Settings</span>
-                </span>
-                <span class="text-[10px] text-blue-600 font-normal underline">Configure</span>
-              </summary>
-              <div class="mt-2.5 flex flex-col gap-2 pt-2 border-t border-gray-200">
-                <p class="text-[10px] text-gray-500 leading-normal">
-                  Connect your Google Cloud OAuth 2.0 Web Client ID for live GIS production authentication.
-                </p>
-                <input type="text" id="input-gis-client-id" placeholder="e.g. 123456789-xyz.apps.googleusercontent.com" class="w-full bg-white text-[11px] px-2.5 py-1.5 rounded-lg border border-gray-300 outline-none focus:border-blue-500">
-                <div class="flex items-center justify-between">
-                  <button type="button" onclick="saveGisClientId()" class="px-3 py-1 bg-blue-600 hover:bg-blue-700 text-white font-semibold text-[11px] rounded-lg transition-colors cursor-pointer">
-                    Save Client ID
-                  </button>
-                  <span id="gis-status-indicator" class="text-[10px] text-emerald-600 font-semibold">GIS Ready (Sandbox &amp; SDK)</span>
-                </div>
-              </div>
-            </details>
-          </div>
-
-          <!-- Compliance Footnote -->
-          <div class="pt-1 text-center">
-            <p class="text-[10px] text-gray-400 leading-normal">
-              To continue, Google will share your name, email address, language preference, and profile picture with P+ Pro Health Companion.
-            </p>
-          </div>
-        </div>
-      </div>
-
       <!-- Registration & Doctor Onboarding Sheet Modal -->
       <div id="register-modal" class="p-modal-overlay">
         <div class="p-modal-sheet flex flex-col gap-3 max-h-[88vh] overflow-y-auto">
@@ -2807,24 +2624,6 @@
             <button id="tab-reg-doctor" class="portal-pill-btn py-1.5 rounded-lg text-xs font-semibold text-secondary cursor-pointer" type="button" onclick="switchRegisterTab('doctor')">
               + Add Doctor Profile
             </button>
-          </div>
-
-          <!-- Quick One-Tap Google Registration Option -->
-          <div class="pt-0.5">
-            <button type="button" onclick="closeRegisterModal(); triggerGoogleSignIn();" class="w-full h-10 bg-white hover:bg-neutral-50 active:scale-[0.99] border border-gray-300 rounded-xl flex items-center justify-center gap-2 px-3 shadow-xs text-xs font-semibold text-gray-700 transition-all cursor-pointer group">
-              <svg class="w-4 h-4 shrink-0" viewBox="0 0 24 24">
-                <path d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.8-2.4 3.66v3.05h3.88c2.27-2.09 3.66-5.17 3.66-9.15z" fill="#4285F4"/>
-                <path d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.05c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.1-6.72-4.94H1.24v3.15C3.26 21.36 7.34 24 12 24z" fill="#34A853"/>
-                <path d="M5.28 14.26c-.25-.72-.38-1.49-.38-2.26s.13-1.54.38-2.26V6.59H1.24C.45 8.16 0 9.92 0 12c0 2.08.45 3.84 1.24 5.41l4.04-3.15z" fill="#FBBC05"/>
-                <path d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.34 0 3.26 2.64 1.24 6.59l4.04 3.15c.95-2.84 3.6-4.99 6.72-4.99z" fill="#EA4335"/>
-              </svg>
-              <span>Quick Sign Up with Google (1-Tap)</span>
-            </button>
-            <div class="flex items-center my-2">
-              <div class="flex-grow h-px bg-gray-200"></div>
-              <span class="px-2 text-[10px] text-gray-400 lowercase font-medium">or fill form manually</span>
-              <div class="flex-grow h-px bg-gray-200"></div>
-            </div>
           </div>
 
           <!-- Patient Signup Form -->
