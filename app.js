@@ -1471,6 +1471,16 @@
           ? 'Accepting real-time patient arrhythmia alerts and emergency triage dispatches.'
           : 'Standby mode: Non-urgent alerts routed to hospital duty registry.';
       }
+
+      // Sync Google Identity Services account card
+      const docGoogleEmail = document.getElementById('doc-profile-google-email');
+      const docGoogleBadge = document.getElementById('doc-profile-google-badge');
+      if (docGoogleEmail) {
+        docGoogleEmail.textContent = user.googleEmail || user.email || 'dr.neha.sharma@hospital.org';
+      }
+      if (docGoogleBadge) {
+        docGoogleBadge.textContent = (user.authProvider === 'google' || (user.email && user.email.includes('@'))) ? 'CONNECTED' : 'GIS READY';
+      }
     } else {
       if (doctorView) doctorView.classList.add('hidden');
       if (patientView) patientView.classList.remove('hidden');
@@ -1537,6 +1547,16 @@
 
       if (allergiesEl) allergiesEl.textContent = user.allergies || 'None';
       if (conditionsEl) conditionsEl.textContent = user.conditions || 'None';
+
+      // Sync Google Identity Services account card
+      const patientGoogleEmail = document.getElementById('profile-google-email');
+      const patientGoogleBadge = document.getElementById('profile-google-badge');
+      if (patientGoogleEmail) {
+        patientGoogleEmail.textContent = user.googleEmail || user.email || 'alex.turner@gmail.com';
+      }
+      if (patientGoogleBadge) {
+        patientGoogleBadge.textContent = (user.authProvider === 'google' || (user.email && user.email.includes('@'))) ? 'CONNECTED' : 'GIS READY';
+      }
 
       // Sync to SOS screen
       const sosScreenName = document.getElementById('sos-primary-contact-name');
