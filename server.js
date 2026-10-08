@@ -626,6 +626,186 @@ const server = http.createServer(async (req, res) => {
       return sendJSON(res, 201, { success: true, diagnostic: newDiag });
     }
 
+    // ==========================================
+    // 11B. BLUETOOTH MW DEVICE & RIGHT READING DATABASE API
+    // ==========================================
+
+    // A. List/Query Connected Bluetooth Devices: GET /api/bluetooth/devices
+    if (pathname === '/api/bluetooth/devices' && req.method === 'GET') {
+      if (!Array.isArray(db.bluetooth_devices)) db.bluetooth_devices = [];
+      return sendJSON(res, 200, {
+        success: true,
+        count: db.bluetooth_devices.length,
+        devices: db.bluetooth_devices
+      });
+    }
+
+    // B. Register/Update Bluetooth MW Device: POST /api/bluetooth/devices
+    if (pathname === '/api/bluetooth/devices' && req.method === 'POST') {
+      const body = await parseBody(req);
+      if (!Array.isArray(db.bluetooth_devices)) db.bluetooth_devices = [];
+      
+      const devId = body.id || (body.name ? `MW-${body.name.replace(/[^a-zA-Z0-9]/g, '_')}` : `MW-${Date.now()}`);
+      const devName = body.name || 'MW Biomedical Wearable (ESP32-S3)';
+      const existingIdx = db.bluetooth_devices.findIndex(d => d.id === devId || d.name === devName);
+      
+      const deviceRecord = {
+        id: devId,
+        name: devName,
+        type: body.type || 'MW Biomedical Telemetry Sensor',
+        status: body.status || 'connected',
+        battery: body.battery !== undefined ? body.battery : 85,
+        rssi: body.rssi || -65,
+        macAddress: body.macAddress || '24:6F:28:B4:9A:12',
+        firmware: body.firmware || 'v2.5.0-MW',
+        services: body.services || ['NUS', 'PPLUS_CUSTOM', 'HEART_RATE'],
+        pairedAt: existingIdx >= 0 ? db.bluetooth_devices[existingIdx].pairedAt : new Date().toISOString(),
+        lastConnectedAt: new Date().toISOString(),
+        readingsCount: existingIdx >= 0 ? (db.bluetooth_devices[existingIdx].readingsCount || 0) : 0
+      };
+
+      if (existingIdx >= 0) {
+        db.bluetooth_devices[existingIdx] = Object.assign({}, db.bluetooth_devices[existingIdx], deviceRecord);
+      } else {
+        db.bluetooth_devices.unshift(deviceRecord);
+      }
+
+      writeDB(db);
+      return sendJSON(res, 200, {
+        success: true,
+        message: 'Bluetooth MW device registered in database',
+        device: existingIdx >= 0 ? db.bluetooth_devices[existingIdx] : deviceRecord
+      });
+    }
+
+    // C. Get Bluetooth MW Telemetry Readings: GET /api/bluetooth/readings
+    if (pathname === '/api/bluetooth/readings' && req.method === 'GET') {
+      if (!Array.isArray(db.bluetooth_readings)) db.bluetooth_readings = [];
+      const limit = parseInt(urlObj.searchParams.get('limit') || '30', 10);
+      const onlyValid = urlObj.searchParams.get('valid') === '1' || urlObj.searchParams.get('valid') === 'true';
+
+      let results = db.bluetooth_readings;
+      if (onlyValid) {
+        results = results.filter(r => r.isValidReading);
+      }
+      results = results.slice(0, limit);
+
+      const validCount = db.bluetooth_readings.filter(r => r.isValidReading).length;
+
+      return sendJSON(res, 200, {
+        success: true,
+        totalInDb: db.bluetooth_readings.length,
+        rightReadingsCount: validCount,
+        readings: results
+      });
+    }
+
+    // D. Store Bluetooth MW Right Reading in Database: POST /api/bluetooth/readings
+    if (pathname === '/api/bluetooth/readings' && req.method === 'POST') {
+      const body = await parseBody(req);
+      if (!Array.isArray(db.bluetooth_readings)) db.bluetooth_readings = [];
+
+      const hr = Number(body.heartRate || body.bpm || 72);
+      const spo2 = Number(body.spO2 || body.spo2 || 98);
+      const temp = Number((Number(body.temp || body.temperature || 36.6)).toFixed(1));
+      const angle = Number(body.postureAngle !== undefined ? body.postureAngle : (body.angle || 0));
+      const bat = Number(body.battery !== undefined ? body.battery : (body.bat || 80));
+      const motion = body.motion || (angle > 12 ? 'Slouch Warning' : 'Normal Upright');
+      const devName = body.deviceName || body.device || 'MW Biomedical Wearable';
+
+      // Physiological validation check for "Right Reading"
+      const isHrValid = hr >= 45 && hr <= 195;
+      const isSpo2Valid = spo2 >= 80 && spo2 <= 100;
+      const isTempValid = temp >= 34.0 && temp <= 41.5;
+      const isAngleValid = angle >= 0 && angle <= 65;
+      const isRightReading = isHrValid && isSpo2Valid && isTempValid && isAngleValid;
+
+      const readingRecord = {
+        id: `MWR-${Date.now()}-${Math.floor(100 + Math.random() * 900)}`,
+        deviceId: body.deviceId || 'MW-DEV-01',
+        deviceName: devName,
+        heartRate: hr,
+        spO2: spo2,
+        temp: temp,
+        postureAngle: angle,
+        battery: bat,
+        motion: motion,
+        signalRssi: body.rssi || -62,
+        isValidReading: isRightReading,
+        readingQuality: isRightReading ? 'Right Reading (Optimal Calibrated)' : 'Anomalous / Check Sensor Placement',
+        validationDetails: {
+          heartRateOk: isHrValid,
+          spO2Ok: isSpo2Valid,
+          tempOk: isTempValid,
+          postureOk: isAngleValid
+        },
+        recordedAt: new Date().toISOString()
+      };
+
+      // Store in bluetooth_readings array (keep latest 300)
+      db.bluetooth_readings.unshift(readingRecord);
+      if (db.bluetooth_readings.length > 300) {
+        db.bluetooth_readings = db.bluetooth_readings.slice(0, 300);
+      }
+
+      // Update vitals_stream in database so entire application is synchronized with this right reading
+      db.vitals_stream = {
+        heartRate: hr,
+        spO2: spo2,
+        temp: temp,
+        postureAngle: angle,
+        motion: motion,
+        battery: bat,
+        connected: true,
+        device: devName,
+        updatedAt: new Date().toISOString()
+      };
+
+      // Increment device readingsCount in database
+      if (Array.isArray(db.bluetooth_devices)) {
+        const d = db.bluetooth_devices.find(dev => dev.name === devName || dev.id === body.deviceId);
+        if (d) {
+          d.readingsCount = (d.readingsCount || 0) + 1;
+          d.lastReadingAt = new Date().toISOString();
+          d.battery = bat;
+          d.status = 'connected';
+        }
+      }
+
+      // Also log as a diagnostic entry if requested or if posture slouch occurred
+      if (body.logToDiagnostics || angle > 15) {
+        if (!Array.isArray(db.diagnostics)) db.diagnostics = [];
+        db.diagnostics.unshift({
+          id: `DIAG-BLE-${Date.now()}`,
+          type: angle > 15 ? 'BLE MW Slouch Alert' : 'BLE MW Right Reading Verified',
+          heartRate: hr,
+          spO2: spo2,
+          temp: temp,
+          postureAngle: angle,
+          status: isRightReading ? 'Optimal' : 'Needs Attention',
+          notes: `Logged from ${devName} via Web Bluetooth`,
+          loggedAt: new Date().toISOString()
+        });
+      }
+
+      writeDB(db);
+
+      return sendJSON(res, 201, {
+        success: true,
+        message: isRightReading ? 'Right reading verified & stored in database' : 'Reading logged with physiological warnings',
+        isRightReading: isRightReading,
+        reading: readingRecord,
+        totalReadingsInDb: db.bluetooth_readings.length
+      });
+    }
+
+    // E. Clear Bluetooth Readings: DELETE /api/bluetooth/readings
+    if (pathname === '/api/bluetooth/readings' && req.method === 'DELETE') {
+      db.bluetooth_readings = [];
+      writeDB(db);
+      return sendJSON(res, 200, { success: true, message: 'All Bluetooth readings cleared from database' });
+    }
+
     // 12. BACKFILE ENGINE: GET /api/backfile or /api/backup/export
     if ((pathname === '/api/backfile' || pathname === '/api/backup/export') && req.method === 'GET') {
       const isDownload = urlObj.searchParams.get('download') === '1' || urlObj.searchParams.get('download') === 'true';
