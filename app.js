@@ -412,6 +412,27 @@
     showToast(`Appointment ${aptId} confirmed with ${docName} for ${slot}!`, 'event_available');
   };
 
+  // Posture Settings Adjustment Helpers
+  window.adjustPostureAngle = function (delta) {
+    const el = document.getElementById('angle-display');
+    if (!el) return;
+    const current = parseInt(el.textContent, 10) || 15;
+    const next = current + delta;
+    if (next >= 5 && next <= 45) {
+      el.textContent = next + '°';
+    }
+  };
+
+  window.adjustPostureHoldTime = function (delta) {
+    const el = document.getElementById('time-display');
+    if (!el) return;
+    const current = parseInt(el.textContent, 10) || 10;
+    const next = current + delta;
+    if (next >= 5 && next <= 60) {
+      el.textContent = next + 's';
+    }
+  };
+
   // Posture Settings Save to Backend
   window.savePostureSettings = async function () {
     const angleEl = document.getElementById('angle-display');
