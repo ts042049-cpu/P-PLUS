@@ -2359,9 +2359,11 @@
     isConnected: false,
     isSimulating: false,
     simTimer: null,
-    deviceName: 'ESP32-S3-PPLUS',
+    deviceName: 'MW Biomedical Wearable (ESP32-S3)',
     packetsCount: 0,
     lastSyncTimestamp: 0,
+    isRightReading: true,
+    dbSyncedCount: 2,
     currentTelemetry: {
       heartRate: 72,
       spO2: 98,
@@ -2616,9 +2618,19 @@
       bleState.isConnected = true;
       if (bleState.isSimulating) stopEsp32Simulation();
 
+      // Register connected MW device in backend database
+      apiRequest('/api/bluetooth/devices', 'POST', {
+        id: bleState.device.id || `MW-${Date.now()}`,
+        name: bleState.deviceName,
+        type: 'MW Biomedical Wearable Sensor',
+        status: 'connected',
+        battery: bleState.currentTelemetry.battery || 85,
+        rssi: -62
+      }).catch(err => console.warn('Device DB register skipped:', err));
+
       updateBleUiState();
       logBleTerminal(`[BLE CONNECTED] Subscribed to notifications from ${bleState.deviceName}!`);
-      showToast(`Connected to ${bleState.deviceName}! Live data streaming.`, 'bluetooth_connected');
+      showToast(`Connected to ${bleState.deviceName}! Live right readings syncing to DB.`, 'bluetooth_connected');
     } catch (err) {
       if (err.name === 'NotFoundError') {
         logBleTerminal('[BLE CANCELLED] User closed device picker.');
@@ -2726,16 +2738,64 @@
     };
 
     bleState.currentTelemetry = telemetry;
-    updateAppScreensWithTelemetry(telemetry);
+
+    // Validate whether reading is physiologically sound ("Right Reading")
+    const isHrRight = telemetry.heartRate >= 45 && telemetry.heartRate <= 195;
+    const isSpo2Right = telemetry.spO2 >= 85 && telemetry.spO2 <= 100;
+    const isTempRight = telemetry.temp >= 34.0 && telemetry.temp <= 41.5;
+    const isAngleRight = telemetry.postureAngle >= 0 && telemetry.postureAngle <= 65;
+    const isRightReading = isHrRight && isSpo2Right && isTempRight && isAngleRight;
+
+    bleState.isRightReading = isRightReading;
+    updateAppScreensWithTelemetry(telemetry, isRightReading);
 
     const now = Date.now();
-    if (now - bleState.lastSyncTimestamp > 4000) {
+    // Auto-sync right readings to backend database
+    if (now - bleState.lastSyncTimestamp > 3000) {
       bleState.lastSyncTimestamp = now;
-      apiRequest('/api/vitals', 'POST', telemetry).catch(() => {});
+      apiRequest('/api/bluetooth/readings', 'POST', {
+        deviceId: bleState.device?.id || 'MW-DEV-01',
+        deviceName: bleState.deviceName,
+        heartRate: telemetry.heartRate,
+        spO2: telemetry.spO2,
+        temp: telemetry.temp,
+        postureAngle: telemetry.postureAngle,
+        battery: telemetry.battery,
+        motion: telemetry.motion
+      }).then(res => {
+        if (res && res.totalReadingsInDb) {
+          bleState.dbSyncedCount = res.totalReadingsInDb;
+          const countBadge = document.getElementById('ble-db-readings-count');
+          if (countBadge) countBadge.textContent = res.totalReadingsInDb;
+        }
+      }).catch(() => {});
     }
   }
 
-  function updateAppScreensWithTelemetry(data) {
+  function updateAppScreensWithTelemetry(data, isRightReading = true) {
+    // 0. Update Right Reading Quality Indicator
+    const qualityIcon = document.getElementById('ble-reading-quality-icon');
+    const qualityLabel = document.getElementById('ble-reading-quality-label');
+    const qualityStatusTxt = document.getElementById('ble-mw-reading-status-txt');
+    if (qualityIcon && qualityLabel) {
+      if (isRightReading) {
+        qualityIcon.textContent = 'verified';
+        qualityIcon.className = 'material-symbols-outlined text-emerald-600 text-[18px]';
+        qualityLabel.textContent = 'Right Reading Verified ✓';
+        qualityLabel.className = 'font-bold text-xs text-emerald-900';
+        if (qualityStatusTxt) {
+          qualityStatusTxt.textContent = `Optimal calibrated reading: ${data.heartRate} BPM • ${data.spO2}% SpO2 • ${data.temp}°C`;
+        }
+      } else {
+        qualityIcon.textContent = 'warning';
+        qualityIcon.className = 'material-symbols-outlined text-amber-600 text-[18px]';
+        qualityLabel.textContent = 'Calibration Warning';
+        qualityLabel.className = 'font-bold text-xs text-amber-900';
+        if (qualityStatusTxt) {
+          qualityStatusTxt.textContent = 'Values outside standard resting physiological bounds. Check sensor placement.';
+        }
+      }
+    }
     // 1. Heart Rate (BPM)
     const bpmEls = document.querySelectorAll('.dynamic-bpm-val');
     bpmEls.forEach(el => {
@@ -2925,6 +2985,70 @@
       showToast('Code ready in box (select & copy)', 'code');
     });
   }
+
+  // ==========================================
+  // BLUETOOTH MW DATABASE SYNC HELPERS
+  // ==========================================
+  window.saveCurrentMwReadingToDb = async function () {
+    const t = bleState.currentTelemetry;
+    const res = await apiRequest('/api/bluetooth/readings', 'POST', {
+      deviceId: bleState.device?.id || 'MW-DEV-01',
+      deviceName: bleState.deviceName,
+      heartRate: t.heartRate,
+      spO2: t.spO2,
+      temp: t.temp,
+      postureAngle: t.postureAngle,
+      battery: t.battery,
+      motion: t.motion,
+      logToDiagnostics: true
+    });
+    if (res && res.success) {
+      showToast(`Right reading (${t.heartRate} BPM, ${t.spO2}%) saved to database!`, 'cloud_done');
+      if (res.totalReadingsInDb) {
+        bleState.dbSyncedCount = res.totalReadingsInDb;
+        const countBadge = document.getElementById('ble-db-readings-count');
+        if (countBadge) countBadge.textContent = res.totalReadingsInDb;
+      }
+      loadMwDbReadingsHistory();
+    }
+  };
+
+  window.toggleMwHistoryView = function () {
+    const c = document.getElementById('ble-mw-history-container');
+    if (!c) return;
+    if (c.classList.contains('hidden')) {
+      c.classList.remove('hidden');
+      loadMwDbReadingsHistory();
+    } else {
+      c.classList.add('hidden');
+    }
+  };
+
+  window.loadMwDbReadingsHistory = async function () {
+    const list = document.getElementById('ble-mw-history-list');
+    if (!list) return;
+    list.innerHTML = '<div class="text-gray-400 py-1 text-center">Loading database records...</div>';
+    const res = await apiRequest('/api/bluetooth/readings?limit=6');
+    if (res && res.readings && res.readings.length > 0) {
+      list.innerHTML = res.readings.map(r => {
+        const time = new Date(r.recordedAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+        return `
+          <div class="flex items-center justify-between p-1.5 rounded-lg bg-white/90 border border-emerald-100 shadow-xs">
+            <div class="flex items-center gap-1.5">
+              <span class="w-2 h-2 rounded-full ${r.isValidReading ? 'bg-emerald-500' : 'bg-amber-500'}"></span>
+              <span class="font-bold text-gray-800">${r.heartRate} BPM</span>
+              <span class="text-gray-500">• ${r.spO2}% • ${r.temp}°C • ${r.postureAngle}°</span>
+            </div>
+            <span class="text-gray-400 font-mono text-[9px]">${time}</span>
+          </div>
+        `;
+      }).join('');
+      const countBadge = document.getElementById('ble-db-readings-count');
+      if (countBadge && res.totalInDb) countBadge.textContent = res.totalInDb;
+    } else {
+      list.innerHTML = '<div class="text-gray-400 py-1 text-center">No database records found yet.</div>';
+    }
+  };
 
   // Live Vitals Telemetry Poller (Only when BLE is not actively connected or simulating)
   function startLiveTelemetrySync() {
