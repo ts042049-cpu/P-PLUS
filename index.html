@@ -782,11 +782,11 @@
                     <span class="font-title-sm text-sm text-on-surface font-semibold">Alert Angle</span>
                   </div>
                   <div class="flex items-center bg-surface-container-low rounded-full p-1 gap-1">
-                    <button aria-label="Decrease alert angle" class="w-7 h-7 rounded-full bg-surface-container-lowest text-on-surface flex items-center justify-center shadow-sm active:scale-95 transition-transform cursor-pointer" onclick="const d = document.getElementById('angle-display'); let v = parseInt(d.textContent) - 1; if(v >= 5) d.textContent = v + '°';" type="button">
+                    <button aria-label="Decrease alert angle" class="w-7 h-7 rounded-full bg-surface-container-lowest text-on-surface flex items-center justify-center shadow-sm active:scale-95 transition-transform cursor-pointer" onclick="adjustPostureAngle(-1)" type="button">
                       <span class="material-symbols-outlined text-[16px]">remove</span>
                     </button>
                     <span class="font-title-sm text-sm text-on-surface min-w-[30px] text-center font-bold" id="angle-display">15°</span>
-                    <button aria-label="Increase alert angle" class="w-7 h-7 rounded-full bg-surface-container-lowest text-on-surface flex items-center justify-center shadow-sm active:scale-95 transition-transform cursor-pointer" onclick="const d = document.getElementById('angle-display'); let v = parseInt(d.textContent) + 1; if(v <= 45) d.textContent = v + '°';" type="button">
+                    <button aria-label="Increase alert angle" class="w-7 h-7 rounded-full bg-surface-container-lowest text-on-surface flex items-center justify-center shadow-sm active:scale-95 transition-transform cursor-pointer" onclick="adjustPostureAngle(1)" type="button">
                       <span class="material-symbols-outlined text-[16px]">add</span>
                     </button>
                   </div>
@@ -800,11 +800,11 @@
                     <span class="font-title-sm text-sm text-on-surface font-semibold">Hold Time</span>
                   </div>
                   <div class="flex items-center bg-surface-container-low rounded-full p-1 gap-1">
-                    <button aria-label="Decrease hold time" class="w-7 h-7 rounded-full bg-surface-container-lowest text-on-surface flex items-center justify-center shadow-sm active:scale-95 transition-transform cursor-pointer" onclick="const d = document.getElementById('time-display'); let v = parseInt(d.textContent) - 5; if(v >= 5) d.textContent = v + 's';" type="button">
+                    <button aria-label="Decrease hold time" class="w-7 h-7 rounded-full bg-surface-container-lowest text-on-surface flex items-center justify-center shadow-sm active:scale-95 transition-transform cursor-pointer" onclick="adjustPostureHoldTime(-5)" type="button">
                       <span class="material-symbols-outlined text-[16px]">remove</span>
                     </button>
                     <span class="font-title-sm text-sm text-on-surface min-w-[34px] text-center font-bold" id="time-display">10s</span>
-                    <button aria-label="Increase hold time" class="w-7 h-7 rounded-full bg-surface-container-lowest text-on-surface flex items-center justify-center shadow-sm active:scale-95 transition-transform cursor-pointer" onclick="const d = document.getElementById('time-display'); let v = parseInt(d.textContent) + 5; if(v <= 60) d.textContent = v + 's';" type="button">
+                    <button aria-label="Increase hold time" class="w-7 h-7 rounded-full bg-surface-container-lowest text-on-surface flex items-center justify-center shadow-sm active:scale-95 transition-transform cursor-pointer" onclick="adjustPostureHoldTime(5)" type="button">
                       <span class="material-symbols-outlined text-[16px]">add</span>
                     </button>
                   </div>
