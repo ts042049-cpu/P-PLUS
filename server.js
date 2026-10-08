@@ -112,7 +112,40 @@ function initDB() {
         connected: true,
         device: 'P+ Wearable ESP32-S3',
         updatedAt: new Date().toISOString()
-      }
+      },
+      bluetooth_devices: [
+        {
+          id: 'MW-DEV-01',
+          name: 'MW Biomedical Wearable (ESP32-S3)',
+          type: 'MW Biomedical Telemetry Sensor',
+          status: 'paired',
+          battery: 84,
+          rssi: -62,
+          macAddress: '24:6F:28:B4:9A:12',
+          firmware: 'v2.5.0-MW',
+          pairedAt: new Date().toISOString(),
+          lastConnectedAt: new Date().toISOString(),
+          readingsCount: 15
+        }
+      ],
+      bluetooth_readings: [
+        {
+          id: 'MWR-INIT-1',
+          deviceId: 'MW-DEV-01',
+          deviceName: 'MW Biomedical Wearable (ESP32-S3)',
+          heartRate: 72,
+          spO2: 98,
+          temp: 36.6,
+          postureAngle: 0,
+          battery: 84,
+          motion: 'Ergonomic Upright',
+          signalRssi: -62,
+          isValidReading: true,
+          readingQuality: 'Right Reading (Optimal Calibrated)',
+          validationDetails: { heartRateOk: true, spO2Ok: true, tempOk: true, postureOk: true },
+          recordedAt: new Date().toISOString()
+        }
+      ]
     };
     fs.writeFileSync(DB_FILE, JSON.stringify(defaultData, null, 2), 'utf8');
   }
