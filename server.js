@@ -382,7 +382,9 @@ const server = http.createServer(async (req, res) => {
           usersCount: db.users ? db.users.length : 0,
           appointmentsCount: db.appointments ? db.appointments.length : 0,
           sosEventsCount: db.sos_events ? db.sos_events.length : 0,
-          diagnosticsCount: db.diagnostics ? db.diagnostics.length : 0
+          diagnosticsCount: db.diagnostics ? db.diagnostics.length : 0,
+          bluetoothDevicesCount: db.bluetooth_devices ? db.bluetooth_devices.length : 0,
+          bluetoothReadingsCount: db.bluetooth_readings ? db.bluetooth_readings.length : 0
         }
       });
     }
