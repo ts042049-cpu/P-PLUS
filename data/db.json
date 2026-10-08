@@ -159,5 +159,64 @@
     "connected": true,
     "device": "P+ Wearable ESP32-S3",
     "updatedAt": "2026-10-03T13:23:33.604Z"
-  }
+  },
+  "bluetooth_devices": [
+    {
+      "id": "MW-DEV-01",
+      "name": "MW Biomedical Wearable (ESP32-S3)",
+      "type": "MW Biomedical Telemetry Sensor",
+      "status": "paired",
+      "battery": 84,
+      "rssi": -62,
+      "macAddress": "24:6F:28:B4:9A:12",
+      "firmware": "v2.5.0-MW",
+      "pairedAt": "2026-10-08T18:00:00.000Z",
+      "lastConnectedAt": "2026-10-08T18:25:00.000Z",
+      "readingsCount": 18
+    }
+  ],
+  "bluetooth_readings": [
+    {
+      "id": "MWR-1728412800001",
+      "deviceId": "MW-DEV-01",
+      "deviceName": "MW Biomedical Wearable (ESP32-S3)",
+      "heartRate": 72,
+      "spO2": 98,
+      "temp": 36.6,
+      "postureAngle": 0,
+      "battery": 84,
+      "motion": "Ergonomic Upright",
+      "signalRssi": -62,
+      "isValidReading": true,
+      "readingQuality": "Right Reading (Optimal Calibrated)",
+      "validationDetails": {
+        "heartRateOk": true,
+        "spO2Ok": true,
+        "tempOk": true,
+        "postureOk": true
+      },
+      "recordedAt": "2026-10-08T18:24:00.000Z"
+    },
+    {
+      "id": "MWR-1728412800002",
+      "deviceId": "MW-DEV-01",
+      "deviceName": "MW Biomedical Wearable (ESP32-S3)",
+      "heartRate": 74,
+      "spO2": 99,
+      "temp": 36.7,
+      "postureAngle": 2,
+      "battery": 84,
+      "motion": "Ergonomic Upright",
+      "signalRssi": -61,
+      "isValidReading": true,
+      "readingQuality": "Right Reading (Optimal Calibrated)",
+      "validationDetails": {
+        "heartRateOk": true,
+        "spO2Ok": true,
+        "tempOk": true,
+        "postureOk": true
+      },
+      "recordedAt": "2026-10-08T18:25:00.000Z"
+    }
+  ]
 }
