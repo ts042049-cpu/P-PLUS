@@ -765,12 +765,12 @@ const server = http.createServer(async (req, res) => {
 
       // Increment device readingsCount in database
       if (Array.isArray(db.bluetooth_devices)) {
-        const d = db.bluetooth_devices.find(dev => dev.name === devName || dev.id === body.deviceId);
-        if (d) {
-          d.readingsCount = (d.readingsCount || 0) + 1;
-          d.lastReadingAt = new Date().toISOString();
-          d.battery = bat;
-          d.status = 'connected';
+        const targetDev = db.bluetooth_devices.find(dev => dev.name === devName || dev.id === body.deviceId);
+        if (targetDev) {
+          targetDev.readingsCount = (targetDev.readingsCount || 0) + 1;
+          targetDev.lastReadingAt = new Date().toISOString();
+          targetDev.battery = bat;
+          targetDev.status = 'connected';
         }
       }
 
