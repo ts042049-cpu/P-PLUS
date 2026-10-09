@@ -4,13 +4,13 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport">
   <title>P+ Pro — Personal Health Companion</title>
-  
+
   <!-- Fonts & Icons -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200">
-  
+
   <!-- Consolidated Stylesheet (Tailwind CSS + P+ Pro Custom Design System & Themes) -->
   <link rel="stylesheet" href="styles.css">
 
@@ -23,10 +23,10 @@
 
   <!-- Presentation App Canvas -->
   <div class="app-canvas">
-    
+
     <!-- Phone Mockup Device Frame -->
     <div class="device-frame">
-      
+
       <!-- Viewport housing all screens -->
       <div id="screens-viewport" class="screens-viewport">
 
@@ -40,15 +40,14 @@
               <span>BUILT FOR A HEALTHIER INDIA</span>
             </div>
 
-
-            <!-- 1. TOP BRANDING -->
+<!-- 1. TOP BRANDING -->
             <header class="w-full flex flex-col items-center text-center mt-2 mb-1 shrink-0 z-10">
               <img alt="P+ Personal Health Companion" class="w-24 h-24 object-contain" src="assets/images/pplus-logo.svg">
             </header>
 
             <!-- 2. PREMIUM TRANSLUCENT LOGIN CARD -->
             <div class="w-full bg-white/95 backdrop-blur-xl rounded-[26px] px-5 py-4 shadow-[0_10px_32px_rgba(0,0,0,0.04)] border border-black/[0.05] flex flex-col shrink-0 z-10">
-              
+
               <!-- Card Header -->
               <div class="mb-3 text-left">
                 <h2 id="login-heading" class="font-bold text-lg text-black tracking-tight">Welcome Back</h2>
@@ -57,16 +56,12 @@
 
               <!-- Interactive Login Form -->
               <form id="login-form" class="flex flex-col space-y-2.5" onsubmit="handleLoginSubmit(event)" novalidate>
-                
+
                 <!-- First & Last Name Field -->
                 <div class="flex flex-col space-y-1">
                   <div class="relative flex items-center">
                     <span class="material-symbols-outlined absolute left-3.5 text-gray-400 text-[18px] pointer-events-none">badge</span>
-                    <input class="input-auth-field w-full bg-[#F5F5F7] text-black placeholder:text-gray-400 rounded-2xl pl-10 pr-3.5 py-2.5 text-xs font-medium outline-none border border-black/[0.04] focus:border-black/30 focus:bg-white focus:ring-2 focus:ring-black/5 transition-all"
-                          id="login-name"
-                          placeholder="First & Last Name"
-                          type="text"
-                          autocomplete="name">
+                    <input class="input-auth-field w-full bg-[#F5F5F7] text-black placeholder:text-gray-400 rounded-2xl pl-10 pr-3.5 py-2.5 text-xs font-medium outline-none border border-black/[0.04] focus:border-black/30 focus:bg-white focus:ring-2 focus:ring-black/5 transition-all" id="login-name" placeholder="First & Last Name" type="text" autocomplete="name">
                   </div>
                   <p id="login-name-error" class="text-red-500 text-[10px] font-medium px-1 hidden"></p>
                 </div>
@@ -75,11 +70,7 @@
                 <div class="flex flex-col space-y-1">
                   <div class="relative flex items-center">
                     <span class="material-symbols-outlined absolute left-3.5 text-gray-400 text-[18px] pointer-events-none">person</span>
-                    <input class="input-auth-field w-full bg-[#F5F5F7] text-black placeholder:text-gray-400 rounded-2xl pl-10 pr-3.5 py-2.5 text-xs font-medium outline-none border border-black/[0.04] focus:border-black/30 focus:bg-white focus:ring-2 focus:ring-black/5 transition-all"
-                           id="login-email"
-                           placeholder="Email or Phone"
-                           type="text"
-                           autocomplete="username">
+                    <input class="input-auth-field w-full bg-[#F5F5F7] text-black placeholder:text-gray-400 rounded-2xl pl-10 pr-3.5 py-2.5 text-xs font-medium outline-none border border-black/[0.04] focus:border-black/30 focus:bg-white focus:ring-2 focus:ring-black/5 transition-all" id="login-email" placeholder="Email or Phone" type="text" autocomplete="username">
                   </div>
                   <p id="login-email-error" class="text-red-500 text-[10px] font-medium px-1 hidden"></p>
                 </div>
@@ -88,11 +79,7 @@
                 <div class="flex flex-col space-y-1">
                   <div class="relative flex items-center">
                     <span class="material-symbols-outlined absolute left-3.5 text-gray-400 text-[18px] pointer-events-none">lock</span>
-                    <input class="input-auth-field w-full bg-[#F5F5F7] text-black placeholder:text-gray-400 rounded-2xl pl-10 pr-10 py-2.5 text-xs font-medium outline-none border border-black/[0.04] focus:border-black/30 focus:bg-white focus:ring-2 focus:ring-black/5 transition-all"
-                           id="login-password"
-                           placeholder="Password"
-                           type="password"
-                           autocomplete="current-password">
+                    <input class="input-auth-field w-full bg-[#F5F5F7] text-black placeholder:text-gray-400 rounded-2xl pl-10 pr-10 py-2.5 text-xs font-medium outline-none border border-black/[0.04] focus:border-black/30 focus:bg-white focus:ring-2 focus:ring-black/5 transition-all" id="login-password" placeholder="Password" type="password" autocomplete="current-password">
                     <button type="button" id="toggle-login-pwd" class="absolute right-3 p-1 text-gray-400 hover:text-black transition-colors cursor-pointer" onclick="togglePasswordVisibility()" aria-label="Toggle password visibility">
                       <span class="material-symbols-outlined text-[18px]" id="eye-icon-login">visibility</span>
                     </button>
@@ -136,11 +123,7 @@
                 </button>
                 <!-- Legacy Google Platform container & Modern GIS container -->
                 <div class="g-signin2 hidden" data-onsuccess="onSignIn"></div>
-                <div id="g_id_onload"
-                     data-client_id="YOUR_GOOGLE_CLIENT_ID.apps.googleusercontent.com"
-                     data-callback="handleGoogleCredentialResponse"
-                     data-auto_prompt="false"
-                     class="hidden">
+                <div id="g_id_onload" data-client_id="YOUR_GOOGLE_CLIENT_ID.apps.googleusercontent.com" data-callback="handleGoogleCredentialResponse" data-auto_prompt="false" class="hidden">
                 </div>
                 <div id="g-signin-real-container" class="hidden"></div>
                 <!-- Apple Logo Button -->
@@ -152,7 +135,7 @@
               <!-- Create Account Link -->
               <div class="mt-2.5 pt-2 border-t border-gray-100 text-center">
                 <p class="text-xs text-gray-500">
-                  New here? 
+                  New here?
                   <a class="text-black font-bold hover:underline cursor-pointer ml-1" onclick="openRegisterModal('patient')">Create Account</a>
                 </p>
               </div>
@@ -216,7 +199,7 @@
           <!-- Main Scroll Area -->
           <div class="screen-scroll-area px-4 pt-3 pb-24">
             <div class="flex flex-col w-full gap-3.5 pb-8 max-w-full">
-              
+
               <!-- Greeting Text Section -->
               <section class="flex flex-col w-full pt-1">
                 <div class="flex items-baseline flex-wrap gap-1.5">
@@ -250,7 +233,7 @@
 
               <!-- 2-Column Telemetry Grid (4 Cards) -->
               <section class="w-full grid grid-cols-2 gap-3 auto-rows-fr">
-                
+
                 <!-- Card 1: Heart Rate (Click -> Live Monitoring) -->
                 <div class="bg-surface-container-lowest rounded-2xl p-3.5 shadow-[0_4px_20px_rgba(0,0,0,0.03)] flex flex-col justify-between min-h-[148px] h-full relative overflow-hidden cursor-pointer active:scale-98 transition-transform border border-surface-container/40 box-border" onclick="navigateTo('screen-live')">
                   <div class="flex items-center justify-between w-full min-w-0">
@@ -522,7 +505,7 @@
 
           <div class="screen-scroll-area px-margin pt-2 pb-4">
             <div class="flex flex-col w-full pb-2">
-              
+
               <!-- Device Status Card (Click to open ESP32-S3 BLE Manager) -->
               <section class="w-full pt-1 pb-3">
                 <div id="live-ble-device-banner" class="w-full bg-surface-container-lowest rounded-full p-2 px-3.5 shadow-sm border border-surface-container/40 flex items-center justify-between cursor-pointer hover:bg-slate-50 active:scale-[0.99] transition-all" onclick="openEsp32BleModal()" title="Manage ESP32-S3 Bluetooth Connection">
@@ -551,11 +534,7 @@
               <!-- Central 3D Human Body Visualization -->
               <section class="relative w-full flex items-center justify-center py-2 overflow-visible">
                 <div class="relative w-full max-w-[240px] aspect-[3/4] flex items-center justify-center">
-                  <img alt="Realistic 3D human body visualization" 
-                       class="w-full h-full object-contain select-none filter drop-shadow-md" 
-                       draggable="false" 
-                       src="assets/images/body_3d.png"
-                       onerror="this.src='https://lh3.googleusercontent.com/aida/AEtjO1XMqTc0XqubitK3YJq8LfFAPeq1qVDa5pvkp4dFG6v-SF-uyTU22BpuYk11JYJ0GdOtgNNGfDO_jSwffm1EzQNPcwXJU9pRyIUFHb8d6WnO9H94I5p9TXQXVOx1Gpd73tzfgTC0ROdxj3PFqMUHKCn_8g57Zdp6mzdMOneX9sm-vx6_7JBMylXJasgspUpMl-Cx0qj8uM9CK_XdFqv-HyZUUzltS4SB8mEqc8rzzs6X8Z5lh07W-Qw8DeY'">
+                  <img alt="Realistic 3D human body visualization" class="w-full h-full object-contain select-none filter drop-shadow-md" draggable="false" src="assets/images/body_3d.png" onerror="this.src='https://lh3.googleusercontent.com/aida/AEtjO1XMqTc0XqubitK3YJq8LfFAPeq1qVDa5pvkp4dFG6v-SF-uyTU22BpuYk11JYJ0GdOtgNNGfDO_jSwffm1EzQNPcwXJU9pRyIUFHb8d6WnO9H94I5p9TXQXVOx1Gpd73tzfgTC0ROdxj3PFqMUHKCn_8g57Zdp6mzdMOneX9sm-vx6_7JBMylXJasgspUpMl-Cx0qj8uM9CK_XdFqv-HyZUUzltS4SB8mEqc8rzzs6X8Z5lh07W-Qw8DeY'">
                   <!-- Floating Angle Overlay Pill -->
                   <div class="absolute top-2 right-2 bg-white/90 backdrop-blur-md border border-black/10 rounded-full px-2.5 py-1 flex items-center gap-1.5 shadow-sm">
                     <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
@@ -567,7 +546,7 @@
               <!-- Health Readings Section (2x2 Matrix) -->
               <section class="w-full mt-2">
                 <div class="grid grid-cols-2 gap-2.5 w-full">
-                  
+
                   <!-- Heart Rate Pod -->
                   <div class="bg-surface-container-lowest p-3 rounded-2xl shadow-sm border border-surface-container/40 flex flex-col justify-between">
                     <div class="flex items-center justify-between mb-1">
@@ -710,7 +689,7 @@
 
           <div class="screen-scroll-area px-margin pt-3 pb-4">
             <div class="flex flex-col w-full pb-2">
-              
+
               <!-- Posture Status Card -->
               <div class="w-full bg-surface-container-lowest rounded-2xl p-4 shadow-sm border border-surface-container/40 flex flex-col gap-2 mb-3">
                 <div class="flex items-center justify-between">
@@ -731,16 +710,13 @@
               <!-- Central Posture Showcase -->
               <div class="w-full bg-surface-container-lowest rounded-2xl p-3.5 shadow-sm border border-surface-container/40 mb-3 flex flex-col gap-3">
                 <div class="w-full rounded-xl overflow-hidden bg-surface-container-lowest flex items-center justify-center relative">
-                  <img alt="Sitting posture comparison showing upright ergonomic alignment versus slouching forward bend" 
-                  class="w-full h-auto object-contain select-none" 
-                    src="assets/images/posture_3d.png"
-                    onerror="this.src='https://lh3.googleusercontent.com/aida/AEtjO1U7Yfy8Ryh5Awug23jMhev2quBOKAzvFxXaIqvjbzm0R9jZzWlaSAcCfFlUBGx-jQfnbDx-kaCOMLqpq2Y6qgBH8IFg28a6meFFJj0VCpI5LTUuCl_ELnx0nPb05tY2JGO2T9FoLdcC__gcyJg1wffFxYIKu1OE5OuvSQEJHbptbE3Upl40IjPkUiwwpYj-U5zZ4e1FU4DUAhmQFNSsqyjC8lTHQ9z1PyfO3a_iTifc0FO04oDr1D-HmiE'">
+                  <img alt="Sitting posture comparison showing upright ergonomic alignment versus slouching forward bend" class="w-full h-auto object-contain select-none" src="assets/images/posture_3d.png" onerror="this.src='https://lh3.googleusercontent.com/aida/AEtjO1U7Yfy8Ryh5Awug23jMhev2quBOKAzvFxXaIqvjbzm0R9jZzWlaSAcCfFlUBGx-jQfnbDx-kaCOMLqpq2Y6qgBH8IFg28a6meFFJj0VCpI5LTUuCl_ELnx0nPb05tY2JGO2T9FoLdcC__gcyJg1wffFxYIKu1OE5OuvSQEJHbptbE3Upl40IjPkUiwwpYj-U5zZ4e1FU4DUAhmQFNSsqyjC8lTHQ9z1PyfO3a_iTifc0FO04oDr1D-HmiE'">
                   <div class="absolute bottom-2 right-2 bg-black/75 backdrop-blur text-white text-[10px] font-semibold px-2 py-0.5 rounded-full flex items-center gap-1">
                     <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
                     <span>IMU: <strong class="dynamic-posture-angle">0°</strong></span>
                   </div>
                 </div>
-                
+
                 <div class="grid grid-cols-2 gap-2.5">
                   <div class="bg-surface-container-low p-3 rounded-xl flex flex-col gap-1">
                     <div class="flex items-center justify-between">
@@ -935,9 +911,7 @@
               <!-- Preparedness Card -->
               <section class="bg-white rounded-2xl p-4 shadow-sm border border-slate-100 flex flex-col gap-2">
                 <h3 class="text-base font-semibold text-slate-950 tracking-tight">Stay Prepared</h3>
-                <p class="text-xs text-slate-500 font-normal leading-relaxed">
-                  Continuous multi-sensor monitoring for early anomaly prevention.
-                </p>
+                <p class="text-xs text-slate-500 font-normal leading-relaxed">Continuous multi-sensor monitoring for early anomaly prevention.</p>
               </section>
             </div>
           </div>
@@ -973,8 +947,7 @@
           </nav>
         </section>
 
-        
-        <!-- SCREEN 6: EMERGENCY SOS -->
+<!-- SCREEN 6: EMERGENCY SOS -->
         <section id="screen-sos" class="screen-view">
           <header class="h-14 px-4 flex items-center justify-between border-b border-surface-container/40 bg-surface/90 backdrop-blur-md shrink-0 z-20">
             <button aria-label="Go back" class="w-10 h-10 -ml-2 flex items-center justify-center text-on-surface active:scale-95 transition-transform cursor-pointer" onclick="goBack()">
@@ -991,7 +964,7 @@
                 <div class="absolute w-64 h-64 rounded-full bg-[#edf1fb]/50 transition-all duration-500"></div>
                 <div class="absolute rounded-full bg-[#e5ecfa]/65 shadow-md transition-all duration-500 sos-ring-outer-size" id="sos-ring-outer"></div>
                 <div class="absolute rounded-full bg-[#dbe4f8]/80 transition-all duration-500 sos-ring-mid-size" id="sos-ring-mid"></div>
-                
+
                 <!-- Center SOS Button -->
                 <button aria-label="Press and hold to send SOS" class="relative z-10 w-36 h-36 rounded-full bg-primary flex flex-col items-center justify-center shadow-[0_16px_36px_rgba(0,0,0,0.28)] active:scale-95 transition-all duration-300 touch-none focus:outline-none cursor-pointer" id="sos-button">
                   <div class="absolute inset-2 rounded-full border border-white/10 pointer-events-none"></div>
@@ -1128,7 +1101,7 @@
 
               <!-- Doctor Cards Stack -->
               <div class="flex flex-col gap-4">
-                
+
                 <!-- Doctor 1: Dr. Neha Sharma -->
                 <div class="w-full bg-surface-container-lowest rounded-2xl p-4 shadow-sm border border-surface-container flex flex-col gap-4">
                   <div class="flex items-start gap-4">
@@ -1297,7 +1270,7 @@
 
           <div class="screen-scroll-area px-margin pt-3 pb-4">
             <div class="flex flex-col w-full gap-4">
-              
+
               <!-- Search Bar -->
               <div class="relative w-full shadow-sm">
                 <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-secondary">
@@ -1329,7 +1302,7 @@
 
               <!-- Doctor Listing Cards -->
               <div class="flex flex-col gap-4">
-                
+
                 <!-- Doctor Card 1: Dr. Aarav Mehta -->
                 <div class="doctor-listing-card bg-surface-container-lowest rounded-2xl p-4 shadow-sm border border-surface-container flex flex-col gap-3" data-doc-name="Dr. Aarav Mehta" data-doc-spec="general physician">
                   <div class="flex items-start gap-3.5">
@@ -1461,7 +1434,7 @@
               <!-- Profile Identity Hero Card -->
               <div class="w-full bg-surface-container-lowest rounded-2xl p-4 shadow-sm border border-surface-container/60 flex flex-col items-center text-center relative overflow-hidden">
                 <div class="absolute -top-10 -right-10 w-28 h-28 bg-emerald-100/50 rounded-full blur-2xl pointer-events-none"></div>
-                
+
                 <!-- Avatar with Camera Badge -->
                 <div class="relative mb-2.5">
                   <div class="w-20 h-20 rounded-full overflow-hidden ring-2 ring-black/10 shadow-md cursor-pointer active:scale-95 transition-transform" onclick="openAvatarModal()" title="Change Profile Picture / Avatar">
@@ -1696,11 +1669,11 @@
             <!-- DOCTOR CLINICAL PROFILE VIEW (DOCTOR ONLY) -->
             <!-- ========================================== -->
             <div id="profile-doctor-view" class="flex flex-col w-full gap-4 hidden">
-              
+
               <!-- Doctor Identity Hero Card -->
               <div class="w-full bg-surface-container-lowest rounded-2xl p-4 shadow-sm border border-surface-container/60 flex flex-col items-center text-center relative overflow-hidden">
                 <div class="absolute -top-10 -right-10 w-28 h-28 bg-blue-100/50 rounded-full blur-2xl pointer-events-none"></div>
-                
+
                 <!-- Avatar with Camera Button -->
                 <div class="relative mb-2.5">
                   <div class="w-20 h-20 rounded-full overflow-hidden ring-2 ring-black/10 shadow-md cursor-pointer active:scale-95 transition-transform" onclick="openAvatarModal()" title="Change Doctor Profile Picture">
@@ -1796,7 +1769,7 @@
                   <span id="doc-duty-badge" class="px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 text-[10px] font-bold tracking-wider uppercase">ON DUTY</span>
                 </div>
                 <p id="doc-duty-desc" class="text-xs text-secondary leading-snug">Accepting real-time patient arrhythmia alerts and emergency triage dispatches.</p>
-                
+
                 <div class="p-2.5 rounded-xl bg-surface-container-low/70 border border-surface-container flex items-center justify-between">
                   <div>
                     <p class="text-xs font-semibold text-on-surface">Emergency Telemetry Triage</p>
@@ -2400,7 +2373,7 @@
       <!-- ========================================== -->
       <div id="clinical-report-modal" class="fixed inset-0 bg-black/70 backdrop-blur-md z-50 flex items-center justify-center p-3 opacity-0 pointer-events-none transition-opacity duration-200">
         <div class="report-sheet-container bg-white rounded-3xl w-full max-w-[420px] max-h-[92vh] flex flex-col shadow-2xl overflow-hidden border border-black/10">
-          
+
           <!-- Modal Header -->
           <div class="px-4 py-3 border-b border-gray-100 flex items-center justify-between bg-surface-container-lowest shrink-0">
             <div class="flex items-center gap-2.5">
@@ -2419,7 +2392,7 @@
 
           <!-- Modal Scrollable Report Content -->
           <div id="clinical-report-modal-scroll" class="p-4 space-y-4 overflow-y-auto flex-1 text-gray-800 text-xs">
-            
+
             <!-- Report Document Header Card -->
             <div style="background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); color: #ffffff;" class="p-4 rounded-2xl flex flex-col gap-2.5 shadow-sm">
               <div class="flex items-center justify-between">
@@ -2898,7 +2871,7 @@
       <div id="avatar-modal" class="p-modal-overlay">
         <div class="p-modal-sheet flex flex-col gap-3.5 max-h-[90vh] overflow-y-auto">
           <div class="w-12 h-1.5 bg-gray-200 rounded-full mx-auto -mt-2"></div>
-          
+
           <div class="flex items-start justify-between pb-2 border-b border-gray-100">
             <div>
               <h3 class="font-bold text-base text-black">Profile Picture & Avatar</h3>
@@ -2926,7 +2899,7 @@
               <span class="text-xs font-bold text-black uppercase tracking-wider">Choose or Upload Picture</span>
               <span class="text-[11px] text-gray-400">Selfie & Presets</span>
             </div>
-            
+
             <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; width: 100%;" id="preset-avatars-grid">
               <!-- Slot 1: Upload Self Photo / Selfie -->
               <button type="button" class="avatar-preset-btn flex flex-col items-center gap-1 p-1 rounded-2xl hover:bg-gray-100 active:scale-95 transition-all cursor-pointer" onclick="triggerPhotoUpload()" title="Take Selfie or Upload Photo">
@@ -3011,7 +2984,7 @@
       <!-- ESP32-S3 Bluetooth Connection Modal -->
       <div id="esp32-ble-modal" class="fixed inset-0 bg-black/65 backdrop-blur-sm z-50 flex items-center justify-center p-3 transition-opacity duration-200 opacity-0 pointer-events-none">
         <div class="bg-white rounded-3xl w-full max-w-[400px] max-h-[92vh] flex flex-col shadow-2xl overflow-hidden border border-black/10 animate-fadeInDown">
-          
+
           <!-- Modal Header -->
           <div class="px-4 py-3 border-b border-gray-100 flex items-center justify-between bg-surface-container-lowest">
             <div class="flex items-center gap-2.5">
@@ -3030,7 +3003,7 @@
 
           <!-- Modal Scroll Body -->
           <div class="p-4 space-y-3.5 overflow-y-auto">
-            
+
             <!-- Connection Status Box -->
             <div id="ble-modal-status-card" class="bg-[#F8F9FA] rounded-2xl p-3.5 border border-gray-200/70 flex flex-col gap-2.5">
               <div class="flex items-center justify-between">
@@ -3040,7 +3013,7 @@
                 </div>
                 <span id="ble-modal-device-name" class="text-[11px] font-semibold text-gray-500 bg-white px-2 py-0.5 rounded-full border border-gray-200">No device paired</span>
               </div>
-              
+
               <div class="grid grid-cols-2 gap-2 text-[11px] text-gray-600 pt-1 border-t border-gray-200/60">
                 <div class="flex items-center gap-1.5">
                   <span class="material-symbols-outlined text-[15px] text-gray-400">battery_charging_full</span>
@@ -3067,9 +3040,7 @@
                     <p class="text-[10px] text-blue-700">Find &amp; pair MW device / ESP32-S3 wearable</p>
                   </div>
                 </div>
-                <span id="ble-search-status-tag" class="text-[9px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full bg-blue-100 text-blue-800 border border-blue-200">
-                  Ready to Search
-                </span>
+                <span id="ble-search-status-tag" class="text-[9px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full bg-blue-100 text-blue-800 border border-blue-200">Ready to Search</span>
               </div>
 
               <!-- Search & Connect Primary Button -->
@@ -3148,9 +3119,7 @@
                   DB Synced: <span id="ble-db-readings-count">2</span> logs
                 </span>
               </div>
-              <p id="ble-mw-reading-status-txt" class="text-[11px] text-emerald-800 leading-tight">
-                Calibrated physiological ranges: HR (50-185 BPM) • SpO₂ (≥85%) • Temp (34-41°C)
-              </p>
+              <p id="ble-mw-reading-status-txt" class="text-[11px] text-emerald-800 leading-tight">Calibrated physiological ranges: HR (50-185 BPM) • SpO₂ (≥85%) • Temp (34-41°C)</p>
               <div class="flex items-center gap-2 pt-0.5">
                 <button type="button" onclick="saveCurrentMwReadingToDb()" class="flex-1 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs py-2 px-3 rounded-xl flex items-center justify-center gap-1.5 cursor-pointer active:scale-98 transition-all shadow-sm">
                   <span class="material-symbols-outlined text-[15px]">cloud_upload</span>
@@ -3248,7 +3217,7 @@ void loop() {
 
     // Send formatted JSON packet to Web App
     char payload[100];
-    sprintf(payload, "{\"bpm\":%d,\"spo2\":%d,\"temp\":%.1f,\"angle\":%d,\"bat\":%d,\"motion\":\"Normal\"}", 
+    sprintf(payload, "{\"bpm\":%d,\"spo2\":%d,\"temp\":%.1f,\"angle\":%d,\"bat\":%d,\"motion\":\"Normal\"}",
             bpm, spo2, temp, angle, battery);
     pCharacteristic-&gt;setValue(payload);
     pCharacteristic-&gt;notify();
@@ -3274,7 +3243,7 @@ void loop() {
       <!-- Theme Selection Modal Sheet -->
       <div id="theme-selector-modal" class="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 flex items-end sm:items-center justify-center p-0 sm:p-4 transition-opacity duration-200 opacity-0 pointer-events-none">
         <div class="theme-modal-container bg-white dark:bg-[#0c1a14] rounded-t-3xl sm:rounded-3xl w-full max-w-[420px] max-h-[90vh] flex flex-col shadow-2xl overflow-hidden border border-black/10 animate-sheetSpringUp">
-          
+
           <!-- Modal Header -->
           <div class="px-5 py-3.5 border-b border-black/5 dark:border-white/10 flex items-center justify-between">
             <div class="flex items-center gap-2.5">
@@ -3293,7 +3262,7 @@ void loop() {
 
           <!-- Themes List -->
           <div class="p-4 space-y-2.5 overflow-y-auto max-h-[60vh]" id="themes-list-container">
-            
+
             <!-- Option 1: Royal Emerald & Champagne Gold -->
             <div class="theme-card-option flex items-center justify-between p-3 rounded-2xl border border-black/10 dark:border-white/10 bg-black/[0.02] dark:bg-white/[0.04] cursor-pointer" onclick="selectAppTheme('theme-emerald-gold')">
               <div class="flex items-center gap-3">
@@ -3412,7 +3381,7 @@ void loop() {
       <!-- Notifications Center Modal Sheet -->
       <div id="notifications-modal" class="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 flex items-end sm:items-center justify-center p-0 sm:p-4 transition-opacity duration-200 opacity-0 pointer-events-none">
         <div class="notifications-modal-container bg-white dark:bg-[#0c1a14] rounded-t-3xl sm:rounded-3xl w-full max-w-[420px] max-h-[85vh] flex flex-col shadow-2xl overflow-hidden border border-black/10 animate-sheetSpringUp">
-          
+
           <!-- Modal Header -->
           <div class="px-5 py-3.5 border-b border-black/5 dark:border-white/10 flex items-center justify-between">
             <div class="flex items-center gap-2.5">
@@ -3439,7 +3408,7 @@ void loop() {
 
           <!-- Notification Items List -->
           <div class="p-3.5 overflow-y-auto space-y-2.5 max-h-[60vh] select-none" id="notifications-list-container">
-            
+
             <!-- Item 1: Posture Alert (Unread) -->
             <div class="notif-card unread p-3 rounded-2xl border border-amber-500/20 bg-amber-500/5 flex items-start gap-3 transition-all hover:bg-amber-500/10 cursor-pointer" onclick="navigateTo('screen-posture'); closeNotificationsModal();">
               <div class="w-8 h-8 rounded-full bg-amber-500/20 text-amber-500 flex items-center justify-center shrink-0 mt-0.5">
@@ -3494,9 +3463,7 @@ void loop() {
                 </div>
                 <p class="text-[11px] text-gray-600 dark:text-gray-300 mt-0.5 leading-snug">&ldquo;Great progress on thoracic alignment. Continue ergonomic hold-times.&rdquo;</p>
                 <div class="mt-1.5 flex items-center gap-2">
-                  <span class="inline-flex items-center gap-1 px-1.5 py-0.5 rounded text-[9px] font-semibold bg-blue-500/10 text-blue-600 dark:text-blue-400">
-                    Consultation
-                  </span>
+                  <span class="inline-flex items-center gap-1 px-1.5 py-0.5 rounded text-[9px] font-semibold bg-blue-500/10 text-blue-600 dark:text-blue-400">Consultation</span>
                   <span class="text-[10px] text-primary dark:text-blue-400 font-bold">Care Team →</span>
                 </div>
               </div>
