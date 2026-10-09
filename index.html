@@ -200,7 +200,7 @@
               </button>
               <!-- Top Navbar Emergency SOS Button (Beside Notifications) -->
               <button aria-label="Emergency SOS" class="header-telemetry-pill flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-bold transition-all active:scale-95 cursor-pointer shadow-xs" onclick="navigateTo('screen-sos')" title="Emergency SOS">
-                <span class="material-symbols-outlined text-[12px] text-error animate-pulse" style="font-variation-settings: 'FILL' 1;">emergency</span>
+                <span class="material-symbols-outlined text-[12px] text-error animate-pulse icon-filled">emergency</span>
                 <span class="font-label-telemetry text-[9px] tracking-wider text-error font-bold">SOS</span>
               </button>
               <button id="btn-navbar-notifications" aria-label="Notifications" class="w-8 h-8 relative flex items-center justify-center text-on-surface hover:text-primary transition-colors cursor-pointer active:scale-95" onclick="openNotificationsModal()" title="Notifications & Alerts">
@@ -478,7 +478,7 @@
           <nav class="h-16 px-space-xs bg-surface-container-lowest/95 backdrop-blur-xl border-t border-surface-container/60 shrink-0 z-30">
             <div class="flex justify-around items-center h-full relative">
               <button class="flex flex-col items-center justify-center min-w-[56px] h-12 text-primary font-bold cursor-pointer" onclick="navigateTo('screen-home')">
-                <span class="material-symbols-outlined text-[22px]" style="font-variation-settings: 'FILL' 1;">home</span>
+                <span class="material-symbols-outlined text-[22px] icon-filled">home</span>
                 <span class="font-label-telemetry text-[10px] uppercase tracking-wider">HOME</span>
               </button>
               <button class="flex flex-col items-center justify-center min-w-[56px] h-12 text-secondary hover:text-on-surface cursor-pointer" onclick="navigateTo('screen-doctors')">
@@ -667,7 +667,7 @@
           <nav class="h-16 px-space-xs bg-surface-container-lowest/95 backdrop-blur-xl border-t border-surface-container/60 shrink-0 z-30">
             <div class="flex justify-around items-center h-full relative">
               <button class="flex flex-col items-center justify-center min-w-[56px] h-12 text-primary font-bold cursor-pointer" onclick="navigateTo('screen-home')">
-                <span class="material-symbols-outlined text-[22px]" style="font-variation-settings: 'FILL' 1;">home</span>
+                <span class="material-symbols-outlined text-[22px] icon-filled">home</span>
                 <span class="font-label-telemetry text-[10px] uppercase tracking-wider">HOME</span>
               </button>
               <button class="flex flex-col items-center justify-center min-w-[56px] h-12 text-secondary hover:text-on-surface cursor-pointer" onclick="navigateTo('screen-doctors')">
@@ -716,7 +716,7 @@
                 <div class="flex items-center justify-between">
                   <div class="flex items-center gap-2.5">
                     <div class="w-9 h-9 rounded-full bg-surface-container flex items-center justify-center text-on-surface">
-                      <span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">shield</span>
+                      <span class="material-symbols-outlined text-[20px] icon-filled">shield</span>
                     </div>
                     <h2 class="font-headline-md text-lg text-on-surface font-bold">Posture Status</h2>
                   </div>
@@ -746,7 +746,7 @@
                     <div class="flex items-center justify-between">
                       <span class="font-title-sm text-sm text-on-surface font-semibold">Current Angle</span>
                       <div class="w-4 h-4 rounded-full bg-tertiary-fixed flex items-center justify-center text-on-tertiary-fixed">
-                        <span class="material-symbols-outlined text-[12px]" style="font-variation-settings: 'FILL' 1;">check</span>
+                        <span class="material-symbols-outlined text-[12px] icon-filled">check</span>
                       </div>
                     </div>
                     <p class="font-body-md text-xs text-secondary">Sensor Alignment</p>
@@ -760,7 +760,7 @@
                     <div class="flex items-center justify-between">
                       <span class="font-title-sm text-sm text-on-surface font-semibold">Forward Bend</span>
                       <div class="w-4 h-4 rounded-full bg-error-container flex items-center justify-center text-error">
-                        <span class="material-symbols-outlined text-[12px]" style="font-variation-settings: 'FILL' 1;">priority_high</span>
+                        <span class="material-symbols-outlined text-[12px] icon-filled">priority_high</span>
                       </div>
                     </div>
                     <p class="font-body-md text-xs text-secondary">15°+ Neck Strain</p>
@@ -844,7 +844,7 @@
                 </button>
               </div>
               <button class="flex flex-col items-center justify-center min-w-[56px] h-12 text-primary font-bold cursor-pointer" onclick="navigateTo('screen-posture')">
-                <span class="material-symbols-outlined text-[22px]" style="font-variation-settings: 'FILL' 1;">accessibility_new</span>
+                <span class="material-symbols-outlined text-[22px] icon-filled">accessibility_new</span>
                 <span class="font-label-telemetry text-[10px] uppercase tracking-wider">POSTURE</span>
               </button>
               <button class="flex flex-col items-center justify-center min-w-[56px] h-12 text-secondary hover:text-on-surface cursor-pointer" onclick="navigateTo('screen-profile')" title="My Profile">
@@ -989,8 +989,8 @@
             <div class="flex flex-col items-center justify-center py-4 select-none">
               <div class="relative w-64 h-64 flex items-center justify-center">
                 <div class="absolute w-64 h-64 rounded-full bg-[#edf1fb]/50 transition-all duration-500"></div>
-                <div class="absolute rounded-full bg-[#e5ecfa]/65 shadow-md transition-all duration-500" id="sos-ring-outer" style="width: 13.5rem; height: 13.5rem;"></div>
-                <div class="absolute rounded-full bg-[#dbe4f8]/80 transition-all duration-500" id="sos-ring-mid" style="width: 11rem; height: 11rem;"></div>
+                <div class="absolute rounded-full bg-[#e5ecfa]/65 shadow-md transition-all duration-500 sos-ring-outer-size" id="sos-ring-outer"></div>
+                <div class="absolute rounded-full bg-[#dbe4f8]/80 transition-all duration-500 sos-ring-mid-size" id="sos-ring-mid"></div>
                 
                 <!-- Center SOS Button -->
                 <button aria-label="Press and hold to send SOS" class="relative z-10 w-36 h-36 rounded-full bg-primary flex flex-col items-center justify-center shadow-[0_16px_36px_rgba(0,0,0,0.28)] active:scale-95 transition-all duration-300 touch-none focus:outline-none cursor-pointer" id="sos-button">
@@ -1045,7 +1045,7 @@
                 <div class="bg-surface-container-lowest px-3.5 py-3 rounded-2xl border border-outline/40 shadow-sm flex items-center justify-between">
                   <div class="flex items-center gap-3 min-w-0">
                     <div class="w-10 h-10 rounded-full bg-[#feeeec] text-error flex items-center justify-center shrink-0">
-                      <span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">emergency</span>
+                      <span class="material-symbols-outlined text-[18px] icon-filled">emergency</span>
                     </div>
                     <div class="min-w-0">
                       <p class="text-sm text-on-surface font-semibold truncate leading-tight">Local Help</p>
@@ -1253,7 +1253,7 @@
                 <span class="font-label-telemetry text-[10px] uppercase tracking-wider">HOME</span>
               </button>
               <button class="flex flex-col items-center justify-center min-w-[56px] h-12 text-primary font-bold cursor-pointer" onclick="navigateTo('screen-doctors')">
-                <span class="material-symbols-outlined text-[22px]" style="font-variation-settings: 'FILL' 1;">medical_services</span>
+                <span class="material-symbols-outlined text-[22px] icon-filled">medical_services</span>
                 <span class="font-label-telemetry text-[10px] uppercase tracking-wider">CARE</span>
               </button>
               <div class="relative -top-4 flex items-center justify-center">
@@ -1346,7 +1346,7 @@
                       </div>
                       <div class="flex items-center justify-between pt-0.5">
                         <div class="flex items-center gap-1 text-on-surface">
-                          <span class="material-symbols-outlined text-[15px] text-amber-500" style="font-variation-settings: 'FILL' 1;">star</span>
+                          <span class="material-symbols-outlined text-[15px] text-amber-500 icon-filled">star</span>
                           <span class="font-bold text-xs">4.8</span>
                           <span class="text-secondary text-[11px]">(128)</span>
                         </div>
@@ -1381,7 +1381,7 @@
                       </div>
                       <div class="flex items-center justify-between pt-0.5">
                         <div class="flex items-center gap-1 text-on-surface">
-                          <span class="material-symbols-outlined text-[15px] text-amber-500" style="font-variation-settings: 'FILL' 1;">star</span>
+                          <span class="material-symbols-outlined text-[15px] text-amber-500 icon-filled">star</span>
                           <span class="font-bold text-xs">4.9</span>
                           <span class="text-secondary text-[11px]">(214)</span>
                         </div>
