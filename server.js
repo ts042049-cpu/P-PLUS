@@ -354,7 +354,7 @@ function getSecurityHeaders() {
     'X-XSS-Protection': '0',
     'Referrer-Policy': 'strict-origin-when-cross-origin',
     'Cross-Origin-Opener-Policy': 'same-origin-allow-popups',
-    'Content-Security-Policy': "default-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://fonts.gstatic.com https://apis.google.com https://accounts.google.com https://images.unsplash.com https://lh3.googleusercontent.com; img-src 'self' data: blob: https:; font-src 'self' https://fonts.gstatic.com data:; frame-src https://accounts.google.com; connect-src 'self' https://accounts.google.com;"
+    'Content-Security-Policy': "default-src 'self'; script-src 'self' 'unsafe-inline' https://apis.google.com https://accounts.google.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: blob: https:; font-src 'self' https://fonts.gstatic.com data:; frame-src https://accounts.google.com; connect-src 'self' https://accounts.google.com https://apis.google.com;"
   };
 }
 
