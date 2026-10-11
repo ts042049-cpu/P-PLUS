@@ -21,7 +21,8 @@
       "googleId": "google-oauth-109283746592817264",
       "lastLoginAt": "2026-10-05T13:33:39.531Z",
       "googleEmail": "alex.turner@gmail.com",
-      "lastLogin": "2026-10-05T13:50:08.470Z"
+      "lastLogin": "2026-10-05T13:50:08.470Z",
+      "passwordHash": "780e20029e8574283e774a3f4e3b65f4:34c0ad68203224e256a1c90fc770f168c26058004c107c921f8c65660f4b2e252eaf5cba8819817f35140f759cff822e6ffcb704204d13475cadb77dc65e9192"
     },
     {
       "id": "DOC-CARD-492",
@@ -39,7 +40,8 @@
       "rating": "4.9",
       "consultationsCount": "1,420+",
       "onDuty": true,
-      "avatar": "https://lh3.googleusercontent.com/aida-public/AB6AXuDIqde2zHWq5d75xmp5aVgxeVego2Sai2irnWTj-vmHBG_t27ybS25MvuSVXxfzw01o8CZPgCxM3Lxj5K9m-lgCCegetXS7QKxdc7ysjQ2UWbJLPqNL_ZRRGwCgooxO7n2G6Kyb75y4Ou8sl1XjAcIZxy_uZ4aCd6MYGz5vN_zChy0g_8047jL7xNjraXRqE7MxTw6xWd730310TSuyGxwnyPpDLqJwIRkbUnKJMpxb8Z9IB-tOdt63Ug"
+      "avatar": "https://lh3.googleusercontent.com/aida-public/AB6AXuDIqde2zHWq5d75xmp5aVgxeVego2Sai2irnWTj-vmHBG_t27ybS25MvuSVXxfzw01o8CZPgCxM3Lxj5K9m-lgCCegetXS7QKxdc7ysjQ2UWbJLPqNL_ZRRGwCgooxO7n2G6Kyb75y4Ou8sl1XjAcIZxy_uZ4aCd6MYGz5vN_zChy0g_8047jL7xNjraXRqE7MxTw6xWd730310TSuyGxwnyPpDLqJwIRkbUnKJMpxb8Z9IB-tOdt63Ug",
+      "passwordHash": "d364ad7f7dce890dae115ef0c9d0b045:ef14639bb8782cf0fb90d6105316efec69702659f8e5334c586e5913f2aa28dc1c8bc8576243087a4c7aa044b0ae19003c53eee5776679f7a403a63a24232a12"
     },
     {
       "id": "P-8427",
@@ -47,7 +49,8 @@
       "name": "Test User",
       "email": "test1791033813534@example.com",
       "phone": "",
-      "createdAt": "2026-10-03T13:23:33.538Z"
+      "createdAt": "2026-10-03T13:23:33.538Z",
+      "passwordHash": "93882f8ad72857e65bf5acf963410c9c:02e54f8fada34b85e10f2e4418a7243216b6156813d94d135d80eb59a72df443bafde11bbf6261233f98ead351a049fd37f353622a903b086512dae9bff2bdc4"
     }
   ],
   "posture_settings": {
