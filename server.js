@@ -1372,11 +1372,12 @@ const server = http.createServer(async (req, res) => {
 </body>
 </html>`;
 
-      res.writeHead(200, {
+      const safePatientName = (patient.name || 'Patient').replace(/[^a-zA-Z0-9_-]/g, '_');
+      res.writeHead(200, Object.assign({
         'Content-Type': 'text/html; charset=UTF-8',
-        'Content-Disposition': `attachment; filename="PPlus_Clinical_Health_Report_${patient.name.replace(/\\s+/g, '_')}_${dateStr}.html"`,
+        'Content-Disposition': `attachment; filename="PPlus_Clinical_Health_Report_${safePatientName}_${dateStr}.html"`,
         'Access-Control-Allow-Origin': '*'
-      });
+      }, getSecurityHeaders()));
       return res.end(htmlContent);
     }
 
