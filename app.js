@@ -845,13 +845,30 @@
       if (btnIcon) btnIcon.classList.remove('hidden');
       if (btnText) btnText.textContent = 'Sign In';
 
-      const backendUser = (res && res.user) ? res.user : null;
-      const stored = loadStoredProfile(isDoctor ? 'doctor' : 'patient');
-      state.currentUser = Object.assign({}, stored, backendUser || {});
+      if (!res || !res.user) {
+        const msg = (res && res.error) ? res.error : 'Authentication failed. Please check credentials.';
+        if (pwdError) {
+          pwdError.textContent = msg;
+          pwdError.classList.remove('hidden');
+        }
+        if (pwdInput) pwdInput.classList.add('input-error');
+        showToast(msg, 'error');
+        return;
+      }
 
-      // Crucially set name to typed name
-      state.currentUser.name = nameVal;
-      if (emailVal) {
+      const backendUser = res.user;
+      const stored = loadStoredProfile(isDoctor ? 'doctor' : 'patient');
+      state.currentUser = Object.assign({}, stored, backendUser);
+
+      // Never keep credentials in client state
+      delete state.currentUser.passwordHash;
+      delete state.currentUser.password;
+
+      // Update name to typed name if provided
+      if (nameVal) {
+        state.currentUser.name = nameVal;
+      }
+      if (emailVal && !state.currentUser.email) {
         state.currentUser.email = emailVal;
       }
       saveStoredProfile(state.currentUser);
@@ -864,12 +881,19 @@
         showToast(`Welcome back, ${state.currentUser.name}! Telemetry stream online`, 'favorite');
       }
       navigateTo('screen-home');
-    }).catch(() => {
+    }).catch(err => {
       if (submitBtn) submitBtn.disabled = false;
       if (spinner) spinner.classList.add('hidden');
       if (btnIcon) btnIcon.classList.remove('hidden');
       if (btnText) btnText.textContent = 'Sign In';
-      navigateTo('screen-home');
+
+      const errorMsg = (err && err.message) || 'Invalid credentials or server error';
+      if (pwdError) {
+        pwdError.textContent = errorMsg;
+        pwdError.classList.remove('hidden');
+      }
+      if (pwdInput) pwdInput.classList.add('input-error');
+      showToast(errorMsg, 'error');
     });
   }
 
