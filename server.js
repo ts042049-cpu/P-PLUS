@@ -1194,7 +1194,7 @@ const server = http.createServer(async (req, res) => {
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>P+ Clinical Health Report — ${patient.name} (${dateStr})</title>
+  <title>P+ Clinical Health Report — ${escapeHTML(patient.name)} (${escapeHTML(dateStr)})</title>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -1236,18 +1236,18 @@ const server = http.createServer(async (req, res) => {
         <div class="brand-sub">Comprehensive Physiological &amp; Posture Telemetry</div>
       </div>
       <div class="meta-box">
-        <div><strong>REPORT ID:</strong> ${repId}</div>
-        <div><strong>DATE:</strong> ${dateStr}</div>
+        <div><strong>REPORT ID:</strong> ${escapeHTML(repId)}</div>
+        <div><strong>DATE:</strong> ${escapeHTML(dateStr)}</div>
         <div style="margin-top: 4px;"><span class="badge-status">VALIDATED CLINICAL REPORT</span></div>
       </div>
     </div>
 
     <div class="section-title">1. Patient Identification &amp; Biometrics</div>
     <div class="grid-4">
-      <div class="info-card"><div class="info-label">Full Name</div><div class="info-val">${patient.name}</div></div>
-      <div class="info-card"><div class="info-label">Patient ID / Age</div><div class="info-val">${patient.id} • ${patient.age} Yrs</div></div>
-      <div class="info-card"><div class="info-label">Blood Group / Sex</div><div class="info-val">${patient.bloodGroup} • ${patient.gender}</div></div>
-      <div class="info-card"><div class="info-label">Height / Weight</div><div class="info-val">${patient.height} cm • ${patient.weight} kg</div></div>
+      <div class="info-card"><div class="info-label">Full Name</div><div class="info-val">${escapeHTML(patient.name)}</div></div>
+      <div class="info-card"><div class="info-label">Patient ID / Age</div><div class="info-val">${escapeHTML(patient.id)} • ${escapeHTML(patient.age)} Yrs</div></div>
+      <div class="info-card"><div class="info-label">Blood Group / Sex</div><div class="info-val">${escapeHTML(patient.bloodGroup)} • ${escapeHTML(patient.gender)}</div></div>
+      <div class="info-card"><div class="info-label">Height / Weight</div><div class="info-val">${escapeHTML(patient.height)} cm • ${escapeHTML(patient.weight)} kg</div></div>
     </div>
 
     <div class="section-title">2. Physiological Vitals &amp; Continuous Telemetry</div>
@@ -1351,10 +1351,10 @@ const server = http.createServer(async (req, res) => {
 
     <div class="doc-stamp">
       <div>
-        <div style="font-size: 13px; font-weight: 700; color: #0f172a;">${doctor.name}</div>
-        <div style="font-size: 11px; color: #64748b;">${doctor.degree} • ${doctor.specialty}</div>
-        <div style="font-size: 11px; color: #64748b;">${doctor.hospital}</div>
-        <div style="font-size: 10px; font-family: monospace; color: #475569; margin-top: 4px;">LIC: ${doctor.license}</div>
+        <div style="font-size: 13px; font-weight: 700; color: #0f172a;">${escapeHTML(doctor.name)}</div>
+        <div style="font-size: 11px; color: #64748b;">${escapeHTML(doctor.degree)} • ${escapeHTML(doctor.specialty)}</div>
+        <div style="font-size: 11px; color: #64748b;">${escapeHTML(doctor.hospital)}</div>
+        <div style="font-size: 10px; font-family: monospace; color: #475569; margin-top: 4px;">LIC: ${escapeHTML(doctor.license)}</div>
       </div>
       <div style="text-align: right;">
         <div style="display: inline-block; border: 2px solid #0f172a; padding: 8px 14px; border-radius: 8px; text-align: center;">
