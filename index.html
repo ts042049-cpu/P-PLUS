@@ -310,7 +310,7 @@
                       <span class="font-label-telemetry text-primary font-bold shrink-0 text-[10.5px] dynamic-posture-form">0° Upright</span>
                     </div>
                     <div class="w-full h-2 bg-surface-container-high rounded-full overflow-hidden">
-                      <div class="h-full bg-primary rounded-full transition-all duration-500 dynamic-posture-bar" style="width: 94%"></div>
+                      <div class="h-full bg-primary rounded-full transition-all duration-500 dynamic-posture-bar w-pct-94"></div>
                     </div>
                   </div>
                 </div>
@@ -870,7 +870,7 @@
                   </div>
                   <p class="text-xs text-slate-500 font-normal">Temperature is normal</p>
                   <div class="w-full bg-slate-100 rounded-full h-1.5 overflow-hidden mt-0.5">
-                    <div class="bg-black h-full rounded-full" style="width: 25%"></div>
+                    <div class="bg-black h-full rounded-full w-pct-25"></div>
                   </div>
                 </article>
 
@@ -881,7 +881,7 @@
                   </div>
                   <p class="text-xs text-slate-500 font-normal">Air quality is acceptable</p>
                   <div class="w-full bg-slate-100 rounded-full h-1.5 overflow-hidden mt-0.5">
-                    <div class="bg-black h-full rounded-full" style="width: 45%"></div>
+                    <div class="bg-black h-full rounded-full w-pct-45"></div>
                   </div>
                 </article>
 
@@ -892,7 +892,7 @@
                   </div>
                   <p class="text-xs text-slate-500 font-normal">Hydration level is good</p>
                   <div class="w-full bg-slate-100 rounded-full h-1.5 overflow-hidden mt-0.5">
-                    <div class="bg-black h-full rounded-full" style="width: 20%"></div>
+                    <div class="bg-black h-full rounded-full w-pct-20"></div>
                   </div>
                 </article>
 
@@ -903,7 +903,7 @@
                   </div>
                   <p class="text-xs text-slate-500 font-normal">Spine alignment within safe threshold</p>
                   <div class="w-full bg-slate-100 rounded-full h-1.5 overflow-hidden mt-0.5">
-                    <div class="bg-emerald-600 h-full rounded-full" style="width: 90%"></div>
+                    <div class="bg-emerald-600 h-full rounded-full w-pct-90"></div>
                   </div>
                 </article>
               </div>
@@ -2045,7 +2045,7 @@
                 </div>
 
                 <!-- 4 KPI Badges for Heart Rate -->
-                <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; width: 100%;" class="pt-1 text-center">
+                <div class="kpi-grid-4col pt-1 text-center">
                   <div class="bg-surface-container-low rounded-xl p-2 border border-surface-container/50">
                     <span class="text-[9px] uppercase font-bold text-secondary block">MIN</span>
                     <span id="kpi-hr-min" class="text-sm font-bold text-on-surface">58</span>
@@ -2208,9 +2208,9 @@
                     <span class="text-primary font-bold">84% Upright</span>
                   </div>
                   <div class="w-full h-3 rounded-full overflow-hidden flex bg-surface-container-high">
-                    <div style="width: 84%;" class="bg-black h-full" title="84% Upright Neutral"></div>
-                    <div style="width: 11%;" class="bg-amber-400 h-full" title="11% Mild Forward Lean"></div>
-                    <div style="width: 5%;" class="bg-red-500 h-full" title="5% Slouch Corrected"></div>
+                    <div class="bg-black h-full w-pct-84" title="84% Upright Neutral"></div>
+                    <div class="bg-amber-400 h-full w-pct-11" title="11% Mild Forward Lean"></div>
+                    <div class="bg-red-500 h-full w-pct-5" title="5% Slouch Corrected"></div>
                   </div>
                   <div class="flex justify-between text-[9px] text-secondary mt-1">
                     <span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-black"></span> Upright 84%</span>
@@ -2227,31 +2227,31 @@
                   </div>
                   <div class="grid grid-cols-7 gap-1.5 items-end h-16 pt-1">
                     <div class="flex flex-col items-center gap-1 h-full justify-end">
-                      <div class="w-full bg-primary/20 rounded-t-md hover:bg-primary transition-colors cursor-pointer" style="height: 75%;" title="Mon: 5.2 hrs"></div>
+                      <div class="w-full bg-primary/20 rounded-t-md hover:bg-primary transition-colors cursor-pointer h-pct-75" title="Mon: 5.2 hrs"></div>
                       <span class="text-[9px] font-mono text-secondary">M</span>
                     </div>
                     <div class="flex flex-col items-center gap-1 h-full justify-end">
-                      <div class="w-full bg-primary/20 rounded-t-md hover:bg-primary transition-colors cursor-pointer" style="height: 85%;" title="Tue: 5.8 hrs"></div>
+                      <div class="w-full bg-primary/20 rounded-t-md hover:bg-primary transition-colors cursor-pointer h-pct-85" title="Tue: 5.8 hrs"></div>
                       <span class="text-[9px] font-mono text-secondary">T</span>
                     </div>
                     <div class="flex flex-col items-center gap-1 h-full justify-end">
-                      <div class="w-full bg-primary/20 rounded-t-md hover:bg-primary transition-colors cursor-pointer" style="height: 92%;" title="Wed: 6.1 hrs"></div>
+                      <div class="w-full bg-primary/20 rounded-t-md hover:bg-primary transition-colors cursor-pointer h-pct-92" title="Wed: 6.1 hrs"></div>
                       <span class="text-[9px] font-mono text-secondary">W</span>
                     </div>
                     <div class="flex flex-col items-center gap-1 h-full justify-end">
-                      <div class="w-full bg-primary/20 rounded-t-md hover:bg-primary transition-colors cursor-pointer" style="height: 78%;" title="Thu: 5.5 hrs"></div>
+                      <div class="w-full bg-primary/20 rounded-t-md hover:bg-primary transition-colors cursor-pointer h-pct-78" title="Thu: 5.5 hrs"></div>
                       <span class="text-[9px] font-mono text-secondary">T</span>
                     </div>
                     <div class="flex flex-col items-center gap-1 h-full justify-end">
-                      <div class="w-full bg-primary/20 rounded-t-md hover:bg-primary transition-colors cursor-pointer" style="height: 84%;" title="Fri: 5.9 hrs"></div>
+                      <div class="w-full bg-primary/20 rounded-t-md hover:bg-primary transition-colors cursor-pointer h-pct-84" title="Fri: 5.9 hrs"></div>
                       <span class="text-[9px] font-mono text-secondary">F</span>
                     </div>
                     <div class="flex flex-col items-center gap-1 h-full justify-end">
-                      <div class="w-full bg-primary/20 rounded-t-md hover:bg-primary transition-colors cursor-pointer" style="height: 65%;" title="Sat: 4.8 hrs"></div>
+                      <div class="w-full bg-primary/20 rounded-t-md hover:bg-primary transition-colors cursor-pointer h-pct-65" title="Sat: 4.8 hrs"></div>
                       <span class="text-[9px] font-mono text-secondary">S</span>
                     </div>
                     <div class="flex flex-col items-center gap-1 h-full justify-end">
-                      <div class="w-full bg-primary rounded-t-md cursor-pointer" style="height: 82%;" title="Sun (Today): 5.7 hrs"></div>
+                      <div class="w-full bg-primary rounded-t-md cursor-pointer h-pct-82" title="Sun (Today): 5.7 hrs"></div>
                       <span class="text-[9px] font-mono font-bold text-primary">S</span>
                     </div>
                   </div>
@@ -2309,7 +2309,7 @@
               </div>
 
               <!-- Dedicated Clinical Report File Action Section -->
-              <div style="background: linear-gradient(135deg, #1e3a8a 0%, #0f172a 100%); color: #ffffff;" class="rounded-2xl p-4 shadow-md flex flex-col gap-3">
+              <div class="clinical-report-action-card rounded-2xl p-4 shadow-md flex flex-col gap-3">
                 <div class="flex items-center gap-3">
                   <div class="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center text-cyan-300 shrink-0">
                     <span class="material-symbols-outlined text-[24px]">description</span>
@@ -2394,7 +2394,7 @@
           <div id="clinical-report-modal-scroll" class="p-4 space-y-4 overflow-y-auto flex-1 text-gray-800 text-xs">
 
             <!-- Report Document Header Card -->
-            <div style="background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); color: #ffffff;" class="p-4 rounded-2xl flex flex-col gap-2.5 shadow-sm">
+            <div class="clinical-report-header-card p-4 rounded-2xl flex flex-col gap-2.5 shadow-sm">
               <div class="flex items-center justify-between">
                 <span class="text-[10px] font-mono text-cyan-300 uppercase tracking-widest font-bold">P+ DIGITAL CLINICAL REPORT</span>
                 <span class="px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 text-[9px] font-bold uppercase tracking-wider">OFFICIAL</span>
@@ -2900,7 +2900,7 @@
               <span class="text-[11px] text-gray-400">Selfie & Presets</span>
             </div>
 
-            <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; width: 100%;" id="preset-avatars-grid">
+            <div class="avatars-preset-grid" id="preset-avatars-grid">
               <!-- Slot 1: Upload Self Photo / Selfie -->
               <button type="button" class="avatar-preset-btn flex flex-col items-center gap-1 p-1 rounded-2xl hover:bg-gray-100 active:scale-95 transition-all cursor-pointer" onclick="triggerPhotoUpload()" title="Take Selfie or Upload Photo">
                 <div class="w-12 h-12 rounded-full border-2 border-dashed border-black/40 bg-black/5 flex items-center justify-center text-black">
@@ -3266,13 +3266,13 @@ void loop() {
             <!-- Option 1: Royal Emerald & Champagne Gold -->
             <div class="theme-card-option flex items-center justify-between p-3 rounded-2xl border border-black/10 dark:border-white/10 bg-black/[0.02] dark:bg-white/[0.04] cursor-pointer" onclick="selectAppTheme('theme-emerald-gold')">
               <div class="flex items-center gap-3">
-                <div class="w-10 h-10 rounded-xl flex items-center justify-center shadow-sm relative overflow-hidden" style="background: linear-gradient(135deg, #061812 0%, #0d3829 100%); border: 1.5px solid #d4af37;">
-                  <span class="w-4 h-4 rounded-full" style="background: #f5d77f; box-shadow: 0 0 8px #f5d77f;"></span>
+                <div class="w-10 h-10 rounded-xl flex items-center justify-center shadow-sm relative overflow-hidden theme-swatch-emerald-gold">
+                  <span class="w-4 h-4 rounded-full theme-dot-emerald-gold"></span>
                 </div>
                 <div>
                   <div class="flex items-center gap-1.5">
                     <span class="font-bold text-xs text-gray-900 dark:text-white">Royal Emerald &amp; Gold</span>
-                    <span class="text-[9px] px-1.5 py-0.2 rounded-full font-bold uppercase" style="background: rgba(212, 175, 55, 0.2); color: #d4af37;">ROYAL</span>
+                    <span class="text-[9px] px-1.5 py-0.2 rounded-full font-bold uppercase theme-badge-royal">ROYAL</span>
                   </div>
                   <p class="text-[11px] text-gray-500 dark:text-gray-400">Deep imperial forest green with 18k champagne gold</p>
                 </div>
@@ -3283,13 +3283,13 @@ void loop() {
             <!-- Option 2: Oceanic Sapphire & Ice Blue -->
             <div class="theme-card-option flex items-center justify-between p-3 rounded-2xl border border-black/10 dark:border-white/10 bg-black/[0.02] dark:bg-white/[0.04] cursor-pointer" onclick="selectAppTheme('theme-oceanic-blue')">
               <div class="flex items-center gap-3">
-                <div class="w-10 h-10 rounded-xl flex items-center justify-center shadow-sm relative overflow-hidden" style="background: linear-gradient(135deg, #030f1c 0%, #08294a 100%); border: 1.5px solid #38bdf8;">
-                  <span class="w-4 h-4 rounded-full" style="background: #38bdf8; box-shadow: 0 0 8px #38bdf8;"></span>
+                <div class="w-10 h-10 rounded-xl flex items-center justify-center shadow-sm relative overflow-hidden theme-swatch-oceanic-blue">
+                  <span class="w-4 h-4 rounded-full theme-dot-oceanic-blue"></span>
                 </div>
                 <div>
                   <div class="flex items-center gap-1.5">
                     <span class="font-bold text-xs text-gray-900 dark:text-white">Oceanic Sapphire &amp; Ice Blue</span>
-                    <span class="text-[9px] px-1.5 py-0.2 rounded-full font-bold uppercase" style="background: rgba(56, 189, 248, 0.2); color: #38bdf8;">COOL</span>
+                    <span class="text-[9px] px-1.5 py-0.2 rounded-full font-bold uppercase theme-badge-cool">COOL</span>
                   </div>
                   <p class="text-[11px] text-gray-500 dark:text-gray-400">Deep abyssal navy with electric cyan &amp; ice telemetry</p>
                 </div>
@@ -3300,13 +3300,13 @@ void loop() {
             <!-- Option 3: Midnight Cyberpunk Neon -->
             <div class="theme-card-option flex items-center justify-between p-3 rounded-2xl border border-black/10 dark:border-white/10 bg-black/[0.02] dark:bg-white/[0.04] cursor-pointer" onclick="selectAppTheme('theme-cyberpunk')">
               <div class="flex items-center gap-3">
-                <div class="w-10 h-10 rounded-xl flex items-center justify-center shadow-sm relative overflow-hidden" style="background: linear-gradient(135deg, #0a0314 0%, #320b5a 100%); border: 1.5px solid #ec4899;">
-                  <span class="w-4 h-4 rounded-full" style="background: #00f5d4; box-shadow: 0 0 8px #00f5d4;"></span>
+                <div class="w-10 h-10 rounded-xl flex items-center justify-center shadow-sm relative overflow-hidden theme-swatch-cyberpunk">
+                  <span class="w-4 h-4 rounded-full theme-dot-cyberpunk"></span>
                 </div>
                 <div>
                   <div class="flex items-center gap-1.5">
                     <span class="font-bold text-xs text-gray-900 dark:text-white">Midnight Cyberpunk Neon</span>
-                    <span class="text-[9px] px-1.5 py-0.2 rounded-full font-bold uppercase" style="background: rgba(236, 72, 153, 0.2); color: #ec4899;">NEON</span>
+                    <span class="text-[9px] px-1.5 py-0.2 rounded-full font-bold uppercase theme-badge-neon">NEON</span>
                   </div>
                   <p class="text-[11px] text-gray-500 dark:text-gray-400">Obsidian violet with electric cyan &amp; magenta pulse</p>
                 </div>
@@ -3317,13 +3317,13 @@ void loop() {
             <!-- Option 4: Crimson Rose Gold & Copper -->
             <div class="theme-card-option flex items-center justify-between p-3 rounded-2xl border border-black/10 dark:border-white/10 bg-black/[0.02] dark:bg-white/[0.04] cursor-pointer" onclick="selectAppTheme('theme-sunset-crimson')">
               <div class="flex items-center gap-3">
-                <div class="w-10 h-10 rounded-xl flex items-center justify-center shadow-sm relative overflow-hidden" style="background: linear-gradient(135deg, #0f0307 0%, #3c0c18 100%); border: 1.5px solid #fb7185;">
-                  <span class="w-4 h-4 rounded-full" style="background: #fda4af; box-shadow: 0 0 8px #fda4af;"></span>
+                <div class="w-10 h-10 rounded-xl flex items-center justify-center shadow-sm relative overflow-hidden theme-swatch-sunset-crimson">
+                  <span class="w-4 h-4 rounded-full theme-dot-sunset-crimson"></span>
                 </div>
                 <div>
                   <div class="flex items-center gap-1.5">
                     <span class="font-bold text-xs text-gray-900 dark:text-white">Crimson Rose Gold</span>
-                    <span class="text-[9px] px-1.5 py-0.2 rounded-full font-bold uppercase" style="background: rgba(251, 113, 133, 0.2); color: #fb7185;">WARM</span>
+                    <span class="text-[9px] px-1.5 py-0.2 rounded-full font-bold uppercase theme-badge-warm">WARM</span>
                   </div>
                   <p class="text-[11px] text-gray-500 dark:text-gray-400">Midnight velvet with glowing rose gold &amp; sunset copper</p>
                 </div>
@@ -3334,13 +3334,13 @@ void loop() {
             <!-- Option 5: Stealth Onyx & Silver -->
             <div class="theme-card-option flex items-center justify-between p-3 rounded-2xl border border-black/10 dark:border-white/10 bg-black/[0.02] dark:bg-white/[0.04] cursor-pointer" onclick="selectAppTheme('theme-stealth-onyx')">
               <div class="flex items-center gap-3">
-                <div class="w-10 h-10 rounded-xl flex items-center justify-center shadow-sm relative overflow-hidden" style="background: linear-gradient(135deg, #050507 0%, #202024 100%); border: 1.5px solid #ffffff;">
-                  <span class="w-4 h-4 rounded-full" style="background: #ffffff; box-shadow: 0 0 8px #ffffff;"></span>
+                <div class="w-10 h-10 rounded-xl flex items-center justify-center shadow-sm relative overflow-hidden theme-swatch-stealth-onyx">
+                  <span class="w-4 h-4 rounded-full theme-dot-stealth-onyx"></span>
                 </div>
                 <div>
                   <div class="flex items-center gap-1.5">
                     <span class="font-bold text-xs text-gray-900 dark:text-white">Stealth Onyx &amp; Silver</span>
-                    <span class="text-[9px] px-1.5 py-0.2 rounded-full font-bold uppercase" style="background: rgba(255, 255, 255, 0.15); color: #ffffff;">OLED</span>
+                    <span class="text-[9px] px-1.5 py-0.2 rounded-full font-bold uppercase theme-badge-oled">OLED</span>
                   </div>
                   <p class="text-[11px] text-gray-500 dark:text-gray-400">Pure blackout minimalism with titanium silver precision</p>
                 </div>
@@ -3351,8 +3351,8 @@ void loop() {
             <!-- Option 6: Clinical Medical Slate (Classic) -->
             <div class="theme-card-option flex items-center justify-between p-3 rounded-2xl border border-black/10 dark:border-white/10 bg-black/[0.02] dark:bg-white/[0.04] cursor-pointer" onclick="selectAppTheme('theme-classic')">
               <div class="flex items-center gap-3">
-                <div class="w-10 h-10 rounded-xl flex items-center justify-center shadow-sm relative overflow-hidden" style="background: linear-gradient(135deg, #f8f9ff 0%, #e2e8f0 100%); border: 1.5px solid #64748b;">
-                  <span class="w-4 h-4 rounded-full" style="background: #0f172a; box-shadow: 0 0 6px rgba(0,0,0,0.3);"></span>
+                <div class="w-10 h-10 rounded-xl flex items-center justify-center shadow-sm relative overflow-hidden theme-swatch-classic">
+                  <span class="w-4 h-4 rounded-full theme-dot-classic"></span>
                 </div>
                 <div>
                   <div class="flex items-center gap-1.5">
