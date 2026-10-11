@@ -1,6 +1,7 @@
 const http = require('http');
 const fs = require('fs');
 const path = require('path');
+const crypto = require('crypto');
 
 const PORT = 8080;
 const DB_FILE = path.join(__dirname, 'data', 'db.json');
