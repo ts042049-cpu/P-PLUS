@@ -225,7 +225,14 @@
   // Toast notifications
   function showToast(message, icon = 'info') {
     if (!toastEl) return;
-    toastEl.innerHTML = `<span class="material-symbols-outlined text-[18px]">${icon}</span><span>${message}</span>`;
+    toastEl.textContent = '';
+    const iconSpan = document.createElement('span');
+    iconSpan.className = 'material-symbols-outlined text-[18px]';
+    iconSpan.textContent = icon;
+    const textSpan = document.createElement('span');
+    textSpan.textContent = String(message || '');
+    toastEl.appendChild(iconSpan);
+    toastEl.appendChild(textSpan);
     toastEl.classList.add('show');
     clearTimeout(toastEl._timer);
     toastEl._timer = setTimeout(() => {
