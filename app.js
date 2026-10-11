@@ -10,27 +10,45 @@
     LAST_ROLE: 'pplus_last_role'
   };
 
+  // HTML sanitization helper for client-side XSS prevention
+  function escapeHTML(str) {
+    if (str == null) return '';
+    return String(str)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#39;');
+  }
+
   // Backend API Communication Layer
   const API_BASE = window.location.origin;
 
   async function apiRequest(endpoint, method = 'GET', data = null) {
-    try {
-      const options = {
-        method,
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      };
-      if (data && (method === 'POST' || method === 'PUT')) {
-        options.body = JSON.stringify(data);
+    const options = {
+      method,
+      headers: {
+        'Content-Type': 'application/json'
       }
-      const res = await fetch(`${API_BASE}${endpoint}`, options);
-      if (!res.ok) throw new Error(`HTTP error ${res.status}`);
-      return await res.json();
-    } catch (err) {
-      console.warn(`[P+ API] Request to ${endpoint} failed:`, err.message);
-      return null;
+    };
+    if (data && (method === 'POST' || method === 'PUT')) {
+      options.body = JSON.stringify(data);
     }
+    const res = await fetch(`${API_BASE}${endpoint}`, options);
+    let json = null;
+    try {
+      json = await res.json();
+    } catch (_) {}
+
+    if (!res.ok) {
+      const errMsg = (json && json.error) ? json.error : `HTTP error ${res.status}`;
+      const err = new Error(errMsg);
+      err.status = res.status;
+      err.data = json;
+      console.warn(`[P+ API] Request to ${endpoint} failed:`, errMsg);
+      throw err;
+    }
+    return json;
   }
 
   const defaultPatient = {
