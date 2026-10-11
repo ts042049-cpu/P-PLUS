@@ -320,48 +320,182 @@ function writeDB(data) {
   }
 }
 
-// Parse JSON request body helper
+// ==========================================
+// SECURITY UTILITIES & DEFENSIVE HELPERS
+// ==========================================
+
+// 1. HTTP Security Headers (OWASP Recommendations)
+function getSecurityHeaders() {
+  return {
+    'X-Content-Type-Options': 'nosniff',
+    'X-Frame-Options': 'SAMEORIGIN',
+    'X-XSS-Protection': '0',
+    'Referrer-Policy': 'strict-origin-when-cross-origin',
+    'Cross-Origin-Opener-Policy': 'same-origin-allow-popups',
+    'Content-Security-Policy': "default-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://fonts.gstatic.com https://apis.google.com https://accounts.google.com https://images.unsplash.com https://lh3.googleusercontent.com; img-src 'self' data: blob: https:; font-src 'self' https://fonts.gstatic.com data:; frame-src https://accounts.google.com; connect-src 'self' https://accounts.google.com;"
+  };
+}
+
+// 2. Cryptographic Password Hashing & Verification (scrypt)
+function hashPassword(password, salt) {
+  salt = salt || crypto.randomBytes(16).toString('hex');
+  const hash = crypto.scryptSync(String(password), salt, 64).toString('hex');
+  return `${salt}:${hash}`;
+}
+
+function verifyPassword(password, stored) {
+  if (!stored || typeof stored !== 'string' || !stored.includes(':')) return false;
+  const [salt, originalHash] = stored.split(':');
+  try {
+    const hash = crypto.scryptSync(String(password), salt, 64).toString('hex');
+    return crypto.timingSafeEqual(Buffer.from(hash, 'hex'), Buffer.from(originalHash, 'hex'));
+  } catch (e) {
+    return false;
+  }
+}
+
+// 3. Cryptographically Secure Token Generator
+function generateSecureToken(prefix = 'PPLUS') {
+  return `${prefix}-${Date.now()}-${crypto.randomBytes(24).toString('hex')}`;
+}
+
+// 4. HTML Entity Sanitization (XSS Defense)
+function escapeHTML(str) {
+  if (str === null || str === undefined) return '';
+  return String(str)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
+
+// 5. In-Memory Sliding Window Rate Limiter
+const rateLimitMap = new Map();
+const RATE_LIMIT_CLEANUP_INTERVAL = 60000;
+
+setInterval(() => {
+  const now = Date.now();
+  for (const [key, record] of rateLimitMap.entries()) {
+    if (now - record.startTime > 60000) {
+      rateLimitMap.delete(key);
+    }
+  }
+}, RATE_LIMIT_CLEANUP_INTERVAL);
+
+function checkRateLimit(ip, routeType = 'general') {
+  const now = Date.now();
+  const key = `${ip}:${routeType}`;
+  const limit = routeType === 'auth' ? 20 : 180;
+  const windowMs = 60000;
+
+  let record = rateLimitMap.get(key);
+  if (!record || now - record.startTime > windowMs) {
+    record = { count: 1, startTime: now };
+    rateLimitMap.set(key, record);
+    return { allowed: true };
+  }
+
+  record.count++;
+  if (record.count > limit) {
+    return {
+      allowed: false,
+      retryAfter: Math.ceil((record.startTime + windowMs - now) / 1000)
+    };
+  }
+  return { allowed: true };
+}
+
+// 6. Safe JSON Request Body Parser (Size Capping & Prototype Pollution Defense)
+const MAX_BODY_SIZE = 2 * 1024 * 1024; // 2MB Limit
+
+function cleanObject(obj) {
+  if (!obj || typeof obj !== 'object') return obj;
+  if (Array.isArray(obj)) return obj.map(cleanObject);
+  const safe = {};
+  for (const key of Object.keys(obj)) {
+    if (key === '__proto__' || key === 'constructor' || key === 'prototype') {
+      continue;
+    }
+    safe[key] = cleanObject(obj[key]);
+  }
+  return safe;
+}
+
 function parseBody(req) {
   return new Promise((resolve, reject) => {
     let body = '';
-    req.on('data', chunk => { body += chunk.toString(); });
+    let bytesReceived = 0;
+    let aborted = false;
+
+    req.on('data', chunk => {
+      if (aborted) return;
+      bytesReceived += chunk.length;
+      if (bytesReceived > MAX_BODY_SIZE) {
+        aborted = true;
+        req.destroy();
+        return reject(new Error('PAYLOAD_TOO_LARGE'));
+      }
+      body += chunk.toString();
+    });
+
     req.on('end', () => {
+      if (aborted) return;
       try {
         const parsed = body ? JSON.parse(body) : {};
-        resolve(parsed);
+        resolve(cleanObject(parsed));
       } catch (err) {
         resolve({});
       }
     });
+
     req.on('error', err => reject(err));
   });
 }
 
-// Send JSON response helper
+// Send JSON response helper with Security Headers
 function sendJSON(res, statusCode, data) {
-  res.writeHead(statusCode, {
+  const headers = Object.assign({
     'Content-Type': 'application/json; charset=UTF-8',
     'Access-Control-Allow-Origin': '*',
     'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
     'Access-Control-Allow-Headers': 'Content-Type, Authorization'
-  });
+  }, getSecurityHeaders());
+  res.writeHead(statusCode, headers);
   res.end(JSON.stringify(data));
 }
 
 // Main HTTP Server
 const server = http.createServer(async (req, res) => {
-  // CORS Preflight
+  const clientIp = req.socket.remoteAddress || '127.0.0.1';
+
+  // CORS Preflight with Security Headers
   if (req.method === 'OPTIONS') {
-    res.writeHead(204, {
+    res.writeHead(204, Object.assign({
       'Access-Control-Allow-Origin': '*',
       'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
-      'Access-Control-Allow-Headers': 'Content-Type, Authorization'
-    });
+      'Access-Control-Allow-Headers': 'Content-Type, Authorization',
+      'Access-Control-Max-Age': '86400'
+    }, getSecurityHeaders()));
     return res.end();
   }
 
   const urlObj = new URL(req.url, `http://${req.headers.host || 'localhost:8080'}`);
   const pathname = urlObj.pathname;
+
+  // Rate Limiting Check
+  const isAuthRoute = pathname.startsWith('/api/auth/');
+  const rateLimit = checkRateLimit(clientIp, isAuthRoute ? 'auth' : 'general');
+  if (!rateLimit.allowed) {
+    res.writeHead(429, Object.assign({
+      'Content-Type': 'application/json; charset=UTF-8',
+      'Retry-After': String(rateLimit.retryAfter || 60)
+    }, getSecurityHeaders()));
+    return res.end(JSON.stringify({
+      error: 'Too many requests. Please slow down and try again later.',
+      retryAfterSeconds: rateLimit.retryAfter
+    }));
+  }
 
   // ==========================================
   // BACKEND REST API ROUTES (/api/*)
