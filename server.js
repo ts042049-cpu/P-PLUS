@@ -570,24 +570,55 @@ const server = http.createServer(async (req, res) => {
     if (pathname === '/api/auth/login' && req.method === 'POST') {
       const body = await parseBody(req);
       const emailOrPhone = (body.emailOrPhone || body.email || '').trim().toLowerCase();
+      const password = (body.password || '').trim();
+      const name = (body.name || '').trim().toLowerCase();
       const role = body.role || 'patient';
 
+      // Find user by email, phone, or name
       let user = db.users.find(u => {
         const uEmail = (u.email || '').toLowerCase();
         const uPhone = (u.phone || '').replace(/\D/g, '');
         const targetClean = emailOrPhone.replace(/\D/g, '');
-        return (uEmail === emailOrPhone) || (targetClean && uPhone === targetClean) || (u.role === role);
+        const uName = (u.name || '').toLowerCase();
+        return (uEmail && uEmail === emailOrPhone) ||
+               (targetClean && uPhone && uPhone === targetClean) ||
+               (name && uName && uName === name && u.role === role);
       });
 
+      // If user not found, reject with 401 (prevent unauthorized login)
       if (!user) {
-        user = db.users.find(u => u.role === role) || db.users[0];
+        return sendJSON(res, 401, {
+          success: false,
+          error: 'Account not found. Please verify your email, phone, or register an account.'
+        });
       }
 
+      // Check password
+      if (user.passwordHash) {
+        if (!password || !verifyPassword(password, user.passwordHash)) {
+          return sendJSON(res, 401, {
+            success: false,
+            error: 'Invalid password. Please check your credentials.'
+          });
+        }
+      } else {
+        // First login setup / demo migration: persist provided password as hash
+        if (password) {
+          user.passwordHash = hashPassword(password);
+          writeDB(db);
+        }
+      }
+
+      // Strip sensitive password hash before returning user payload
+      const safeUser = Object.assign({}, user);
+      delete safeUser.passwordHash;
+
+      const token = generateSecureToken('PPLUS-AUTH');
       return sendJSON(res, 200, {
         success: true,
         message: 'Authentication successful',
-        user: user,
-        token: `JWT-${Date.now()}-${Math.random().toString(36).substring(2, 8)}`
+        user: safeUser,
+        token: token
       });
     }
 
@@ -595,18 +626,32 @@ const server = http.createServer(async (req, res) => {
     if (pathname === '/api/auth/register' && req.method === 'POST') {
       const body = await parseBody(req);
       const role = body.role || 'patient';
+      const name = (body.name || '').trim();
+      const email = (body.email || '').trim().toLowerCase();
+      const phone = (body.phone || '').trim();
+      const password = (body.password || body.pin || '').trim();
+
+      if (!name || name.length < 2) {
+        return sendJSON(res, 400, { success: false, error: 'Name must be at least 2 characters long' });
+      }
+
       const newId = role === 'doctor' ? `DOC-${Math.floor(1000 + Math.random() * 9000)}` : `P-${Math.floor(1000 + Math.random() * 9000)}`;
 
       const newUser = Object.assign({
         id: newId,
         role: role,
-        name: body.name || (role === 'doctor' ? 'Dr. New Doctor' : 'New Patient'),
-        email: body.email || '',
-        phone: body.phone || '',
+        name: name,
+        email: email,
+        phone: phone,
         createdAt: new Date().toISOString()
       }, body);
 
-      const existingIdx = db.users.findIndex(u => u.email && u.email.toLowerCase() === (body.email || '').toLowerCase());
+      // Securely hash password
+      newUser.passwordHash = hashPassword(password || 'password123');
+      delete newUser.password;
+      delete newUser.pin;
+
+      const existingIdx = db.users.findIndex(u => (email && u.email && u.email.toLowerCase() === email) || (phone && u.phone && u.phone === phone));
       if (existingIdx >= 0) {
         db.users[existingIdx] = Object.assign({}, db.users[existingIdx], newUser);
       } else {
@@ -614,10 +659,14 @@ const server = http.createServer(async (req, res) => {
       }
       writeDB(db);
 
+      const safeUser = Object.assign({}, newUser);
+      delete safeUser.passwordHash;
+
       return sendJSON(res, 201, {
         success: true,
-        message: 'Account created successfully',
-        user: newUser
+        message: 'Account created successfully with secure credentials',
+        user: safeUser,
+        token: generateSecureToken('PPLUS-REG')
       });
     }
 
@@ -672,11 +721,14 @@ const server = http.createServer(async (req, res) => {
       }
       writeDB(db);
 
+      const safeUser = Object.assign({}, user);
+      delete safeUser.passwordHash;
+
       return sendJSON(res, 200, {
         success: true,
         message: 'Google Sign-In verified and logged in successfully',
-        user: user,
-        token: `JWT-GOOGLE-${Date.now()}-${Math.random().toString(36).substring(2, 8)}`
+        user: safeUser,
+        token: generateSecureToken('PPLUS-GOOGLE')
       });
     }
 
