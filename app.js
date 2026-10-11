@@ -425,16 +425,19 @@
     const patient = state.currentUser ? state.currentUser.name : 'Alex Turner';
 
     // Persist appointment to backend database
-    const res = await apiRequest('/api/appointments', 'POST', {
-      doctorName: docName,
-      specialty: docSpec,
-      slot: slot,
-      patientName: patient,
-      notes: 'Consultation request booked via P+ Pro Companion'
-    });
-
-    const aptId = res && res.appointment ? res.appointment.id : 'APT-CONFIRMED';
-    showToast(`Appointment ${aptId} confirmed with ${docName} for ${slot}!`, 'event_available');
+    try {
+      const res = await apiRequest('/api/appointments', 'POST', {
+        doctorName: docName,
+        specialty: docSpec,
+        slot: slot,
+        patientName: patient,
+        notes: 'Consultation request booked via P+ Pro Companion'
+      });
+      const aptId = res && res.appointment ? res.appointment.id : 'APT-CONFIRMED';
+      showToast(`Appointment ${aptId} confirmed with ${docName} for ${slot}!`, 'event_available');
+    } catch (err) {
+      showToast('Could not book appointment: ' + err.message, 'error');
+    }
   };
 
   // Posture Settings Adjustment Helpers
@@ -466,14 +469,17 @@
     const timeVal = timeEl ? parseInt(timeEl.textContent, 10) : 10;
 
     // Persist posture settings to backend database
-    const res = await apiRequest('/api/posture/settings', 'POST', {
-      alertAngle: angleVal,
-      holdTime: timeVal,
-      vibrate: true,
-      mode: 'Desk & Mobile'
-    });
-
-    showToast(`Posture settings (${angleVal}°, ${timeVal}s) saved to database & synced!`, 'check_circle');
+    try {
+      await apiRequest('/api/posture/settings', 'POST', {
+        alertAngle: angleVal,
+        holdTime: timeVal,
+        vibrate: true,
+        mode: 'Desk & Mobile'
+      });
+      showToast(`Posture settings (${angleVal}°, ${timeVal}s) saved to database & synced!`, 'check_circle');
+    } catch (err) {
+      showToast('Could not save posture settings: ' + err.message, 'error');
+    }
   };
 
   // Center '+' Floating Action Button: Log Diagnostic Entry
@@ -490,9 +496,13 @@
     };
 
     // Persist diagnostic entry to backend database
-    const res = await apiRequest('/api/diagnostics', 'POST', diagData);
-    const diagId = res && res.diagnostic ? res.diagnostic.id : 'DIAG-LOG';
-    showToast(`Diagnostic entry ${diagId} saved to database • Sensor calibrated`, 'check_circle');
+    try {
+      const res = await apiRequest('/api/diagnostics', 'POST', diagData);
+      const diagId = res && res.diagnostic ? res.diagnostic.id : 'DIAG-LOG';
+      showToast(`Diagnostic entry ${diagId} saved to database • Sensor calibrated`, 'check_circle');
+    } catch (err) {
+      showToast('Could not save diagnostic: ' + err.message, 'error');
+    }
   };
 
   window.shareDoctorProfile = function (doctorName) {
@@ -1242,53 +1252,103 @@
   function handlePatientRegistration(e) {
     if (e) e.preventDefault();
     const nameInput = document.getElementById('reg-patient-name');
+    const contactInput = document.getElementById('reg-patient-contact');
+    const pinInput = document.getElementById('reg-patient-pin');
+
     const name = nameInput && nameInput.value ? nameInput.value.trim() : 'Alex Turner';
-    closeRegisterModal();
+    const contact = contactInput && contactInput.value ? contactInput.value.trim() : '';
+    const pin = pinInput && pinInput.value ? pinInput.value.trim() : '';
+
+    if (!name) {
+      showToast('Please enter your full name', 'warning');
+      return;
+    }
+    if (pin && pin.length < 4) {
+      showToast('Security PIN must be at least 4 digits', 'warning');
+      return;
+    }
+
+    const isEmail = contact.includes('@');
+    const emailVal = isEmail ? contact : (name.toLowerCase().replace(/[^a-z0-9]/g, '.') + '@patient.org');
+    const phoneVal = !isEmail && contact ? contact : '+1 (555) 234-8890';
+
     const existing = loadStoredProfile('patient');
-    state.currentUser = Object.assign({}, existing, {
+    const newPatient = Object.assign({}, existing, {
       name: name,
+      email: emailVal,
+      phone: phoneVal,
+      password: pin || 'password123',
       role: 'patient',
       id: 'P-' + Math.floor(1000 + Math.random() * 9000)
     });
-    saveStoredProfile(state.currentUser);
-    apiRequest('/api/auth/register', 'POST', state.currentUser).catch(() => {});
-    updateActiveUserProfile();
-    showToast(`Account created for ${state.currentUser.name}! Saved to database.`, 'how_to_reg');
-    setTimeout(() => {
-      navigateTo('screen-home');
-    }, 450);
+
+    apiRequest('/api/auth/register', 'POST', newPatient).then(res => {
+      closeRegisterModal();
+      state.currentUser = Object.assign({}, existing, (res && res.user) ? res.user : newPatient);
+      delete state.currentUser.passwordHash;
+      delete state.currentUser.password;
+      saveStoredProfile(state.currentUser);
+      updateActiveUserProfile();
+      showToast(`Account created for ${state.currentUser.name}! Saved to database.`, 'how_to_reg');
+      setTimeout(() => {
+        navigateTo('screen-home');
+      }, 450);
+    }).catch(err => {
+      showToast((err && err.message) || 'Registration failed', 'error');
+    });
   }
 
   function handleDoctorRegistration(e) {
     if (e) e.preventDefault();
-    const name = document.getElementById('reg-doc-name').value.trim();
-    const spec = document.getElementById('reg-doc-spec').value;
-    const hospital = document.getElementById('reg-doc-hospital').value.trim();
+    const nameInput = document.getElementById('reg-doc-name');
+    const specInput = document.getElementById('reg-doc-spec');
+    const hospInput = document.getElementById('reg-doc-hospital');
+    const licInput = document.getElementById('reg-doc-license');
 
-    closeRegisterModal();
+    const name = nameInput ? nameInput.value.trim() : '';
+    const spec = specInput ? specInput.value : 'General Physician';
+    const hospital = hospInput ? hospInput.value.trim() : '';
+    const license = licInput ? licInput.value.trim() : 'MED-REG-01';
 
+    if (!name || !hospital) {
+      showToast('Please complete all required doctor fields', 'warning');
+      return;
+    }
+
+    const email = `${name.toLowerCase().replace(/[^a-z0-9]/g, '.')}@${hospital.toLowerCase().replace(/[^a-z0-9]/g, '') || 'hospital'}.org`;
     const existing = loadStoredProfile('doctor');
     const docProfile = Object.assign({}, existing, {
       name: name,
       specialty: spec,
       hospital: hospital,
+      license: license,
       role: 'doctor',
+      email: email,
+      password: 'password123',
       id: 'DOC-' + Math.floor(100 + Math.random() * 900)
     });
-    saveStoredProfile(docProfile);
-    apiRequest('/api/auth/register', 'POST', docProfile).catch(() => {});
 
-    // Dynamically inject the new doctor card into screen-doctors
-    addDoctorToCareTeamList(name, spec, hospital);
+    apiRequest('/api/auth/register', 'POST', docProfile).then(res => {
+      closeRegisterModal();
+      const savedUser = Object.assign({}, existing, (res && res.user) ? res.user : docProfile);
+      delete savedUser.passwordHash;
+      delete savedUser.password;
+      saveStoredProfile(savedUser);
 
-    showToast(`${name} (${spec}) added to Care Team!`, 'verified');
-    
-    // Switch to Doctor Portal and prefill
-    switchLoginPortal('doctor');
-    const emailInput = document.getElementById('login-email');
-    if (emailInput) {
-      emailInput.value = `${name.toLowerCase().replace(/[^a-z]/g, '.')}@${hospital.toLowerCase().replace(/[^a-z]/g, '') || 'hospital'}.org`;
-    }
+      // Dynamically inject the new doctor card into screen-doctors
+      addDoctorToCareTeamList(name, spec, hospital);
+
+      showToast(`${name} (${spec}) added to Care Team!`, 'verified');
+
+      // Switch to Doctor Portal and prefill
+      switchLoginPortal('doctor');
+      const emailInput = document.getElementById('login-email');
+      if (emailInput) {
+        emailInput.value = email;
+      }
+    }).catch(err => {
+      showToast((err && err.message) || 'Doctor registration failed', 'error');
+    });
   }
 
   function addDoctorToCareTeamList(name, spec, hospital) {
@@ -1296,6 +1356,10 @@
     if (!doctorsScreen) return;
     const stack = doctorsScreen.querySelector('.flex.flex-col.gap-4');
     if (!stack) return;
+
+    const safeName = escapeHTML(name);
+    const safeSpec = escapeHTML(spec);
+    const safeHospital = escapeHTML(hospital);
 
     const newCard = document.createElement('div');
     newCard.className = 'w-full bg-surface-container-lowest rounded-2xl p-4 shadow-sm border border-surface-container flex flex-col gap-4 animate-pulse';
@@ -1306,27 +1370,46 @@
         </div>
         <div class="flex flex-col min-w-0 flex-1">
           <div class="flex items-center justify-between gap-2">
-            <h3 class="text-lg font-bold text-on-surface tracking-tight">${name}</h3>
+            <h3 class="text-lg font-bold text-on-surface tracking-tight">${safeName}</h3>
             <div class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-surface-container-low text-on-surface font-semibold text-xs shrink-0">
               <span class="text-amber-500 text-xs">★</span>
               <span>5.0</span>
             </div>
           </div>
-          <span class="text-xs text-on-surface-variant font-medium mt-0.5">${spec}</span>
-          <span class="text-label-md text-secondary text-xs mt-0.5">${hospital}</span>
+          <span class="text-xs text-on-surface-variant font-medium mt-0.5">${safeSpec}</span>
+          <span class="text-label-md text-secondary text-xs mt-0.5">${safeHospital}</span>
         </div>
       </div>
       <div class="flex items-center gap-2.5">
-        <button class="flex-1 h-11 bg-primary hover:bg-primary-container active:scale-[0.98] transition-all rounded-full flex items-center justify-center gap-1.5 shadow-sm cursor-pointer" type="button" onclick="openBookingModal('${name.replace(/'/g, "\\'")}', '${spec}')">
+        <button class="book-now-btn flex-1 h-11 bg-primary hover:bg-primary-container active:scale-[0.98] transition-all rounded-full flex items-center justify-center gap-1.5 shadow-sm cursor-pointer" type="button">
           <span class="text-xs text-on-primary font-medium">Book Now</span>
           <span class="material-symbols-outlined text-on-primary text-[16px]">calendar_today</span>
         </button>
-        <button aria-label="Share profile" class="h-11 px-4 rounded-full bg-surface-container-low hover:bg-surface-container text-on-surface flex items-center justify-center gap-1.5 font-medium text-xs transition-all active:scale-95 shrink-0 cursor-pointer" type="button" onclick="shareDoctorProfile('${name.replace(/'/g, "\\'")}')">
+        <button aria-label="Share profile" class="share-doc-btn h-11 px-4 rounded-full bg-surface-container-low hover:bg-surface-container text-on-surface flex items-center justify-center gap-1.5 font-medium text-xs transition-all active:scale-95 shrink-0 cursor-pointer" type="button">
           <span class="material-symbols-outlined text-[17px]">share</span>
           <span>Share</span>
         </button>
       </div>
     `;
+
+    // Secure DOM event listeners avoiding string injection / code execution
+    const bookBtn = newCard.querySelector('.book-now-btn');
+    if (bookBtn) {
+      bookBtn.addEventListener('click', () => {
+        if (typeof window.openBookingModal === 'function') {
+          window.openBookingModal(name, spec);
+        }
+      });
+    }
+    const shareBtn = newCard.querySelector('.share-doc-btn');
+    if (shareBtn) {
+      shareBtn.addEventListener('click', () => {
+        if (typeof window.shareDoctorProfile === 'function') {
+          window.shareDoctorProfile(name);
+        }
+      });
+    }
+
     stack.prepend(newCard);
     setTimeout(() => newCard.classList.remove('animate-pulse'), 1500);
   }
