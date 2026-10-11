@@ -3123,25 +3123,29 @@
   // ==========================================
   window.saveCurrentMwReadingToDb = async function () {
     const t = bleState.currentTelemetry;
-    const res = await apiRequest('/api/bluetooth/readings', 'POST', {
-      deviceId: bleState.device?.id || 'MW-DEV-01',
-      deviceName: bleState.deviceName,
-      heartRate: t.heartRate,
-      spO2: t.spO2,
-      temp: t.temp,
-      postureAngle: t.postureAngle,
-      battery: t.battery,
-      motion: t.motion,
-      logToDiagnostics: true
-    });
-    if (res && res.success) {
-      showToast(`Right reading (${t.heartRate} BPM, ${t.spO2}%) saved to database!`, 'cloud_done');
-      if (res.totalReadingsInDb) {
-        bleState.dbSyncedCount = res.totalReadingsInDb;
-        const countBadge = document.getElementById('ble-db-readings-count');
-        if (countBadge) countBadge.textContent = res.totalReadingsInDb;
+    try {
+      const res = await apiRequest('/api/bluetooth/readings', 'POST', {
+        deviceId: bleState.device?.id || 'MW-DEV-01',
+        deviceName: bleState.deviceName,
+        heartRate: t.heartRate,
+        spO2: t.spO2,
+        temp: t.temp,
+        postureAngle: t.postureAngle,
+        battery: t.battery,
+        motion: t.motion,
+        logToDiagnostics: true
+      });
+      if (res && res.success) {
+        showToast(`Right reading (${t.heartRate} BPM, ${t.spO2}%) saved to database!`, 'cloud_done');
+        if (res.totalReadingsInDb) {
+          bleState.dbSyncedCount = res.totalReadingsInDb;
+          const countBadge = document.getElementById('ble-db-readings-count');
+          if (countBadge) countBadge.textContent = res.totalReadingsInDb;
+        }
+        loadMwDbReadingsHistory();
       }
-      loadMwDbReadingsHistory();
+    } catch (err) {
+      showToast('Could not save sensor reading: ' + err.message, 'error');
     }
   };
 
@@ -3160,25 +3164,33 @@
     const list = document.getElementById('ble-mw-history-list');
     if (!list) return;
     list.innerHTML = '<div class="text-gray-400 py-1 text-center">Loading database records...</div>';
-    const res = await apiRequest('/api/bluetooth/readings?limit=6');
-    if (res && res.readings && res.readings.length > 0) {
-      list.innerHTML = res.readings.map(r => {
-        const time = new Date(r.recordedAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' });
-        return `
-          <div class="flex items-center justify-between p-1.5 rounded-lg bg-white/90 border border-emerald-100 shadow-xs">
-            <div class="flex items-center gap-1.5">
-              <span class="w-2 h-2 rounded-full ${r.isValidReading ? 'bg-emerald-500' : 'bg-amber-500'}"></span>
-              <span class="font-bold text-gray-800">${r.heartRate} BPM</span>
-              <span class="text-gray-500">• ${r.spO2}% • ${r.temp}°C • ${r.postureAngle}°</span>
+    try {
+      const res = await apiRequest('/api/bluetooth/readings?limit=6');
+      if (res && res.readings && res.readings.length > 0) {
+        list.innerHTML = res.readings.map(r => {
+          const time = new Date(r.recordedAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+          const safeHr = Number(r.heartRate) || 0;
+          const safeSpO2 = Number(r.spO2) || 0;
+          const safeTemp = Number(r.temp) || 0;
+          const safeAngle = Number(r.postureAngle) || 0;
+          return `
+            <div class="flex items-center justify-between p-1.5 rounded-lg bg-white/90 border border-emerald-100 shadow-xs">
+              <div class="flex items-center gap-1.5">
+                <span class="w-2 h-2 rounded-full ${r.isValidReading ? 'bg-emerald-500' : 'bg-amber-500'}"></span>
+                <span class="font-bold text-gray-800">${safeHr} BPM</span>
+                <span class="text-gray-500">• ${safeSpO2}% • ${safeTemp}°C • ${safeAngle}°</span>
+              </div>
+              <span class="text-gray-400 font-mono text-[9px]">${escapeHTML(time)}</span>
             </div>
-            <span class="text-gray-400 font-mono text-[9px]">${time}</span>
-          </div>
-        `;
-      }).join('');
-      const countBadge = document.getElementById('ble-db-readings-count');
-      if (countBadge && res.totalInDb) countBadge.textContent = res.totalInDb;
-    } else {
-      list.innerHTML = '<div class="text-gray-400 py-1 text-center">No database records found yet.</div>';
+          `;
+        }).join('');
+        const countBadge = document.getElementById('ble-db-readings-count');
+        if (countBadge && res.totalInDb) countBadge.textContent = res.totalInDb;
+      } else {
+        list.innerHTML = '<div class="text-gray-400 py-1 text-center">No database records found yet.</div>';
+      }
+    } catch (_) {
+      list.innerHTML = '<div class="text-gray-400 py-1 text-center">Database offline or synchronizing...</div>';
     }
   };
 
@@ -3189,10 +3201,12 @@
         return; // Don't override real-time BLE stream with poller
       }
       if (state.currentScreen === 'screen-home' || state.currentScreen === 'screen-live') {
-        const data = await apiRequest('/api/vitals');
-        if (data && data.vitals) {
-          updateAppScreensWithTelemetry(data.vitals);
-        }
+        try {
+          const data = await apiRequest('/api/vitals');
+          if (data && data.vitals) {
+            updateAppScreensWithTelemetry(data.vitals);
+          }
+        } catch (_) {}
       }
     }, 2800);
   }
