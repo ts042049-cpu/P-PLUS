@@ -175,6 +175,26 @@ function initDB() {
       console.warn('Initial backfile snapshot skipped:', e.message);
     }
   }
+
+  // Ensure all existing user records have a secure passwordHash
+  try {
+    if (fs.existsSync(DB_FILE)) {
+      const raw = fs.readFileSync(DB_FILE, 'utf8');
+      const data = JSON.parse(raw);
+      let changed = false;
+      if (data && Array.isArray(data.users)) {
+        data.users.forEach(u => {
+          if (!u.passwordHash) {
+            u.passwordHash = hashPassword('password123');
+            changed = true;
+          }
+        });
+        if (changed) {
+          fs.writeFileSync(DB_FILE, JSON.stringify(data, null, 2), 'utf8');
+        }
+      }
+    }
+  } catch (_) {}
 }
 
 // Generate formatted backfile object
