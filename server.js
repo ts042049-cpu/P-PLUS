@@ -1106,6 +1106,9 @@ const server = http.createServer(async (req, res) => {
     if (pathname === '/api/backfile/restore-snapshot' && req.method === 'POST') {
       const body = await parseBody(req);
       const filename = path.basename(body.filename || '');
+      if (!/^(backfile|pre_restore_backup)_[\w-]+\.json$/.test(filename)) {
+        return sendJSON(res, 400, { success: false, error: 'Invalid backup snapshot filename format' });
+      }
       const targetPath = path.join(BACKUPS_DIR, filename);
       if (!fs.existsSync(targetPath)) {
         return sendJSON(res, 404, { success: false, error: 'Backup snapshot file not found' });
