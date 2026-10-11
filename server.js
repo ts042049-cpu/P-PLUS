@@ -17,6 +17,8 @@ const MIME_TYPES = {
   '.jpeg': 'image/jpeg',
   '.svg': 'image/svg+xml',
   '.ico': 'image/x-icon',
+  '.webp': 'image/webp',
+  '.webmanifest': 'application/manifest+json',
   '.woff2': 'font/woff2',
   '.woff': 'font/woff'
 };
@@ -1427,17 +1429,65 @@ const server = http.createServer(async (req, res) => {
   }
 
   // ==========================================
-  // STATIC ASSET SERVING
+  // STATIC ASSET SERVING WITH PATH TRAVERSAL & INFO LEAK DEFENSE
   // ==========================================
-  let reqPath = decodeURIComponent(pathname);
+  let reqPath;
+  try {
+    reqPath = decodeURIComponent(pathname);
+  } catch (err) {
+    res.writeHead(400, { 'Content-Type': 'text/plain' });
+    return res.end('Bad Request: Malformed URI');
+  }
+
+  // Null byte injection defense
+  if (reqPath.indexOf('\0') !== -1 || reqPath.indexOf('%00') !== -1) {
+    res.writeHead(400, { 'Content-Type': 'text/plain' });
+    return res.end('Bad Request: Null Byte Detected');
+  }
+
   if (reqPath === '/' || reqPath === '') {
     reqPath = '/index.html';
   }
 
-  const filePath = path.join(__dirname, reqPath);
-  if (!filePath.startsWith(__dirname)) {
-    res.writeHead(403);
-    return res.end('Forbidden');
+  // Normalize path and prevent directory traversal
+  const normalizedPath = path.normalize(reqPath).replace(/^(\.\.[\/\\])+/, '');
+  const rootDir = path.resolve(__dirname);
+  const filePath = path.resolve(rootDir, '.' + (normalizedPath.startsWith(path.sep) ? normalizedPath : path.sep + normalizedPath));
+
+  // Verify filePath stays strictly inside rootDir
+  if (!filePath.startsWith(rootDir)) {
+    res.writeHead(403, { 'Content-Type': 'text/plain' });
+    return res.end('Forbidden: Path Traversal Detected');
+  }
+
+  // Disallow access to sensitive folders and files
+  const relPath = path.relative(rootDir, filePath).toLowerCase();
+  const pathParts = relPath.split(/[/\\]/);
+
+  const blockedDirs = ['data', '.git', '.vscode', 'node_modules'];
+  const isBlockedDir = pathParts.some(part => blockedDirs.includes(part) || part.startsWith('.'));
+
+  const blockedFiles = [
+    'server.js',
+    'local_server.js',
+    'package.json',
+    'package-lock.json',
+    'jsconfig.json',
+    'db.json',
+    'backfile.json'
+  ];
+  const fileName = path.basename(filePath).toLowerCase();
+  const isBlockedFile = blockedFiles.includes(fileName) || fileName.startsWith('.') || fileName.endsWith('.md');
+
+  if (isBlockedDir || isBlockedFile) {
+    res.writeHead(403, { 'Content-Type': 'text/plain' });
+    return res.end('Forbidden: Access Denied to Internal Resource');
+  }
+
+  const ext = path.extname(filePath).toLowerCase();
+  if (!MIME_TYPES[ext]) {
+    res.writeHead(403, { 'Content-Type': 'text/plain' });
+    return res.end('Forbidden: Unsupported File Type');
   }
 
   fs.stat(filePath, (err, stats) => {
@@ -1446,12 +1496,13 @@ const server = http.createServer(async (req, res) => {
       return res.end('File Not Found');
     }
 
-    const ext = path.extname(filePath).toLowerCase();
     const contentType = MIME_TYPES[ext] || 'application/octet-stream';
-    res.writeHead(200, {
+    const securityHeaders = getSecurityHeaders();
+    res.writeHead(200, Object.assign({
       'Content-Type': contentType,
-      'Access-Control-Allow-Origin': '*'
-    });
+      'Access-Control-Allow-Origin': '*',
+      'Cache-Control': ext === '.html' ? 'no-cache, must-revalidate' : 'public, max-age=3600'
+    }, securityHeaders));
     fs.createReadStream(filePath).pipe(res);
   });
 });
