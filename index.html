@@ -149,6 +149,11 @@
                 <span class="w-1 h-1 rounded-full bg-gray-300"></span>
                 <span>Offline • Private • Secure</span>
               </div>
+              <div class="flex items-center justify-center gap-2 text-[10px] text-gray-400 font-medium mt-1">
+                <button type="button" class="hover:underline hover:text-black cursor-pointer bg-transparent border-0 p-0 text-[10px] text-gray-400" onclick="switchTermsTab('terms'); navigateTo('screen-terms')">Terms of Service</button>
+                <span>•</span>
+                <button type="button" class="hover:underline hover:text-black cursor-pointer bg-transparent border-0 p-0 text-[10px] text-gray-400" onclick="switchTermsTab('privacy'); navigateTo('screen-terms')">Privacy Policy</button>
+              </div>
 
               <!-- Bottom Home Indicator Bar -->
               <div class="w-28 h-1 bg-black/15 rounded-full mt-2 mb-0.5"></div>
@@ -1649,6 +1654,30 @@
                   </div>
                   <input type="checkbox" checked class="rounded text-primary focus:ring-primary w-4 h-4 border-gray-300" onchange="showToast('Fall detection mesh armed', 'verified')">
                 </label>
+              </div>
+
+              <!-- Privacy, Legal & Terms Card -->
+              <div class="w-full bg-surface-container-lowest rounded-2xl p-4 shadow-sm border border-surface-container/60 flex flex-col gap-2.5">
+                <div class="flex items-center justify-between">
+                  <div class="flex items-center gap-2">
+                    <span class="material-symbols-outlined text-primary text-[20px]">policy</span>
+                    <h3 class="font-title-sm text-sm font-bold text-on-surface">Legal, Terms &amp; Privacy</h3>
+                  </div>
+                  <span class="px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 text-[10px] font-bold">HIPAA &amp; DISHA</span>
+                </div>
+                <p class="text-xs text-secondary leading-snug">Review your biometric telemetry rights, zero-surveillance data privacy policies, and clinical terms.</p>
+                <button type="button" class="w-full p-2.5 rounded-xl bg-surface-container-low hover:bg-surface-container border border-surface-container flex items-center justify-between transition-colors cursor-pointer group" onclick="navigateTo('screen-terms')">
+                  <div class="flex items-center gap-2.5">
+                    <div class="w-8 h-8 rounded-lg bg-blue-50 text-blue-700 flex items-center justify-center shrink-0">
+                      <span class="material-symbols-outlined text-[18px]">verified_user</span>
+                    </div>
+                    <div class="text-left">
+                      <p class="font-semibold text-xs text-on-surface leading-tight group-hover:text-primary transition-colors">Terms of Service &amp; Privacy Policy</p>
+                      <p class="text-[11px] text-secondary leading-tight mt-0.5">Protocol v2.4 • Local-first storage guarantees</p>
+                    </div>
+                  </div>
+                  <span class="material-symbols-outlined text-secondary group-hover:text-on-surface group-hover:translate-x-0.5 transition-all text-[18px]">chevron_right</span>
+                </button>
               </div>
 
               <!-- Actions: Export & Logout -->
