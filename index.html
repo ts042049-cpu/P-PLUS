@@ -2751,38 +2751,13 @@
                 </div>
               </div>
 
+              <!-- Bottom Home Indicator Bar -->
+              <div class="w-full flex justify-center pt-2 pb-4">
+                <div class="w-28 h-1 bg-black/15 rounded-full"></div>
+              </div>
+
             </div>
           </div>
-
-          <!-- Bottom Navigation Bar -->
-          <nav class="h-16 px-space-xs bg-surface-container-lowest/95 backdrop-blur-xl border-t border-surface-container/60 shrink-0 z-30">
-            <div class="flex justify-around items-center h-full relative">
-              <button class="flex flex-col items-center justify-center min-w-[56px] h-12 text-secondary hover:text-on-surface cursor-pointer" onclick="navigateTo('screen-home')" title="Home">
-                <span class="material-symbols-outlined text-[22px]">home</span>
-                <span class="font-label-telemetry text-[10px] uppercase tracking-wider">HOME</span>
-              </button>
-              <button class="flex flex-col items-center justify-center min-w-[56px] h-12 text-secondary hover:text-on-surface cursor-pointer" onclick="navigateTo('screen-doctors')" title="Care Team">
-                <span class="material-symbols-outlined text-[22px]">medical_services</span>
-                <span class="font-label-telemetry text-[10px] uppercase tracking-wider">CARE</span>
-              </button>
-              <div class="relative -top-4 flex items-center justify-center">
-                <button aria-label="Connect Bluetooth Device" class="main-plus-ble-btn w-12 h-12 rounded-full bg-primary text-on-primary shadow-lg flex items-center justify-center transition-transform active:scale-95 cursor-pointer relative" onclick="handlePlusButtonClick()" title="Connect Bluetooth Device (ESP32-S3)">
-                  <span class="material-symbols-outlined text-[24px] nav-center-icon">add</span>
-                  <span class="nav-center-ble-badge absolute -bottom-0.5 -right-0.5 w-4 h-4 rounded-full bg-blue-600 text-white flex items-center justify-center border-2 border-white shadow-xs">
-                    <span class="material-symbols-outlined text-[10px]">bluetooth</span>
-                  </span>
-                </button>
-              </div>
-              <button class="flex flex-col items-center justify-center min-w-[56px] h-12 text-secondary hover:text-on-surface cursor-pointer" onclick="navigateTo('screen-posture')" title="Posture Rehabilitation">
-                <span class="material-symbols-outlined text-[22px]">accessibility_new</span>
-                <span class="font-label-telemetry text-[10px] uppercase tracking-wider">POSTURE</span>
-              </button>
-              <button class="flex flex-col items-center justify-center min-w-[56px] h-12 text-secondary hover:text-on-surface cursor-pointer" onclick="navigateTo('screen-profile')" title="My Profile">
-                <span class="material-symbols-outlined text-[22px]">person</span>
-                <span class="font-label-telemetry text-[10px] uppercase tracking-wider">ME</span>
-              </button>
-            </div>
-          </nav>
         </section>
 
       </div><!-- end #screens-viewport -->
