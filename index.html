@@ -2418,6 +2418,373 @@
           </nav>
         </section>
 
+        <!-- ========================================== -->
+        <!-- SCREEN: TERMS OF SERVICE & PRIVACY POLICY -->
+        <!-- ========================================== -->
+        <section id="screen-terms" class="screen-view bg-[#f8f9fc]">
+          <header class="h-14 px-4 flex items-center justify-between border-b border-surface-container/40 bg-surface/95 backdrop-blur-xl shrink-0 z-20 relative">
+            <button aria-label="Go back" class="w-10 h-10 -ml-1 rounded-full flex items-center justify-center text-on-surface hover:bg-surface-container transition-colors active:scale-95 cursor-pointer" onclick="goBack()" type="button">
+              <span class="material-symbols-outlined text-[22px]">chevron_left</span>
+            </button>
+            <h1 class="font-semibold text-base tracking-tight text-on-surface">Terms &amp; Policy</h1>
+            <button aria-label="Download legal document" class="w-9 h-9 rounded-full flex items-center justify-center text-on-surface hover:bg-surface-container transition-colors active:scale-95 cursor-pointer" onclick="downloadLegalPolicy()" title="Download Terms & Privacy Policy (TXT)">
+              <span class="material-symbols-outlined text-[20px]">download</span>
+            </button>
+          </header>
+
+          <div class="screen-scroll-area px-4 pt-3 pb-6">
+            <div class="flex flex-col gap-3.5 max-w-xl mx-auto">
+              
+              <!-- Hero Legal Status Card -->
+              <div class="bg-gradient-to-br from-white to-slate-50/80 rounded-2xl p-4 shadow-sm border border-slate-200/80 flex flex-col gap-3 relative overflow-hidden">
+                <div class="absolute -top-10 -right-10 w-28 h-28 bg-blue-100/40 rounded-full blur-2xl pointer-events-none"></div>
+                <div class="flex items-start justify-between">
+                  <div class="flex items-center gap-2.5">
+                    <div class="w-11 h-11 rounded-xl bg-primary/10 text-primary flex items-center justify-center shrink-0 border border-primary/20">
+                      <span class="material-symbols-outlined text-[24px]">verified_user</span>
+                    </div>
+                    <div>
+                      <h2 class="text-base font-bold text-slate-900 tracking-tight">Terms &amp; Privacy Policy</h2>
+                      <p class="text-[11px] text-slate-500 font-medium mt-0.5">P+ Pro Health Companion • Protocol v2.4</p>
+                    </div>
+                  </div>
+                  <div id="terms-status-badge" class="px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 font-semibold text-[10px] flex items-center border border-emerald-200 shrink-0">
+                    <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 mr-1"></span>
+                    <span>Active Policy</span>
+                  </div>
+                </div>
+
+                <p class="text-xs text-slate-600 leading-relaxed">
+                  Your trust and biometric safety are paramount. P+ Pro is engineered with a <strong>local-first, zero-surveillance architecture</strong>: your health vitals stay on your hardware and are never sold or brokered.
+                </p>
+
+                <!-- Compliance Pills Grid -->
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-1.5 pt-0.5">
+                  <div class="px-2 py-1.5 rounded-xl bg-slate-100/80 border border-slate-200/60 flex items-center gap-1.5 text-slate-700">
+                    <span class="material-symbols-outlined text-emerald-600 text-[14px]">shield</span>
+                    <span class="text-[10px] font-semibold">HIPAA Aligned</span>
+                  </div>
+                  <div class="px-2 py-1.5 rounded-xl bg-slate-100/80 border border-slate-200/60 flex items-center gap-1.5 text-slate-700">
+                    <span class="material-symbols-outlined text-blue-600 text-[14px]">lock</span>
+                    <span class="text-[10px] font-semibold">AES-256 E2EE</span>
+                  </div>
+                  <div class="px-2 py-1.5 rounded-xl bg-slate-100/80 border border-slate-200/60 flex items-center gap-1.5 text-slate-700">
+                    <span class="material-symbols-outlined text-amber-600 text-[14px]">health_and_safety</span>
+                    <span class="text-[10px] font-semibold">DISHA Ready</span>
+                  </div>
+                  <div class="px-2 py-1.5 rounded-xl bg-slate-100/80 border border-slate-200/60 flex items-center gap-1.5 text-slate-700">
+                    <span class="material-symbols-outlined text-purple-600 text-[14px]">database</span>
+                    <span class="text-[10px] font-semibold">Local-First</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Segmented Navigation Tabs -->
+              <div class="w-full bg-slate-100 p-1 rounded-full flex items-center gap-1 shadow-sm overflow-x-auto" id="terms-tabs-bar" role="tablist">
+                <button aria-selected="true" class="terms-tab-btn flex-1 py-1.5 px-2.5 rounded-full text-[11px] font-semibold text-center whitespace-nowrap transition-all bg-black text-white shadow-sm cursor-pointer" data-terms-tab="terms" role="tab" type="button" onclick="switchTermsTab('terms')">Terms of Service</button>
+                <button aria-selected="false" class="terms-tab-btn flex-1 py-1.5 px-2.5 rounded-full text-[11px] font-semibold text-center whitespace-nowrap transition-all text-slate-600 hover:text-black hover:bg-white/50 cursor-pointer" data-terms-tab="privacy" role="tab" type="button" onclick="switchTermsTab('privacy')">Privacy Policy</button>
+                <button aria-selected="false" class="terms-tab-btn flex-1 py-1.5 px-2.5 rounded-full text-[11px] font-semibold text-center whitespace-nowrap transition-all text-slate-600 hover:text-black hover:bg-white/50 cursor-pointer" data-terms-tab="disclaimer" role="tab" type="button" onclick="switchTermsTab('disclaimer')">Clinical Disclaimer</button>
+                <button aria-selected="false" class="terms-tab-btn flex-1 py-1.5 px-2.5 rounded-full text-[11px] font-semibold text-center whitespace-nowrap transition-all text-slate-600 hover:text-black hover:bg-white/50 cursor-pointer" data-terms-tab="rights" role="tab" type="button" onclick="switchTermsTab('rights')">Your Rights</button>
+              </div>
+
+              <!-- Real-time Filter Search Input -->
+              <div class="relative flex items-center">
+                <span class="material-symbols-outlined absolute left-3 text-slate-400 text-[18px] pointer-events-none">search</span>
+                <input id="terms-search-input" class="w-full bg-white text-slate-900 placeholder:text-slate-400 rounded-xl pl-9 pr-8 py-2 text-xs font-medium outline-none border border-slate-200 focus:border-black/30 focus:ring-2 focus:ring-black/5 transition-all shadow-2xs" placeholder="Search clauses, privacy terms, or data policies..." type="text" oninput="filterTermsContent(this.value)">
+                <button type="button" class="absolute right-2.5 text-slate-400 hover:text-slate-600 text-xs cursor-pointer" onclick="document.getElementById('terms-search-input').value=''; filterTermsContent('');" title="Clear search">
+                  <span class="material-symbols-outlined text-[16px]">close</span>
+                </button>
+              </div>
+
+              <!-- ============================================== -->
+              <!-- PANEL 1: TERMS OF SERVICE                     -->
+              <!-- ============================================== -->
+              <div id="terms-panel-terms" class="terms-panel flex flex-col gap-3">
+                
+                <!-- Clause 1 -->
+                <article class="terms-clause-card bg-white rounded-2xl p-4 shadow-sm border border-slate-100 flex flex-col gap-2">
+                  <div class="flex items-center gap-2">
+                    <span class="w-6 h-6 rounded-lg bg-blue-50 text-blue-600 text-xs font-bold flex items-center justify-center shrink-0">1</span>
+                    <h3 class="text-sm font-bold text-slate-900 tracking-tight">Acceptance &amp; Companion Scope</h3>
+                  </div>
+                  <p class="text-xs text-slate-600 leading-relaxed">
+                    By downloading, accessing, or syncing hardware sensors with P+ Pro ("Service"), you agree to these Terms of Service. P+ Pro functions as a personal physiological telemetry companion, posture rehabilitation assistant, and doctor consultation coordinator.
+                  </p>
+                  <div class="p-2.5 rounded-xl bg-slate-50 border border-slate-100 text-[11px] text-slate-500 flex items-center gap-2">
+                    <span class="material-symbols-outlined text-slate-400 text-[16px] shrink-0">info</span>
+                    <span>Intended solely for wellness tracking, rehabilitation monitoring, and clinical coordination.</span>
+                  </div>
+                </article>
+
+                <!-- Clause 2: Emergency Disclaimer -->
+                <article class="terms-clause-card bg-white rounded-2xl p-4 shadow-sm border border-amber-200/80 bg-gradient-to-br from-amber-50/20 to-white flex flex-col gap-2">
+                  <div class="flex items-center justify-between">
+                    <div class="flex items-center gap-2">
+                      <span class="w-6 h-6 rounded-lg bg-amber-100 text-amber-800 text-xs font-bold flex items-center justify-center shrink-0">2</span>
+                      <h3 class="text-sm font-bold text-slate-900 tracking-tight">Not An Emergency / ICU Replacement</h3>
+                    </div>
+                    <span class="px-2 py-0.5 rounded-full bg-amber-100 text-amber-800 text-[10px] font-bold uppercase">CRITICAL</span>
+                  </div>
+                  <p class="text-xs text-slate-700 leading-relaxed font-medium">
+                    P+ Pro does NOT replace 108 / 911 emergency services, paramedic dispatch, or intensive hospital telemetry units. In severe trauma, acute cardiac arrest, or loss of consciousness, you or your caregiver must contact local emergency medical dispatch immediately.
+                  </p>
+                  <div class="p-2.5 rounded-xl bg-amber-50/80 border border-amber-200 text-[11px] text-amber-900 flex items-center justify-between">
+                    <span>Emergency Ambulance Hotline</span>
+                    <a href="tel:108" class="px-2.5 py-1 rounded-lg bg-red-600 text-white font-bold text-[10px] flex items-center gap-1 shadow-xs">
+                      <span class="material-symbols-outlined text-[12px]">call</span>
+                      <span>Call 108 / 911</span>
+                    </a>
+                  </div>
+                </article>
+
+                <!-- Clause 3 -->
+                <article class="terms-clause-card bg-white rounded-2xl p-4 shadow-sm border border-slate-100 flex flex-col gap-2">
+                  <div class="flex items-center gap-2">
+                    <span class="w-6 h-6 rounded-lg bg-blue-50 text-blue-600 text-xs font-bold flex items-center justify-center shrink-0">3</span>
+                    <h3 class="text-sm font-bold text-slate-900 tracking-tight">Wearable Sensor Pairing &amp; Calibration</h3>
+                  </div>
+                  <p class="text-xs text-slate-600 leading-relaxed">
+                    Wearable sensors (ESP32-S3 band, PPG pulse oximetry, spine posture IMU insole) require clean skin contact, appropriate calibration, and stable Bluetooth Low Energy (BLE) connectivity. Readings may vary during vigorous motion, sweating, or misplacement. Users agree to calibrate baseline angles per instructions.
+                  </p>
+                </article>
+
+                <!-- Clause 4 -->
+                <article class="terms-clause-card bg-white rounded-2xl p-4 shadow-sm border border-slate-100 flex flex-col gap-2">
+                  <div class="flex items-center gap-2">
+                    <span class="w-6 h-6 rounded-lg bg-blue-50 text-blue-600 text-xs font-bold flex items-center justify-center shrink-0">4</span>
+                    <h3 class="text-sm font-bold text-slate-900 tracking-tight">Clinical Consultations &amp; Tele-Triage</h3>
+                  </div>
+                  <p class="text-xs text-slate-600 leading-relaxed">
+                    Telehealth appointments booked with verified Care Specialists (Cardiologists, Orthopedics, Physicians) represent professional guidance based on reported vitals. Digital prescriptions feature RSA-2048 cryptographic signatures from certified practitioners.
+                  </p>
+                </article>
+
+                <!-- Clause 5 -->
+                <article class="terms-clause-card bg-white rounded-2xl p-4 shadow-sm border border-slate-100 flex flex-col gap-2">
+                  <div class="flex items-center gap-2">
+                    <span class="w-6 h-6 rounded-lg bg-blue-50 text-blue-600 text-xs font-bold flex items-center justify-center shrink-0">5</span>
+                    <h3 class="text-sm font-bold text-slate-900 tracking-tight">Account Security &amp; Biometric PIN</h3>
+                  </div>
+                  <p class="text-xs text-slate-600 leading-relaxed">
+                    You are solely responsible for maintaining the confidentiality of your PIN, password, and authentication tokens. Do not share your login credentials with unauthorized third parties.
+                  </p>
+                </article>
+              </div>
+
+              <!-- ============================================== -->
+              <!-- PANEL 2: PRIVACY POLICY                        -->
+              <!-- ============================================== -->
+              <div id="terms-panel-privacy" class="terms-panel flex flex-col gap-3 hidden">
+                
+                <!-- Privacy Guarantee Banner -->
+                <article class="terms-clause-card bg-emerald-500/10 rounded-2xl p-4 border border-emerald-500/20 flex flex-col gap-2">
+                  <div class="flex items-center gap-2 text-emerald-800">
+                    <span class="material-symbols-outlined text-[20px]">verified</span>
+                    <h3 class="text-sm font-bold tracking-tight">Zero Data Monetization Pledge</h3>
+                  </div>
+                  <p class="text-xs text-emerald-900 leading-relaxed">
+                    We do <strong>NOT</strong> sell, rent, license, or broker your personal health information, vitals telemetry, or medical records to advertisers, pharmaceutical brokers, or data analytics firms. Your health metrics are yours alone.
+                  </p>
+                </article>
+
+                <!-- Clause 1 -->
+                <article class="terms-clause-card bg-white rounded-2xl p-4 shadow-sm border border-slate-100 flex flex-col gap-2">
+                  <div class="flex items-center gap-2">
+                    <span class="material-symbols-outlined text-primary text-[20px]">database</span>
+                    <h3 class="text-sm font-bold text-slate-900 tracking-tight">1. What Information We Process</h3>
+                  </div>
+                  <div class="flex flex-col gap-1.5 text-xs text-slate-600">
+                    <div class="flex items-start gap-2">
+                      <span class="w-1.5 h-1.5 rounded-full bg-primary mt-1.5 shrink-0"></span>
+                      <span><strong>Vital Biometrics:</strong> Heart Rate (BPM), Blood Oxygen (SpO₂), Body Temperature (°C), Spine Posture Angle (°), and Motion status.</span>
+                    </div>
+                    <div class="flex items-start gap-2">
+                      <span class="w-1.5 h-1.5 rounded-full bg-primary mt-1.5 shrink-0"></span>
+                      <span><strong>Clinical Identifiers:</strong> Name, age, blood type, known allergies, chronic conditions, and emergency triage contact.</span>
+                    </div>
+                    <div class="flex items-start gap-2">
+                      <span class="w-1.5 h-1.5 rounded-full bg-primary mt-1.5 shrink-0"></span>
+                      <span><strong>Telemetry Diagnostics:</strong> Bluetooth MAC address, battery levels, RSSI signal strength, and timestamped sensor logs.</span>
+                    </div>
+                  </div>
+                </article>
+
+                <!-- Clause 2 -->
+                <article class="terms-clause-card bg-white rounded-2xl p-4 shadow-sm border border-slate-100 flex flex-col gap-2">
+                  <div class="flex items-center gap-2">
+                    <span class="material-symbols-outlined text-primary text-[20px]">lock</span>
+                    <h3 class="text-sm font-bold text-slate-900 tracking-tight">2. Local-First Storage &amp; Encryption</h3>
+                  </div>
+                  <p class="text-xs text-slate-600 leading-relaxed">
+                    By default, vitals are stored on your local device repository. When synchronized with the clinical backend, all communications are secured with <strong>TLS 1.3</strong> transport encryption, and local data stores are safeguarded with <strong>AES-256</strong> cryptographic protection.
+                  </p>
+                </article>
+
+                <!-- Clause 3 -->
+                <article class="terms-clause-card bg-white rounded-2xl p-4 shadow-sm border border-slate-100 flex flex-col gap-2">
+                  <div class="flex items-center gap-2">
+                    <span class="material-symbols-outlined text-primary text-[20px]">share</span>
+                    <h3 class="text-sm font-bold text-slate-900 tracking-tight">3. Selective Doctor Sharing</h3>
+                  </div>
+                  <p class="text-xs text-slate-600 leading-relaxed">
+                    Your real-time vitals and diagnostic summaries are shared strictly with medical doctors that you have booked or explicitly authorized in your Care Team. You may revoke a doctor's telemetry viewing permission at any moment from your Profile.
+                  </p>
+                </article>
+
+                <!-- Clause 4 -->
+                <article class="terms-clause-card bg-white rounded-2xl p-4 shadow-sm border border-slate-100 flex flex-col gap-2">
+                  <div class="flex items-center gap-2">
+                    <span class="material-symbols-outlined text-primary text-[20px]">cookie</span>
+                    <h3 class="text-sm font-bold text-slate-900 tracking-tight">4. No Tracking Cookies or Third-Party Ads</h3>
+                  </div>
+                  <p class="text-xs text-slate-600 leading-relaxed">
+                    P+ Pro contains zero third-party advertising SDKs, cross-site tracking scripts, or behavioural profiling beacons. Only essential session tokens and encrypted offline data are retained.
+                  </p>
+                </article>
+              </div>
+
+              <!-- ============================================== -->
+              <!-- PANEL 3: CLINICAL & AI DISCLAIMERS            -->
+              <!-- ============================================== -->
+              <div id="terms-panel-disclaimer" class="terms-panel flex flex-col gap-3 hidden">
+                
+                <!-- Disclaimer 1 -->
+                <article class="terms-clause-card bg-white rounded-2xl p-4 shadow-sm border border-slate-100 flex flex-col gap-2">
+                  <div class="flex items-center gap-2">
+                    <span class="material-symbols-outlined text-amber-600 text-[20px]">psychology</span>
+                    <h3 class="text-sm font-bold text-slate-900 tracking-tight">AI Early Warning Algorithms</h3>
+                  </div>
+                  <p class="text-xs text-slate-600 leading-relaxed">
+                    P+ Pro incorporates machine-learning triage algorithms (e.g. Arrhythmia Risk index, Posture Ergonomic Slouch scores, Heat Vulnerability warnings). These predictive flags are probabilistic triage heuristics intended to prompt proactive clinical discussion, not conclusive diagnostic pathology findings.
+                  </p>
+                </article>
+
+                <!-- Disclaimer 2 -->
+                <article class="terms-clause-card bg-white rounded-2xl p-4 shadow-sm border border-slate-100 flex flex-col gap-2">
+                  <div class="flex items-center gap-2">
+                    <span class="material-symbols-outlined text-amber-600 text-[20px]">tune</span>
+                    <h3 class="text-sm font-bold text-slate-900 tracking-tight">Environmental &amp; Motion Artifacts</h3>
+                  </div>
+                  <p class="text-xs text-slate-600 leading-relaxed">
+                    PPG optical heart rate and SpO₂ readings may occasionally be skewed by motion artifacts, excessive ambient light, cold extremity vasoconstriction, or loose band tension. Always verify unexpected vitals with a standard clinical sphygmomanometer / pulse oximeter.
+                  </p>
+                </article>
+
+                <!-- Disclaimer 3 -->
+                <article class="terms-clause-card bg-white rounded-2xl p-4 shadow-sm border border-slate-100 flex flex-col gap-2">
+                  <div class="flex items-center gap-2">
+                    <span class="material-symbols-outlined text-amber-600 text-[20px]">medication</span>
+                    <h3 class="text-sm font-bold text-slate-900 tracking-tight">Medications &amp; Prescriptions</h3>
+                  </div>
+                  <p class="text-xs text-slate-600 leading-relaxed">
+                    Never discontinue or modify dosage of prescribed pharmaceuticals (such as beta-blockers, anti-hypertensives, or insulin) based purely on sensor telemetry without direct authorization from your attending physician.
+                  </p>
+                </article>
+              </div>
+
+              <!-- ============================================== -->
+              <!-- PANEL 4: YOUR DATA RIGHTS (GDPR / DISHA)      -->
+              <!-- ============================================== -->
+              <div id="terms-panel-rights" class="terms-panel flex flex-col gap-3 hidden">
+                
+                <article class="terms-clause-card bg-white rounded-2xl p-4 shadow-sm border border-slate-100 flex flex-col gap-3">
+                  <div class="flex items-center gap-2">
+                    <span class="material-symbols-outlined text-emerald-600 text-[20px]">gavel</span>
+                    <h3 class="text-sm font-bold text-slate-900 tracking-tight">Your Rights Under Digital Health Law</h3>
+                  </div>
+                  <p class="text-xs text-slate-600 leading-relaxed">
+                    In compliance with the Digital Personal Data Protection Act (DPDP), DISHA, and GDPR standards, you retain comprehensive authority over your personal telemetry:
+                  </p>
+
+                  <div class="grid grid-cols-1 gap-2 pt-1">
+                    <!-- Right 1 -->
+                    <div class="p-3 rounded-xl bg-slate-50 border border-slate-200/60 flex items-center justify-between">
+                      <div class="min-w-0 pr-2">
+                        <h4 class="text-xs font-bold text-slate-900">Right to Portability &amp; Export</h4>
+                        <p class="text-[11px] text-slate-500">Download your full medical history &amp; vitals in CSV/PDF.</p>
+                      </div>
+                      <button type="button" class="px-2.5 py-1.5 rounded-lg bg-white border border-slate-200 text-slate-800 text-xs font-semibold hover:bg-slate-100 transition-colors cursor-pointer shrink-0" onclick="openClinicalReportModal()">
+                        Export
+                      </button>
+                    </div>
+
+                    <!-- Right 2 -->
+                    <div class="p-3 rounded-xl bg-slate-50 border border-slate-200/60 flex items-center justify-between">
+                      <div class="min-w-0 pr-2">
+                        <h4 class="text-xs font-bold text-slate-900">Right to Revoke Doctor Sharing</h4>
+                        <p class="text-[11px] text-slate-500">Instantly detach medical practitioners from your stream.</p>
+                      </div>
+                      <button type="button" class="px-2.5 py-1.5 rounded-lg bg-white border border-slate-200 text-slate-800 text-xs font-semibold hover:bg-slate-100 transition-colors cursor-pointer shrink-0" onclick="navigateTo('screen-doctors')">
+                        Manage
+                      </button>
+                    </div>
+
+                    <!-- Right 3 -->
+                    <div class="p-3 rounded-xl bg-slate-50 border border-slate-200/60 flex items-center justify-between">
+                      <div class="min-w-0 pr-2">
+                        <h4 class="text-xs font-bold text-slate-900">Data Protection Officer (DPO)</h4>
+                        <p class="text-[11px] text-slate-500">File grievance or data inquiry with our compliance team.</p>
+                      </div>
+                      <button type="button" class="px-2.5 py-1.5 rounded-lg bg-primary text-on-primary text-xs font-semibold hover:bg-primary-container transition-colors cursor-pointer shrink-0" onclick="contactDPO()">
+                        Contact
+                      </button>
+                    </div>
+                  </div>
+                </article>
+              </div>
+
+              <!-- Bottom Agreement & Action Card -->
+              <div class="bg-white rounded-2xl p-4 shadow-sm border border-slate-100 flex flex-col gap-2.5 mt-1">
+                <div class="flex items-center justify-between text-xs text-slate-500 font-medium">
+                  <span>Last Reviewed: October 2026</span>
+                  <span class="text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full text-[10px] font-bold">Standard v2.4</span>
+                </div>
+                <div class="grid grid-cols-2 gap-2 pt-1">
+                  <button type="button" class="h-10 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 text-xs font-semibold flex items-center justify-center gap-1.5 transition-colors cursor-pointer" onclick="downloadLegalPolicy()">
+                    <span class="material-symbols-outlined text-[16px]">description</span>
+                    <span>Download Copy</span>
+                  </button>
+                  <button type="button" class="h-10 rounded-xl bg-black hover:bg-neutral-800 text-white text-xs font-semibold flex items-center justify-center gap-1.5 transition-all active:scale-98 shadow-sm cursor-pointer" onclick="acceptTermsAndPolicy()">
+                    <span class="material-symbols-outlined text-[16px]">check_circle</span>
+                    <span>Acknowledge &amp; Accept</span>
+                  </button>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- Bottom Navigation Bar -->
+          <nav class="h-16 px-space-xs bg-surface-container-lowest/95 backdrop-blur-xl border-t border-surface-container/60 shrink-0 z-30">
+            <div class="flex justify-around items-center h-full relative">
+              <button class="flex flex-col items-center justify-center min-w-[56px] h-12 text-secondary hover:text-on-surface cursor-pointer" onclick="navigateTo('screen-home')" title="Home">
+                <span class="material-symbols-outlined text-[22px]">home</span>
+                <span class="font-label-telemetry text-[10px] uppercase tracking-wider">HOME</span>
+              </button>
+              <button class="flex flex-col items-center justify-center min-w-[56px] h-12 text-secondary hover:text-on-surface cursor-pointer" onclick="navigateTo('screen-doctors')" title="Care Team">
+                <span class="material-symbols-outlined text-[22px]">medical_services</span>
+                <span class="font-label-telemetry text-[10px] uppercase tracking-wider">CARE</span>
+              </button>
+              <div class="relative -top-4 flex items-center justify-center">
+                <button aria-label="Connect Bluetooth Device" class="main-plus-ble-btn w-12 h-12 rounded-full bg-primary text-on-primary shadow-lg flex items-center justify-center transition-transform active:scale-95 cursor-pointer relative" onclick="handlePlusButtonClick()" title="Connect Bluetooth Device (ESP32-S3)">
+                  <span class="material-symbols-outlined text-[24px] nav-center-icon">add</span>
+                  <span class="nav-center-ble-badge absolute -bottom-0.5 -right-0.5 w-4 h-4 rounded-full bg-blue-600 text-white flex items-center justify-center border-2 border-white shadow-xs">
+                    <span class="material-symbols-outlined text-[10px]">bluetooth</span>
+                  </span>
+                </button>
+              </div>
+              <button class="flex flex-col items-center justify-center min-w-[56px] h-12 text-secondary hover:text-on-surface cursor-pointer" onclick="navigateTo('screen-posture')" title="Posture Rehabilitation">
+                <span class="material-symbols-outlined text-[22px]">accessibility_new</span>
+                <span class="font-label-telemetry text-[10px] uppercase tracking-wider">POSTURE</span>
+              </button>
+              <button class="flex flex-col items-center justify-center min-w-[56px] h-12 text-secondary hover:text-on-surface cursor-pointer" onclick="navigateTo('screen-profile')" title="My Profile">
+                <span class="material-symbols-outlined text-[22px]">person</span>
+                <span class="font-label-telemetry text-[10px] uppercase tracking-wider">ME</span>
+              </button>
+            </div>
+          </nav>
+        </section>
+
       </div><!-- end #screens-viewport -->
 
       <!-- ========================================== -->
