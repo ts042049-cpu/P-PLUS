@@ -3491,6 +3491,166 @@
     showToast('All notifications marked as read', 'done_all');
   }
 
+  // ==========================================
+  // TERMS & PRIVACY POLICY SCREEN LOGIC
+  // ==========================================
+  function switchTermsTab(tabName) {
+    const tabButtons = document.querySelectorAll('.terms-tab-btn');
+    const panels = document.querySelectorAll('.terms-panel');
+
+    tabButtons.forEach(btn => {
+      const target = btn.getAttribute('data-terms-tab');
+      const isSelected = target === tabName;
+      btn.setAttribute('aria-selected', isSelected ? 'true' : 'false');
+      if (isSelected) {
+        btn.classList.add('bg-black', 'text-white', 'shadow-sm');
+        btn.classList.remove('text-slate-600', 'hover:text-black', 'hover:bg-white/50');
+      } else {
+        btn.classList.remove('bg-black', 'text-white', 'shadow-sm');
+        btn.classList.add('text-slate-600', 'hover:text-black', 'hover:bg-white/50');
+      }
+    });
+
+    panels.forEach(panel => {
+      if (panel.id === `terms-panel-${tabName}`) {
+        panel.classList.remove('hidden');
+      } else {
+        panel.classList.add('hidden');
+      }
+    });
+
+    // Reset search filter input if any
+    const searchInput = document.getElementById('terms-search-input');
+    if (searchInput && searchInput.value) {
+      searchInput.value = '';
+      filterTermsContent('');
+    }
+  }
+
+  function filterTermsContent(query) {
+    const term = (query || '').trim().toLowerCase();
+    const activePanel = document.querySelector('.terms-panel:not(.hidden)');
+    if (!activePanel) return;
+
+    const cards = activePanel.querySelectorAll('.terms-clause-card');
+    let visibleCount = 0;
+
+    cards.forEach(card => {
+      if (!term) {
+        card.style.display = '';
+        visibleCount++;
+        return;
+      }
+      const text = card.textContent.toLowerCase();
+      if (text.includes(term)) {
+        card.style.display = '';
+        visibleCount++;
+      } else {
+        card.style.display = 'none';
+      }
+    });
+
+    let emptyState = activePanel.querySelector('.terms-search-empty');
+    if (visibleCount === 0) {
+      if (!emptyState) {
+        emptyState = document.createElement('div');
+        emptyState.className = 'terms-search-empty p-6 rounded-2xl bg-white border border-slate-100 text-center flex flex-col items-center gap-2 text-slate-500 my-2';
+        emptyState.innerHTML = `
+          <span class="material-symbols-outlined text-[32px] text-slate-400">search_off</span>
+          <p class="text-xs font-semibold text-slate-700">No matching clauses found</p>
+          <p class="text-[11px] text-slate-500">Try searching for keywords like "data", "sensor", "emergency", "doctor", or "rights".</p>
+        `;
+        activePanel.appendChild(emptyState);
+      }
+      emptyState.style.display = 'flex';
+    } else if (emptyState) {
+      emptyState.style.display = 'none';
+    }
+  }
+
+  function acceptTermsAndPolicy() {
+    try {
+      const now = new Date();
+      localStorage.setItem('pplus_terms_accepted', 'true');
+      localStorage.setItem('pplus_terms_accepted_at', now.toISOString());
+      
+      const badge = document.getElementById('terms-status-badge');
+      if (badge) {
+        badge.innerHTML = '<span class="w-1.5 h-1.5 rounded-full bg-emerald-500 mr-1 inline-block"></span>Accepted • ' + now.toLocaleDateString();
+        badge.className = 'px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 font-semibold text-[10px] flex items-center border border-emerald-200 shrink-0';
+      }
+      
+      showToast('Terms & Privacy Policy Acknowledged & Saved', 'verified');
+    } catch (e) {
+      showToast('Agreement saved', 'check');
+    }
+  }
+
+  function downloadLegalPolicy() {
+    const policyText = `=====================================================
+P+ PRO — TERMS OF SERVICE & CLINICAL PRIVACY POLICY
+Personal Health Companion & Wearable Telemetry Ecosystem
+Version: 2.4 | Effective Date: October 2026
+Compliance: HIPAA Aligned, DISHA & DPDP Framework, AES-256 E2EE
+=====================================================
+
+1. INTRODUCTION & SCOPE OF SERVICE
+P+ Pro is an integrated health companion, biomedical telemetry interface, and clinical scheduling platform designed to aggregate physiological vital signs (Pulse, SpO2, Temperature, Posture IMU, ECG signals) from paired wearable hardware (ESP32-S3 modules) and deliver proactive health alerts.
+
+2. CRITICAL EMERGENCY & MEDICAL DISCLAIMER
+- NOT AN ICU OR EMERGENCY RESPONSE SYSTEM: P+ Pro is not a life-support system or diagnostic medical apparatus.
+- IN MEDICAL EMERGENCIES: If you experience chest pain, sudden numbness, breathing difficulties, or acute symptoms, call 108 / 911 or your local emergency medical service IMMEDIATELY.
+- ALGORITHMIC TRIAGE AIDS: Risk classifications, early warning flags, and health scoring are statistical indicators and do NOT replace the diagnosis or judgment of a licensed physician.
+
+3. PRIVACY & DATA SOVEREIGNTY (ZERO-DATA-SELLING GUARANTEE)
+- LOCAL-FIRST PHILOSOPHY: All raw biosensor readings, posture telemetry, and personal medical records are retained primarily on your device and private local database store.
+- NO THIRD-PARTY SALE: We NEVER sell, rent, monetize, or broker your personal biometric health data to advertisers, data brokers, or insurance carriers.
+- CRYPTOGRAPHIC SECURITY: At-rest databases are encrypted with AES-256 standards. Digital doctor prescriptions utilize RSA-2048 cryptographic signatures.
+
+4. WEARABLE SENSOR PAIRING & TOLERANCE
+- Sensor accuracy depends on proper skin contact, posture insole positioning, and Bluetooth Low Energy (BLE) link quality.
+- Environmental variances (perspiration, vibration, loose fit) may produce signal noise or transient anomalies.
+
+5. DOCTOR-PATIENT TELE-TRIAGE & CONSULTATIONS
+- Virtual consultations and messaging through P+ Care Specialists represent supplemental guidance.
+- Patient telemetry is accessible ONLY to healthcare practitioners explicitly authorized by the patient.
+
+6. USER RIGHTS & DATA ERASURE (GDPR / DISHA)
+- You have the absolute right to:
+  a) Export your complete medical logs in standard CSV / JSON / PDF format at any time.
+  b) Revoke medical specialist access with one click.
+  c) Request complete erasure ("Right to be Forgotten") of local caches and database records.
+
+7. CONTACT DATA PROTECTION OFFICER (DPO)
+- Grievance Officer: P+ Pro Legal & Compliance Team
+- Email: dpo@pplus-health.org | support@pplus-health.org
+- Response SLA: Within 24-48 business hours.
+
+(C) 2026 P+ Pro Health Technologies. All rights reserved.`;
+
+    try {
+      const blob = new Blob([policyText], { type: 'text/plain;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'P_Plus_Pro_Terms_And_Privacy_Policy_2026.txt';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+      showToast('Terms & Privacy Policy document downloaded', 'download');
+    } catch (_) {
+      showToast('Unable to download on this browser', 'error');
+    }
+  }
+
+  function contactDPO() {
+    showToast('DPO: dpo@pplus-health.org • Response in 24h', 'mail');
+    setTimeout(() => {
+      window.location.href = 'mailto:dpo@pplus-health.org?subject=P%2B%20Pro%20Data%20Privacy%20Inquiry';
+    }, 400);
+  }
+
   window.toggleAppTheme = toggleAppTheme;
   window.selectAppTheme = selectAppTheme;
   window.openThemeSelectorModal = openThemeSelectorModal;
@@ -3499,6 +3659,11 @@
   window.closeNotificationsModal = closeNotificationsModal;
   window.markAllNotificationsAsRead = markAllNotificationsAsRead;
   window.initTheme = initTheme;
+  window.switchTermsTab = switchTermsTab;
+  window.filterTermsContent = filterTermsContent;
+  window.acceptTermsAndPolicy = acceptTermsAndPolicy;
+  window.downloadLegalPolicy = downloadLegalPolicy;
+  window.contactDPO = contactDPO;
 })();
 
 

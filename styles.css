@@ -4099,7 +4099,8 @@ body[class*="theme-"]:not(.theme-classic) #screen-sos,
 body[class*="theme-"]:not(.theme-classic) #screen-doctors,
 body[class*="theme-"]:not(.theme-classic) #screen-find,
 body[class*="theme-"]:not(.theme-classic) #screen-profile,
-body[class*="theme-"]:not(.theme-classic) #screen-graphs {
+body[class*="theme-"]:not(.theme-classic) #screen-graphs,
+body[class*="theme-"]:not(.theme-classic) #screen-terms {
   background: var(--theme-bg) !important;
 }
 
