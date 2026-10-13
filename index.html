@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport">
@@ -19,6 +20,7 @@
   <script src="https://apis.google.com/js/platform.js" async defer></script>
   <script src="https://accounts.google.com/gsi/client" async defer></script>
 </head>
+
 <body class="theme-emerald-gold">
 
   <!-- Presentation App Canvas -->
@@ -34,134 +36,154 @@
           <div class="screen-scroll-area">
             <div class="min-h-full w-full flex flex-col justify-between px-5 pt-3 pb-4 max-w-[400px] mx-auto relative select-none">
 
-            <!-- Subtle Editorial Ambient Side Marks -->
-            <div class="hidden">
-              <span>POSTURE FIRST • HEALTH IMPACT</span>
-              <span>BUILT FOR A HEALTHIER INDIA</span>
-            </div>
-
-<!-- 1. TOP BRANDING -->
-            <header class="w-full flex flex-col items-center text-center mt-2 mb-1 shrink-0 z-10">
-              <img alt="P+ Personal Health Companion" class="w-24 h-24 object-contain" src="assets/images/pplus-logo.svg">
-            </header>
-
-            <!-- 2. PREMIUM TRANSLUCENT LOGIN CARD -->
-            <div class="w-full bg-white/95 backdrop-blur-xl rounded-[26px] px-5 py-4 shadow-[0_10px_32px_rgba(0,0,0,0.04)] border border-black/[0.05] flex flex-col shrink-0 z-10">
-
-              <!-- Card Header -->
-              <div class="mb-3 text-left">
-                <h2 id="login-heading" class="font-bold text-lg text-black tracking-tight">Welcome Back</h2>
-                <p id="login-subheading" class="text-xs text-gray-400 mt-0.5">Sign in to continue your health journey</p>
+              <!-- Subtle Editorial Ambient Side Marks -->
+              <div class="hidden">
+                <span>POSTURE FIRST • HEALTH IMPACT</span>
+                <span>BUILT FOR A HEALTHIER INDIA</span>
               </div>
 
-              <!-- Interactive Login Form -->
-              <form id="login-form" class="flex flex-col space-y-2.5" onsubmit="handleLoginSubmit(event)" novalidate>
+              <!-- 1. TOP BRANDING -->
+              <header class="w-full flex flex-col items-center text-center mt-2 mb-1 shrink-0 z-10">
+                <img alt="P+ Personal Health Companion" class="w-24 h-24 object-contain" src="assets/images/pplus-logo.svg">
+              </header>
 
-                <!-- First & Last Name Field -->
-                <div class="flex flex-col space-y-1">
-                  <div class="relative flex items-center">
-                    <span class="material-symbols-outlined absolute left-3.5 text-gray-400 text-[18px] pointer-events-none">badge</span>
-                    <input class="input-auth-field w-full bg-[#F5F5F7] text-black placeholder:text-gray-400 rounded-2xl pl-10 pr-3.5 py-2.5 text-xs font-medium outline-none border border-black/[0.04] focus:border-black/30 focus:bg-white focus:ring-2 focus:ring-black/5 transition-all" id="login-name" placeholder="First & Last Name" type="text" autocomplete="name">
-                  </div>
-                  <p id="login-name-error" class="text-red-500 text-[10px] font-medium px-1 hidden"></p>
+              <!-- 2. PREMIUM TRANSLUCENT LOGIN CARD -->
+              <div class="w-full bg-white/95 backdrop-blur-xl rounded-[26px] px-5 py-4 shadow-[0_10px_32px_rgba(0,0,0,0.04)] border border-black/[0.05] flex flex-col shrink-0 z-10">
+
+                <!-- Card Header -->
+                <div class="mb-3 text-left">
+                  <h2 id="login-heading" class="font-bold text-lg text-black tracking-tight">Welcome Back</h2>
+                  <p id="login-subheading" class="text-xs text-gray-400 mt-0.5">Sign in to continue your health journey</p>
                 </div>
 
-                <!-- Email or Phone Field -->
-                <div class="flex flex-col space-y-1">
-                  <div class="relative flex items-center">
-                    <span class="material-symbols-outlined absolute left-3.5 text-gray-400 text-[18px] pointer-events-none">person</span>
-                    <input class="input-auth-field w-full bg-[#F5F5F7] text-black placeholder:text-gray-400 rounded-2xl pl-10 pr-3.5 py-2.5 text-xs font-medium outline-none border border-black/[0.04] focus:border-black/30 focus:bg-white focus:ring-2 focus:ring-black/5 transition-all" id="login-email" placeholder="Email or Phone" type="text" autocomplete="username">
-                  </div>
-                  <p id="login-email-error" class="text-red-500 text-[10px] font-medium px-1 hidden"></p>
-                </div>
+                <!-- Interactive Login Form -->
+                <form id="login-form" class="flex flex-col space-y-2.5" onsubmit="handleLoginSubmit(event)" novalidate>
 
-                <!-- Password Field -->
-                <div class="flex flex-col space-y-1">
-                  <div class="relative flex items-center">
-                    <span class="material-symbols-outlined absolute left-3.5 text-gray-400 text-[18px] pointer-events-none">lock</span>
-                    <input class="input-auth-field w-full bg-[#F5F5F7] text-black placeholder:text-gray-400 rounded-2xl pl-10 pr-10 py-2.5 text-xs font-medium outline-none border border-black/[0.04] focus:border-black/30 focus:bg-white focus:ring-2 focus:ring-black/5 transition-all" id="login-password" placeholder="Password" type="password" autocomplete="current-password">
-                    <button type="button" id="toggle-login-pwd" class="absolute right-3 p-1 text-gray-400 hover:text-black transition-colors cursor-pointer" onclick="togglePasswordVisibility()" aria-label="Toggle password visibility">
-                      <span class="material-symbols-outlined text-[18px]" id="eye-icon-login">visibility</span>
+                  <!-- First & Last Name Field -->
+                  <div class="flex flex-col space-y-1">
+                    <div class="relative flex items-center">
+                      <span class="material-symbols-outlined absolute left-3.5 text-gray-400 text-[18px] pointer-events-none">badge</span>
+                      <input
+                        class="input-auth-field w-full bg-[#F5F5F7] text-black placeholder:text-gray-400 rounded-2xl pl-10 pr-3.5 py-2.5 text-xs font-medium outline-none border border-black/[0.04] focus:border-black/30 focus:bg-white focus:ring-2 focus:ring-black/5 transition-all"
+                        id="login-name" placeholder="First & Last Name" type="text" autocomplete="name">
+                    </div>
+                    <p id="login-name-error" class="text-red-500 text-[10px] font-medium px-1 hidden"></p>
+                  </div>
+
+                  <!-- Email or Phone Field -->
+                  <div class="flex flex-col space-y-1">
+                    <div class="relative flex items-center">
+                      <span class="material-symbols-outlined absolute left-3.5 text-gray-400 text-[18px] pointer-events-none">person</span>
+                      <input
+                        class="input-auth-field w-full bg-[#F5F5F7] text-black placeholder:text-gray-400 rounded-2xl pl-10 pr-3.5 py-2.5 text-xs font-medium outline-none border border-black/[0.04] focus:border-black/30 focus:bg-white focus:ring-2 focus:ring-black/5 transition-all"
+                        id="login-email" placeholder="Email or Phone" type="text" autocomplete="username">
+                    </div>
+                    <p id="login-email-error" class="text-red-500 text-[10px] font-medium px-1 hidden"></p>
+                  </div>
+
+                  <!-- Password Field -->
+                  <div class="flex flex-col space-y-1">
+                    <div class="relative flex items-center">
+                      <span class="material-symbols-outlined absolute left-3.5 text-gray-400 text-[18px] pointer-events-none">lock</span>
+                      <input
+                        class="input-auth-field w-full bg-[#F5F5F7] text-black placeholder:text-gray-400 rounded-2xl pl-10 pr-10 py-2.5 text-xs font-medium outline-none border border-black/[0.04] focus:border-black/30 focus:bg-white focus:ring-2 focus:ring-black/5 transition-all"
+                        id="login-password" placeholder="Password" type="password" autocomplete="current-password">
+                      <button type="button" id="toggle-login-pwd" class="absolute right-3 p-1 text-gray-400 hover:text-black transition-colors cursor-pointer" onclick="togglePasswordVisibility()" aria-label="Toggle password visibility">
+                        <span class="material-symbols-outlined text-[18px]" id="eye-icon-login">visibility</span>
+                      </button>
+                    </div>
+                    <p id="login-password-error" class="text-red-500 text-[10px] font-medium px-1 hidden"></p>
+                  </div>
+
+                  <!-- Remember Me + Forgot Password -->
+                  <div class="flex items-center justify-between text-xs px-0.5">
+                    <label class="flex items-center gap-2 cursor-pointer select-none">
+                      <input type="checkbox" id="login-remember-me" class="rounded border-gray-300 text-black focus:ring-black w-3.5 h-3.5 cursor-pointer accent-black" checked>
+                      <span class="text-gray-500 font-medium text-[11px]">Remember me</span>
+                    </label>
+                    <a class="text-gray-400 hover:text-black font-medium text-[11px] transition-colors cursor-pointer" onclick="showForgotPasswordPrompt()">
+                      Forgot Password?
+                    </a>
+                  </div>
+
+                  <!-- Sign In Large Black Pill Button -->
+                  <div class="pt-0.5">
+                    <button id="btn-login-submit"
+                      class="w-full bg-black text-white font-bold text-xs py-3 px-6 rounded-full shadow-[0_4px_14px_rgba(0,0,0,0.18)] hover:bg-neutral-900 active:scale-[0.99] transition-all flex items-center justify-center gap-2 cursor-pointer tracking-wide"
+                      type="submit">
+                      <span id="btn-login-spinner" class="auth-spinner hidden"></span>
+                      <span id="btn-login-text">Sign In</span>
+                      <span id="btn-login-icon" class="text-sm font-bold leading-none">→</span>
                     </button>
                   </div>
-                  <p id="login-password-error" class="text-red-500 text-[10px] font-medium px-1 hidden"></p>
+                </form>
+
+                <!-- Social / Biometric Divider -->
+                <div class="flex items-center my-2.5">
+                  <div class="flex-grow h-px bg-gray-200/80"></div>
+                  <span class="px-3 text-[10px] text-gray-400 lowercase tracking-wider font-medium">or continue with</span>
+                  <div class="flex-grow h-px bg-gray-200/80"></div>
                 </div>
 
-                <!-- Remember Me + Forgot Password -->
-                <div class="flex items-center justify-between text-xs px-0.5">
-                  <label class="flex items-center gap-2 cursor-pointer select-none">
-                    <input type="checkbox" id="login-remember-me" class="rounded border-gray-300 text-black focus:ring-black w-3.5 h-3.5 cursor-pointer accent-black" checked>
-                    <span class="text-gray-500 font-medium text-[11px]">Remember me</span>
-                  </label>
-                  <a class="text-gray-400 hover:text-black font-medium text-[11px] transition-colors cursor-pointer" onclick="showForgotPasswordPrompt()">
-                    Forgot Password?
-                  </a>
-                </div>
-
-                <!-- Sign In Large Black Pill Button -->
-                <div class="pt-0.5">
-                  <button id="btn-login-submit" class="w-full bg-black text-white font-bold text-xs py-3 px-6 rounded-full shadow-[0_4px_14px_rgba(0,0,0,0.18)] hover:bg-neutral-900 active:scale-[0.99] transition-all flex items-center justify-center gap-2 cursor-pointer tracking-wide" type="submit">
-                    <span id="btn-login-spinner" class="auth-spinner hidden"></span>
-                    <span id="btn-login-text">Sign In</span>
-                    <span id="btn-login-icon" class="text-sm font-bold leading-none">→</span>
+                <!-- Social Buttons: Google & Apple Logos -->
+                <div class="flex items-center justify-center gap-4 my-1">
+                  <!-- Google Sign-In Button -->
+                  <button id="btn-google-signin" aria-label="Sign in with Google"
+                    class="w-12 h-12 rounded-full bg-[#F5F5F7] hover:bg-[#EAEAEA] active:scale-95 border border-black/[0.06] flex items-center justify-center transition-all cursor-pointer shadow-xs relative" type="button"
+                    onclick="handleGoogleSignInClick()" title="Sign in with Google">
+                    <svg class="w-5 h-5" viewBox="0 0 24 24">
+                      <path d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.8-2.4 3.66v3.05h3.88c2.27-2.09 3.66-5.17 3.66-9.15z" fill="#4285F4"></path>
+                      <path d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.05c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.1-6.72-4.94H1.24v3.15C3.26 21.36 7.34 24 12 24z" fill="#34A853"></path>
+                      <path d="M5.28 14.26c-.25-.72-.38-1.49-.38-2.26s.13-1.54.38-2.26V6.59H1.24C.45 8.16 0 9.92 0 12c0 2.08.45 3.84 1.24 5.41l4.04-3.15z" fill="#FBBC05"></path>
+                      <path d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.34 0 3.26 2.64 1.24 6.59l4.04 3.15c.95-2.84 3.6-4.99 6.72-4.99z" fill="#EA4335"></path>
+                    </svg>
+                  </button>
+                  <!-- Legacy Google Platform container & Modern GIS container -->
+                  <div class="g-signin2 hidden" data-onsuccess="onSignIn"></div>
+                  <div id="g_id_onload" data-client_id="YOUR_GOOGLE_CLIENT_ID.apps.googleusercontent.com" data-callback="handleGoogleCredentialResponse" data-auto_prompt="false" class="hidden">
+                  </div>
+                  <div id="g-signin-real-container" class="hidden"></div>
+                  <!-- Apple Logo Button -->
+                  <button aria-label="Continue with Apple ID"
+                    class="w-12 h-12 rounded-full bg-[#F5F5F7] hover:bg-[#EAEAEA] active:scale-95 border border-black/[0.06] flex items-center justify-center transition-all cursor-pointer text-black shadow-xs" type="button"
+                    onclick="simulateSocialLogin('Apple')" title="Apple ID">
+                    <svg class="w-5 h-5 fill-current" viewBox="0 0 170 170">
+                      <path
+                        d="M150.37 130.25c-2.45 5.66-5.35 10.87-8.71 15.66-4.58 6.53-8.33 11.05-11.22 13.56-4.48 4.12-9.28 6.23-14.42 6.35-3.69 0-8.14-1.05-13.32-3.18-5.19-2.12-9.97-3.17-14.34-3.17-4.58 0-9.49 1.05-14.75 3.17-5.26 2.13-9.5 3.24-12.74 3.35-4.35.13-9.16-1.9-14.42-6.08-3.7-3.04-7.58-7.71-11.65-14-4.9-7.5-8.9-16.14-12-25.92-3.1-9.78-4.65-19.14-4.65-28.09 0-13.04 3.33-24.03 10-32.97 6.67-8.94 15.06-13.48 25.17-13.62 4.35 0 9.38 1.15 15.08 3.44 5.7 2.3 9.4 3.51 11.11 3.63 1.94-.25 5.86-1.55 11.75-3.9 5.89-2.35 10.9-3.39 15.03-3.12 11.41.6 20.35 4.88 26.83 12.83-9.56 5.79-14.23 13.91-14.02 24.36.21 8.23 3.33 15.11 9.36 20.63 6.03 5.52 13.1 8.87 21.21 10.05-2.02 6.09-4.32 11.95-6.9 17.58zm-29.35-108.6c.11 2.94-.65 5.88-2.28 8.82-1.63 2.94-3.8 5.46-6.51 7.56-2.5 1.96-5.17 3.34-8.01 4.14-2.84.8-5.46 1.09-7.86.87-.11-2.72.63-5.55 2.22-8.5 1.59-2.95 3.77-5.5 6.54-7.65 2.5-1.96 5.17-3.38 8.01-4.26 2.84-.88 5.64-1.21 8.4-1z" />
+                    </svg>
                   </button>
                 </div>
-              </form>
 
-              <!-- Social / Biometric Divider -->
-              <div class="flex items-center my-2.5">
-                <div class="flex-grow h-px bg-gray-200/80"></div>
-                <span class="px-3 text-[10px] text-gray-400 lowercase tracking-wider font-medium">or continue with</span>
-                <div class="flex-grow h-px bg-gray-200/80"></div>
-              </div>
-
-              <!-- Social Buttons: Google & Apple Logos -->
-              <div class="flex items-center justify-center gap-4 my-1">
-                <!-- Google Sign-In Button -->
-                <button id="btn-google-signin" aria-label="Sign in with Google" class="w-12 h-12 rounded-full bg-[#F5F5F7] hover:bg-[#EAEAEA] active:scale-95 border border-black/[0.06] flex items-center justify-center transition-all cursor-pointer shadow-xs relative" type="button" onclick="handleGoogleSignInClick()" title="Sign in with Google">
-                  <svg class="w-5 h-5" viewBox="0 0 24 24"><path d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.8-2.4 3.66v3.05h3.88c2.27-2.09 3.66-5.17 3.66-9.15z" fill="#4285F4"></path><path d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.05c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.1-6.72-4.94H1.24v3.15C3.26 21.36 7.34 24 12 24z" fill="#34A853"></path><path d="M5.28 14.26c-.25-.72-.38-1.49-.38-2.26s.13-1.54.38-2.26V6.59H1.24C.45 8.16 0 9.92 0 12c0 2.08.45 3.84 1.24 5.41l4.04-3.15z" fill="#FBBC05"></path><path d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.34 0 3.26 2.64 1.24 6.59l4.04 3.15c.95-2.84 3.6-4.99 6.72-4.99z" fill="#EA4335"></path></svg>
-                </button>
-                <!-- Legacy Google Platform container & Modern GIS container -->
-                <div class="g-signin2 hidden" data-onsuccess="onSignIn"></div>
-                <div id="g_id_onload" data-client_id="YOUR_GOOGLE_CLIENT_ID.apps.googleusercontent.com" data-callback="handleGoogleCredentialResponse" data-auto_prompt="false" class="hidden">
+                <!-- Create Account Link -->
+                <div class="mt-2.5 pt-2 border-t border-gray-100 text-center">
+                  <p class="text-xs text-gray-500">
+                    New here?
+                    <a class="text-black font-bold hover:underline cursor-pointer ml-1" onclick="openRegisterModal('patient')">Create Account</a>
+                  </p>
                 </div>
-                <div id="g-signin-real-container" class="hidden"></div>
-                <!-- Apple Logo Button -->
-                <button aria-label="Continue with Apple ID" class="w-12 h-12 rounded-full bg-[#F5F5F7] hover:bg-[#EAEAEA] active:scale-95 border border-black/[0.06] flex items-center justify-center transition-all cursor-pointer text-black shadow-xs" type="button" onclick="simulateSocialLogin('Apple')" title="Apple ID">
-                  <svg class="w-5 h-5 fill-current" viewBox="0 0 170 170"><path d="M150.37 130.25c-2.45 5.66-5.35 10.87-8.71 15.66-4.58 6.53-8.33 11.05-11.22 13.56-4.48 4.12-9.28 6.23-14.42 6.35-3.69 0-8.14-1.05-13.32-3.18-5.19-2.12-9.97-3.17-14.34-3.17-4.58 0-9.49 1.05-14.75 3.17-5.26 2.13-9.5 3.24-12.74 3.35-4.35.13-9.16-1.9-14.42-6.08-3.7-3.04-7.58-7.71-11.65-14-4.9-7.5-8.9-16.14-12-25.92-3.1-9.78-4.65-19.14-4.65-28.09 0-13.04 3.33-24.03 10-32.97 6.67-8.94 15.06-13.48 25.17-13.62 4.35 0 9.38 1.15 15.08 3.44 5.7 2.3 9.4 3.51 11.11 3.63 1.94-.25 5.86-1.55 11.75-3.9 5.89-2.35 10.9-3.39 15.03-3.12 11.41.6 20.35 4.88 26.83 12.83-9.56 5.79-14.23 13.91-14.02 24.36.21 8.23 3.33 15.11 9.36 20.63 6.03 5.52 13.1 8.87 21.21 10.05-2.02 6.09-4.32 11.95-6.9 17.58zm-29.35-108.6c.11 2.94-.65 5.88-2.28 8.82-1.63 2.94-3.8 5.46-6.51 7.56-2.5 1.96-5.17 3.34-8.01 4.14-2.84.8-5.46 1.09-7.86.87-.11-2.72.63-5.55 2.22-8.5 1.59-2.95 3.77-5.5 6.54-7.65 2.5-1.96 5.17-3.38 8.01-4.26 2.84-.88 5.64-1.21 8.4-1z"/></svg>
-                </button>
               </div>
 
-              <!-- Create Account Link -->
-              <div class="mt-2.5 pt-2 border-t border-gray-100 text-center">
-                <p class="text-xs text-gray-500">
-                  New here?
-                  <a class="text-black font-bold hover:underline cursor-pointer ml-1" onclick="openRegisterModal('patient')">Create Account</a>
-                </p>
-              </div>
+              <!-- 4. PRIVACY & SECURITY FOOTER MESSAGE -->
+              <footer class="w-full flex flex-col items-center text-center mt-2 shrink-0">
+                <div class="flex items-center gap-1.5 text-[11px] text-gray-400 font-medium">
+                  <span class="material-symbols-outlined text-[13px] text-gray-400">shield</span>
+                  <span>Your data stays with you</span>
+                  <span class="w-1 h-1 rounded-full bg-gray-300"></span>
+                  <span>Offline • Private • Secure</span>
+                </div>
+                <div class="flex items-center justify-center gap-2 text-[10px] text-gray-400 font-medium mt-1">
+                  <button type="button" class="hover:underline hover:text-black cursor-pointer bg-transparent border-0 p-0 text-[10px] text-gray-400" onclick="switchTermsTab('terms'); navigateTo('screen-terms')">Terms of Service</button>
+                  <span>•</span>
+                  <button type="button" class="hover:underline hover:text-black cursor-pointer bg-transparent border-0 p-0 text-[10px] text-gray-400" onclick="switchTermsTab('privacy'); navigateTo('screen-terms')">Privacy Policy</button>
+                </div>
+
+                <!-- Bottom Home Indicator Bar -->
+                <div class="w-28 h-1 bg-black/15 rounded-full mt-2 mb-0.5"></div>
+              </footer>
+
             </div>
-
-            <!-- 4. PRIVACY & SECURITY FOOTER MESSAGE -->
-            <footer class="w-full flex flex-col items-center text-center mt-2 shrink-0">
-              <div class="flex items-center gap-1.5 text-[11px] text-gray-400 font-medium">
-                <span class="material-symbols-outlined text-[13px] text-gray-400">shield</span>
-                <span>Your data stays with you</span>
-                <span class="w-1 h-1 rounded-full bg-gray-300"></span>
-                <span>Offline • Private • Secure</span>
-              </div>
-              <div class="flex items-center justify-center gap-2 text-[10px] text-gray-400 font-medium mt-1">
-                <button type="button" class="hover:underline hover:text-black cursor-pointer bg-transparent border-0 p-0 text-[10px] text-gray-400" onclick="switchTermsTab('terms'); navigateTo('screen-terms')">Terms of Service</button>
-                <span>•</span>
-                <button type="button" class="hover:underline hover:text-black cursor-pointer bg-transparent border-0 p-0 text-[10px] text-gray-400" onclick="switchTermsTab('privacy'); navigateTo('screen-terms')">Privacy Policy</button>
-              </div>
-
-              <!-- Bottom Home Indicator Bar -->
-              <div class="w-28 h-1 bg-black/15 rounded-full mt-2 mb-0.5"></div>
-            </footer>
-
           </div>
-        </div>
-      </section>
+        </section>
 
         <!-- ========================================== -->
         <!-- SCREEN 2: HOME DASHBOARD -->
@@ -177,26 +199,32 @@
             </div>
             <div class="flex items-center gap-1.5 relative">
               <!-- Top Navbar Bluetooth ESP32-S3 Pill -->
-              <button id="ble-status-pill" type="button" onclick="openEsp32BleModal()" class="header-telemetry-pill flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-bold transition-all active:scale-95 cursor-pointer shadow-xs" title="Connect ESP32-S3 via Bluetooth">
+              <button id="ble-status-pill" type="button" onclick="openEsp32BleModal()" class="header-telemetry-pill flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-bold transition-all active:scale-95 cursor-pointer shadow-xs"
+                title="Connect ESP32-S3 via Bluetooth">
                 <span id="ble-header-icon" class="material-symbols-outlined text-[12px] text-blue-600">bluetooth</span>
                 <span id="ble-header-label" class="font-label-telemetry text-[9px] tracking-tight">ESP32</span>
               </button>
               <!-- Top Navbar Theme Switcher Pill -->
-              <button id="home-theme-toggle-btn" type="button" onclick="openThemeSelectorModal()" class="header-telemetry-pill theme-pill-btn flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-bold transition-all active:scale-95 cursor-pointer shadow-xs" title="Choose Theme & Color Modes">
+              <button id="home-theme-toggle-btn" type="button" onclick="openThemeSelectorModal()"
+                class="header-telemetry-pill theme-pill-btn flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-bold transition-all active:scale-95 cursor-pointer shadow-xs" title="Choose Theme & Color Modes">
                 <span class="material-symbols-outlined text-[12px] text-amber-400">palette</span>
                 <span class="theme-pill-label font-label-telemetry text-[9px] tracking-tight">colour</span>
               </button>
               <!-- Top Navbar Emergency SOS Button (Beside Notifications) -->
-              <button aria-label="Emergency SOS" class="header-telemetry-pill flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-bold transition-all active:scale-95 cursor-pointer shadow-xs" onclick="navigateTo('screen-sos')" title="Emergency SOS">
+              <button aria-label="Emergency SOS" class="header-telemetry-pill flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-bold transition-all active:scale-95 cursor-pointer shadow-xs" onclick="navigateTo('screen-sos')"
+                title="Emergency SOS">
                 <span class="material-symbols-outlined text-[12px] text-error animate-pulse icon-filled">emergency</span>
                 <span class="font-label-telemetry text-[9px] tracking-wider text-error font-bold">SOS</span>
               </button>
-              <button id="btn-navbar-notifications" aria-label="Notifications" class="w-8 h-8 relative flex items-center justify-center text-on-surface hover:text-primary transition-colors cursor-pointer active:scale-95" onclick="openNotificationsModal()" title="Notifications & Alerts">
+              <button id="btn-navbar-notifications" aria-label="Notifications" class="w-8 h-8 relative flex items-center justify-center text-on-surface hover:text-primary transition-colors cursor-pointer active:scale-95"
+                onclick="openNotificationsModal()" title="Notifications & Alerts">
                 <span class="material-symbols-outlined text-[20px]">notifications</span>
                 <span id="notif-unread-dot" class="absolute top-1 right-1 w-2 h-2 rounded-full bg-red-500 ring-2 ring-white dark:ring-black"></span>
               </button>
-              <div id="home-avatar-btn" class="w-8 h-8 rounded-full overflow-hidden bg-surface-container-high ring-2 ring-primary/30 cursor-pointer active:scale-95 transition-transform" onclick="navigateTo('screen-profile')" title="Open Health & Clinical Profile">
-                <img id="home-avatar-img" class="w-full h-full object-cover" alt="User Profile" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC7oLNhZft-_5NFE_r1jeWbiYhe5D9ugz7wfXM_HqTUzvz4H9IwmLxhE94qekm-wUFfC9UOsjKGm3G3-HnS29iK_1RsLqnSDTP7diXu1tcinjvlSyuIhzPd7eRoDLVjP58-VfabynwpbfyB1EkpTwDHzOBji70n_CDiW9b1RTWsc1XuygDGX2w3n31EUdG5yBq7M6YCy3aPgQGtJqPy2aJDBbswLqVB9QmuzeBBBXa7jrur4hltT8SOOw">
+              <div id="home-avatar-btn" class="w-8 h-8 rounded-full overflow-hidden bg-surface-container-high ring-2 ring-primary/30 cursor-pointer active:scale-95 transition-transform" onclick="navigateTo('screen-profile')"
+                title="Open Health & Clinical Profile">
+                <img id="home-avatar-img" class="w-full h-full object-cover" alt="User Profile"
+                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuC7oLNhZft-_5NFE_r1jeWbiYhe5D9ugz7wfXM_HqTUzvz4H9IwmLxhE94qekm-wUFfC9UOsjKGm3G3-HnS29iK_1RsLqnSDTP7diXu1tcinjvlSyuIhzPd7eRoDLVjP58-VfabynwpbfyB1EkpTwDHzOBji70n_CDiW9b1RTWsc1XuygDGX2w3n31EUdG5yBq7M6YCy3aPgQGtJqPy2aJDBbswLqVB9QmuzeBBBXa7jrur4hltT8SOOw">
               </div>
             </div>
           </header>
@@ -216,7 +244,9 @@
 
               <!-- Health Status Overview Card (Click -> Live Monitoring) -->
               <section class="w-full">
-                <div class="group w-full bg-surface-container-lowest rounded-2xl p-4 shadow-[0_4px_20px_rgba(0,0,0,0.03)] flex items-center justify-between transition-all duration-200 active:scale-[0.99] cursor-pointer border border-surface-container/50 hover:border-surface-container box-border" onclick="navigateTo('screen-live')">
+                <div
+                  class="group w-full bg-surface-container-lowest rounded-2xl p-4 shadow-[0_4px_20px_rgba(0,0,0,0.03)] flex items-center justify-between transition-all duration-200 active:scale-[0.99] cursor-pointer border border-surface-container/50 hover:border-surface-container box-border"
+                  onclick="navigateTo('screen-live')">
                   <div class="flex items-center gap-3.5 min-w-0">
                     <div class="w-11 h-11 rounded-full bg-surface-container-low flex items-center justify-center shrink-0">
                       <span class="material-symbols-outlined text-primary text-[22px]">favorite</span>
@@ -240,7 +270,9 @@
               <section class="w-full grid grid-cols-2 gap-3 auto-rows-fr">
 
                 <!-- Card 1: Heart Rate (Click -> Live Monitoring) -->
-                <div class="bg-surface-container-lowest rounded-2xl p-3.5 shadow-[0_4px_20px_rgba(0,0,0,0.03)] flex flex-col justify-between min-h-[148px] h-full relative overflow-hidden cursor-pointer active:scale-98 transition-transform border border-surface-container/40 box-border" onclick="navigateTo('screen-live')">
+                <div
+                  class="bg-surface-container-lowest rounded-2xl p-3.5 shadow-[0_4px_20px_rgba(0,0,0,0.03)] flex flex-col justify-between min-h-[148px] h-full relative overflow-hidden cursor-pointer active:scale-98 transition-transform border border-surface-container/40 box-border"
+                  onclick="navigateTo('screen-live')">
                   <div class="flex items-center justify-between w-full min-w-0">
                     <span class="font-label-telemetry text-label-telemetry uppercase tracking-wider text-secondary font-semibold truncate">HEART RATE</span>
                     <div class="flex items-center gap-1 shrink-0 ml-1">
@@ -261,7 +293,9 @@
                 </div>
 
                 <!-- Card 2: SpO2 (Click -> Live Monitoring) -->
-                <div class="bg-surface-container-lowest rounded-2xl p-3.5 shadow-[0_4px_20px_rgba(0,0,0,0.03)] flex flex-col justify-between min-h-[148px] h-full relative overflow-hidden cursor-pointer active:scale-98 transition-transform border border-surface-container/40 box-border" onclick="navigateTo('screen-live')">
+                <div
+                  class="bg-surface-container-lowest rounded-2xl p-3.5 shadow-[0_4px_20px_rgba(0,0,0,0.03)] flex flex-col justify-between min-h-[148px] h-full relative overflow-hidden cursor-pointer active:scale-98 transition-transform border border-surface-container/40 box-border"
+                  onclick="navigateTo('screen-live')">
                   <div class="flex items-center justify-between w-full min-w-0">
                     <span class="font-label-telemetry text-label-telemetry uppercase tracking-wider text-secondary font-semibold truncate">SPO₂</span>
                     <span class="font-label-telemetry text-[10px] text-on-tertiary-container bg-surface-container-low px-2 py-0.5 rounded-full font-semibold shrink-0 ml-1 whitespace-nowrap">Optimal</span>
@@ -280,7 +314,9 @@
                 </div>
 
                 <!-- Card 3: Body Temp -->
-                <div class="bg-surface-container-lowest rounded-2xl p-3.5 shadow-[0_4px_20px_rgba(0,0,0,0.03)] flex flex-col justify-between min-h-[148px] h-full relative overflow-hidden cursor-pointer active:scale-98 transition-transform border border-surface-container/40 box-border" onclick="navigateTo('screen-live')">
+                <div
+                  class="bg-surface-container-lowest rounded-2xl p-3.5 shadow-[0_4px_20px_rgba(0,0,0,0.03)] flex flex-col justify-between min-h-[148px] h-full relative overflow-hidden cursor-pointer active:scale-98 transition-transform border border-surface-container/40 box-border"
+                  onclick="navigateTo('screen-live')">
                   <div class="flex items-center justify-between w-full min-w-0">
                     <span class="font-label-telemetry text-label-telemetry uppercase tracking-wider text-secondary font-semibold truncate">BODY TEMP</span>
                     <span class="material-symbols-outlined text-[18px] text-secondary shrink-0 ml-1">device_thermostat</span>
@@ -299,7 +335,9 @@
                 </div>
 
                 <!-- Card 4: Posture (Click -> Posture Monitoring) -->
-                <div class="bg-surface-container-lowest rounded-2xl p-3.5 shadow-[0_4px_20px_rgba(0,0,0,0.03)] flex flex-col justify-between min-h-[148px] h-full relative overflow-hidden cursor-pointer active:scale-98 transition-transform border border-surface-container/40 box-border" onclick="navigateTo('screen-posture')">
+                <div
+                  class="bg-surface-container-lowest rounded-2xl p-3.5 shadow-[0_4px_20px_rgba(0,0,0,0.03)] flex flex-col justify-between min-h-[148px] h-full relative overflow-hidden cursor-pointer active:scale-98 transition-transform border border-surface-container/40 box-border"
+                  onclick="navigateTo('screen-posture')">
                   <div class="flex items-center justify-between w-full min-w-0">
                     <span class="font-label-telemetry text-label-telemetry uppercase tracking-wider text-secondary font-semibold truncate">POSTURE</span>
                     <span class="font-label-telemetry text-[10px] text-on-tertiary-container bg-surface-container-low px-2 py-0.5 rounded-full font-semibold shrink-0 ml-1 whitespace-nowrap dynamic-posture-label">Optimal</span>
@@ -324,7 +362,9 @@
 
               <!-- Posture & Spine Alignment Section (Click -> Posture Monitoring) -->
               <section class="w-full">
-                <div class="bg-surface-container-lowest rounded-2xl p-4 shadow-[0_4px_20px_rgba(0,0,0,0.03)] flex flex-col gap-3.5 cursor-pointer active:scale-99 transition-transform border border-surface-container/40 hover:border-surface-container box-border overflow-hidden w-full" onclick="navigateTo('screen-posture')">
+                <div
+                  class="bg-surface-container-lowest rounded-2xl p-4 shadow-[0_4px_20px_rgba(0,0,0,0.03)] flex flex-col gap-3.5 cursor-pointer active:scale-99 transition-transform border border-surface-container/40 hover:border-surface-container box-border overflow-hidden w-full"
+                  onclick="navigateTo('screen-posture')">
                   <div class="flex items-start justify-between gap-2 w-full">
                     <div class="flex items-center gap-2.5 min-w-0">
                       <div class="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center text-primary shrink-0">
@@ -382,7 +422,9 @@
 
               <!-- Interactive Health Graphs & Trends Quick Access Card -->
               <section class="w-full">
-                <div class="group w-full bg-gradient-to-br from-slate-900 via-gray-900 to-black text-white rounded-2xl p-4 shadow-[0_4px_20px_rgba(0,0,0,0.08)] flex flex-col gap-3 cursor-pointer active:scale-99 transition-all border border-black/10 box-border overflow-hidden" onclick="navigateTo('screen-graphs')">
+                <div
+                  class="group w-full bg-gradient-to-br from-slate-900 via-gray-900 to-black text-white rounded-2xl p-4 shadow-[0_4px_20px_rgba(0,0,0,0.08)] flex flex-col gap-3 cursor-pointer active:scale-99 transition-all border border-black/10 box-border overflow-hidden"
+                  onclick="navigateTo('screen-graphs')">
                   <div class="flex items-start justify-between">
                     <div class="flex items-center gap-2.5">
                       <div class="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center text-cyan-300 shrink-0">
@@ -402,10 +444,10 @@
                   <!-- Dynamic Mini Sparkline Preview -->
                   <div class="w-full h-10 pt-1">
                     <svg class="w-full h-full" fill="none" preserveAspectRatio="none" viewBox="0 0 240 38">
-                      <path d="M0,28 C30,30 50,15 80,18 C110,22 130,8 160,12 C190,16 210,5 240,10" stroke="#38bdf8" stroke-width="2.2" stroke-linecap="round"/>
-                      <path d="M0,28 C30,30 50,15 80,18 C110,22 130,8 160,12 C190,16 210,5 240,10 L240,38 L0,38 Z" fill="rgba(56, 189, 248, 0.15)"/>
-                      <circle cx="240" cy="10" r="3" fill="#38bdf8" class="animate-ping"/>
-                      <circle cx="240" cy="10" r="3" fill="#38bdf8"/>
+                      <path d="M0,28 C30,30 50,15 80,18 C110,22 130,8 160,12 C190,16 210,5 240,10" stroke="#38bdf8" stroke-width="2.2" stroke-linecap="round" />
+                      <path d="M0,28 C30,30 50,15 80,18 C110,22 130,8 160,12 C190,16 210,5 240,10 L240,38 L0,38 Z" fill="rgba(56, 189, 248, 0.15)" />
+                      <circle cx="240" cy="10" r="3" fill="#38bdf8" class="animate-ping" />
+                      <circle cx="240" cy="10" r="3" fill="#38bdf8" />
                     </svg>
                   </div>
 
@@ -424,7 +466,9 @@
 
               <!-- Clinical Health Report File Generator Quick Access Card -->
               <section class="w-full">
-                <div class="w-full bg-surface-container-lowest rounded-2xl p-3.5 shadow-[0_4px_20px_rgba(0,0,0,0.03)] flex items-center justify-between cursor-pointer active:scale-99 transition-transform border border-surface-container/50 box-border hover:border-surface-container" onclick="openClinicalReportModal()">
+                <div
+                  class="w-full bg-surface-container-lowest rounded-2xl p-3.5 shadow-[0_4px_20px_rgba(0,0,0,0.03)] flex items-center justify-between cursor-pointer active:scale-99 transition-transform border border-surface-container/50 box-border hover:border-surface-container"
+                  onclick="openClinicalReportModal()">
                   <div class="flex items-center gap-3 min-w-0">
                     <div class="w-10 h-10 rounded-xl bg-blue-50 text-blue-700 flex items-center justify-center shrink-0 border border-blue-100">
                       <span class="material-symbols-outlined text-[22px]">clinical_notes</span>
@@ -437,7 +481,8 @@
                       <p class="font-body-md text-secondary text-xs truncate mt-0.5">Generate &amp; download doctor-ready report</p>
                     </div>
                   </div>
-                  <button type="button" class="w-8 h-8 rounded-full bg-surface-container-low hover:bg-surface-container flex items-center justify-center text-primary shrink-0 ml-2" onclick="event.stopPropagation(); openClinicalReportModal()" title="Generate Report File">
+                  <button type="button" class="w-8 h-8 rounded-full bg-surface-container-low hover:bg-surface-container flex items-center justify-center text-primary shrink-0 ml-2" onclick="event.stopPropagation(); openClinicalReportModal()"
+                    title="Generate Report File">
                     <span class="material-symbols-outlined text-[18px]">download</span>
                   </button>
                 </div>
@@ -445,7 +490,8 @@
 
               <!-- Risk Warning Quick Tile (Click -> Risk & Early Warning) -->
               <section class="w-full">
-                <div class="bg-surface-container-lowest rounded-2xl p-3.5 shadow-[0_4px_20px_rgba(0,0,0,0.03)] flex items-center justify-between cursor-pointer active:scale-99 transition-transform border border-surface-container/50 box-border w-full" onclick="navigateTo('screen-risk')">
+                <div class="bg-surface-container-lowest rounded-2xl p-3.5 shadow-[0_4px_20px_rgba(0,0,0,0.03)] flex items-center justify-between cursor-pointer active:scale-99 transition-transform border border-surface-container/50 box-border w-full"
+                  onclick="navigateTo('screen-risk')">
                   <div class="flex items-center gap-3 min-w-0">
                     <div class="w-10 h-10 rounded-xl bg-slate-100 flex items-center justify-center text-slate-900 shrink-0">
                       <span class="material-symbols-outlined text-[22px]">shield</span>
@@ -474,7 +520,8 @@
                 <span class="font-label-telemetry text-[10px] uppercase tracking-wider">CARE</span>
               </button>
               <div class="relative -top-4 flex items-center justify-center">
-                <button aria-label="Connect Bluetooth Device" class="main-plus-ble-btn w-12 h-12 rounded-full bg-primary text-on-primary shadow-lg flex items-center justify-center transition-transform active:scale-95 cursor-pointer relative" onclick="handlePlusButtonClick()" title="Connect Bluetooth Device (ESP32-S3)">
+                <button aria-label="Connect Bluetooth Device" class="main-plus-ble-btn w-12 h-12 rounded-full bg-primary text-on-primary shadow-lg flex items-center justify-center transition-transform active:scale-95 cursor-pointer relative"
+                  onclick="handlePlusButtonClick()" title="Connect Bluetooth Device (ESP32-S3)">
                   <span class="material-symbols-outlined text-[24px] nav-center-icon">add</span>
                   <span class="nav-center-ble-badge absolute -bottom-0.5 -right-0.5 w-4 h-4 rounded-full bg-blue-600 text-white flex items-center justify-center border-2 border-white shadow-xs">
                     <span class="material-symbols-outlined text-[10px]">bluetooth</span>
@@ -513,7 +560,9 @@
 
               <!-- Device Status Card (Click to open ESP32-S3 BLE Manager) -->
               <section class="w-full pt-1 pb-3">
-                <div id="live-ble-device-banner" class="w-full bg-surface-container-lowest rounded-full p-2 px-3.5 shadow-sm border border-surface-container/40 flex items-center justify-between cursor-pointer hover:bg-slate-50 active:scale-[0.99] transition-all" onclick="openEsp32BleModal()" title="Manage ESP32-S3 Bluetooth Connection">
+                <div id="live-ble-device-banner"
+                  class="w-full bg-surface-container-lowest rounded-full p-2 px-3.5 shadow-sm border border-surface-container/40 flex items-center justify-between cursor-pointer hover:bg-slate-50 active:scale-[0.99] transition-all"
+                  onclick="openEsp32BleModal()" title="Manage ESP32-S3 Bluetooth Connection">
                   <div class="flex items-center gap-2.5 min-w-0">
                     <span id="live-ble-pulse-indicator" class="relative flex h-2.5 w-2.5 shrink-0">
                       <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-500 opacity-75"></span>
@@ -539,7 +588,8 @@
               <!-- Central 3D Human Body Visualization -->
               <section class="relative w-full flex items-center justify-center py-2 overflow-visible">
                 <div class="relative w-full max-w-[240px] aspect-[3/4] flex items-center justify-center">
-                  <img alt="Realistic 3D human body visualization" class="w-full h-full object-contain select-none filter drop-shadow-md" draggable="false" src="assets/images/body_3d.png" onerror="this.src='https://lh3.googleusercontent.com/aida/AEtjO1XMqTc0XqubitK3YJq8LfFAPeq1qVDa5pvkp4dFG6v-SF-uyTU22BpuYk11JYJ0GdOtgNNGfDO_jSwffm1EzQNPcwXJU9pRyIUFHb8d6WnO9H94I5p9TXQXVOx1Gpd73tzfgTC0ROdxj3PFqMUHKCn_8g57Zdp6mzdMOneX9sm-vx6_7JBMylXJasgspUpMl-Cx0qj8uM9CK_XdFqv-HyZUUzltS4SB8mEqc8rzzs6X8Z5lh07W-Qw8DeY'">
+                  <img alt="Realistic 3D human body visualization" class="w-full h-full object-contain select-none filter drop-shadow-md" draggable="false" src="assets/images/body_3d.png"
+                    onerror="this.src='https://lh3.googleusercontent.com/aida/AEtjO1XMqTc0XqubitK3YJq8LfFAPeq1qVDa5pvkp4dFG6v-SF-uyTU22BpuYk11JYJ0GdOtgNNGfDO_jSwffm1EzQNPcwXJU9pRyIUFHb8d6WnO9H94I5p9TXQXVOx1Gpd73tzfgTC0ROdxj3PFqMUHKCn_8g57Zdp6mzdMOneX9sm-vx6_7JBMylXJasgspUpMl-Cx0qj8uM9CK_XdFqv-HyZUUzltS4SB8mEqc8rzzs6X8Z5lh07W-Qw8DeY'">
                   <!-- Floating Angle Overlay Pill -->
                   <div class="absolute top-2 right-2 bg-white/90 backdrop-blur-md border border-black/10 rounded-full px-2.5 py-1 flex items-center gap-1.5 shadow-sm">
                     <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
@@ -564,7 +614,8 @@
                     </div>
                     <div class="w-full h-6 mt-1 flex items-center">
                       <svg class="w-full h-full overflow-visible" fill="none" preserveAspectRatio="none" viewBox="0 0 100 24">
-                        <path class="text-on-surface animated-ecg-path" d="M0,12 L20,12 L25,3 L29,21 L33,7 L37,15 L40,12 L60,12 L65,4 L69,20 L73,8 L77,14 L80,12 L100,12" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75"></path>
+                        <path class="text-on-surface animated-ecg-path" d="M0,12 L20,12 L25,3 L29,21 L33,7 L37,15 L40,12 L60,12 L65,4 L69,20 L73,8 L77,14 L80,12 L100,12" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                          stroke-width="1.75"></path>
                       </svg>
                     </div>
                   </div>
@@ -618,7 +669,8 @@
                 </div>
 
                 <!-- Link to Health Graphs Screen -->
-                <button type="button" onclick="navigateTo('screen-graphs')" class="w-full mt-2.5 py-2.5 px-3 rounded-2xl bg-black text-white text-xs font-semibold flex items-center justify-center gap-2 active:scale-98 transition-all cursor-pointer shadow-xs">
+                <button type="button" onclick="navigateTo('screen-graphs')"
+                  class="w-full mt-2.5 py-2.5 px-3 rounded-2xl bg-black text-white text-xs font-semibold flex items-center justify-center gap-2 active:scale-98 transition-all cursor-pointer shadow-xs">
                   <span class="material-symbols-outlined text-[16px] text-cyan-300">ssid_chart</span>
                   <span>View Interactive Health Graphs &amp; Trends</span>
                   <span class="material-symbols-outlined text-[14px]">arrow_forward</span>
@@ -659,7 +711,8 @@
                 <span class="font-label-telemetry text-[10px] uppercase tracking-wider">CARE</span>
               </button>
               <div class="relative -top-4 flex items-center justify-center">
-                <button aria-label="Connect Bluetooth Device" class="main-plus-ble-btn w-12 h-12 rounded-full bg-primary text-on-primary shadow-lg flex items-center justify-center transition-transform active:scale-95 cursor-pointer relative" onclick="handlePlusButtonClick()" title="Connect Bluetooth Device (ESP32-S3)">
+                <button aria-label="Connect Bluetooth Device" class="main-plus-ble-btn w-12 h-12 rounded-full bg-primary text-on-primary shadow-lg flex items-center justify-center transition-transform active:scale-95 cursor-pointer relative"
+                  onclick="handlePlusButtonClick()" title="Connect Bluetooth Device (ESP32-S3)">
                   <span class="material-symbols-outlined text-[24px] nav-center-icon">add</span>
                   <span class="nav-center-ble-badge absolute -bottom-0.5 -right-0.5 w-4 h-4 rounded-full bg-blue-600 text-white flex items-center justify-center border-2 border-white shadow-xs">
                     <span class="material-symbols-outlined text-[10px]">bluetooth</span>
@@ -715,7 +768,8 @@
               <!-- Central Posture Showcase -->
               <div class="w-full bg-surface-container-lowest rounded-2xl p-3.5 shadow-sm border border-surface-container/40 mb-3 flex flex-col gap-3">
                 <div class="w-full rounded-xl overflow-hidden bg-surface-container-lowest flex items-center justify-center relative">
-                  <img alt="Sitting posture comparison showing upright ergonomic alignment versus slouching forward bend" class="w-full h-auto object-contain select-none" src="assets/images/posture_3d.png" onerror="this.src='https://lh3.googleusercontent.com/aida/AEtjO1U7Yfy8Ryh5Awug23jMhev2quBOKAzvFxXaIqvjbzm0R9jZzWlaSAcCfFlUBGx-jQfnbDx-kaCOMLqpq2Y6qgBH8IFg28a6meFFJj0VCpI5LTUuCl_ELnx0nPb05tY2JGO2T9FoLdcC__gcyJg1wffFxYIKu1OE5OuvSQEJHbptbE3Upl40IjPkUiwwpYj-U5zZ4e1FU4DUAhmQFNSsqyjC8lTHQ9z1PyfO3a_iTifc0FO04oDr1D-HmiE'">
+                  <img alt="Sitting posture comparison showing upright ergonomic alignment versus slouching forward bend" class="w-full h-auto object-contain select-none" src="assets/images/posture_3d.png"
+                    onerror="this.src='https://lh3.googleusercontent.com/aida/AEtjO1U7Yfy8Ryh5Awug23jMhev2quBOKAzvFxXaIqvjbzm0R9jZzWlaSAcCfFlUBGx-jQfnbDx-kaCOMLqpq2Y6qgBH8IFg28a6meFFJj0VCpI5LTUuCl_ELnx0nPb05tY2JGO2T9FoLdcC__gcyJg1wffFxYIKu1OE5OuvSQEJHbptbE3Upl40IjPkUiwwpYj-U5zZ4e1FU4DUAhmQFNSsqyjC8lTHQ9z1PyfO3a_iTifc0FO04oDr1D-HmiE'">
                   <div class="absolute bottom-2 right-2 bg-black/75 backdrop-blur text-white text-[10px] font-semibold px-2 py-0.5 rounded-full flex items-center gap-1">
                     <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
                     <span>IMU: <strong class="dynamic-posture-angle">0°</strong></span>
@@ -762,11 +816,13 @@
                     <span class="font-title-sm text-sm text-on-surface font-semibold">Alert Angle</span>
                   </div>
                   <div class="flex items-center bg-surface-container-low rounded-full p-1 gap-1">
-                    <button aria-label="Decrease alert angle" class="w-7 h-7 rounded-full bg-surface-container-lowest text-on-surface flex items-center justify-center shadow-sm active:scale-95 transition-transform cursor-pointer" onclick="adjustPostureAngle(-1)" type="button">
+                    <button aria-label="Decrease alert angle" class="w-7 h-7 rounded-full bg-surface-container-lowest text-on-surface flex items-center justify-center shadow-sm active:scale-95 transition-transform cursor-pointer"
+                      onclick="adjustPostureAngle(-1)" type="button">
                       <span class="material-symbols-outlined text-[16px]">remove</span>
                     </button>
                     <span class="font-title-sm text-sm text-on-surface min-w-[30px] text-center font-bold" id="angle-display">15°</span>
-                    <button aria-label="Increase alert angle" class="w-7 h-7 rounded-full bg-surface-container-lowest text-on-surface flex items-center justify-center shadow-sm active:scale-95 transition-transform cursor-pointer" onclick="adjustPostureAngle(1)" type="button">
+                    <button aria-label="Increase alert angle" class="w-7 h-7 rounded-full bg-surface-container-lowest text-on-surface flex items-center justify-center shadow-sm active:scale-95 transition-transform cursor-pointer"
+                      onclick="adjustPostureAngle(1)" type="button">
                       <span class="material-symbols-outlined text-[16px]">add</span>
                     </button>
                   </div>
@@ -780,11 +836,13 @@
                     <span class="font-title-sm text-sm text-on-surface font-semibold">Hold Time</span>
                   </div>
                   <div class="flex items-center bg-surface-container-low rounded-full p-1 gap-1">
-                    <button aria-label="Decrease hold time" class="w-7 h-7 rounded-full bg-surface-container-lowest text-on-surface flex items-center justify-center shadow-sm active:scale-95 transition-transform cursor-pointer" onclick="adjustPostureHoldTime(-5)" type="button">
+                    <button aria-label="Decrease hold time" class="w-7 h-7 rounded-full bg-surface-container-lowest text-on-surface flex items-center justify-center shadow-sm active:scale-95 transition-transform cursor-pointer"
+                      onclick="adjustPostureHoldTime(-5)" type="button">
                       <span class="material-symbols-outlined text-[16px]">remove</span>
                     </button>
                     <span class="font-title-sm text-sm text-on-surface min-w-[34px] text-center font-bold" id="time-display">10s</span>
-                    <button aria-label="Increase hold time" class="w-7 h-7 rounded-full bg-surface-container-lowest text-on-surface flex items-center justify-center shadow-sm active:scale-95 transition-transform cursor-pointer" onclick="adjustPostureHoldTime(5)" type="button">
+                    <button aria-label="Increase hold time" class="w-7 h-7 rounded-full bg-surface-container-lowest text-on-surface flex items-center justify-center shadow-sm active:scale-95 transition-transform cursor-pointer"
+                      onclick="adjustPostureHoldTime(5)" type="button">
                       <span class="material-symbols-outlined text-[16px]">add</span>
                     </button>
                   </div>
@@ -792,12 +850,15 @@
               </div>
 
               <!-- Save Button -->
-              <button class="w-full h-12 rounded-full bg-primary text-on-primary font-title-sm text-sm flex items-center justify-center gap-2 active:scale-[0.98] transition-transform shadow-md font-semibold cursor-pointer" type="button" onclick="savePostureSettings()">
+              <button class="w-full h-12 rounded-full bg-primary text-on-primary font-title-sm text-sm flex items-center justify-center gap-2 active:scale-[0.98] transition-transform shadow-md font-semibold cursor-pointer" type="button"
+                onclick="savePostureSettings()">
                 <span>Save Settings</span>
               </button>
 
               <!-- Link to Posture Graphs & Analytics -->
-              <button class="w-full h-11 rounded-full bg-surface-container-low hover:bg-surface-container text-on-surface font-title-sm text-xs flex items-center justify-center gap-2 active:scale-[0.98] transition-transform font-semibold cursor-pointer border border-surface-container mt-1" type="button" onclick="navigateTo('screen-graphs'); filterGraphMetric('posture');">
+              <button
+                class="w-full h-11 rounded-full bg-surface-container-low hover:bg-surface-container text-on-surface font-title-sm text-xs flex items-center justify-center gap-2 active:scale-[0.98] transition-transform font-semibold cursor-pointer border border-surface-container mt-1"
+                type="button" onclick="navigateTo('screen-graphs'); filterGraphMetric('posture');">
                 <span class="material-symbols-outlined text-[16px] text-purple-600">query_stats</span>
                 <span>View 7-Day Posture Curves &amp; Consistency</span>
               </button>
@@ -817,7 +878,8 @@
                 <span class="font-label-telemetry text-[10px] uppercase tracking-wider">CARE</span>
               </button>
               <div class="relative -top-4 flex items-center justify-center">
-                <button aria-label="Connect Bluetooth Device" class="main-plus-ble-btn w-12 h-12 rounded-full bg-primary text-on-primary shadow-lg flex items-center justify-center transition-transform active:scale-95 cursor-pointer relative" onclick="handlePlusButtonClick()" title="Connect Bluetooth Device (ESP32-S3)">
+                <button aria-label="Connect Bluetooth Device" class="main-plus-ble-btn w-12 h-12 rounded-full bg-primary text-on-primary shadow-lg flex items-center justify-center transition-transform active:scale-95 cursor-pointer relative"
+                  onclick="handlePlusButtonClick()" title="Connect Bluetooth Device (ESP32-S3)">
                   <span class="material-symbols-outlined text-[24px] nav-center-icon">add</span>
                   <span class="nav-center-ble-badge absolute -bottom-0.5 -right-0.5 w-4 h-4 rounded-full bg-blue-600 text-white flex items-center justify-center border-2 border-white shadow-xs">
                     <span class="material-symbols-outlined text-[10px]">bluetooth</span>
@@ -861,10 +923,14 @@
 
               <!-- Segmented Filter Tabs -->
               <div class="w-full bg-slate-100 p-1 rounded-full flex items-center gap-1 shadow-sm overflow-x-auto" id="category-tabs" role="tablist">
-                <button aria-selected="true" class="risk-tab-btn flex-1 py-1.5 px-2 rounded-full text-[11px] font-semibold text-center whitespace-nowrap transition-all bg-black text-white shadow-sm cursor-pointer" data-tab="all" role="tab" type="button">All</button>
-                <button aria-selected="false" class="risk-tab-btn flex-1 py-1.5 px-2 rounded-full text-[11px] font-semibold text-center whitespace-nowrap transition-all text-slate-600 hover:text-black hover:bg-white/50 cursor-pointer" data-tab="environment" role="tab" type="button">Environment</button>
-                <button aria-selected="false" class="risk-tab-btn flex-1 py-1.5 px-2 rounded-full text-[11px] font-semibold text-center whitespace-nowrap transition-all text-slate-600 hover:text-black hover:bg-white/50 cursor-pointer" data-tab="health" role="tab" type="button">Health</button>
-                <button aria-selected="false" class="risk-tab-btn flex-1 py-1.5 px-2 rounded-full text-[11px] font-semibold text-center whitespace-nowrap transition-all text-slate-600 hover:text-black hover:bg-white/50 cursor-pointer" data-tab="lifestyle" role="tab" type="button">Lifestyle</button>
+                <button aria-selected="true" class="risk-tab-btn flex-1 py-1.5 px-2 rounded-full text-[11px] font-semibold text-center whitespace-nowrap transition-all bg-black text-white shadow-sm cursor-pointer" data-tab="all" role="tab"
+                  type="button">All</button>
+                <button aria-selected="false" class="risk-tab-btn flex-1 py-1.5 px-2 rounded-full text-[11px] font-semibold text-center whitespace-nowrap transition-all text-slate-600 hover:text-black hover:bg-white/50 cursor-pointer"
+                  data-tab="environment" role="tab" type="button">Environment</button>
+                <button aria-selected="false" class="risk-tab-btn flex-1 py-1.5 px-2 rounded-full text-[11px] font-semibold text-center whitespace-nowrap transition-all text-slate-600 hover:text-black hover:bg-white/50 cursor-pointer"
+                  data-tab="health" role="tab" type="button">Health</button>
+                <button aria-selected="false" class="risk-tab-btn flex-1 py-1.5 px-2 rounded-full text-[11px] font-semibold text-center whitespace-nowrap transition-all text-slate-600 hover:text-black hover:bg-white/50 cursor-pointer"
+                  data-tab="lifestyle" role="tab" type="button">Lifestyle</button>
               </div>
 
               <div class="flex flex-col gap-3">
@@ -916,7 +982,8 @@
               <!-- Preparedness Card -->
               <section class="bg-white rounded-2xl p-4 shadow-sm border border-slate-100 flex flex-col gap-2">
                 <h3 class="text-base font-semibold text-slate-950 tracking-tight">Stay Prepared</h3>
-                <p class="text-xs text-slate-500 font-normal leading-relaxed">Continuous multi-sensor monitoring for early anomaly prevention.</p>
+                <p class="text-xs text-slate-500 font-normal leading-relaxed">Continuous multi-sensor monitoring for early anomaly prevention.
+                </p>
               </section>
             </div>
           </div>
@@ -933,7 +1000,8 @@
                 <span class="font-label-telemetry text-[10px] uppercase tracking-wider">CARE</span>
               </button>
               <div class="relative -top-4 flex items-center justify-center">
-                <button aria-label="Connect Bluetooth Device" class="main-plus-ble-btn w-12 h-12 rounded-full bg-primary text-on-primary shadow-lg flex items-center justify-center transition-transform active:scale-95 cursor-pointer relative" onclick="handlePlusButtonClick()" title="Connect Bluetooth Device (ESP32-S3)">
+                <button aria-label="Connect Bluetooth Device" class="main-plus-ble-btn w-12 h-12 rounded-full bg-primary text-on-primary shadow-lg flex items-center justify-center transition-transform active:scale-95 cursor-pointer relative"
+                  onclick="handlePlusButtonClick()" title="Connect Bluetooth Device (ESP32-S3)">
                   <span class="material-symbols-outlined text-[24px] nav-center-icon">add</span>
                   <span class="nav-center-ble-badge absolute -bottom-0.5 -right-0.5 w-4 h-4 rounded-full bg-blue-600 text-white flex items-center justify-center border-2 border-white shadow-xs">
                     <span class="material-symbols-outlined text-[10px]">bluetooth</span>
@@ -952,7 +1020,7 @@
           </nav>
         </section>
 
-<!-- SCREEN 6: EMERGENCY SOS -->
+        <!-- SCREEN 6: EMERGENCY SOS -->
         <section id="screen-sos" class="screen-view">
           <header class="h-14 px-4 flex items-center justify-between border-b border-surface-container/40 bg-surface/90 backdrop-blur-md shrink-0 z-20">
             <button aria-label="Go back" class="w-10 h-10 -ml-2 flex items-center justify-center text-on-surface active:scale-95 transition-transform cursor-pointer" onclick="goBack()">
@@ -971,11 +1039,14 @@
                 <div class="absolute rounded-full bg-[#dbe4f8]/80 transition-all duration-500 sos-ring-mid-size" id="sos-ring-mid"></div>
 
                 <!-- Center SOS Button -->
-                <button aria-label="Press and hold to send SOS" class="relative z-10 w-36 h-36 rounded-full bg-primary flex flex-col items-center justify-center shadow-[0_16px_36px_rgba(0,0,0,0.28)] active:scale-95 transition-all duration-300 touch-none focus:outline-none cursor-pointer" id="sos-button">
+                <button aria-label="Press and hold to send SOS"
+                  class="relative z-10 w-36 h-36 rounded-full bg-primary flex flex-col items-center justify-center shadow-[0_16px_36px_rgba(0,0,0,0.28)] active:scale-95 transition-all duration-300 touch-none focus:outline-none cursor-pointer"
+                  id="sos-button">
                   <div class="absolute inset-2 rounded-full border border-white/10 pointer-events-none"></div>
                   <svg class="absolute inset-0 w-full h-full -rotate-90 pointer-events-none" viewBox="0 0 176 176">
                     <circle class="text-white/10" cx="88" cy="88" fill="none" r="82" stroke="currentColor" stroke-width="3"></circle>
-                    <circle class="text-red-500 transition-all duration-75 ease-linear" cx="88" cy="88" fill="none" id="sos-progress-circle" r="82" stroke="currentColor" stroke-dasharray="515" stroke-dashoffset="515" stroke-linecap="round" stroke-width="4"></circle>
+                    <circle class="text-red-500 transition-all duration-75 ease-linear" cx="88" cy="88" fill="none" id="sos-progress-circle" r="82" stroke="currentColor" stroke-dasharray="515" stroke-dashoffset="515" stroke-linecap="round"
+                      stroke-width="4"></circle>
                   </svg>
                   <span class="text-[30px] text-on-primary tracking-wider font-bold leading-none select-none">SOS</span>
                   <span class="text-[10px] text-white/60 tracking-widest uppercase mt-1 font-medium select-none">HOLD 3S</span>
@@ -1002,7 +1073,9 @@
                       <p id="sos-primary-contact-name" class="text-xs text-secondary truncate mt-0.5 leading-tight">Dr. Robert Kelly</p>
                     </div>
                   </div>
-                  <a id="sos-primary-contact-link" aria-label="Call Primary Contact" class="w-9 h-9 rounded-full bg-surface-container-low flex items-center justify-center text-on-surface hover:bg-surface-container active:scale-95 transition-transform shrink-0" href="tel:5550192834" onclick="showToast('Calling primary contact...', 'call')">
+                  <a id="sos-primary-contact-link" aria-label="Call Primary Contact"
+                    class="w-9 h-9 rounded-full bg-surface-container-low flex items-center justify-center text-on-surface hover:bg-surface-container active:scale-95 transition-transform shrink-0" href="tel:5550192834"
+                    onclick="showToast('Calling primary contact...', 'call')">
                     <span class="material-symbols-outlined text-[17px]">call</span>
                   </a>
                 </div>
@@ -1015,7 +1088,8 @@
                       <p class="text-xs text-secondary truncate mt-0.5 leading-tight">Emma Sterling</p>
                     </div>
                   </div>
-                  <a aria-label="Call Family Member" class="w-9 h-9 rounded-full bg-surface-container-low flex items-center justify-center text-on-surface hover:bg-surface-container active:scale-95 transition-transform shrink-0" href="tel:5550192835" onclick="showToast('Calling Emma Sterling...', 'call')">
+                  <a aria-label="Call Family Member" class="w-9 h-9 rounded-full bg-surface-container-low flex items-center justify-center text-on-surface hover:bg-surface-container active:scale-95 transition-transform shrink-0" href="tel:5550192835"
+                    onclick="showToast('Calling Emma Sterling...', 'call')">
                     <span class="material-symbols-outlined text-[17px]">call</span>
                   </a>
                 </div>
@@ -1030,7 +1104,8 @@
                       <p class="text-xs text-secondary truncate mt-0.5 leading-tight">112 (Emergency Dispatch)</p>
                     </div>
                   </div>
-                  <a aria-label="Call Local Help" class="w-9 h-9 rounded-full bg-surface-container-low flex items-center justify-center text-on-surface hover:bg-surface-container active:scale-95 transition-transform shrink-0" href="tel:112" onclick="showToast('Connecting to 112 Dispatch...', 'emergency')">
+                  <a aria-label="Call Local Help" class="w-9 h-9 rounded-full bg-surface-container-low flex items-center justify-center text-on-surface hover:bg-surface-container active:scale-95 transition-transform shrink-0" href="tel:112"
+                    onclick="showToast('Connecting to 112 Dispatch...', 'emergency')">
                     <span class="material-symbols-outlined text-[17px]">call</span>
                   </a>
                 </div>
@@ -1039,7 +1114,8 @@
 
             <!-- Test Alert Button -->
             <div class="mt-4 mb-1">
-              <button class="w-full h-11 rounded-full bg-white border border-outline/70 text-on-surface text-sm font-semibold flex items-center justify-center shadow-sm hover:bg-gray-50 active:scale-[0.98] transition-all cursor-pointer" id="sos-test-btn">
+              <button class="w-full h-11 rounded-full bg-white border border-outline/70 text-on-surface text-sm font-semibold flex items-center justify-center shadow-sm hover:bg-gray-50 active:scale-[0.98] transition-all cursor-pointer"
+                id="sos-test-btn">
                 Send Test Alert
               </button>
             </div>
@@ -1057,7 +1133,8 @@
                 <span class="font-label-telemetry text-[10px] uppercase tracking-wider">CARE</span>
               </button>
               <div class="relative -top-4 flex items-center justify-center">
-                <button aria-label="Connect Bluetooth Device" class="main-plus-ble-btn w-12 h-12 rounded-full bg-primary text-on-primary shadow-lg flex items-center justify-center transition-transform active:scale-95 cursor-pointer relative" onclick="handlePlusButtonClick()" title="Connect Bluetooth Device (ESP32-S3)">
+                <button aria-label="Connect Bluetooth Device" class="main-plus-ble-btn w-12 h-12 rounded-full bg-primary text-on-primary shadow-lg flex items-center justify-center transition-transform active:scale-95 cursor-pointer relative"
+                  onclick="handlePlusButtonClick()" title="Connect Bluetooth Device (ESP32-S3)">
                   <span class="material-symbols-outlined text-[24px] nav-center-icon">add</span>
                   <span class="nav-center-ble-badge absolute -bottom-0.5 -right-0.5 w-4 h-4 rounded-full bg-blue-600 text-white flex items-center justify-center border-2 border-white shadow-xs">
                     <span class="material-symbols-outlined text-[10px]">bluetooth</span>
@@ -1110,7 +1187,8 @@
                 <!-- Doctor 1: Dr. Neha Sharma -->
                 <div class="w-full bg-surface-container-lowest rounded-2xl p-4 shadow-sm border border-surface-container flex flex-col gap-4">
                   <div class="flex items-start gap-4">
-                    <img class="w-20 h-20 rounded-2xl object-cover shadow-sm ring-1 ring-black/5 shrink-0" alt="Dr. Neha Sharma" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDIqde2zHWq5d75xmp5aVgxeVego2Sai2irnWTj-vmHBG_t27ybS25MvuSVXxfzw01o8CZPgCxM3Lxj5K9m-lgCCegetXS7QKxdc7ysjQ2UWbJLPqNL_ZRRGwCgooxO7n2G6Kyb75y4Ou8sl1XjAcIZxy_uZ4aCd6MYGz5vN_zChy0g_8047jL7xNjraXRqE7MxTw6xWd730310TSuyGxwnyPpDLqJwIRkbUnKJMpxb8Z9IB-tOdt63Ug">
+                    <img class="w-20 h-20 rounded-2xl object-cover shadow-sm ring-1 ring-black/5 shrink-0" alt="Dr. Neha Sharma"
+                      src="https://lh3.googleusercontent.com/aida-public/AB6AXuDIqde2zHWq5d75xmp5aVgxeVego2Sai2irnWTj-vmHBG_t27ybS25MvuSVXxfzw01o8CZPgCxM3Lxj5K9m-lgCCegetXS7QKxdc7ysjQ2UWbJLPqNL_ZRRGwCgooxO7n2G6Kyb75y4Ou8sl1XjAcIZxy_uZ4aCd6MYGz5vN_zChy0g_8047jL7xNjraXRqE7MxTw6xWd730310TSuyGxwnyPpDLqJwIRkbUnKJMpxb8Z9IB-tOdt63Ug">
                     <div class="flex flex-col min-w-0 flex-1">
                       <div class="flex items-center justify-between gap-2">
                         <h3 class="text-lg font-bold text-on-surface tracking-tight">Dr. Neha Sharma</h3>
@@ -1124,11 +1202,14 @@
                     </div>
                   </div>
                   <div class="flex items-center gap-2.5">
-                    <button class="flex-1 h-11 bg-primary hover:bg-primary-container active:scale-[0.98] transition-all rounded-full flex items-center justify-center gap-1.5 shadow-sm cursor-pointer" type="button" onclick="openBookingModal('Dr. Neha Sharma', 'General Physician')">
+                    <button class="flex-1 h-11 bg-primary hover:bg-primary-container active:scale-[0.98] transition-all rounded-full flex items-center justify-center gap-1.5 shadow-sm cursor-pointer" type="button"
+                      onclick="openBookingModal('Dr. Neha Sharma', 'General Physician')">
                       <span class="text-xs text-on-primary font-medium">Book Now</span>
                       <span class="material-symbols-outlined text-on-primary text-[16px]">calendar_today</span>
                     </button>
-                    <button aria-label="Share profile" class="h-11 px-4 rounded-full bg-surface-container-low hover:bg-surface-container text-on-surface flex items-center justify-center gap-1.5 font-medium text-xs transition-all active:scale-95 shrink-0 cursor-pointer" type="button" onclick="shareDoctorProfile('Dr. Neha Sharma')">
+                    <button aria-label="Share profile"
+                      class="h-11 px-4 rounded-full bg-surface-container-low hover:bg-surface-container text-on-surface flex items-center justify-center gap-1.5 font-medium text-xs transition-all active:scale-95 shrink-0 cursor-pointer" type="button"
+                      onclick="shareDoctorProfile('Dr. Neha Sharma')">
                       <span class="material-symbols-outlined text-[17px]">share</span>
                       <span>Share</span>
                     </button>
@@ -1138,7 +1219,8 @@
                 <!-- Doctor 2: Dr. Vivek Malhotra -->
                 <div class="w-full bg-surface-container-lowest rounded-2xl p-4 shadow-sm border border-surface-container flex flex-col gap-4">
                   <div class="flex items-start gap-4">
-                    <img class="w-20 h-20 rounded-2xl object-cover shadow-sm ring-1 ring-black/5 shrink-0" alt="Dr. Vivek Malhotra" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAitGr2C3qa5_wxm0029IP7oaM5W44U9uRmdKYZEEmynTzY9A9vwoLG9T7ggXYxygPbOKBQ5ZYi5nQDbbchsa-ztDzhVtpmogCQgWTKLbfMDT_ak2nwFPml3INcIf9Zbxs3uxMfNjJ8tBJSMRzHibVrx629fyPWgJVgQjrErlQkDYYmaqpEHLe22xX8sDSTLgay9ubznzwAO-lyELLWRw5miDP6eI37b6Gv6c_OpCYATZtamm6wXNy6PQ">
+                    <img class="w-20 h-20 rounded-2xl object-cover shadow-sm ring-1 ring-black/5 shrink-0" alt="Dr. Vivek Malhotra"
+                      src="https://lh3.googleusercontent.com/aida-public/AB6AXuAitGr2C3qa5_wxm0029IP7oaM5W44U9uRmdKYZEEmynTzY9A9vwoLG9T7ggXYxygPbOKBQ5ZYi5nQDbbchsa-ztDzhVtpmogCQgWTKLbfMDT_ak2nwFPml3INcIf9Zbxs3uxMfNjJ8tBJSMRzHibVrx629fyPWgJVgQjrErlQkDYYmaqpEHLe22xX8sDSTLgay9ubznzwAO-lyELLWRw5miDP6eI37b6Gv6c_OpCYATZtamm6wXNy6PQ">
                     <div class="flex flex-col min-w-0 flex-1">
                       <div class="flex items-center justify-between gap-2">
                         <h3 class="text-lg font-bold text-on-surface tracking-tight">Dr. Vivek Malhotra</h3>
@@ -1152,11 +1234,14 @@
                     </div>
                   </div>
                   <div class="flex items-center gap-2.5">
-                    <button class="flex-1 h-11 bg-primary hover:bg-primary-container active:scale-[0.98] transition-all rounded-full flex items-center justify-center gap-1.5 shadow-sm cursor-pointer" type="button" onclick="openBookingModal('Dr. Vivek Malhotra', 'Cardiologist')">
+                    <button class="flex-1 h-11 bg-primary hover:bg-primary-container active:scale-[0.98] transition-all rounded-full flex items-center justify-center gap-1.5 shadow-sm cursor-pointer" type="button"
+                      onclick="openBookingModal('Dr. Vivek Malhotra', 'Cardiologist')">
                       <span class="text-xs text-on-primary font-medium">Book Now</span>
                       <span class="material-symbols-outlined text-on-primary text-[16px]">calendar_today</span>
                     </button>
-                    <button aria-label="Share profile" class="h-11 px-4 rounded-full bg-surface-container-low hover:bg-surface-container text-on-surface flex items-center justify-center gap-1.5 font-medium text-xs transition-all active:scale-95 shrink-0 cursor-pointer" type="button" onclick="shareDoctorProfile('Dr. Vivek Malhotra')">
+                    <button aria-label="Share profile"
+                      class="h-11 px-4 rounded-full bg-surface-container-low hover:bg-surface-container text-on-surface flex items-center justify-center gap-1.5 font-medium text-xs transition-all active:scale-95 shrink-0 cursor-pointer" type="button"
+                      onclick="shareDoctorProfile('Dr. Vivek Malhotra')">
                       <span class="material-symbols-outlined text-[17px]">share</span>
                       <span>Share</span>
                     </button>
@@ -1166,7 +1251,8 @@
                 <!-- Doctor 3: Dr. Priya Singh -->
                 <div class="w-full bg-surface-container-lowest rounded-2xl p-4 shadow-sm border border-surface-container flex flex-col gap-4">
                   <div class="flex items-start gap-4">
-                    <img class="w-20 h-20 rounded-2xl object-cover shadow-sm ring-1 ring-black/5 shrink-0" alt="Dr. Priya Singh" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAiP9kP15YyfiEYUW7jkZsXLBzydYcHBkYTFoAf93blqjm1iB1lqYWz1hcV2-se6oc1uZLexbayHurZI4P9YSkXsIbR1jtao2L_HaCpeuqUcb95SBT2DB6ZwEPGD10tdmVTBlIdscLq2GOjOp5FcyvsfJo86_ilxqsX2fiaxhm5YxVd9q21Pv_s-e9Ac4kXZhuXVM1V01pO1P92aoDoN5V6aRgZAq1MIkshE423OayVCouAQ665exCAyA">
+                    <img class="w-20 h-20 rounded-2xl object-cover shadow-sm ring-1 ring-black/5 shrink-0" alt="Dr. Priya Singh"
+                      src="https://lh3.googleusercontent.com/aida-public/AB6AXuAiP9kP15YyfiEYUW7jkZsXLBzydYcHBkYTFoAf93blqjm1iB1lqYWz1hcV2-se6oc1uZLexbayHurZI4P9YSkXsIbR1jtao2L_HaCpeuqUcb95SBT2DB6ZwEPGD10tdmVTBlIdscLq2GOjOp5FcyvsfJo86_ilxqsX2fiaxhm5YxVd9q21Pv_s-e9Ac4kXZhuXVM1V01pO1P92aoDoN5V6aRgZAq1MIkshE423OayVCouAQ665exCAyA">
                     <div class="flex flex-col min-w-0 flex-1">
                       <div class="flex items-center justify-between gap-2">
                         <h3 class="text-lg font-bold text-on-surface tracking-tight">Dr. Priya Singh</h3>
@@ -1180,11 +1266,14 @@
                     </div>
                   </div>
                   <div class="flex items-center gap-2.5">
-                    <button class="flex-1 h-11 bg-primary hover:bg-primary-container active:scale-[0.98] transition-all rounded-full flex items-center justify-center gap-1.5 shadow-sm cursor-pointer" type="button" onclick="openBookingModal('Dr. Priya Singh', 'Dermatologist')">
+                    <button class="flex-1 h-11 bg-primary hover:bg-primary-container active:scale-[0.98] transition-all rounded-full flex items-center justify-center gap-1.5 shadow-sm cursor-pointer" type="button"
+                      onclick="openBookingModal('Dr. Priya Singh', 'Dermatologist')">
                       <span class="text-xs text-on-primary font-medium">Book Now</span>
                       <span class="material-symbols-outlined text-on-primary text-[16px]">calendar_today</span>
                     </button>
-                    <button aria-label="Share profile" class="h-11 px-4 rounded-full bg-surface-container-low hover:bg-surface-container text-on-surface flex items-center justify-center gap-1.5 font-medium text-xs transition-all active:scale-95 shrink-0 cursor-pointer" type="button" onclick="shareDoctorProfile('Dr. Priya Singh')">
+                    <button aria-label="Share profile"
+                      class="h-11 px-4 rounded-full bg-surface-container-low hover:bg-surface-container text-on-surface flex items-center justify-center gap-1.5 font-medium text-xs transition-all active:scale-95 shrink-0 cursor-pointer" type="button"
+                      onclick="shareDoctorProfile('Dr. Priya Singh')">
                       <span class="material-symbols-outlined text-[17px]">share</span>
                       <span>Share</span>
                     </button>
@@ -1194,7 +1283,8 @@
                 <!-- Doctor 4: Dr. Arjun Iyer -->
                 <div class="w-full bg-surface-container-lowest rounded-2xl p-4 shadow-sm border border-surface-container flex flex-col gap-4">
                   <div class="flex items-start gap-4">
-                    <img class="w-20 h-20 rounded-2xl object-cover shadow-sm ring-1 ring-black/5 shrink-0" alt="Dr. Arjun Iyer" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA9KjunmaflgCrdZmOl5YUSEfBQXbCOzs2CImyrpx9wsKrJa6T_t2aPV1Sg4rj862YLUfFb5141caxGAH15_mJ5Yf4kqWFdxfy6sB7tvmMzTEdf1F6lUDynYcjHeTQEe6itXdUk79yyScDFsm4e6M83T6IbpUGcJTHwECJDZHmlBC6UmcMbgFRmPdTopbns0bZfXRGfXQOjfU9eidh2L7bnhkcugSaiWXS1csW24EKblOhlPlr-a_pPcw">
+                    <img class="w-20 h-20 rounded-2xl object-cover shadow-sm ring-1 ring-black/5 shrink-0" alt="Dr. Arjun Iyer"
+                      src="https://lh3.googleusercontent.com/aida-public/AB6AXuA9KjunmaflgCrdZmOl5YUSEfBQXbCOzs2CImyrpx9wsKrJa6T_t2aPV1Sg4rj862YLUfFb5141caxGAH15_mJ5Yf4kqWFdxfy6sB7tvmMzTEdf1F6lUDynYcjHeTQEe6itXdUk79yyScDFsm4e6M83T6IbpUGcJTHwECJDZHmlBC6UmcMbgFRmPdTopbns0bZfXRGfXQOjfU9eidh2L7bnhkcugSaiWXS1csW24EKblOhlPlr-a_pPcw">
                     <div class="flex flex-col min-w-0 flex-1">
                       <div class="flex items-center justify-between gap-2">
                         <h3 class="text-lg font-bold text-on-surface tracking-tight">Dr. Arjun Iyer</h3>
@@ -1208,11 +1298,14 @@
                     </div>
                   </div>
                   <div class="flex items-center gap-2.5">
-                    <button class="flex-1 h-11 bg-primary hover:bg-primary-container active:scale-[0.98] transition-all rounded-full flex items-center justify-center gap-1.5 shadow-sm cursor-pointer" type="button" onclick="openBookingModal('Dr. Arjun Iyer', 'Neurologist')">
+                    <button class="flex-1 h-11 bg-primary hover:bg-primary-container active:scale-[0.98] transition-all rounded-full flex items-center justify-center gap-1.5 shadow-sm cursor-pointer" type="button"
+                      onclick="openBookingModal('Dr. Arjun Iyer', 'Neurologist')">
                       <span class="text-xs text-on-primary font-medium">Book Now</span>
                       <span class="material-symbols-outlined text-on-primary text-[16px]">calendar_today</span>
                     </button>
-                    <button aria-label="Share profile" class="h-11 px-4 rounded-full bg-surface-container-low hover:bg-surface-container text-on-surface flex items-center justify-center gap-1.5 font-medium text-xs transition-all active:scale-95 shrink-0 cursor-pointer" type="button" onclick="shareDoctorProfile('Dr. Arjun Iyer')">
+                    <button aria-label="Share profile"
+                      class="h-11 px-4 rounded-full bg-surface-container-low hover:bg-surface-container text-on-surface flex items-center justify-center gap-1.5 font-medium text-xs transition-all active:scale-95 shrink-0 cursor-pointer" type="button"
+                      onclick="shareDoctorProfile('Dr. Arjun Iyer')">
                       <span class="material-symbols-outlined text-[17px]">share</span>
                       <span>Share</span>
                     </button>
@@ -1235,7 +1328,8 @@
                 <span class="font-label-telemetry text-[10px] uppercase tracking-wider">CARE</span>
               </button>
               <div class="relative -top-4 flex items-center justify-center">
-                <button aria-label="Connect Bluetooth Device" class="main-plus-ble-btn w-12 h-12 rounded-full bg-primary text-on-primary shadow-lg flex items-center justify-center transition-transform active:scale-95 cursor-pointer relative" onclick="handlePlusButtonClick()" title="Connect Bluetooth Device (ESP32-S3)">
+                <button aria-label="Connect Bluetooth Device" class="main-plus-ble-btn w-12 h-12 rounded-full bg-primary text-on-primary shadow-lg flex items-center justify-center transition-transform active:scale-95 cursor-pointer relative"
+                  onclick="handlePlusButtonClick()" title="Connect Bluetooth Device (ESP32-S3)">
                   <span class="material-symbols-outlined text-[24px] nav-center-icon">add</span>
                   <span class="nav-center-ble-badge absolute -bottom-0.5 -right-0.5 w-4 h-4 rounded-full bg-blue-600 text-white flex items-center justify-center border-2 border-white shadow-xs">
                     <span class="material-symbols-outlined text-[10px]">bluetooth</span>
@@ -1259,12 +1353,14 @@
         <!-- ========================================== -->
         <section id="screen-find" class="screen-view">
           <header class="h-14 px-margin flex items-center justify-between border-b border-surface-container/60 bg-surface/90 backdrop-blur-xl shrink-0 z-20">
-            <button aria-label="Go Back" class="w-10 h-10 -ml-1 rounded-full bg-surface-container-lowest border border-surface-container flex items-center justify-center text-on-surface transition-transform active:scale-95 shadow-sm cursor-pointer" onclick="goBack()">
+            <button aria-label="Go Back" class="w-10 h-10 -ml-1 rounded-full bg-surface-container-lowest border border-surface-container flex items-center justify-center text-on-surface transition-transform active:scale-95 shadow-sm cursor-pointer"
+              onclick="goBack()">
               <span class="material-symbols-outlined text-[20px]">arrow_back_ios_new</span>
             </button>
             <h1 class="font-headline-md text-base tracking-tight text-on-surface font-bold">Find Doctor</h1>
             <div class="flex items-center gap-1.5">
-              <button aria-label="Notifications" class="w-9 h-9 rounded-full flex items-center justify-center text-on-surface-variant hover:text-on-surface transition-colors cursor-pointer" onclick="showToast('Specialists available in your area', 'location_on')">
+              <button aria-label="Notifications" class="w-9 h-9 rounded-full flex items-center justify-center text-on-surface-variant hover:text-on-surface transition-colors cursor-pointer"
+                onclick="showToast('Specialists available in your area', 'location_on')">
                 <span class="material-symbols-outlined text-[20px]">notifications</span>
               </button>
               <div class="w-7 h-7 rounded-full bg-primary flex items-center justify-center">
@@ -1281,7 +1377,8 @@
                 <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-secondary">
                   <span class="material-symbols-outlined text-[20px]">search</span>
                 </div>
-                <input class="w-full h-12 pl-12 pr-12 bg-surface-container-lowest text-on-surface placeholder:text-secondary font-body-md text-sm rounded-full outline-none border border-surface-container focus:border-primary transition-all shadow-sm" id="doctor-search-input" placeholder="Search by specialist, condition..." type="text">
+                <input class="w-full h-12 pl-12 pr-12 bg-surface-container-lowest text-on-surface placeholder:text-secondary font-body-md text-sm rounded-full outline-none border border-surface-container focus:border-primary transition-all shadow-sm"
+                  id="doctor-search-input" placeholder="Search by specialist, condition..." type="text">
                 <button aria-label="Voice Search" class="absolute inset-y-0 right-0 pr-3.5 flex items-center text-secondary hover:text-on-surface transition-colors cursor-pointer" onclick="showToast('Listening for doctor or condition...', 'mic')">
                   <span class="material-symbols-outlined text-[20px]">mic</span>
                 </button>
@@ -1312,7 +1409,8 @@
                 <div class="doctor-listing-card bg-surface-container-lowest rounded-2xl p-4 shadow-sm border border-surface-container flex flex-col gap-3" data-doc-name="Dr. Aarav Mehta" data-doc-spec="general physician">
                   <div class="flex items-start gap-3.5">
                     <div class="relative w-20 h-20 rounded-2xl overflow-hidden bg-surface-container flex-shrink-0 shadow-sm">
-                      <img alt="Dr. Aarav Mehta" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBD89tZReyghZqRWbODJGeaNKrOMlczE-9lBfNQdATLQGbwKLO9lAlS0H_zZ1f7FsTwMO3ydZFHS5MvianKDZEO-J0LDVs5-Hx_UA4d-shCsqxMULc7IGs-Mzv8db3kroRvl345U2B0XTcHDslKjm63zXBdTHIt7XJdssyyy13JRF6cXD-fkxkhnDcNZvseGNoXVY3mbTzVxVNUVGFQPWgpb-DRSX_tNnCPvDabo6i7Dh4bQQHV_3oShw">
+                      <img alt="Dr. Aarav Mehta" class="w-full h-full object-cover"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuBD89tZReyghZqRWbODJGeaNKrOMlczE-9lBfNQdATLQGbwKLO9lAlS0H_zZ1f7FsTwMO3ydZFHS5MvianKDZEO-J0LDVs5-Hx_UA4d-shCsqxMULc7IGs-Mzv8db3kroRvl345U2B0XTcHDslKjm63zXBdTHIt7XJdssyyy13JRF6cXD-fkxkhnDcNZvseGNoXVY3mbTzVxVNUVGFQPWgpb-DRSX_tNnCPvDabo6i7Dh4bQQHV_3oShw">
                       <div class="absolute bottom-1 right-1 w-3 h-3 bg-tertiary-fixed border border-white rounded-full"></div>
                     </div>
                     <div class="flex-1 min-w-0 flex flex-col justify-between h-20 py-0.5">
@@ -1333,11 +1431,14 @@
                     </div>
                   </div>
                   <div class="flex items-center gap-2.5">
-                    <button class="flex-1 h-10 bg-primary hover:bg-primary-container active:scale-[0.98] transition-all rounded-full flex items-center justify-center gap-1.5 shadow-sm cursor-pointer" type="button" onclick="openBookingModal('Dr. Aarav Mehta', 'General Physician')">
+                    <button class="flex-1 h-10 bg-primary hover:bg-primary-container active:scale-[0.98] transition-all rounded-full flex items-center justify-center gap-1.5 shadow-sm cursor-pointer" type="button"
+                      onclick="openBookingModal('Dr. Aarav Mehta', 'General Physician')">
                       <span class="text-xs text-on-primary font-medium">Book Appointment</span>
                       <span class="material-symbols-outlined text-on-primary text-[15px]">calendar_today</span>
                     </button>
-                    <button aria-label="Share profile" class="h-10 px-3.5 rounded-full bg-surface-container-low hover:bg-surface-container text-on-surface flex items-center justify-center gap-1 font-medium text-xs transition-all active:scale-95 shrink-0 cursor-pointer" type="button" onclick="shareDoctorProfile('Dr. Aarav Mehta')">
+                    <button aria-label="Share profile"
+                      class="h-10 px-3.5 rounded-full bg-surface-container-low hover:bg-surface-container text-on-surface flex items-center justify-center gap-1 font-medium text-xs transition-all active:scale-95 shrink-0 cursor-pointer" type="button"
+                      onclick="shareDoctorProfile('Dr. Aarav Mehta')">
                       <span class="material-symbols-outlined text-[17px]">share</span>
                     </button>
                   </div>
@@ -1347,7 +1448,8 @@
                 <div class="doctor-listing-card bg-surface-container-lowest rounded-2xl p-4 shadow-sm border border-surface-container flex flex-col gap-3" data-doc-name="Dr. Rohan Kapoor" data-doc-spec="cardiologist">
                   <div class="flex items-start gap-3.5">
                     <div class="relative w-20 h-20 rounded-2xl overflow-hidden bg-surface-container flex-shrink-0 shadow-sm">
-                      <img alt="Dr. Rohan Kapoor" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB_1vHF1bWVt50kPsLNONdDT-wMhDkEnXHfL3ul5eV6C0ISjHG-0uizWrqNCZvxogUqZxAyOZF4epPTxTznMb2oziGn1rLYHjYZ_Hm4mqNx7egUJo36xwPy1U44C6DyTwFDaZIsaeVu3wAKPpbwwi7uxUww_0DRwgnL53wksf30HEM8qrcGGeMgF4W5T9I50wXah6ADMFbS34-FYeDWrVoXuDPbX_pxULOMeZ0pRswLN9c0z3BfL2RcLA">
+                      <img alt="Dr. Rohan Kapoor" class="w-full h-full object-cover"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuB_1vHF1bWVt50kPsLNONdDT-wMhDkEnXHfL3ul5eV6C0ISjHG-0uizWrqNCZvxogUqZxAyOZF4epPTxTznMb2oziGn1rLYHjYZ_Hm4mqNx7egUJo36xwPy1U44C6DyTwFDaZIsaeVu3wAKPpbwwi7uxUww_0DRwgnL53wksf30HEM8qrcGGeMgF4W5T9I50wXah6ADMFbS34-FYeDWrVoXuDPbX_pxULOMeZ0pRswLN9c0z3BfL2RcLA">
                       <div class="absolute bottom-1 right-1 w-3 h-3 bg-tertiary-fixed border border-white rounded-full"></div>
                     </div>
                     <div class="flex-1 min-w-0 flex flex-col justify-between h-20 py-0.5">
@@ -1368,11 +1470,14 @@
                     </div>
                   </div>
                   <div class="flex items-center gap-2.5">
-                    <button class="flex-1 h-10 bg-primary hover:bg-primary-container active:scale-[0.98] transition-all rounded-full flex items-center justify-center gap-1.5 shadow-sm cursor-pointer" type="button" onclick="openBookingModal('Dr. Rohan Kapoor', 'Cardiologist')">
+                    <button class="flex-1 h-10 bg-primary hover:bg-primary-container active:scale-[0.98] transition-all rounded-full flex items-center justify-center gap-1.5 shadow-sm cursor-pointer" type="button"
+                      onclick="openBookingModal('Dr. Rohan Kapoor', 'Cardiologist')">
                       <span class="text-xs text-on-primary font-medium">Book Appointment</span>
                       <span class="material-symbols-outlined text-on-primary text-[15px]">calendar_today</span>
                     </button>
-                    <button aria-label="Share profile" class="h-10 px-3.5 rounded-full bg-surface-container-low hover:bg-surface-container text-on-surface flex items-center justify-center gap-1 font-medium text-xs transition-all active:scale-95 shrink-0 cursor-pointer" type="button" onclick="shareDoctorProfile('Dr. Rohan Kapoor')">
+                    <button aria-label="Share profile"
+                      class="h-10 px-3.5 rounded-full bg-surface-container-low hover:bg-surface-container text-on-surface flex items-center justify-center gap-1 font-medium text-xs transition-all active:scale-95 shrink-0 cursor-pointer" type="button"
+                      onclick="shareDoctorProfile('Dr. Rohan Kapoor')">
                       <span class="material-symbols-outlined text-[17px]">share</span>
                     </button>
                   </div>
@@ -1395,7 +1500,8 @@
                 <span class="font-label-telemetry text-[10px] uppercase tracking-wider">CARE</span>
               </button>
               <div class="relative -top-4 flex items-center justify-center">
-                <button aria-label="Connect Bluetooth Device" class="main-plus-ble-btn w-12 h-12 rounded-full bg-primary text-on-primary shadow-lg flex items-center justify-center transition-transform active:scale-95 cursor-pointer relative" onclick="handlePlusButtonClick()" title="Connect Bluetooth Device (ESP32-S3)">
+                <button aria-label="Connect Bluetooth Device" class="main-plus-ble-btn w-12 h-12 rounded-full bg-primary text-on-primary shadow-lg flex items-center justify-center transition-transform active:scale-95 cursor-pointer relative"
+                  onclick="handlePlusButtonClick()" title="Connect Bluetooth Device (ESP32-S3)">
                   <span class="material-symbols-outlined text-[24px] nav-center-icon">add</span>
                   <span class="nav-center-ble-badge absolute -bottom-0.5 -right-0.5 w-4 h-4 rounded-full bg-blue-600 text-white flex items-center justify-center border-2 border-white shadow-xs">
                     <span class="material-symbols-outlined text-[10px]">bluetooth</span>
@@ -1443,9 +1549,11 @@
                 <!-- Avatar with Camera Badge -->
                 <div class="relative mb-2.5">
                   <div class="w-20 h-20 rounded-full overflow-hidden ring-2 ring-black/10 shadow-md cursor-pointer active:scale-95 transition-transform" onclick="openAvatarModal()" title="Change Profile Picture / Avatar">
-                    <img id="profile-display-avatar" class="w-full h-full object-cover" alt="Profile Picture" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC7oLNhZft-_5NFE_r1jeWbiYhe5D9ugz7wfXM_HqTUzvz4H9IwmLxhE94qekm-wUFfC9UOsjKGm3G3-HnS29iK_1RsLqnSDTP7diXu1tcinjvlSyuIhzPd7eRoDLVjP58-VfabynwpbfyB1EkpTwDHzOBji70n_CDiW9b1RTWsc1XuygDGX2w3n31EUdG5yBq7M6YCy3aPgQGtJqPy2aJDBbswLqVB9QmuzeBBBXa7jrur4hltT8SOOw">
+                    <img id="profile-display-avatar" class="w-full h-full object-cover" alt="Profile Picture"
+                      src="https://lh3.googleusercontent.com/aida-public/AB6AXuC7oLNhZft-_5NFE_r1jeWbiYhe5D9ugz7wfXM_HqTUzvz4H9IwmLxhE94qekm-wUFfC9UOsjKGm3G3-HnS29iK_1RsLqnSDTP7diXu1tcinjvlSyuIhzPd7eRoDLVjP58-VfabynwpbfyB1EkpTwDHzOBji70n_CDiW9b1RTWsc1XuygDGX2w3n31EUdG5yBq7M6YCy3aPgQGtJqPy2aJDBbswLqVB9QmuzeBBBXa7jrur4hltT8SOOw">
                   </div>
-                  <button type="button" aria-label="Change photo" class="absolute -bottom-1 -right-1 w-7 h-7 rounded-full bg-black text-white flex items-center justify-center shadow-md border-2 border-white cursor-pointer active:scale-90 transition-transform" onclick="openAvatarModal()">
+                  <button type="button" aria-label="Change photo"
+                    class="absolute -bottom-1 -right-1 w-7 h-7 rounded-full bg-black text-white flex items-center justify-center shadow-md border-2 border-white cursor-pointer active:scale-90 transition-transform" onclick="openAvatarModal()">
                     <span class="material-symbols-outlined text-[15px]">photo_camera</span>
                   </button>
                 </div>
@@ -1571,7 +1679,8 @@
                   <p class="text-[11px] text-white/70 leading-snug">Scan to access real-time vital history & blood type during triage.</p>
                 </div>
                 <!-- Simulated QR Code -->
-                <div class="w-16 h-16 bg-white p-1 rounded-xl shadow flex items-center justify-center shrink-0 cursor-pointer active:scale-95 transition-transform" onclick="showToast('Emergency QR scanned • Medical Passport verified', 'qr_code_scanner')" title="Tap to view QR">
+                <div class="w-16 h-16 bg-white p-1 rounded-xl shadow flex items-center justify-center shrink-0 cursor-pointer active:scale-95 transition-transform"
+                  onclick="showToast('Emergency QR scanned • Medical Passport verified', 'qr_code_scanner')" title="Tap to view QR">
                   <svg class="w-full h-full text-black" viewBox="0 0 24 24" fill="currentColor">
                     <path d="M2 2h8v8H2V2zm2 2v4h4V4H4zm-2 8h8v8H2v-8zm2 2v4h4v-4H4zm8-12h8v8h-8V2zm2 2v4h4V4h-4zm3 8h2v2h-2v-2zm-3 3h2v2h-2v-2zm3 3h2v2h-2v-2zm-3-6h2v2h-2v-2zm6 0h2v2h-2v-2zm0 3h2v5h-2v-5zm-3 3h2v2h-2v-2zm-3-3h2v2h-2v-2z"></path>
                   </svg>
@@ -1666,7 +1775,8 @@
                   <span class="px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 text-[10px] font-bold">HIPAA &amp; DISHA</span>
                 </div>
                 <p class="text-xs text-secondary leading-snug">Review your biometric telemetry rights, zero-surveillance data privacy policies, and clinical terms.</p>
-                <button type="button" class="w-full p-2.5 rounded-xl bg-surface-container-low hover:bg-surface-container border border-surface-container flex items-center justify-between transition-colors cursor-pointer group" onclick="navigateTo('screen-terms')">
+                <button type="button" class="w-full p-2.5 rounded-xl bg-surface-container-low hover:bg-surface-container border border-surface-container flex items-center justify-between transition-colors cursor-pointer group"
+                  onclick="navigateTo('screen-terms')">
                   <div class="flex items-center gap-2.5">
                     <div class="w-8 h-8 rounded-lg bg-blue-50 text-blue-700 flex items-center justify-center shrink-0">
                       <span class="material-symbols-outlined text-[18px]">verified_user</span>
@@ -1682,7 +1792,8 @@
 
               <!-- Actions: Export & Logout -->
               <div class="flex flex-col gap-2 pt-1 pb-2">
-                <button class="w-full h-11 rounded-full bg-surface-container-low hover:bg-surface-container text-on-surface text-xs font-semibold flex items-center justify-center gap-2 transition-colors cursor-pointer border border-surface-container" onclick="openClinicalReportModal()" type="button">
+                <button class="w-full h-11 rounded-full bg-surface-container-low hover:bg-surface-container text-on-surface text-xs font-semibold flex items-center justify-center gap-2 transition-colors cursor-pointer border border-surface-container"
+                  onclick="openClinicalReportModal()" type="button">
                   <span class="material-symbols-outlined text-[16px]">description</span>
                   <span>Open &amp; Download Clinical Health Report File</span>
                 </button>
@@ -1706,9 +1817,11 @@
                 <!-- Avatar with Camera Button -->
                 <div class="relative mb-2.5">
                   <div class="w-20 h-20 rounded-full overflow-hidden ring-2 ring-black/10 shadow-md cursor-pointer active:scale-95 transition-transform" onclick="openAvatarModal()" title="Change Doctor Profile Picture">
-                    <img id="doc-profile-avatar" class="w-full h-full object-cover" alt="Doctor Profile" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDIqde2zHWq5d75xmp5aVgxeVego2Sai2irnWTj-vmHBG_t27ybS25MvuSVXxfzw01o8CZPgCxM3Lxj5K9m-lgCCegetXS7QKxdc7ysjQ2UWbJLPqNL_ZRRGwCgooxO7n2G6Kyb75y4Ou8sl1XjAcIZxy_uZ4aCd6MYGz5vN_zChy0g_8047jL7xNjraXRqE7MxTw6xWd730310TSuyGxwnyPpDLqJwIRkbUnKJMpxb8Z9IB-tOdt63Ug">
+                    <img id="doc-profile-avatar" class="w-full h-full object-cover" alt="Doctor Profile"
+                      src="https://lh3.googleusercontent.com/aida-public/AB6AXuDIqde2zHWq5d75xmp5aVgxeVego2Sai2irnWTj-vmHBG_t27ybS25MvuSVXxfzw01o8CZPgCxM3Lxj5K9m-lgCCegetXS7QKxdc7ysjQ2UWbJLPqNL_ZRRGwCgooxO7n2G6Kyb75y4Ou8sl1XjAcIZxy_uZ4aCd6MYGz5vN_zChy0g_8047jL7xNjraXRqE7MxTw6xWd730310TSuyGxwnyPpDLqJwIRkbUnKJMpxb8Z9IB-tOdt63Ug">
                   </div>
-                  <button type="button" aria-label="Change photo" class="absolute -bottom-1 -right-1 w-7 h-7 rounded-full bg-black text-white flex items-center justify-center shadow-md border-2 border-white cursor-pointer active:scale-90 transition-transform" onclick="openAvatarModal()">
+                  <button type="button" aria-label="Change photo"
+                    class="absolute -bottom-1 -right-1 w-7 h-7 rounded-full bg-black text-white flex items-center justify-center shadow-md border-2 border-white cursor-pointer active:scale-90 transition-transform" onclick="openAvatarModal()">
                     <span class="material-symbols-outlined text-[15px]">photo_camera</span>
                   </button>
                 </div>
@@ -1806,7 +1919,9 @@
                   </div>
                   <label class="relative inline-flex items-center cursor-pointer">
                     <input id="doc-duty-checkbox" type="checkbox" checked class="sr-only peer" onchange="toggleDoctorDuty(this.checked)">
-                    <div class="w-10 h-5 bg-gray-300 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-primary"></div>
+                    <div
+                      class="w-10 h-5 bg-gray-300 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-primary">
+                    </div>
                   </label>
                 </div>
               </div>
@@ -1846,7 +1961,8 @@
                     </div>
                     <p class="text-[11px] text-secondary truncate mt-0.5">Stage 1 Hypertension • BP 132/86 mmHg</p>
                   </div>
-                  <button class="px-2.5 py-1 rounded-lg bg-surface-container-high text-on-surface text-[11px] font-semibold hover:bg-surface-container active:scale-95 transition-all shrink-0 cursor-pointer" onclick="openBookingModal('Maya Patel (#P-3310)', 'Stage 1 Hypertension Consultation')">
+                  <button class="px-2.5 py-1 rounded-lg bg-surface-container-high text-on-surface text-[11px] font-semibold hover:bg-surface-container active:scale-95 transition-all shrink-0 cursor-pointer"
+                    onclick="openBookingModal('Maya Patel (#P-3310)', 'Stage 1 Hypertension Consultation')">
                     Consult
                   </button>
                 </div>
@@ -1888,11 +2004,13 @@
                 </div>
 
                 <div class="grid grid-cols-2 gap-2">
-                  <button class="h-10 rounded-xl bg-surface-container-low hover:bg-surface-container text-on-surface text-xs font-semibold flex items-center justify-center gap-1.5 transition-colors cursor-pointer border border-surface-container" onclick="showToast('Tele-Clinic Room active: WebRTC HD Video & ECG stream ready', 'videocam')">
+                  <button class="h-10 rounded-xl bg-surface-container-low hover:bg-surface-container text-on-surface text-xs font-semibold flex items-center justify-center gap-1.5 transition-colors cursor-pointer border border-surface-container"
+                    onclick="showToast('Tele-Clinic Room active: WebRTC HD Video & ECG stream ready', 'videocam')">
                     <span class="material-symbols-outlined text-[16px] text-primary">videocam</span>
                     <span>Tele-Clinic Room</span>
                   </button>
-                  <button class="h-10 rounded-xl bg-surface-container-low hover:bg-surface-container text-on-surface text-xs font-semibold flex items-center justify-center gap-1.5 transition-colors cursor-pointer border border-surface-container" onclick="navigateTo('screen-doctors')">
+                  <button class="h-10 rounded-xl bg-surface-container-low hover:bg-surface-container text-on-surface text-xs font-semibold flex items-center justify-center gap-1.5 transition-colors cursor-pointer border border-surface-container"
+                    onclick="navigateTo('screen-doctors')">
                     <span class="material-symbols-outlined text-[16px] text-primary">group</span>
                     <span>Care Specialists</span>
                   </button>
@@ -1934,7 +2052,8 @@
                   </div>
                   <span class="px-2 py-0.5 rounded-full bg-blue-100 text-blue-800 text-[10px] font-bold">TELE-TRIAGE</span>
                 </div>
-                <button type="button" class="w-full p-2.5 rounded-xl bg-surface-container-low hover:bg-surface-container border border-surface-container flex items-center justify-between transition-colors cursor-pointer group" onclick="navigateTo('screen-terms')">
+                <button type="button" class="w-full p-2.5 rounded-xl bg-surface-container-low hover:bg-surface-container border border-surface-container flex items-center justify-between transition-colors cursor-pointer group"
+                  onclick="navigateTo('screen-terms')">
                   <div class="flex items-center gap-2.5">
                     <div class="w-8 h-8 rounded-lg bg-emerald-50 text-emerald-700 flex items-center justify-center shrink-0">
                       <span class="material-symbols-outlined text-[18px]">policy</span>
@@ -1950,7 +2069,8 @@
 
               <!-- Doctor Actions: Export Consultation Logs & Sign Out -->
               <div class="flex flex-col gap-2 pt-1 pb-2">
-                <button class="w-full h-11 rounded-full bg-surface-container-low hover:bg-surface-container text-on-surface text-xs font-semibold flex items-center justify-center gap-2 transition-colors cursor-pointer border border-surface-container" onclick="exportClinicalLogs()" type="button">
+                <button class="w-full h-11 rounded-full bg-surface-container-low hover:bg-surface-container text-on-surface text-xs font-semibold flex items-center justify-center gap-2 transition-colors cursor-pointer border border-surface-container"
+                  onclick="exportClinicalLogs()" type="button">
                   <span class="material-symbols-outlined text-[16px]">print</span>
                   <span>Export Clinical Consultation Logs (PDF)</span>
                 </button>
@@ -1975,7 +2095,8 @@
                 <span class="font-label-telemetry text-[10px] uppercase tracking-wider">CARE</span>
               </button>
               <div class="relative -top-4 flex items-center justify-center">
-                <button aria-label="Connect Bluetooth Device" class="main-plus-ble-btn w-12 h-12 rounded-full bg-primary text-on-primary shadow-lg flex items-center justify-center transition-transform active:scale-95 cursor-pointer relative" onclick="handlePlusButtonClick()" title="Connect Bluetooth Device (ESP32-S3)">
+                <button aria-label="Connect Bluetooth Device" class="main-plus-ble-btn w-12 h-12 rounded-full bg-primary text-on-primary shadow-lg flex items-center justify-center transition-transform active:scale-95 cursor-pointer relative"
+                  onclick="handlePlusButtonClick()" title="Connect Bluetooth Device (ESP32-S3)">
                   <span class="material-symbols-outlined text-[24px] nav-center-icon">add</span>
                   <span class="nav-center-ble-badge absolute -bottom-0.5 -right-0.5 w-4 h-4 rounded-full bg-blue-600 text-white flex items-center justify-center border-2 border-white shadow-xs">
                     <span class="material-symbols-outlined text-[10px]">bluetooth</span>
@@ -2004,7 +2125,8 @@
               <span class="material-symbols-outlined text-[20px]">arrow_back</span>
             </button>
             <h1 class="font-title-sm text-base text-on-surface font-bold tracking-tight">Health Graphs &amp; Analytics</h1>
-            <button aria-label="Export Clinical Report" class="header-action-pill flex items-center justify-center gap-1 bg-black hover:bg-gray-800 text-white text-xs font-semibold active:scale-95 transition-all cursor-pointer shadow-xs" onclick="openClinicalReportModal()" title="View and Download Clinical Report File">
+            <button aria-label="Export Clinical Report" class="header-action-pill flex items-center justify-center gap-1 bg-black hover:bg-gray-800 text-white text-xs font-semibold active:scale-95 transition-all cursor-pointer shadow-xs"
+              onclick="openClinicalReportModal()" title="View and Download Clinical Report File">
               <span class="material-symbols-outlined text-[15px]">description</span>
               <span class="font-label-telemetry text-[10px] tracking-tight">Report</span>
             </button>
@@ -2061,23 +2183,23 @@
                   <svg id="svg-graph-hr" class="w-full h-28 overflow-visible" fill="none" preserveAspectRatio="none" viewBox="0 0 340 100">
                     <defs>
                       <linearGradient id="hrGrad" x1="0" y1="0" x2="0" y2="1">
-                        <stop offset="0%" stop-color="#ef4444" stop-opacity="0.5"/>
-                        <stop offset="100%" stop-color="#ef4444" stop-opacity="0.0"/>
+                        <stop offset="0%" stop-color="#ef4444" stop-opacity="0.5" />
+                        <stop offset="100%" stop-color="#ef4444" stop-opacity="0.0" />
                       </linearGradient>
                     </defs>
                     <!-- Grid guidelines -->
-                    <line x1="0" y1="20" x2="340" y2="20" stroke="#334155" stroke-dasharray="3 3" stroke-width="0.8"/>
-                    <line x1="0" y1="50" x2="340" y2="50" stroke="#334155" stroke-dasharray="3 3" stroke-width="0.8"/>
-                    <line x1="0" y1="80" x2="340" y2="80" stroke="#334155" stroke-dasharray="3 3" stroke-width="0.8"/>
+                    <line x1="0" y1="20" x2="340" y2="20" stroke="#334155" stroke-dasharray="3 3" stroke-width="0.8" />
+                    <line x1="0" y1="50" x2="340" y2="50" stroke="#334155" stroke-dasharray="3 3" stroke-width="0.8" />
+                    <line x1="0" y1="80" x2="340" y2="80" stroke="#334155" stroke-dasharray="3 3" stroke-width="0.8" />
                     <!-- Area under curve -->
-                    <path id="path-hr-area" d="M0,65 C30,68 60,74 90,70 C120,66 140,48 170,42 C200,38 230,52 260,46 C290,40 310,25 340,32 L340,100 L0,100 Z" fill="url(#hrGrad)"/>
+                    <path id="path-hr-area" d="M0,65 C30,68 60,74 90,70 C120,66 140,48 170,42 C200,38 230,52 260,46 C290,40 310,25 340,32 L340,100 L0,100 Z" fill="url(#hrGrad)" />
                     <!-- Line path -->
-                    <path id="path-hr-line" d="M0,65 C30,68 60,74 90,70 C120,66 140,48 170,42 C200,38 230,52 260,46 C290,40 310,25 340,32" stroke="#ef4444" stroke-width="2.5" stroke-linecap="round"/>
+                    <path id="path-hr-line" d="M0,65 C30,68 60,74 90,70 C120,66 140,48 170,42 C200,38 230,52 260,46 C290,40 310,25 340,32" stroke="#ef4444" stroke-width="2.5" stroke-linecap="round" />
                     <!-- Peak point -->
-                    <circle id="dot-hr-peak" cx="310" cy="25" r="4.5" fill="#f87171" stroke="#ffffff" stroke-width="1.5"/>
+                    <circle id="dot-hr-peak" cx="310" cy="25" r="4.5" fill="#f87171" stroke="#ffffff" stroke-width="1.5" />
                     <text id="text-hr-peak" x="305" y="16" fill="#f87171" font-size="9" font-weight="700" text-anchor="middle">Peak 94</text>
                     <!-- Resting nadir point -->
-                    <circle id="dot-hr-nadir" cx="60" cy="74" r="3.5" fill="#94a3b8" stroke="#ffffff" stroke-width="1"/>
+                    <circle id="dot-hr-nadir" cx="60" cy="74" r="3.5" fill="#94a3b8" stroke="#ffffff" stroke-width="1" />
                     <text id="text-hr-nadir" x="60" y="88" fill="#cbd5e1" font-size="8" font-weight="600" text-anchor="middle">Min 58</text>
                   </svg>
 
@@ -2150,20 +2272,20 @@
                   <svg id="svg-graph-spo2" class="w-full h-24 overflow-visible" fill="none" preserveAspectRatio="none" viewBox="0 0 340 100">
                     <defs>
                       <linearGradient id="spo2Grad" x1="0" y1="0" x2="0" y2="1">
-                        <stop offset="0%" stop-color="#38bdf8" stop-opacity="0.5"/>
-                        <stop offset="100%" stop-color="#38bdf8" stop-opacity="0.0"/>
+                        <stop offset="0%" stop-color="#38bdf8" stop-opacity="0.5" />
+                        <stop offset="100%" stop-color="#38bdf8" stop-opacity="0.0" />
                       </linearGradient>
                     </defs>
                     <!-- Shaded normal medical band 95-100% -->
-                    <rect x="0" y="10" width="340" height="70" fill="rgba(56, 189, 248, 0.08)"/>
-                    <line x1="0" y1="10" x2="340" y2="10" stroke="#0284c7" stroke-dasharray="2 2" stroke-width="0.8"/>
-                    <line x1="0" y1="80" x2="340" y2="80" stroke="#0284c7" stroke-dasharray="2 2" stroke-width="0.8"/>
+                    <rect x="0" y="10" width="340" height="70" fill="rgba(56, 189, 248, 0.08)" />
+                    <line x1="0" y1="10" x2="340" y2="10" stroke="#0284c7" stroke-dasharray="2 2" stroke-width="0.8" />
+                    <line x1="0" y1="80" x2="340" y2="80" stroke="#0284c7" stroke-dasharray="2 2" stroke-width="0.8" />
                     <text x="5" y="20" fill="#38bdf8" font-size="8" font-weight="600">100%</text>
                     <text x="5" y="78" fill="#38bdf8" font-size="8" font-weight="600">95% (Threshold)</text>
                     <!-- Oxygen Saturation Line -->
-                    <path id="path-spo2-area" d="M0,32 C40,30 70,42 100,40 C140,38 180,26 220,30 C260,34 300,28 340,30 L340,100 L0,100 Z" fill="url(#spo2Grad)"/>
-                    <path id="path-spo2-line" d="M0,32 C40,30 70,42 100,40 C140,38 180,26 220,30 C260,34 300,28 340,30" stroke="#38bdf8" stroke-width="2.2" stroke-linecap="round"/>
-                    <circle cx="220" cy="30" r="3.5" fill="#38bdf8" stroke="#ffffff" stroke-width="1"/>
+                    <path id="path-spo2-area" d="M0,32 C40,30 70,42 100,40 C140,38 180,26 220,30 C260,34 300,28 340,30 L340,100 L0,100 Z" fill="url(#spo2Grad)" />
+                    <path id="path-spo2-line" d="M0,32 C40,30 70,42 100,40 C140,38 180,26 220,30 C260,34 300,28 340,30" stroke="#38bdf8" stroke-width="2.2" stroke-linecap="round" />
+                    <circle cx="220" cy="30" r="3.5" fill="#38bdf8" stroke="#ffffff" stroke-width="1" />
                   </svg>
 
                   <div id="graph-spo2-axis" class="flex justify-between items-center text-[9px] font-mono text-gray-400 pt-1 border-t border-slate-800">
@@ -2225,18 +2347,18 @@
                   <svg id="svg-graph-posture" class="w-full h-24 overflow-visible" fill="none" preserveAspectRatio="none" viewBox="0 0 340 100">
                     <defs>
                       <linearGradient id="postureGrad" x1="0" y1="0" x2="0" y2="1">
-                        <stop offset="0%" stop-color="#a855f7" stop-opacity="0.4"/>
-                        <stop offset="100%" stop-color="#a855f7" stop-opacity="0.0"/>
+                        <stop offset="0%" stop-color="#a855f7" stop-opacity="0.4" />
+                        <stop offset="100%" stop-color="#a855f7" stop-opacity="0.0" />
                       </linearGradient>
                     </defs>
                     <!-- Slouch Threshold Line (> 15 deg) -->
-                    <line x1="0" y1="35" x2="340" y2="35" stroke="#ef4444" stroke-dasharray="3 3" stroke-width="1"/>
+                    <line x1="0" y1="35" x2="340" y2="35" stroke="#ef4444" stroke-dasharray="3 3" stroke-width="1" />
                     <text x="5" y="30" fill="#f87171" font-size="8" font-weight="600">15° Slouch Trigger Line</text>
                     <!-- Angle curve -->
-                    <path id="path-posture-area" d="M0,85 C40,82 70,88 100,75 C130,62 160,30 190,78 C220,82 250,85 280,80 C310,75 330,85 340,88 L340,100 L0,100 Z" fill="url(#postureGrad)"/>
-                    <path id="path-posture-line" d="M0,85 C40,82 70,88 100,75 C130,62 160,30 190,78 C220,82 250,85 280,80 C310,75 330,85 340,88" stroke="#a855f7" stroke-width="2.2" stroke-linecap="round"/>
+                    <path id="path-posture-area" d="M0,85 C40,82 70,88 100,75 C130,62 160,30 190,78 C220,82 250,85 280,80 C310,75 330,85 340,88 L340,100 L0,100 Z" fill="url(#postureGrad)" />
+                    <path id="path-posture-line" d="M0,85 C40,82 70,88 100,75 C130,62 160,30 190,78 C220,82 250,85 280,80 C310,75 330,85 340,88" stroke="#a855f7" stroke-width="2.2" stroke-linecap="round" />
                     <!-- Slouch Alert Event Marker -->
-                    <circle cx="160" cy="30" r="4.5" fill="#ef4444" stroke="#ffffff" stroke-width="1.5"/>
+                    <circle cx="160" cy="30" r="4.5" fill="#ef4444" stroke="#ffffff" stroke-width="1.5" />
                     <text x="160" y="20" fill="#f87171" font-size="8" font-weight="700" text-anchor="middle">Slouch 16°</text>
                   </svg>
 
@@ -2339,15 +2461,15 @@
                   <svg id="svg-graph-temp" class="w-full h-20 overflow-visible" fill="none" preserveAspectRatio="none" viewBox="0 0 340 100">
                     <defs>
                       <linearGradient id="tempGrad" x1="0" y1="0" x2="0" y2="1">
-                        <stop offset="0%" stop-color="#f59e0b" stop-opacity="0.4"/>
-                        <stop offset="100%" stop-color="#f59e0b" stop-opacity="0.0"/>
+                        <stop offset="0%" stop-color="#f59e0b" stop-opacity="0.4" />
+                        <stop offset="100%" stop-color="#f59e0b" stop-opacity="0.0" />
                       </linearGradient>
                     </defs>
-                    <line x1="0" y1="20" x2="340" y2="20" stroke="#f59e0b" stroke-dasharray="2 2" stroke-width="0.7"/>
-                    <line x1="0" y1="80" x2="340" y2="80" stroke="#f59e0b" stroke-dasharray="2 2" stroke-width="0.7"/>
-                    <path id="path-temp-area" d="M0,70 C40,78 90,82 140,65 C190,50 240,35 290,45 C320,52 335,48 340,46 L340,100 L0,100 Z" fill="url(#tempGrad)"/>
-                    <path id="path-temp-line" d="M0,70 C40,78 90,82 140,65 C190,50 240,35 290,45 C320,52 335,48 340,46" stroke="#f59e0b" stroke-width="2.2" stroke-linecap="round"/>
-                    <circle cx="290" cy="45" r="3.5" fill="#f59e0b" stroke="#ffffff" stroke-width="1"/>
+                    <line x1="0" y1="20" x2="340" y2="20" stroke="#f59e0b" stroke-dasharray="2 2" stroke-width="0.7" />
+                    <line x1="0" y1="80" x2="340" y2="80" stroke="#f59e0b" stroke-dasharray="2 2" stroke-width="0.7" />
+                    <path id="path-temp-area" d="M0,70 C40,78 90,82 140,65 C190,50 240,35 290,45 C320,52 335,48 340,46 L340,100 L0,100 Z" fill="url(#tempGrad)" />
+                    <path id="path-temp-line" d="M0,70 C40,78 90,82 140,65 C190,50 240,35 290,45 C320,52 335,48 340,46" stroke="#f59e0b" stroke-width="2.2" stroke-linecap="round" />
+                    <circle cx="290" cy="45" r="3.5" fill="#f59e0b" stroke="#ffffff" stroke-width="1" />
                   </svg>
                   <div id="graph-temp-axis" class="flex justify-between items-center text-[9px] font-mono text-gray-400 pt-1 border-t border-slate-800">
                     <span>00:00 (36.3°C)</span>
@@ -2373,11 +2495,13 @@
                 </div>
 
                 <div class="grid grid-cols-2 gap-2 pt-1">
-                  <button type="button" class="bg-white hover:bg-gray-100 text-black font-bold text-xs py-2.5 px-3 rounded-xl flex items-center justify-center gap-1.5 active:scale-98 transition-all cursor-pointer shadow-xs" onclick="openClinicalReportModal()">
+                  <button type="button" class="bg-white hover:bg-gray-100 text-black font-bold text-xs py-2.5 px-3 rounded-xl flex items-center justify-center gap-1.5 active:scale-98 transition-all cursor-pointer shadow-xs"
+                    onclick="openClinicalReportModal()">
                     <span class="material-symbols-outlined text-[16px]">visibility</span>
                     <span>Preview Report</span>
                   </button>
-                  <button type="button" class="bg-cyan-400 hover:bg-cyan-300 text-slate-950 font-bold text-xs py-2.5 px-3 rounded-xl flex items-center justify-center gap-1.5 active:scale-98 transition-all cursor-pointer shadow-xs" onclick="exportHealthReport()">
+                  <button type="button" class="bg-cyan-400 hover:bg-cyan-300 text-slate-950 font-bold text-xs py-2.5 px-3 rounded-xl flex items-center justify-center gap-1.5 active:scale-98 transition-all cursor-pointer shadow-xs"
+                    onclick="exportHealthReport()">
                     <span class="material-symbols-outlined text-[16px]">download</span>
                     <span>Download File</span>
                   </button>
@@ -2399,7 +2523,8 @@
                 <span class="font-label-telemetry text-[10px] uppercase tracking-wider">CARE</span>
               </button>
               <div class="relative -top-4 flex items-center justify-center">
-                <button aria-label="Connect Bluetooth Device" class="main-plus-ble-btn w-12 h-12 rounded-full bg-primary text-on-primary shadow-lg flex items-center justify-center transition-transform active:scale-95 cursor-pointer relative" onclick="handlePlusButtonClick()" title="Connect Bluetooth Device (ESP32-S3)">
+                <button aria-label="Connect Bluetooth Device" class="main-plus-ble-btn w-12 h-12 rounded-full bg-primary text-on-primary shadow-lg flex items-center justify-center transition-transform active:scale-95 cursor-pointer relative"
+                  onclick="handlePlusButtonClick()" title="Connect Bluetooth Device (ESP32-S3)">
                   <span class="material-symbols-outlined text-[24px] nav-center-icon">add</span>
                   <span class="nav-center-ble-badge absolute -bottom-0.5 -right-0.5 w-4 h-4 rounded-full bg-blue-600 text-white flex items-center justify-center border-2 border-white shadow-xs">
                     <span class="material-symbols-outlined text-[10px]">bluetooth</span>
@@ -2427,14 +2552,15 @@
               <span class="material-symbols-outlined text-[22px]">chevron_left</span>
             </button>
             <h1 class="font-semibold text-base tracking-tight text-on-surface">Terms &amp; Policy</h1>
-            <button aria-label="Download legal document" class="w-9 h-9 rounded-full flex items-center justify-center text-on-surface hover:bg-surface-container transition-colors active:scale-95 cursor-pointer" onclick="downloadLegalPolicy()" title="Download Terms & Privacy Policy (TXT)">
+            <button aria-label="Download legal document" class="w-9 h-9 rounded-full flex items-center justify-center text-on-surface hover:bg-surface-container transition-colors active:scale-95 cursor-pointer" onclick="downloadLegalPolicy()"
+              title="Download Terms & Privacy Policy (TXT)">
               <span class="material-symbols-outlined text-[20px]">download</span>
             </button>
           </header>
 
           <div class="screen-scroll-area px-4 pt-3 pb-6">
             <div class="flex flex-col gap-3.5 max-w-xl mx-auto">
-              
+
               <!-- Hero Legal Status Card -->
               <div class="bg-gradient-to-br from-white to-slate-50/80 rounded-2xl p-4 shadow-sm border border-slate-200/80 flex flex-col gap-3 relative overflow-hidden">
                 <div class="absolute -top-10 -right-10 w-28 h-28 bg-blue-100/40 rounded-full blur-2xl pointer-events-none"></div>
@@ -2481,16 +2607,22 @@
 
               <!-- Segmented Navigation Tabs -->
               <div class="w-full bg-slate-100 p-1 rounded-full flex items-center gap-1 shadow-sm overflow-x-auto" id="terms-tabs-bar" role="tablist">
-                <button aria-selected="true" class="terms-tab-btn flex-1 py-1.5 px-2.5 rounded-full text-[11px] font-semibold text-center whitespace-nowrap transition-all bg-black text-white shadow-sm cursor-pointer" data-terms-tab="terms" role="tab" type="button" onclick="switchTermsTab('terms')">Terms of Service</button>
-                <button aria-selected="false" class="terms-tab-btn flex-1 py-1.5 px-2.5 rounded-full text-[11px] font-semibold text-center whitespace-nowrap transition-all text-slate-600 hover:text-black hover:bg-white/50 cursor-pointer" data-terms-tab="privacy" role="tab" type="button" onclick="switchTermsTab('privacy')">Privacy Policy</button>
-                <button aria-selected="false" class="terms-tab-btn flex-1 py-1.5 px-2.5 rounded-full text-[11px] font-semibold text-center whitespace-nowrap transition-all text-slate-600 hover:text-black hover:bg-white/50 cursor-pointer" data-terms-tab="disclaimer" role="tab" type="button" onclick="switchTermsTab('disclaimer')">Clinical Disclaimer</button>
-                <button aria-selected="false" class="terms-tab-btn flex-1 py-1.5 px-2.5 rounded-full text-[11px] font-semibold text-center whitespace-nowrap transition-all text-slate-600 hover:text-black hover:bg-white/50 cursor-pointer" data-terms-tab="rights" role="tab" type="button" onclick="switchTermsTab('rights')">Your Rights</button>
+                <button aria-selected="true" class="terms-tab-btn flex-1 py-1.5 px-2.5 rounded-full text-[11px] font-semibold text-center whitespace-nowrap transition-all bg-black text-white shadow-sm cursor-pointer" data-terms-tab="terms" role="tab"
+                  type="button" onclick="switchTermsTab('terms')">Terms of Service</button>
+                <button aria-selected="false" class="terms-tab-btn flex-1 py-1.5 px-2.5 rounded-full text-[11px] font-semibold text-center whitespace-nowrap transition-all text-slate-600 hover:text-black hover:bg-white/50 cursor-pointer"
+                  data-terms-tab="privacy" role="tab" type="button" onclick="switchTermsTab('privacy')">Privacy Policy</button>
+                <button aria-selected="false" class="terms-tab-btn flex-1 py-1.5 px-2.5 rounded-full text-[11px] font-semibold text-center whitespace-nowrap transition-all text-slate-600 hover:text-black hover:bg-white/50 cursor-pointer"
+                  data-terms-tab="disclaimer" role="tab" type="button" onclick="switchTermsTab('disclaimer')">Clinical Disclaimer</button>
+                <button aria-selected="false" class="terms-tab-btn flex-1 py-1.5 px-2.5 rounded-full text-[11px] font-semibold text-center whitespace-nowrap transition-all text-slate-600 hover:text-black hover:bg-white/50 cursor-pointer"
+                  data-terms-tab="rights" role="tab" type="button" onclick="switchTermsTab('rights')">Your Rights</button>
               </div>
 
               <!-- Real-time Filter Search Input -->
               <div class="relative flex items-center">
                 <span class="material-symbols-outlined absolute left-3 text-slate-400 text-[18px] pointer-events-none">search</span>
-                <input id="terms-search-input" class="w-full bg-white text-slate-900 placeholder:text-slate-400 rounded-xl pl-9 pr-8 py-2 text-xs font-medium outline-none border border-slate-200 focus:border-black/30 focus:ring-2 focus:ring-black/5 transition-all shadow-2xs" placeholder="Search clauses, privacy terms, or data policies..." type="text" oninput="filterTermsContent(this.value)">
+                <input id="terms-search-input"
+                  class="w-full bg-white text-slate-900 placeholder:text-slate-400 rounded-xl pl-9 pr-8 py-2 text-xs font-medium outline-none border border-slate-200 focus:border-black/30 focus:ring-2 focus:ring-black/5 transition-all shadow-2xs"
+                  placeholder="Search clauses, privacy terms, or data policies..." type="text" oninput="filterTermsContent(this.value)">
                 <button type="button" class="absolute right-2.5 text-slate-400 hover:text-slate-600 text-xs cursor-pointer" onclick="document.getElementById('terms-search-input').value=''; filterTermsContent('');" title="Clear search">
                   <span class="material-symbols-outlined text-[16px]">close</span>
                 </button>
@@ -2500,7 +2632,7 @@
               <!-- PANEL 1: TERMS OF SERVICE                     -->
               <!-- ============================================== -->
               <div id="terms-panel-terms" class="terms-panel flex flex-col gap-3">
-                
+
                 <!-- Clause 1 -->
                 <article class="terms-clause-card bg-white rounded-2xl p-4 shadow-sm border border-slate-100 flex flex-col gap-2">
                   <div class="flex items-center gap-2">
@@ -2508,7 +2640,8 @@
                     <h3 class="text-sm font-bold text-slate-900 tracking-tight">Acceptance &amp; Companion Scope</h3>
                   </div>
                   <p class="text-xs text-slate-600 leading-relaxed">
-                    By downloading, accessing, or syncing hardware sensors with P+ Pro ("Service"), you agree to these Terms of Service. P+ Pro functions as a personal physiological telemetry companion, posture rehabilitation assistant, and doctor consultation coordinator.
+                    By downloading, accessing, or syncing hardware sensors with P+ Pro ("Service"), you agree to these Terms of Service. P+ Pro functions as a personal physiological telemetry companion, posture rehabilitation assistant, and doctor
+                    consultation coordinator.
                   </p>
                   <div class="p-2.5 rounded-xl bg-slate-50 border border-slate-100 text-[11px] text-slate-500 flex items-center gap-2">
                     <span class="material-symbols-outlined text-slate-400 text-[16px] shrink-0">info</span>
@@ -2526,7 +2659,8 @@
                     <span class="px-2 py-0.5 rounded-full bg-amber-100 text-amber-800 text-[10px] font-bold uppercase">CRITICAL</span>
                   </div>
                   <p class="text-xs text-slate-700 leading-relaxed font-medium">
-                    P+ Pro does NOT replace 108 / 911 emergency services, paramedic dispatch, or intensive hospital telemetry units. In severe trauma, acute cardiac arrest, or loss of consciousness, you or your caregiver must contact local emergency medical dispatch immediately.
+                    P+ Pro does NOT replace 108 / 911 emergency services, paramedic dispatch, or intensive hospital telemetry units. In severe trauma, acute cardiac arrest, or loss of consciousness, you or your caregiver must contact local emergency
+                    medical dispatch immediately.
                   </p>
                   <div class="p-2.5 rounded-xl bg-amber-50/80 border border-amber-200 text-[11px] text-amber-900 flex items-center justify-between">
                     <span>Emergency Ambulance Hotline</span>
@@ -2544,7 +2678,8 @@
                     <h3 class="text-sm font-bold text-slate-900 tracking-tight">Wearable Sensor Pairing &amp; Calibration</h3>
                   </div>
                   <p class="text-xs text-slate-600 leading-relaxed">
-                    Wearable sensors (ESP32-S3 band, PPG pulse oximetry, spine posture IMU insole) require clean skin contact, appropriate calibration, and stable Bluetooth Low Energy (BLE) connectivity. Readings may vary during vigorous motion, sweating, or misplacement. Users agree to calibrate baseline angles per instructions.
+                    Wearable sensors (ESP32-S3 band, PPG pulse oximetry, spine posture IMU insole) require clean skin contact, appropriate calibration, and stable Bluetooth Low Energy (BLE) connectivity. Readings may vary during vigorous motion,
+                    sweating, or misplacement. Users agree to calibrate baseline angles per instructions.
                   </p>
                 </article>
 
@@ -2555,7 +2690,8 @@
                     <h3 class="text-sm font-bold text-slate-900 tracking-tight">Clinical Consultations &amp; Tele-Triage</h3>
                   </div>
                   <p class="text-xs text-slate-600 leading-relaxed">
-                    Telehealth appointments booked with verified Care Specialists (Cardiologists, Orthopedics, Physicians) represent professional guidance based on reported vitals. Digital prescriptions feature RSA-2048 cryptographic signatures from certified practitioners.
+                    Telehealth appointments booked with verified Care Specialists (Cardiologists, Orthopedics, Physicians) represent professional guidance based on reported vitals. Digital prescriptions feature RSA-2048 cryptographic signatures from
+                    certified practitioners.
                   </p>
                 </article>
 
@@ -2575,7 +2711,7 @@
               <!-- PANEL 2: PRIVACY POLICY                        -->
               <!-- ============================================== -->
               <div id="terms-panel-privacy" class="terms-panel flex flex-col gap-3 hidden">
-                
+
                 <!-- Privacy Guarantee Banner -->
                 <article class="terms-clause-card bg-emerald-500/10 rounded-2xl p-4 border border-emerald-500/20 flex flex-col gap-2">
                   <div class="flex items-center gap-2 text-emerald-800">
@@ -2616,7 +2752,8 @@
                     <h3 class="text-sm font-bold text-slate-900 tracking-tight">2. Local-First Storage &amp; Encryption</h3>
                   </div>
                   <p class="text-xs text-slate-600 leading-relaxed">
-                    By default, vitals are stored on your local device repository. When synchronized with the clinical backend, all communications are secured with <strong>TLS 1.3</strong> transport encryption, and local data stores are safeguarded with <strong>AES-256</strong> cryptographic protection.
+                    By default, vitals are stored on your local device repository. When synchronized with the clinical backend, all communications are secured with <strong>TLS 1.3</strong> transport encryption, and local data stores are safeguarded
+                    with <strong>AES-256</strong> cryptographic protection.
                   </p>
                 </article>
 
@@ -2627,7 +2764,8 @@
                     <h3 class="text-sm font-bold text-slate-900 tracking-tight">3. Selective Doctor Sharing</h3>
                   </div>
                   <p class="text-xs text-slate-600 leading-relaxed">
-                    Your real-time vitals and diagnostic summaries are shared strictly with medical doctors that you have booked or explicitly authorized in your Care Team. You may revoke a doctor's telemetry viewing permission at any moment from your Profile.
+                    Your real-time vitals and diagnostic summaries are shared strictly with medical doctors that you have booked or explicitly authorized in your Care Team. You may revoke a doctor's telemetry viewing permission at any moment from
+                    your Profile.
                   </p>
                 </article>
 
@@ -2647,7 +2785,7 @@
               <!-- PANEL 3: CLINICAL & AI DISCLAIMERS            -->
               <!-- ============================================== -->
               <div id="terms-panel-disclaimer" class="terms-panel flex flex-col gap-3 hidden">
-                
+
                 <!-- Disclaimer 1 -->
                 <article class="terms-clause-card bg-white rounded-2xl p-4 shadow-sm border border-slate-100 flex flex-col gap-2">
                   <div class="flex items-center gap-2">
@@ -2655,7 +2793,8 @@
                     <h3 class="text-sm font-bold text-slate-900 tracking-tight">AI Early Warning Algorithms</h3>
                   </div>
                   <p class="text-xs text-slate-600 leading-relaxed">
-                    P+ Pro incorporates machine-learning triage algorithms (e.g. Arrhythmia Risk index, Posture Ergonomic Slouch scores, Heat Vulnerability warnings). These predictive flags are probabilistic triage heuristics intended to prompt proactive clinical discussion, not conclusive diagnostic pathology findings.
+                    P+ Pro incorporates machine-learning triage algorithms (e.g. Arrhythmia Risk index, Posture Ergonomic Slouch scores, Heat Vulnerability warnings). These predictive flags are probabilistic triage heuristics intended to prompt
+                    proactive clinical discussion, not conclusive diagnostic pathology findings.
                   </p>
                 </article>
 
@@ -2666,7 +2805,8 @@
                     <h3 class="text-sm font-bold text-slate-900 tracking-tight">Environmental &amp; Motion Artifacts</h3>
                   </div>
                   <p class="text-xs text-slate-600 leading-relaxed">
-                    PPG optical heart rate and SpO₂ readings may occasionally be skewed by motion artifacts, excessive ambient light, cold extremity vasoconstriction, or loose band tension. Always verify unexpected vitals with a standard clinical sphygmomanometer / pulse oximeter.
+                    PPG optical heart rate and SpO₂ readings may occasionally be skewed by motion artifacts, excessive ambient light, cold extremity vasoconstriction, or loose band tension. Always verify unexpected vitals with a standard clinical
+                    sphygmomanometer / pulse oximeter.
                   </p>
                 </article>
 
@@ -2686,7 +2826,7 @@
               <!-- PANEL 4: YOUR DATA RIGHTS (GDPR / DISHA)      -->
               <!-- ============================================== -->
               <div id="terms-panel-rights" class="terms-panel flex flex-col gap-3 hidden">
-                
+
                 <article class="terms-clause-card bg-white rounded-2xl p-4 shadow-sm border border-slate-100 flex flex-col gap-3">
                   <div class="flex items-center gap-2">
                     <span class="material-symbols-outlined text-emerald-600 text-[20px]">gavel</span>
@@ -2744,7 +2884,8 @@
                     <span class="material-symbols-outlined text-[16px]">description</span>
                     <span>Download Copy</span>
                   </button>
-                  <button type="button" class="h-10 rounded-xl bg-black hover:bg-neutral-800 text-white text-xs font-semibold flex items-center justify-center gap-1.5 transition-all active:scale-98 shadow-sm cursor-pointer" onclick="acceptTermsAndPolicy()">
+                  <button type="button" class="h-10 rounded-xl bg-black hover:bg-neutral-800 text-white text-xs font-semibold flex items-center justify-center gap-1.5 transition-all active:scale-98 shadow-sm cursor-pointer"
+                    onclick="acceptTermsAndPolicy()">
                     <span class="material-symbols-outlined text-[16px]">check_circle</span>
                     <span>Acknowledge &amp; Accept</span>
                   </button>
@@ -2779,7 +2920,8 @@
                 <p class="text-[11px] text-gray-500">Read &amp; Export Validated Medical Dossier</p>
               </div>
             </div>
-            <button type="button" class="w-7 h-7 rounded-full bg-gray-100 hover:bg-gray-200 flex items-center justify-center text-gray-500 hover:text-black cursor-pointer transition-colors" onclick="closeClinicalReportModal()" aria-label="Close Clinical Report">
+            <button type="button" class="w-7 h-7 rounded-full bg-gray-100 hover:bg-gray-200 flex items-center justify-center text-gray-500 hover:text-black cursor-pointer transition-colors" onclick="closeClinicalReportModal()"
+              aria-label="Close Clinical Report">
               <span class="material-symbols-outlined text-[16px]">close</span>
             </button>
           </div>
@@ -2871,9 +3013,9 @@
                 <span class="text-gray-400">Peak 94 BPM • Min 58 BPM</span>
               </div>
               <svg class="w-full h-14" fill="none" preserveAspectRatio="none" viewBox="0 0 300 50">
-                <path d="M0,35 C30,38 60,42 90,40 C120,38 140,25 170,22 C200,20 230,30 260,26 C280,22 290,14 300,16" stroke="#38bdf8" stroke-width="2" stroke-linecap="round"/>
-                <path d="M0,35 C30,38 60,42 90,40 C120,38 140,25 170,22 C200,20 230,30 260,26 C280,22 290,14 300,16 L300,50 L0,50 Z" fill="rgba(56, 189, 248, 0.15)"/>
-                <circle cx="290" cy="14" r="3" fill="#38bdf8"/>
+                <path d="M0,35 C30,38 60,42 90,40 C120,38 140,25 170,22 C200,20 230,30 260,26 C280,22 290,14 300,16" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" />
+                <path d="M0,35 C30,38 60,42 90,40 C120,38 140,25 170,22 C200,20 230,30 260,26 C280,22 290,14 300,16 L300,50 L0,50 Z" fill="rgba(56, 189, 248, 0.15)" />
+                <circle cx="290" cy="14" r="3" fill="#38bdf8" />
               </svg>
             </div>
 
@@ -2881,7 +3023,8 @@
             <div class="bg-gray-50 rounded-2xl p-3 border border-gray-200/70 space-y-1.5">
               <span class="font-bold text-gray-900 uppercase text-[10px] tracking-wider">4. Posture Compliance</span>
               <p class="text-[11px] text-gray-700 leading-snug">
-                Patient maintains <strong>84% upright ergonomic posture</strong> across daily telemetry logs. Total upright adherence: <strong>5h 42m today</strong>. Slouch alert frequency is minimal (2 corrected events). Hardware threshold active at 15°.
+                Patient maintains <strong>84% upright ergonomic posture</strong> across daily telemetry logs. Total upright adherence: <strong>5h 42m today</strong>. Slouch alert frequency is minimal (2 corrected events). Hardware threshold active at
+                15°.
               </p>
             </div>
 
@@ -2906,13 +3049,15 @@
           <div class="px-4 py-3 border-t border-gray-100 flex flex-col gap-2 bg-gray-50 shrink-0">
             <div class="grid grid-cols-2 gap-2">
               <!-- Action 1: Download Standalone HTML Report File -->
-              <button type="button" onclick="exportHealthReport()" class="w-full py-2.5 rounded-xl bg-black hover:bg-gray-800 text-white font-bold text-xs flex items-center justify-center gap-1.5 active:scale-98 transition-all cursor-pointer shadow-xs">
+              <button type="button" onclick="exportHealthReport()"
+                class="w-full py-2.5 rounded-xl bg-black hover:bg-gray-800 text-white font-bold text-xs flex items-center justify-center gap-1.5 active:scale-98 transition-all cursor-pointer shadow-xs">
                 <span class="material-symbols-outlined text-[16px]">download</span>
                 <span>Download Report File</span>
               </button>
 
               <!-- Action 2: Print / Save to PDF -->
-              <button type="button" onclick="printHealthReport()" class="w-full py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs flex items-center justify-center gap-1.5 active:scale-98 transition-all cursor-pointer shadow-xs">
+              <button type="button" onclick="printHealthReport()"
+                class="w-full py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs flex items-center justify-center gap-1.5 active:scale-98 transition-all cursor-pointer shadow-xs">
                 <span class="material-symbols-outlined text-[16px]">print</span>
                 <span>Print / Save PDF</span>
               </button>
@@ -2920,7 +3065,8 @@
 
             <!-- Action 3: Download Raw CSV File & Close -->
             <div class="flex items-center gap-2">
-              <button type="button" onclick="exportCsvReport()" class="flex-1 py-2 rounded-xl bg-white hover:bg-gray-100 text-gray-700 border border-gray-200 font-semibold text-xs flex items-center justify-center gap-1 active:scale-98 transition-all cursor-pointer">
+              <button type="button" onclick="exportCsvReport()"
+                class="flex-1 py-2 rounded-xl bg-white hover:bg-gray-100 text-gray-700 border border-gray-200 font-semibold text-xs flex items-center justify-center gap-1 active:scale-98 transition-all cursor-pointer">
                 <span class="material-symbols-outlined text-[15px]">table_chart</span>
                 <span>Export CSV Data</span>
               </button>
@@ -3006,28 +3152,34 @@
           <form id="form-reg-patient" class="flex flex-col space-y-2.5 pt-1" onsubmit="handlePatientRegistration(event)">
             <div class="flex flex-col space-y-0.5">
               <label class="font-label-md text-secondary text-xs">Full Name</label>
-              <input required class="input-auth-field w-full bg-surface-container-low text-on-surface placeholder:text-secondary/60 rounded-lg px-3 py-1.5 text-xs outline-none border border-transparent" id="reg-patient-name" placeholder="e.g. John Doe">
+              <input required class="input-auth-field w-full bg-surface-container-low text-on-surface placeholder:text-secondary/60 rounded-lg px-3 py-1.5 text-xs outline-none border border-transparent" id="reg-patient-name"
+                placeholder="e.g. John Doe">
             </div>
             <div class="flex flex-col space-y-0.5">
               <label class="font-label-md text-secondary text-xs">Email or Phone</label>
-              <input required class="input-auth-field w-full bg-surface-container-low text-on-surface placeholder:text-secondary/60 rounded-lg px-3 py-1.5 text-xs outline-none border border-transparent" id="reg-patient-contact" placeholder="name@example.com" type="text">
+              <input required class="input-auth-field w-full bg-surface-container-low text-on-surface placeholder:text-secondary/60 rounded-lg px-3 py-1.5 text-xs outline-none border border-transparent" id="reg-patient-contact"
+                placeholder="name@example.com" type="text">
             </div>
             <div class="flex flex-col space-y-0.5">
               <label class="font-label-md text-secondary text-xs">Security PIN (4-6 digits)</label>
-              <input required type="password" class="input-auth-field w-full bg-surface-container-low text-on-surface placeholder:text-secondary/60 rounded-lg px-3 py-1.5 text-xs outline-none border border-transparent" id="reg-patient-pin" placeholder="••••">
+              <input required type="password" class="input-auth-field w-full bg-surface-container-low text-on-surface placeholder:text-secondary/60 rounded-lg px-3 py-1.5 text-xs outline-none border border-transparent" id="reg-patient-pin"
+                placeholder="••••">
             </div>
             <button class="w-full h-11 bg-primary text-on-primary font-semibold text-xs rounded-full mt-2 cursor-pointer shadow-sm active:scale-98 transition-transform flex items-center justify-center gap-1.5" type="submit">
               <span>Register & Start Monitoring</span>
               <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
             </button>
-            <p class="text-[10px] text-secondary text-center pt-0.5">By registering, you agree to the <button type="button" class="text-primary font-semibold hover:underline cursor-pointer bg-transparent border-0 p-0 text-[10px]" onclick="closeRegisterModal(); switchTermsTab('terms'); navigateTo('screen-terms')">Terms</button> &amp; <button type="button" class="text-primary font-semibold hover:underline cursor-pointer bg-transparent border-0 p-0 text-[10px]" onclick="closeRegisterModal(); switchTermsTab('privacy'); navigateTo('screen-terms')">Privacy Policy</button></p>
+            <p class="text-[10px] text-secondary text-center pt-0.5">By registering, you agree to the <button type="button" class="text-primary font-semibold hover:underline cursor-pointer bg-transparent border-0 p-0 text-[10px]"
+                onclick="closeRegisterModal(); switchTermsTab('terms'); navigateTo('screen-terms')">Terms</button> &amp; <button type="button" class="text-primary font-semibold hover:underline cursor-pointer bg-transparent border-0 p-0 text-[10px]"
+                onclick="closeRegisterModal(); switchTermsTab('privacy'); navigateTo('screen-terms')">Privacy Policy</button></p>
           </form>
 
           <!-- Doctor Onboarding Form ("Add Doctor") -->
           <form id="form-reg-doctor" class="flex flex-col space-y-2.5 pt-1 hidden" onsubmit="handleDoctorRegistration(event)">
             <div class="flex flex-col space-y-0.5">
               <label class="font-label-md text-secondary text-xs">Doctor's Full Name</label>
-              <input required class="input-auth-field w-full bg-surface-container-low text-on-surface placeholder:text-secondary/60 rounded-lg px-3 py-1.5 text-xs outline-none border border-transparent" id="reg-doc-name" placeholder="e.g. Dr. Rajesh Kumar">
+              <input required class="input-auth-field w-full bg-surface-container-low text-on-surface placeholder:text-secondary/60 rounded-lg px-3 py-1.5 text-xs outline-none border border-transparent" id="reg-doc-name"
+                placeholder="e.g. Dr. Rajesh Kumar">
             </div>
             <div class="flex flex-col space-y-0.5">
               <label class="font-label-md text-secondary text-xs">Specialization</label>
@@ -3041,17 +3193,21 @@
             </div>
             <div class="flex flex-col space-y-0.5">
               <label class="font-label-md text-secondary text-xs">Hospital / Institute</label>
-              <input required class="input-auth-field w-full bg-surface-container-low text-on-surface placeholder:text-secondary/60 rounded-lg px-3 py-1.5 text-xs outline-none border border-transparent" id="reg-doc-hospital" placeholder="e.g. Metro Heart Institute">
+              <input required class="input-auth-field w-full bg-surface-container-low text-on-surface placeholder:text-secondary/60 rounded-lg px-3 py-1.5 text-xs outline-none border border-transparent" id="reg-doc-hospital"
+                placeholder="e.g. Metro Heart Institute">
             </div>
             <div class="flex flex-col space-y-0.5">
               <label class="font-label-md text-secondary text-xs">Medical License ID</label>
-              <input required class="input-auth-field w-full bg-surface-container-low text-on-surface placeholder:text-secondary/60 rounded-lg px-3 py-1.5 text-xs outline-none border border-transparent" id="reg-doc-license" placeholder="e.g. MED-IND-94821">
+              <input required class="input-auth-field w-full bg-surface-container-low text-on-surface placeholder:text-secondary/60 rounded-lg px-3 py-1.5 text-xs outline-none border border-transparent" id="reg-doc-license"
+                placeholder="e.g. MED-IND-94821">
             </div>
             <button class="w-full h-11 bg-primary text-on-primary font-semibold text-xs rounded-full mt-2 cursor-pointer shadow-sm active:scale-98 transition-transform flex items-center justify-center gap-1.5" type="submit">
               <span class="material-symbols-outlined text-[16px]">verified</span>
               <span>Add Doctor to Care Team</span>
             </button>
-            <p class="text-[10px] text-secondary text-center pt-0.5">By onboarding, you accept <button type="button" class="text-primary font-semibold hover:underline cursor-pointer bg-transparent border-0 p-0 text-[10px]" onclick="closeRegisterModal(); switchTermsTab('terms'); navigateTo('screen-terms')">Clinical Terms</button> &amp; <button type="button" class="text-primary font-semibold hover:underline cursor-pointer bg-transparent border-0 p-0 text-[10px]" onclick="closeRegisterModal(); switchTermsTab('privacy'); navigateTo('screen-terms')">Data Policies</button></p>
+            <p class="text-[10px] text-secondary text-center pt-0.5">By onboarding, you accept <button type="button" class="text-primary font-semibold hover:underline cursor-pointer bg-transparent border-0 p-0 text-[10px]"
+                onclick="closeRegisterModal(); switchTermsTab('terms'); navigateTo('screen-terms')">Clinical Terms</button> &amp; <button type="button"
+                class="text-primary font-semibold hover:underline cursor-pointer bg-transparent border-0 p-0 text-[10px]" onclick="closeRegisterModal(); switchTermsTab('privacy'); navigateTo('screen-terms')">Data Policies</button></p>
           </form>
         </div>
       </div>
@@ -3137,11 +3293,13 @@
             <div class="grid grid-cols-2 gap-2">
               <div class="flex flex-col space-y-0.5">
                 <label class="font-label-md text-secondary text-xs">Height (cm)</label>
-                <input required type="number" min="50" max="250" class="input-auth-field w-full bg-surface-container-low text-on-surface rounded-lg px-3 py-1.5 text-xs outline-none border border-transparent" id="edit-profile-height" value="178" oninput="updateBmiPreview()">
+                <input required type="number" min="50" max="250" class="input-auth-field w-full bg-surface-container-low text-on-surface rounded-lg px-3 py-1.5 text-xs outline-none border border-transparent" id="edit-profile-height" value="178"
+                  oninput="updateBmiPreview()">
               </div>
               <div class="flex flex-col space-y-0.5">
                 <label class="font-label-md text-secondary text-xs">Weight (kg)</label>
-                <input required type="number" min="20" max="300" class="input-auth-field w-full bg-surface-container-low text-on-surface rounded-lg px-3 py-1.5 text-xs outline-none border border-transparent" id="edit-profile-weight" value="71" oninput="updateBmiPreview()">
+                <input required type="number" min="20" max="300" class="input-auth-field w-full bg-surface-container-low text-on-surface rounded-lg px-3 py-1.5 text-xs outline-none border border-transparent" id="edit-profile-weight" value="71"
+                  oninput="updateBmiPreview()">
               </div>
             </div>
             <p id="edit-profile-bmi-preview" class="text-[11px] text-secondary font-medium px-1">Calculated BMI: <span class="font-bold text-on-surface">22.4 (Normal)</span></p>
@@ -3306,7 +3464,8 @@
               </button>
 
               <!-- Preset 1 -->
-              <button type="button" class="avatar-preset-btn flex flex-col items-center gap-1 p-1 rounded-2xl hover:bg-gray-100 active:scale-95 transition-all cursor-pointer" onclick="selectPresetAvatar('https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=256&auto=format&fit=crop&q=80', this)">
+              <button type="button" class="avatar-preset-btn flex flex-col items-center gap-1 p-1 rounded-2xl hover:bg-gray-100 active:scale-95 transition-all cursor-pointer"
+                onclick="selectPresetAvatar('https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=256&auto=format&fit=crop&q=80', this)">
                 <div class="w-12 h-12 rounded-full overflow-hidden ring-2 ring-black/10">
                   <img class="w-full h-full object-cover" src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=256&auto=format&fit=crop&q=80" alt="Sophia">
                 </div>
@@ -3314,7 +3473,8 @@
               </button>
 
               <!-- Preset 2 -->
-              <button type="button" class="avatar-preset-btn flex flex-col items-center gap-1 p-1 rounded-2xl hover:bg-gray-100 active:scale-95 transition-all cursor-pointer" onclick="selectPresetAvatar('https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=256&auto=format&fit=crop&q=80', this)">
+              <button type="button" class="avatar-preset-btn flex flex-col items-center gap-1 p-1 rounded-2xl hover:bg-gray-100 active:scale-95 transition-all cursor-pointer"
+                onclick="selectPresetAvatar('https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=256&auto=format&fit=crop&q=80', this)">
                 <div class="w-12 h-12 rounded-full overflow-hidden ring-2 ring-black/10">
                   <img class="w-full h-full object-cover" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=256&auto=format&fit=crop&q=80" alt="David">
                 </div>
@@ -3322,7 +3482,8 @@
               </button>
 
               <!-- Preset 3 -->
-              <button type="button" class="avatar-preset-btn flex flex-col items-center gap-1 p-1 rounded-2xl hover:bg-gray-100 active:scale-95 transition-all cursor-pointer" onclick="selectPresetAvatar('https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=256&auto=format&fit=crop&q=80', this)">
+              <button type="button" class="avatar-preset-btn flex flex-col items-center gap-1 p-1 rounded-2xl hover:bg-gray-100 active:scale-95 transition-all cursor-pointer"
+                onclick="selectPresetAvatar('https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=256&auto=format&fit=crop&q=80', this)">
                 <div class="w-12 h-12 rounded-full overflow-hidden ring-2 ring-black/10">
                   <img class="w-full h-full object-cover" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=256&auto=format&fit=crop&q=80" alt="Emma">
                 </div>
@@ -3330,7 +3491,8 @@
               </button>
 
               <!-- Preset 4 -->
-              <button type="button" class="avatar-preset-btn flex flex-col items-center gap-1 p-1 rounded-2xl hover:bg-gray-100 active:scale-95 transition-all cursor-pointer" onclick="selectPresetAvatar('https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=256&auto=format&fit=crop&q=80', this)">
+              <button type="button" class="avatar-preset-btn flex flex-col items-center gap-1 p-1 rounded-2xl hover:bg-gray-100 active:scale-95 transition-all cursor-pointer"
+                onclick="selectPresetAvatar('https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=256&auto=format&fit=crop&q=80', this)">
                 <div class="w-12 h-12 rounded-full overflow-hidden ring-2 ring-black/10">
                   <img class="w-full h-full object-cover" src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=256&auto=format&fit=crop&q=80" alt="Lucas">
                 </div>
@@ -3338,23 +3500,30 @@
               </button>
 
               <!-- Preset 5 -->
-              <button type="button" class="avatar-preset-btn flex flex-col items-center gap-1 p-1 rounded-2xl hover:bg-gray-100 active:scale-95 transition-all cursor-pointer" onclick="selectPresetAvatar('https://lh3.googleusercontent.com/aida-public/AB6AXuDIqde2zHWq5d75xmp5aVgxeVego2Sai2irnWTj-vmHBG_t27ybS25MvuSVXxfzw01o8CZPgCxM3Lxj5K9m-lgCCegetXS7QKxdc7ysjQ2UWbJLPqNL_ZRRGwCgooxO7n2G6Kyb75y4Ou8sl1XjAcIZxy_uZ4aCd6MYGz5vN_zChy0g_8047jL7xNjraXRqE7MxTw6xWd730310TSuyGxwnyPpDLqJwIRkbUnKJMpxb8Z9IB-tOdt63Ug', this)">
+              <button type="button" class="avatar-preset-btn flex flex-col items-center gap-1 p-1 rounded-2xl hover:bg-gray-100 active:scale-95 transition-all cursor-pointer"
+                onclick="selectPresetAvatar('https://lh3.googleusercontent.com/aida-public/AB6AXuDIqde2zHWq5d75xmp5aVgxeVego2Sai2irnWTj-vmHBG_t27ybS25MvuSVXxfzw01o8CZPgCxM3Lxj5K9m-lgCCegetXS7QKxdc7ysjQ2UWbJLPqNL_ZRRGwCgooxO7n2G6Kyb75y4Ou8sl1XjAcIZxy_uZ4aCd6MYGz5vN_zChy0g_8047jL7xNjraXRqE7MxTw6xWd730310TSuyGxwnyPpDLqJwIRkbUnKJMpxb8Z9IB-tOdt63Ug', this)">
                 <div class="w-12 h-12 rounded-full overflow-hidden ring-2 ring-black/10">
-                  <img class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDIqde2zHWq5d75xmp5aVgxeVego2Sai2irnWTj-vmHBG_t27ybS25MvuSVXxfzw01o8CZPgCxM3Lxj5K9m-lgCCegetXS7QKxdc7ysjQ2UWbJLPqNL_ZRRGwCgooxO7n2G6Kyb75y4Ou8sl1XjAcIZxy_uZ4aCd6MYGz5vN_zChy0g_8047jL7xNjraXRqE7MxTw6xWd730310TSuyGxwnyPpDLqJwIRkbUnKJMpxb8Z9IB-tOdt63Ug" alt="Dr. Neha">
+                  <img class="w-full h-full object-cover"
+                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuDIqde2zHWq5d75xmp5aVgxeVego2Sai2irnWTj-vmHBG_t27ybS25MvuSVXxfzw01o8CZPgCxM3Lxj5K9m-lgCCegetXS7QKxdc7ysjQ2UWbJLPqNL_ZRRGwCgooxO7n2G6Kyb75y4Ou8sl1XjAcIZxy_uZ4aCd6MYGz5vN_zChy0g_8047jL7xNjraXRqE7MxTw6xWd730310TSuyGxwnyPpDLqJwIRkbUnKJMpxb8Z9IB-tOdt63Ug"
+                    alt="Dr. Neha">
                 </div>
                 <span class="text-[10px] font-medium text-gray-600">Dr. Neha</span>
               </button>
 
               <!-- Preset 6 -->
-              <button type="button" class="avatar-preset-btn flex flex-col items-center gap-1 p-1 rounded-2xl hover:bg-gray-100 active:scale-95 transition-all cursor-pointer" onclick="selectPresetAvatar('https://lh3.googleusercontent.com/aida-public/AB6AXuC7oLNhZft-_5NFE_r1jeWbiYhe5D9ugz7wfXM_HqTUzvz4H9IwmLxhE94qekm-wUFfC9UOsjKGm3G3-HnS29iK_1RsLqnSDTP7diXu1tcinjvlSyuIhzPd7eRoDLVjP58-VfabynwpbfyB1EkpTwDHzOBji70n_CDiW9b1RTWsc1XuygDGX2w3n31EUdG5yBq7M6YCy3aPgQGtJqPy2aJDBbswLqVB9QmuzeBBBXa7jrur4hltT8SOOw', this)">
+              <button type="button" class="avatar-preset-btn flex flex-col items-center gap-1 p-1 rounded-2xl hover:bg-gray-100 active:scale-95 transition-all cursor-pointer"
+                onclick="selectPresetAvatar('https://lh3.googleusercontent.com/aida-public/AB6AXuC7oLNhZft-_5NFE_r1jeWbiYhe5D9ugz7wfXM_HqTUzvz4H9IwmLxhE94qekm-wUFfC9UOsjKGm3G3-HnS29iK_1RsLqnSDTP7diXu1tcinjvlSyuIhzPd7eRoDLVjP58-VfabynwpbfyB1EkpTwDHzOBji70n_CDiW9b1RTWsc1XuygDGX2w3n31EUdG5yBq7M6YCy3aPgQGtJqPy2aJDBbswLqVB9QmuzeBBBXa7jrur4hltT8SOOw', this)">
                 <div class="w-12 h-12 rounded-full overflow-hidden ring-2 ring-black/10">
-                  <img class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC7oLNhZft-_5NFE_r1jeWbiYhe5D9ugz7wfXM_HqTUzvz4H9IwmLxhE94qekm-wUFfC9UOsjKGm3G3-HnS29iK_1RsLqnSDTP7diXu1tcinjvlSyuIhzPd7eRoDLVjP58-VfabynwpbfyB1EkpTwDHzOBji70n_CDiW9b1RTWsc1XuygDGX2w3n31EUdG5yBq7M6YCy3aPgQGtJqPy2aJDBbswLqVB9QmuzeBBBXa7jrur4hltT8SOOw" alt="Sarah">
+                  <img class="w-full h-full object-cover"
+                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuC7oLNhZft-_5NFE_r1jeWbiYhe5D9ugz7wfXM_HqTUzvz4H9IwmLxhE94qekm-wUFfC9UOsjKGm3G3-HnS29iK_1RsLqnSDTP7diXu1tcinjvlSyuIhzPd7eRoDLVjP58-VfabynwpbfyB1EkpTwDHzOBji70n_CDiW9b1RTWsc1XuygDGX2w3n31EUdG5yBq7M6YCy3aPgQGtJqPy2aJDBbswLqVB9QmuzeBBBXa7jrur4hltT8SOOw"
+                    alt="Sarah">
                 </div>
                 <span class="text-[10px] font-medium text-gray-600">Sarah</span>
               </button>
 
               <!-- Preset 7 -->
-              <button type="button" class="avatar-preset-btn flex flex-col items-center gap-1 p-1 rounded-2xl hover:bg-gray-100 active:scale-95 transition-all cursor-pointer" onclick="selectPresetAvatar('https://images.unsplash.com/photo-1622253692010-333f2da6031d?w=256&auto=format&fit=crop&q=80', this)">
+              <button type="button" class="avatar-preset-btn flex flex-col items-center gap-1 p-1 rounded-2xl hover:bg-gray-100 active:scale-95 transition-all cursor-pointer"
+                onclick="selectPresetAvatar('https://images.unsplash.com/photo-1622253692010-333f2da6031d?w=256&auto=format&fit=crop&q=80', this)">
                 <div class="w-12 h-12 rounded-full overflow-hidden ring-2 ring-black/10">
                   <img class="w-full h-full object-cover" src="https://images.unsplash.com/photo-1622253692010-333f2da6031d?w=256&auto=format&fit=crop&q=80" alt="Dr. Aryan">
                 </div>
@@ -3392,15 +3561,14 @@
                 <p class="text-[11px] text-gray-500">Live Telemetry &amp; Database Right Readings</p>
               </div>
             </div>
-            <button type="button" class="w-7 h-7 rounded-full bg-gray-100 hover:bg-gray-200 flex items-center justify-center text-gray-500 hover:text-black cursor-pointer transition-colors" onclick="closeEsp32BleModal()" aria-label="Close Bluetooth Manager">
+            <button type="button" class="w-7 h-7 rounded-full bg-gray-100 hover:bg-gray-200 flex items-center justify-center text-gray-500 hover:text-black cursor-pointer transition-colors" onclick="closeEsp32BleModal()"
+              aria-label="Close Bluetooth Manager">
               <span class="material-symbols-outlined text-[16px]">close</span>
             </button>
           </div>
 
-          <!-- Modal Scroll Body -->
           <div class="p-4 space-y-3.5 overflow-y-auto">
 
-            <!-- Connection Status Box -->
             <div id="ble-modal-status-card" class="bg-[#F8F9FA] rounded-2xl p-3.5 border border-gray-200/70 flex flex-col gap-2.5">
               <div class="flex items-center justify-between">
                 <div class="flex items-center gap-2">
@@ -3436,22 +3604,26 @@
                     <p class="text-[10px] text-blue-700">Find &amp; pair MW device / ESP32-S3 wearable</p>
                   </div>
                 </div>
-                <span id="ble-search-status-tag" class="text-[9px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full bg-blue-100 text-blue-800 border border-blue-200">Ready to Search</span>
+                <span id="ble-search-status-tag" class="text-[9px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full bg-blue-100 text-blue-800 border border-blue-200">Ready to Search
+                </span>
               </div>
 
               <!-- Search & Connect Primary Button -->
               <div class="flex flex-col gap-2 pt-1">
-                <button id="ble-connect-btn" type="button" onclick="connectEsp32Bluetooth()" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs py-3 px-4 rounded-xl shadow-md shadow-blue-500/20 flex items-center justify-center gap-2 cursor-pointer active:scale-98 transition-all">
+                <button id="ble-connect-btn" type="button" onclick="connectEsp32Bluetooth()"
+                  class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs py-3 px-4 rounded-xl shadow-md shadow-blue-500/20 flex items-center justify-center gap-2 cursor-pointer active:scale-98 transition-all">
                   <span class="material-symbols-outlined text-[18px] animate-pulse">bluetooth_searching</span>
                   <span class="tracking-wide">Start Bluetooth Search</span>
                 </button>
 
                 <div class="flex items-center gap-2">
-                  <button id="ble-sim-toggle-btn" type="button" onclick="toggleEsp32Simulation()" class="flex-1 bg-white hover:bg-gray-50 text-gray-800 border border-gray-200 font-semibold text-xs py-2 px-3 rounded-xl flex items-center justify-center gap-1.5 cursor-pointer active:scale-98 transition-all shadow-xs">
+                  <button id="ble-sim-toggle-btn" type="button" onclick="toggleEsp32Simulation()"
+                    class="flex-1 bg-white hover:bg-gray-50 text-gray-800 border border-gray-200 font-semibold text-xs py-2 px-3 rounded-xl flex items-center justify-center gap-1.5 cursor-pointer active:scale-98 transition-all shadow-xs">
                     <span class="material-symbols-outlined text-[16px] text-indigo-600">sensors</span>
                     <span id="ble-sim-btn-label">Simulate Stream</span>
                   </button>
-                  <button id="ble-disconnect-btn" type="button" onclick="disconnectEsp32Bluetooth()" class="hidden flex-1 bg-red-50 hover:bg-red-100 text-red-600 border border-red-200 font-semibold text-xs py-2 px-3 rounded-xl items-center justify-center gap-1.5 cursor-pointer active:scale-98 transition-all shadow-xs">
+                  <button id="ble-disconnect-btn" type="button" onclick="disconnectEsp32Bluetooth()"
+                    class="hidden flex-1 bg-red-50 hover:bg-red-100 text-red-600 border border-red-200 font-semibold text-xs py-2 px-3 rounded-xl items-center justify-center gap-1.5 cursor-pointer active:scale-98 transition-all shadow-xs">
                     <span class="material-symbols-outlined text-[16px]">link_off</span>
                     <span>Disconnect</span>
                   </button>
@@ -3515,13 +3687,16 @@
                   DB Synced: <span id="ble-db-readings-count">2</span> logs
                 </span>
               </div>
-              <p id="ble-mw-reading-status-txt" class="text-[11px] text-emerald-800 leading-tight">Calibrated physiological ranges: HR (50-185 BPM) • SpO₂ (≥85%) • Temp (34-41°C)</p>
+              <p id="ble-mw-reading-status-txt" class="text-[11px] text-emerald-800 leading-tight">Calibrated physiological ranges: HR (50-185 BPM) • SpO₂ (≥85%) • Temp (34-41°C)
+              </p>
               <div class="flex items-center gap-2 pt-0.5">
-                <button type="button" onclick="saveCurrentMwReadingToDb()" class="flex-1 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs py-2 px-3 rounded-xl flex items-center justify-center gap-1.5 cursor-pointer active:scale-98 transition-all shadow-sm">
+                <button type="button" onclick="saveCurrentMwReadingToDb()"
+                  class="flex-1 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs py-2 px-3 rounded-xl flex items-center justify-center gap-1.5 cursor-pointer active:scale-98 transition-all shadow-sm">
                   <span class="material-symbols-outlined text-[15px]">cloud_upload</span>
                   <span>Save Right Reading to DB</span>
                 </button>
-                <button type="button" onclick="toggleMwHistoryView()" class="bg-white hover:bg-emerald-100/50 text-emerald-800 border border-emerald-300 font-semibold text-xs py-2 px-3 rounded-xl flex items-center justify-center gap-1 cursor-pointer active:scale-98 transition-all">
+                <button type="button" onclick="toggleMwHistoryView()"
+                  class="bg-white hover:bg-emerald-100/50 text-emerald-800 border border-emerald-300 font-semibold text-xs py-2 px-3 rounded-xl flex items-center justify-center gap-1 cursor-pointer active:scale-98 transition-all">
                   <span class="material-symbols-outlined text-[15px]">history</span>
                   <span>DB Logs</span>
                 </button>
@@ -3651,7 +3826,8 @@ void loop() {
                 <p class="text-[11px] text-gray-500 dark:text-gray-400">Choose your personalized companion style</p>
               </div>
             </div>
-            <button type="button" class="w-7 h-7 rounded-full bg-black/5 dark:bg-white/10 hover:bg-black/10 flex items-center justify-center text-gray-500 dark:text-gray-300 hover:text-black cursor-pointer transition-colors" onclick="closeThemeSelectorModal()" aria-label="Close Theme Selector">
+            <button type="button" class="w-7 h-7 rounded-full bg-black/5 dark:bg-white/10 hover:bg-black/10 flex items-center justify-center text-gray-500 dark:text-gray-300 hover:text-black cursor-pointer transition-colors"
+              onclick="closeThemeSelectorModal()" aria-label="Close Theme Selector">
               <span class="material-symbols-outlined text-[16px]">close</span>
             </button>
           </div>
@@ -3796,7 +3972,8 @@ void loop() {
               <button type="button" onclick="markAllNotificationsAsRead()" class="text-[11px] text-primary dark:text-amber-400 font-semibold hover:underline px-2 py-1 cursor-pointer" title="Mark all as read">
                 Read all
               </button>
-              <button type="button" class="w-7 h-7 rounded-full bg-black/5 dark:bg-white/10 hover:bg-black/10 flex items-center justify-center text-gray-500 dark:text-gray-300 hover:text-black cursor-pointer transition-colors" onclick="closeNotificationsModal()" aria-label="Close Notifications">
+              <button type="button" class="w-7 h-7 rounded-full bg-black/5 dark:bg-white/10 hover:bg-black/10 flex items-center justify-center text-gray-500 dark:text-gray-300 hover:text-black cursor-pointer transition-colors"
+                onclick="closeNotificationsModal()" aria-label="Close Notifications">
                 <span class="material-symbols-outlined text-[16px]">close</span>
               </button>
             </div>
@@ -3859,7 +4036,8 @@ void loop() {
                 </div>
                 <p class="text-[11px] text-gray-600 dark:text-gray-300 mt-0.5 leading-snug">&ldquo;Great progress on thoracic alignment. Continue ergonomic hold-times.&rdquo;</p>
                 <div class="mt-1.5 flex items-center gap-2">
-                  <span class="inline-flex items-center gap-1 px-1.5 py-0.5 rounded text-[9px] font-semibold bg-blue-500/10 text-blue-600 dark:text-blue-400">Consultation</span>
+                  <span class="inline-flex items-center gap-1 px-1.5 py-0.5 rounded text-[9px] font-semibold bg-blue-500/10 text-blue-600 dark:text-blue-400">Consultation
+                  </span>
                   <span class="text-[10px] text-primary dark:text-blue-400 font-bold">Care Team →</span>
                 </div>
               </div>
@@ -3867,7 +4045,8 @@ void loop() {
             </div>
 
             <!-- Item 4: BLE ESP32 Connected (Read) -->
-            <div class="notif-card p-3 rounded-2xl border border-black/5 dark:border-white/5 bg-black/[0.02] dark:bg-white/[0.02] flex items-start gap-3 transition-all hover:bg-black/[0.04] cursor-pointer" onclick="openEsp32BleModal(); closeNotificationsModal();">
+            <div class="notif-card p-3 rounded-2xl border border-black/5 dark:border-white/5 bg-black/[0.02] dark:bg-white/[0.02] flex items-start gap-3 transition-all hover:bg-black/[0.04] cursor-pointer"
+              onclick="openEsp32BleModal(); closeNotificationsModal();">
               <div class="w-8 h-8 rounded-full bg-gray-500/10 text-gray-500 flex items-center justify-center shrink-0 mt-0.5">
                 <span class="material-symbols-outlined text-[18px]">bluetooth_connected</span>
               </div>
@@ -3906,4 +4085,5 @@ void loop() {
   <!-- Core App Logic -->
   <script src="app.js"></script>
 </body>
+
 </html>
