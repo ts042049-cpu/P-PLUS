@@ -1,0 +1,238 @@
+{
+  "app": "P+ Pro — Personal Health Companion",
+  "version": "2.0.0",
+  "format": "PPLUS_PRO_BACKFILE_V2",
+  "savedAt": "2026-10-13T17:41:46.504Z",
+  "label": "Auto-Sync Save",
+  "stats": {
+    "usersCount": 3,
+    "appointmentsCount": 3,
+    "sosEventsCount": 3,
+    "diagnosticsCount": 2
+  },
+  "data": {
+    "users": [
+      {
+        "id": "P-8821",
+        "role": "patient",
+        "name": "Alex Turner (Google)",
+        "email": "alex.turner@gmail.com",
+        "phone": "+1 (555) 234-8890",
+        "bloodGroup": "O+",
+        "age": 28,
+        "gender": "Male",
+        "height": 178,
+        "weight": 71,
+        "emergencyName": "Dr. Robert Kelly",
+        "emergencyPhone": "+1 (555) 019-2834",
+        "allergies": "Penicillin, Dust",
+        "conditions": "Mild Hypertension",
+        "avatar": "https://lh3.googleusercontent.com/aida-public/AB6AXuC7oLNhZft-_5NFE_r1jeWbiYhe5D9ugz7wfXM_HqTUzvz4H9IwmLxhE94qekm-wUFfC9UOsjKGm3G3-HnS29iK_1RsLqnSDTP7diXu1tcinjvlSyuIhzPd7eRoDLVjP58-VfabynwpbfyB1EkpTwDHzOBji70n_CDiW9b1RTWsc1XuygDGX2w3n31EUdG5yBq7M6YCy3aPgQGtJqPy2aJDBbswLqVB9QmuzeBBBXa7jrur4hltT8SOOw",
+        "updatedAt": "2026-10-12T16:08:17.140Z",
+        "authProvider": "google",
+        "googleId": "google-oauth-109283746592817264",
+        "lastLoginAt": "2026-10-05T13:33:39.531Z",
+        "googleEmail": "alex.turner@gmail.com",
+        "lastLogin": "2026-10-13T17:41:46.484Z",
+        "passwordHash": "780e20029e8574283e774a3f4e3b65f4:34c0ad68203224e256a1c90fc770f168c26058004c107c921f8c65660f4b2e252eaf5cba8819817f35140f759cff822e6ffcb704204d13475cadb77dc65e9192"
+      },
+      {
+        "id": "DOC-CARD-492",
+        "role": "doctor",
+        "name": "Dr. Neha Sharma",
+        "email": "dr.neha.sharma@hospital.org",
+        "phone": "+1 (555) 882-9912",
+        "degree": "MD, FACC",
+        "specialty": "Cardiology & Electrophysiology",
+        "license": "MED-REG-IND-88419",
+        "hospital": "Metro Heart Institute & Research Centre",
+        "department": "Cardiovascular Sciences",
+        "opdRoom": "Room 304, Wing B",
+        "opdHours": "Mon - Fri • 09:00 AM - 02:00 PM",
+        "rating": "4.9",
+        "consultationsCount": "1,420+",
+        "onDuty": true,
+        "avatar": "https://lh3.googleusercontent.com/aida-public/AB6AXuDIqde2zHWq5d75xmp5aVgxeVego2Sai2irnWTj-vmHBG_t27ybS25MvuSVXxfzw01o8CZPgCxM3Lxj5K9m-lgCCegetXS7QKxdc7ysjQ2UWbJLPqNL_ZRRGwCgooxO7n2G6Kyb75y4Ou8sl1XjAcIZxy_uZ4aCd6MYGz5vN_zChy0g_8047jL7xNjraXRqE7MxTw6xWd730310TSuyGxwnyPpDLqJwIRkbUnKJMpxb8Z9IB-tOdt63Ug",
+        "passwordHash": "d364ad7f7dce890dae115ef0c9d0b045:ef14639bb8782cf0fb90d6105316efec69702659f8e5334c586e5913f2aa28dc1c8bc8576243087a4c7aa044b0ae19003c53eee5776679f7a403a63a24232a12"
+      },
+      {
+        "id": "P-8427",
+        "role": "patient",
+        "name": "Test User",
+        "email": "test1791033813534@example.com",
+        "phone": "",
+        "createdAt": "2026-10-03T13:23:33.538Z",
+        "passwordHash": "93882f8ad72857e65bf5acf963410c9c:02e54f8fada34b85e10f2e4418a7243216b6156813d94d135d80eb59a72df443bafde11bbf6261233f98ead351a049fd37f353622a903b086512dae9bff2bdc4"
+      }
+    ],
+    "posture_settings": {
+      "alertAngle": 15,
+      "holdTime": 10,
+      "vibrate": true,
+      "mode": "Desk & Mobile",
+      "updatedAt": "2026-10-03T13:23:33.570Z"
+    },
+    "appointments": [
+      {
+        "id": "APT-9159",
+        "doctorName": "Dr. Neha Sharma",
+        "specialty": "General Physician",
+        "slot": "Today 10:30 AM",
+        "patientName": "Alex Turner",
+        "notes": "Routine consultation",
+        "status": "Confirmed",
+        "bookedAt": "2026-10-03T13:23:33.550Z"
+      },
+      {
+        "id": "APT-7706",
+        "doctorName": "Dr. Vivek Malhotra",
+        "specialty": "Cardiologist",
+        "slot": "Today 10:30 AM",
+        "patientName": "Alex Turner",
+        "notes": "Consultation request booked via P+ Pro Companion",
+        "status": "Confirmed",
+        "bookedAt": "2026-09-23T14:10:45.405Z"
+      },
+      {
+        "id": "APT-1001",
+        "doctorName": "Dr. Neha Sharma",
+        "specialty": "General Physician",
+        "slot": "Today 10:30 AM",
+        "patientName": "Alex Turner",
+        "status": "Confirmed",
+        "bookedAt": "2026-09-23T10:00:00.000Z"
+      }
+    ],
+    "sos_events": [
+      {
+        "id": "SOS-1791033830229",
+        "status": "DISPATCH_TRIGGERED",
+        "emergencyContact": "Dr. Robert Kelly (+1 555-019-2834)",
+        "patientName": "Alex Turner",
+        "location": "Lat 28.6139° N, Lon 77.2090° E",
+        "vitalSnapshot": {
+          "heartRate": 74,
+          "spO2": 98
+        },
+        "timestamp": "2026-10-03T13:23:50.229Z"
+      },
+      {
+        "id": "SOS-1791033813596",
+        "status": "DISPATCH_TRIGGERED",
+        "emergencyContact": "Emergency Triage",
+        "patientName": "Alex Turner",
+        "location": "Lat 28.6139° N, Lon 77.2090° E",
+        "vitalSnapshot": {
+          "heartRate": 110,
+          "spO2": 95
+        },
+        "timestamp": "2026-10-03T13:23:33.596Z"
+      },
+      {
+        "id": "SOS-1790957082247",
+        "status": "DISPATCH_TRIGGERED",
+        "emergencyContact": "bhaiya (9999999999)",
+        "patientName": "Tushar saini",
+        "location": "Lat 28.6139° N, Lon 77.2090° E (GPS Locked)",
+        "vitalSnapshot": {
+          "heartRate": 74,
+          "spO2": 98
+        },
+        "timestamp": "2026-10-02T16:04:42.253Z"
+      }
+    ],
+    "diagnostics": [
+      {
+        "id": "DIAG-1791033813587",
+        "type": "Test Log",
+        "heartRate": 75,
+        "spO2": 98,
+        "temp": 36.6,
+        "postureAngle": 0,
+        "status": "Optimal",
+        "notes": "ESP32 sensor calibrated successfully",
+        "loggedAt": "2026-10-03T13:23:33.590Z"
+      },
+      {
+        "id": "DIAG-1",
+        "type": "Routine Vitals Log",
+        "heartRate": 72,
+        "spO2": 98,
+        "temp": 36.6,
+        "postureAngle": 0,
+        "status": "Optimal",
+        "loggedAt": "2026-09-23T12:30:00.000Z"
+      }
+    ],
+    "vitals_stream": {
+      "heartRate": 74,
+      "spO2": 99,
+      "temp": 36.6,
+      "postureAngle": 0,
+      "motion": "Normal (Resting Phase)",
+      "battery": 78,
+      "connected": true,
+      "device": "P+ Wearable ESP32-S3",
+      "updatedAt": "2026-10-03T13:23:33.604Z"
+    },
+    "bluetooth_devices": [
+      {
+        "id": "MW-DEV-01",
+        "name": "MW Biomedical Wearable (ESP32-S3)",
+        "type": "MW Biomedical Telemetry Sensor",
+        "status": "paired",
+        "battery": 84,
+        "rssi": -62,
+        "macAddress": "24:6F:28:B4:9A:12",
+        "firmware": "v2.5.0-MW",
+        "pairedAt": "2026-10-08T18:00:00.000Z",
+        "lastConnectedAt": "2026-10-08T18:25:00.000Z",
+        "readingsCount": 18
+      }
+    ],
+    "bluetooth_readings": [
+      {
+        "id": "MWR-1728412800001",
+        "deviceId": "MW-DEV-01",
+        "deviceName": "MW Biomedical Wearable (ESP32-S3)",
+        "heartRate": 72,
+        "spO2": 98,
+        "temp": 36.6,
+        "postureAngle": 0,
+        "battery": 84,
+        "motion": "Ergonomic Upright",
+        "signalRssi": -62,
+        "isValidReading": true,
+        "readingQuality": "Right Reading (Optimal Calibrated)",
+        "validationDetails": {
+          "heartRateOk": true,
+          "spO2Ok": true,
+          "tempOk": true,
+          "postureOk": true
+        },
+        "recordedAt": "2026-10-08T18:24:00.000Z"
+      },
+      {
+        "id": "MWR-1728412800002",
+        "deviceId": "MW-DEV-01",
+        "deviceName": "MW Biomedical Wearable (ESP32-S3)",
+        "heartRate": 74,
+        "spO2": 99,
+        "temp": 36.7,
+        "postureAngle": 2,
+        "battery": 84,
+        "motion": "Ergonomic Upright",
+        "signalRssi": -61,
+        "isValidReading": true,
+        "readingQuality": "Right Reading (Optimal Calibrated)",
+        "validationDetails": {
+          "heartRateOk": true,
+          "spO2Ok": true,
+          "tempOk": true,
+          "postureOk": true
+        },
+        "recordedAt": "2026-10-08T18:25:00.000Z"
+      }
+    ]
+  }
+}
