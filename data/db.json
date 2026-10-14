@@ -3,7 +3,7 @@
     {
       "id": "P-9488",
       "role": "patient",
-      "name": "Alex Turner",
+      "name": "Alex Turner (Google)",
       "email": "alex.turner@clinical.org",
       "phone": "+1 (555) 234-8890",
       "bloodGroup": "O+",
@@ -16,12 +16,12 @@
       "allergies": "Penicillin, Dust",
       "conditions": "Mild Hypertension",
       "avatar": "https://lh3.googleusercontent.com/aida-public/AB6AXuC7oLNhZft-_5NFE_r1jeWbiYhe5D9ugz7wfXM_HqTUzvz4H9IwmLxhE94qekm-wUFfC9UOsjKGm3G3-HnS29iK_1RsLqnSDTP7diXu1tcinjvlSyuIhzPd7eRoDLVjP58-VfabynwpbfyB1EkpTwDHzOBji70n_CDiW9b1RTWsc1XuygDGX2w3n31EUdG5yBq7M6YCy3aPgQGtJqPy2aJDBbswLqVB9QmuzeBBBXa7jrur4hltT8SOOw",
-      "updatedAt": "2026-10-13T18:47:34.368Z",
+      "updatedAt": "2026-10-14T15:40:00.604Z",
       "authProvider": "google",
       "googleId": "google-oauth-109283746592817264",
       "lastLoginAt": "2026-10-05T13:33:39.531Z",
       "googleEmail": "alex.turner@gmail.com",
-      "lastLogin": "2026-10-05T13:50:08.470Z",
+      "lastLogin": "2026-10-14T15:40:00.500Z",
       "passwordHash": "1b1c5f268d2e286f70cdb7040f87da09:74a515db0a24d65696bf024372f417a9a612187fb5ea3bb4c9a8803eeed8dddf777bb4d95642c5ee4ef834b5750ad44b839d4e77ed3b4d51accfe03ae8a3b5da",
       "createdAt": "2026-10-13T18:44:56.509Z"
     },
